@@ -16,5 +16,13 @@ namespace DocSystTest.UserTest
 
             Assert.IsNotNull(user);
         }
+
+        [TestMethod]
+        public void CreateUser_WithParameters_Ok()
+        {
+            User user = new User("Name", "Apellido", "UserName", "Password", "mail", true);
+
+            Assert.IsNotNull(user);
+        }
     }
 }
