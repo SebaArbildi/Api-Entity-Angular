@@ -20,7 +20,7 @@ namespace DocSystTest.UserTest
         [TestMethod]
         public void CreateUser_WithParameters_Ok()
         {
-            User user = new User("Name", "Apellido", "UserName", "Password", "mail", true);
+            User user = new User("Name", "LastName", "UserName", "Password", "Mail", true);
 
             Assert.IsNotNull(user);
         }
