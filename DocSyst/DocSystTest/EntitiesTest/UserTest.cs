@@ -1,10 +1,7 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using DocSystEntities.User;
 
-namespace DocSystTest.UserTest
+namespace DocSystTest.EntitiesTest
 {
     [TestClass]
     public class UserTest
