@@ -69,13 +69,22 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="DataAccessTest\UserDataAccessTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserTest\UserTest.cs" />
+    <Compile Include="EntitiesTest\UserTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DocSystDataAccessInterface\DocSystDataAccessInterface.csproj">
+      <Project>{73d5543f-593e-4122-8b7b-b56045b3af69}</Project>
+      <Name>DocSystDataAccessInterface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DocSystDataAccess\DocSystDataAccessImplementation.csproj">
+      <Project>{5bdc68de-bbe5-4f31-9491-3d470bb29efb}</Project>
+      <Name>DocSystDataAccessImplementation</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DocSystEntities\DocSystEntities.csproj">
       <Project>{5b3c42ed-a71e-419b-86e3-32ff647ebd34}</Project>
       <Name>DocSystEntities</Name>

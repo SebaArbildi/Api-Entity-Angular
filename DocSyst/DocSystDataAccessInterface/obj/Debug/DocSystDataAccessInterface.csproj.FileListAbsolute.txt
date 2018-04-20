@@ -1,0 +1,4 @@
+C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystDataAccessInterface\bin\Debug\DocSystDataAccessInterface.dll
+C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystDataAccessInterface\bin\Debug\DocSystDataAccessInterface.pdb
+C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystDataAccessInterface\obj\Debug\DocSystDataAccessInterface.dll
+C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystDataAccessInterface\obj\Debug\DocSystDataAccessInterface.pdb
