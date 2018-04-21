@@ -46,5 +46,45 @@ namespace DocSystTest.DataAccessTest
             User obtained = userDataAccess.Get(user.Username);
             Assert.IsNull(obtained);
         }
+
+        [TestMethod]
+        public void ModifyUserFromDb_ExpectedParameters_Ok()
+        {
+            IUserDataAccess userDataAccess = new UserDataAccess();
+            User user = Utils.CreateUserForTest();
+            userDataAccess.Add(user);
+            user.Name = "Pepito";
+
+            userDataAccess.Modify(user);
+
+            User obtained = userDataAccess.Get(user.Username);
+            Assert.IsNull(obtained);
+        }
+
+        [TestMethod]
+        public void GetAllUsersFromDb_ExpectedParameters_Ok()
+        {
+            IUserDataAccess userDataAccess = new UserDataAccess();
+            User user = Utils.CreateUserForTest();
+            userDataAccess.Add(user);
+
+            userDataAccess.Get();
+
+            User obtained = userDataAccess.Get(user.Username);
+            Assert.IsNull(obtained);
+        }
+
+        [TestMethod]
+        public void ExistUserInDb_ExpectedParameters_Ok()
+        {
+            IUserDataAccess userDataAccess = new UserDataAccess();
+            User user = Utils.CreateUserForTest();
+            userDataAccess.Add(user);
+
+            userDataAccess.Exists(user.Username);
+
+            User obtained = userDataAccess.Get(user.Username);
+            Assert.IsNull(obtained);
+        }
     }
 }
