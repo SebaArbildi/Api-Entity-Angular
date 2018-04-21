@@ -20,7 +20,7 @@ namespace DocSystBusinessLogicImplementation.UserBusinessLogicImplementation
         {
             if (!UserIsNull(newUser))
             {
-                if (!UserExists(newUser))
+                if (!UserExists(newUser.Username))
                 {
                     try
                     {
@@ -44,17 +44,59 @@ namespace DocSystBusinessLogicImplementation.UserBusinessLogicImplementation
 
         public void DeleteUser(string username)
         {
-            throw new NotImplementedException();
+            if (username != null)
+            {
+                if (UserExists(username))
+                {
+                    try
+                    {
+                        userDataAccess.Delete(username);
+                    }
+                    catch (Exception)
+                    {
+                        throw;
+                    }
+                }
+                else
+                {
+                    throw new ArgumentException("Username doesn't exist", username);
+                }
+            }
+            else
+            {
+                throw new ArgumentNullException(username);
+            }
         }
 
         public void ModifyUser(User newUser)
         {
-            throw new NotImplementedException();
+            if (!UserIsNull(newUser))
+            {
+                if (UserExists(newUser.Username))
+                {
+                    try
+                    {
+                        userDataAccess.Modify(newUser);
+                    }
+                    catch (Exception)
+                    {
+                        throw;
+                    }
+                }
+                else
+                {
+                    throw new ArgumentException("Username doesn't exist", newUser.Username);
+                }
+            }
+            else
+            {
+                throw new ArgumentNullException("Null references");
+            }
         }
 
-        private bool UserExists(User newUser)
+        private bool UserExists(string usernameer)
         {
-            return userDataAccess.Exists(newUser.Username);
+            return userDataAccess.Exists(usernameer);
         }
 
         private bool UserIsNull(User newUser)

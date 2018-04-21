@@ -76,7 +76,8 @@ namespace DocSystTest.BusinessLogicTest
         {
             User newUser = Utils.CreateUserForTest();
 
-            mockUserDataAccess.Setup(b1 => b1.Add(newUser));
+            mockUserDataAccess.Setup(b1 => b1.Delete(newUser.Username));
+            mockUserDataAccess.Setup(b1 => b1.Exists(newUser.Username)).Returns(true);
 
             userBusinessLogic.DeleteUser(newUser.Username);
         }
@@ -86,18 +87,18 @@ namespace DocSystTest.BusinessLogicTest
         public void DeleteUser_UserHasNullFields_ArgumentNullException()
         {
             User newUser = Utils.CreateUserForTest();
-            newUser.Name = null;
+            newUser.Username = null;
 
             userBusinessLogic.DeleteUser(newUser.Username);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(DuplicateWaitObjectException))]
+        [ExpectedException(typeof(ArgumentException))]
         public void DeleteUser_UserAlreadyExists_DuplicateException()
         {
             User newUser = Utils.CreateUserForTest();
 
-            mockUserDataAccess.Setup(b1 => b1.Exists(newUser.Username)).Returns(true);
+            mockUserDataAccess.Setup(b1 => b1.Exists(newUser.Username)).Returns(false);
 
             userBusinessLogic.DeleteUser(newUser.Username);
         }
@@ -108,6 +109,7 @@ namespace DocSystTest.BusinessLogicTest
             User newUser = Utils.CreateUserForTest();
 
             mockUserDataAccess.Setup(b1 => b1.Add(newUser));
+            mockUserDataAccess.Setup(b1 => b1.Exists(newUser.Username)).Returns(true);
 
             userBusinessLogic.ModifyUser(newUser);
         }
@@ -123,12 +125,12 @@ namespace DocSystTest.BusinessLogicTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(DuplicateWaitObjectException))]
+        [ExpectedException(typeof(ArgumentException))]
         public void ModifyUser_UserAlreadyExists_DuplicateException()
         {
             User newUser = Utils.CreateUserForTest();
 
-            mockUserDataAccess.Setup(b1 => b1.Exists(newUser.Username)).Returns(true);
+            mockUserDataAccess.Setup(b1 => b1.Exists(newUser.Username)).Returns(false);
 
             userBusinessLogic.ModifyUser(newUser);
         }
