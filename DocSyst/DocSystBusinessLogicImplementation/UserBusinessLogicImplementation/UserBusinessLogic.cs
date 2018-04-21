@@ -22,14 +22,7 @@ namespace DocSystBusinessLogicImplementation.UserBusinessLogicImplementation
             {
                 if (!UserExists(newUser.Username))
                 {
-                    try
-                    {
-                        userDataAccess.Add(newUser);
-                    }
-                    catch (Exception)
-                    {
-                        throw;
-                    }
+                    userDataAccess.Add(newUser);
                 }
                 else
                 {
@@ -48,14 +41,7 @@ namespace DocSystBusinessLogicImplementation.UserBusinessLogicImplementation
             {
                 if (UserExists(username))
                 {
-                    try
-                    {
-                        userDataAccess.Delete(username);
-                    }
-                    catch (Exception)
-                    {
-                        throw;
-                    }
+                    userDataAccess.Delete(username);
                 }
                 else
                 {
@@ -74,14 +60,8 @@ namespace DocSystBusinessLogicImplementation.UserBusinessLogicImplementation
             {
                 if (UserExists(newUser.Username))
                 {
-                    try
-                    {
-                        userDataAccess.Modify(newUser);
-                    }
-                    catch (Exception)
-                    {
-                        throw;
-                    }
+
+                    userDataAccess.Modify(newUser);
                 }
                 else
                 {

@@ -72,11 +72,21 @@ namespace DocSystTest.BusinessLogicTest
         }
 
         [TestMethod]
+        [ExpectedException(typeof(Exception))]
+        public void AddUser_DataAccessThrowException_ExceptionCatched()
+        {
+            User newUser = Utils.CreateUserForTest();
+
+            mockUserDataAccess.Setup(b1 => b1.Add(newUser)).Throws(new Exception());
+
+            userBusinessLogic.AddUser(newUser);
+        }
+
+        [TestMethod]
         public void DeleteUser_ExpectedParameters_Ok()
         {
             User newUser = Utils.CreateUserForTest();
 
-            mockUserDataAccess.Setup(b1 => b1.Delete(newUser.Username));
             mockUserDataAccess.Setup(b1 => b1.Exists(newUser.Username)).Returns(true);
 
             userBusinessLogic.DeleteUser(newUser.Username);
@@ -104,11 +114,22 @@ namespace DocSystTest.BusinessLogicTest
         }
 
         [TestMethod]
+        [ExpectedException(typeof(Exception))]
+        public void DeleteUser_DataAccessThrowException_ExceptionCatched()
+        {
+            User newUser = Utils.CreateUserForTest();
+
+            mockUserDataAccess.Setup(b1 => b1.Exists(newUser.Username)).Returns(true);
+            mockUserDataAccess.Setup(b1 => b1.Delete(newUser.Username)).Throws(new Exception());
+
+            userBusinessLogic.DeleteUser(newUser.Username);
+        }
+
+        [TestMethod]
         public void ModifyUser_ExpectedParameters_Ok()
         {
             User newUser = Utils.CreateUserForTest();
 
-            mockUserDataAccess.Setup(b1 => b1.Add(newUser));
             mockUserDataAccess.Setup(b1 => b1.Exists(newUser.Username)).Returns(true);
 
             userBusinessLogic.ModifyUser(newUser);
@@ -131,6 +152,18 @@ namespace DocSystTest.BusinessLogicTest
             User newUser = Utils.CreateUserForTest();
 
             mockUserDataAccess.Setup(b1 => b1.Exists(newUser.Username)).Returns(false);
+
+            userBusinessLogic.ModifyUser(newUser);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(Exception))]
+        public void ModifyUser_DataAccessThrowException_ExceptionCatched()
+        {
+            User newUser = Utils.CreateUserForTest();
+
+            mockUserDataAccess.Setup(b1 => b1.Exists(newUser.Username)).Returns(true);
+            mockUserDataAccess.Setup(b1 => b1.Modify(newUser)).Throws(new Exception());
 
             userBusinessLogic.ModifyUser(newUser);
         }
