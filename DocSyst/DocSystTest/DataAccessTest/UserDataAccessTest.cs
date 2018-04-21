@@ -33,5 +33,18 @@ namespace DocSystTest.DataAccessTest
             User obtained = userDataAccess.Get(user.Username);
             Assert.AreEqual(user, obtained);
         }
+
+        [TestMethod]
+        public void DeleteUserFromDb_ExpectedParameters_Ok()
+        {
+            IUserDataAccess userDataAccess = new UserDataAccess();
+            User user = Utils.CreateUserForTest();
+            userDataAccess.Add(user);
+
+            userDataAccess.Delete(user.Username);
+
+            User obtained = userDataAccess.Get(user.Username);
+            Assert.IsNull(obtained);
+        }
     }
 }
