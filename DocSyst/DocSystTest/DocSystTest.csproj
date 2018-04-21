@@ -78,6 +78,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="BusinessLogicTest\UserBusinessLogicTest.cs" />
     <Compile Include="DataAccessTest\UserDataAccessTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="EntitiesTest\UserTest.cs" />
@@ -88,6 +89,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DocSystBusinessLogicImplementation\DocSystBusinessLogicImplementation.csproj">
+      <Project>{493442c1-632d-4e3e-a97a-8fde0bfe8f1c}</Project>
+      <Name>DocSystBusinessLogicImplementation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DocSystBusinessLogicInterface\DocSystBusinessLogicInterface.csproj">
+      <Project>{a1021758-cc14-4e31-a18f-bad39be137e6}</Project>
+      <Name>DocSystBusinessLogicInterface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DocSystDataAccessInterface\DocSystDataAccessInterface.csproj">
       <Project>{73d5543f-593e-4122-8b7b-b56045b3af69}</Project>
       <Name>DocSystDataAccessInterface</Name>

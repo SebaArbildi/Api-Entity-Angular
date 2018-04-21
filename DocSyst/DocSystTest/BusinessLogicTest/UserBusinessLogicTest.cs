@@ -1,7 +1,8 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using DocSystBusinessLogicInterface.UserBusinessLogicInterface;
+using DocSystBusinessLogicImplementation.UserBusinessLogicImplementation;
+using DocSystDataAccessInterface.UserDataAccessInterface;
+using DocSystDataAccess.UserDataAccessImplementation;
 
 namespace DocSystTest.BusinessLogicTest
 {
@@ -11,7 +12,7 @@ namespace DocSystTest.BusinessLogicTest
         [TestMethod]
         public void CreateUserBL_WithoutParameters_Ok()
         {
-            IUserBusinessLogic userBusinessLogic = new UserBusinessLogicTest();
+            IUserBusinessLogic userBusinessLogic = new UserBusinessLogic();
 
             Assert.IsNotNull(userBusinessLogic);
         }
@@ -19,9 +20,9 @@ namespace DocSystTest.BusinessLogicTest
         [TestMethod]
         public void CreateUserBL_WithParameters_Ok()
         {
-            IUserDataAccess userDataAccess = new IUserDataAccess();
+            IUserDataAccess userDataAccess = new UserDataAccess();
 
-            IUserBusinessLogic userBusinessLogic = new UserBusinessLogicTest(userDataAccess);
+            IUserBusinessLogic userBusinessLogic = new UserBusinessLogic(userDataAccess);
 
             Assert.IsNotNull(userBusinessLogic);
         }
