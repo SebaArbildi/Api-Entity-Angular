@@ -25,5 +25,10 @@ namespace DocSystDataAccess.UserDataAccessImplementation
             }
             return user;
         }
+
+        public void Delete(string username)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
