@@ -8,7 +8,12 @@ namespace DocSystTest.DataAccessTest
     [TestClass]
     public class UserDataAccessTest
     {
-        
+        [TestCleanup]
+        public void CleanDataBase()
+        {
+            Utils.DeleteBd();
+        }
+
         [TestMethod]
         public void CreateUserDataAccess_WithoutParameters_Ok()
         {
@@ -25,7 +30,7 @@ namespace DocSystTest.DataAccessTest
 
             userDataAccess.Add(user);
 
-            User obtained = userDataAccess.Get(user.UserName);
+            User obtained = userDataAccess.Get(user.Username);
             Assert.AreEqual(user, obtained);
         }
     }

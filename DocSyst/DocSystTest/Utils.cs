@@ -1,17 +1,21 @@
-﻿using DocSystEntities.User;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DocSystDataAccess;
+using DocSystEntities.User;
 
 namespace DocSystTest
 {
     internal static class Utils
     {
+        internal static void DeleteBd()
+        {
+            using (DocSystDbContext context = new DocSystDbContext())
+            {
+                context.Database.Delete();
+            }
+        }
+
         internal static User CreateUserForTest()
         {
-            return new User("Name", "LastName", "UserName", "Password", "Mail", true);
+            return new User("Name", "LastName", "Username", "Password", "Mail", true);
         }
     }
 }

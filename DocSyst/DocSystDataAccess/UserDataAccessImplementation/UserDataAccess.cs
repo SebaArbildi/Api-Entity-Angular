@@ -1,6 +1,7 @@
 ﻿using System;
 using DocSystDataAccessInterface.UserDataAccessInterface;
 using DocSystEntities.User;
+using System.Linq;
 
 namespace DocSystDataAccess.UserDataAccessImplementation
 {
@@ -8,12 +9,21 @@ namespace DocSystDataAccess.UserDataAccessImplementation
     {
         public void Add(User user)
         {
-            throw new NotImplementedException();
+            using (DocSystDbContext context = new DocSystDbContext())
+            {
+                context.Users.Add(user);
+                context.SaveChanges();
+            }
         }
 
         public User Get(string username)
         {
-            throw new NotImplementedException();
+            User user = null;
+            using (DocSystDbContext context = new DocSystDbContext())
+            {
+                user = context.Users.Where(userDb => userDb.Username == username).FirstOrDefault();
+            }
+            return user;
         }
     }
 }

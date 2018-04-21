@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace DocSystEntities.User
 {
@@ -10,7 +6,7 @@ namespace DocSystEntities.User
     {
         private string name;
         private string lastName;
-        private string userName;
+        private string username;
         private string password;
         private string mail;
         private bool isAdmin;
@@ -19,24 +15,102 @@ namespace DocSystEntities.User
 
         public User(string name, string lastName, string userName, string password, string mail, bool isAdmin)
         {
-            this.name = name;
-            this.lastName = lastName;
-            this.userName = userName;
-            this.password = password;
-            this.mail = mail;
-            this.isAdmin = isAdmin;
+            this.Name = name;
+            this.LastName = lastName;
+            this.Username = userName;
+            this.Password = password;
+            this.Mail = mail;
+            this.IsAdmin = isAdmin;
         }
 
-        public string Name { get; set; }
+        public string Name
+        {
+            get
+            {
+                return name;
+            }
 
-        public string LastName { get; set; }
+            set
+            {
+                name = value;
+            }
+        }
 
-        public string UserName { get; set; }
+        public string LastName
+        {
+            get
+            {
+                return lastName;
+            }
 
-        public string Password { get; set; }
+            set
+            {
+                lastName = value;
+            }
+        }
 
-        public string Mail { get; set; }
+        [Key]
+        public string Username
+        {
+            get
+            {
+                return username;
+            }
 
-        public bool IsAdmin { get; set; }
+            set
+            {
+                username = value;
+            }
+        }
+
+        public string Password
+        {
+            get
+            {
+                return password;
+            }
+
+            set
+            {
+                password = value;
+            }
+        }
+
+        public string Mail
+        {
+            get
+            {
+                return mail;
+            }
+
+            set
+            {
+                mail = value;
+            }
+        }
+
+        public bool IsAdmin
+        {
+            get
+            {
+                return isAdmin;
+            }
+
+            set
+            {
+                isAdmin = value;
+            }
+        }
+
+        public override bool Equals(object obj)
+        {
+            bool equals = false;
+            User user = (User)obj;
+            if (this.Username.Equals(user.Username))
+            {
+                equals = true;
+            }
+            return equals;
+        }
     }
 }

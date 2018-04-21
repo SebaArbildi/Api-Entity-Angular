@@ -1,5 +1,9 @@
+C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystEntities\bin\Debug\DocSystEntities.dll.config
 C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystEntities\bin\Debug\DocSystEntities.dll
 C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystEntities\bin\Debug\DocSystEntities.pdb
-C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystEntities\obj\Debug\DocSystEntities.csprojResolveAssemblyReference.cache
+C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystEntities\bin\Debug\EntityFramework.dll
+C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystEntities\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystEntities\bin\Debug\EntityFramework.xml
+C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystEntities\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystEntities\obj\Debug\DocSystEntities.dll
 C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystEntities\obj\Debug\DocSystEntities.pdb
