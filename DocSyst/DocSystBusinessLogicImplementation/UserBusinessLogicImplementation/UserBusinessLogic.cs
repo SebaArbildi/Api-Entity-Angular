@@ -2,6 +2,7 @@
 using DocSystBusinessLogicInterface.UserBusinessLogicInterface;
 using DocSystDataAccessInterface.UserDataAccessInterface;
 using DocSystEntities.User;
+using System.Collections.Generic;
 
 namespace DocSystBusinessLogicImplementation.UserBusinessLogicImplementation
 {
@@ -74,9 +75,33 @@ namespace DocSystBusinessLogicImplementation.UserBusinessLogicImplementation
             }
         }
 
-        private bool UserExists(string usernameer)
+        public User GetUser(string username)
         {
-            return userDataAccess.Exists(usernameer);
+            if (username != null)
+            {
+                if (UserExists(username))
+                {
+                    return userDataAccess.Get(username);
+                }
+                else
+                {
+                    throw new ArgumentException("Username doesn't exist", username);
+                }
+            }
+            else
+            {
+                throw new ArgumentNullException(username);
+            }
+        }
+
+        public IList<User> GetUsers()
+        {
+            return userDataAccess.Get();
+        }
+
+        private bool UserExists(string username)
+        {
+            return userDataAccess.Exists(username);
         }
 
         private bool UserIsNull(User newUser)

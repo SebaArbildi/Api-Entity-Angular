@@ -6,6 +6,7 @@ using DocSystDataAccess.UserDataAccessImplementation;
 using System;
 using DocSystEntities.User;
 using Moq;
+using System.Collections.Generic;
 
 namespace DocSystTest.BusinessLogicTest
 {
@@ -15,6 +16,12 @@ namespace DocSystTest.BusinessLogicTest
         private Mock<IUserDataAccess> mockUserDataAccess;
         private IUserBusinessLogic userBusinessLogic;
         private User user;
+
+        [TestCleanup]
+        public void CleanDataBase()
+        {
+            Utils.DeleteBd();
+        }
 
         [TestInitialize]
         public void CreateUserBusinessLogicForTest()
@@ -159,12 +166,14 @@ namespace DocSystTest.BusinessLogicTest
         {
             mockUserDataAccess.Setup(b1 => b1.Get()).Throws(new Exception());
 
-            userBusinessLogic.GetUsers(user);
+            userBusinessLogic.GetUsers();
         }
 
         [TestMethod]
         public void GetUser_ExpectedParameters_Ok()
         {
+            mockUserDataAccess.Setup(b1 => b1.Exists(user.Username)).Returns(true);
+
             userBusinessLogic.GetUser(user.Username);
         }
 
@@ -172,25 +181,48 @@ namespace DocSystTest.BusinessLogicTest
         [ExpectedException(typeof(ArgumentNullException))]
         public void GetUser_UserHasNullFields_ArgumentNullException()
         {
+            user.Username = null;
             userBusinessLogic.GetUser(user.Username);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(DuplicateWaitObjectException))]
+        [ExpectedException(typeof(ArgumentException))]
         public void GetUser_UserNotExists_DuplicateException()
         {
             mockUserDataAccess.Setup(b1 => b1.Exists(user.Username)).Returns(false);
 
-            userBusinessLogic.GetUser(user);
+            userBusinessLogic.GetUser(user.Username);
         }
 
         [TestMethod]
         [ExpectedException(typeof(Exception))]
         public void GetUser_DataAccessThrowException_ExceptionCatched()
         {
+            mockUserDataAccess.Setup(b1 => b1.Exists(user.Username)).Returns(true);
             mockUserDataAccess.Setup(b1 => b1.Get(user.Username)).Throws(new Exception());
 
-            userBusinessLogic.GetUser(user);
+            userBusinessLogic.GetUser(user.Username);
+        }
+
+        [TestMethod]
+        public void IntegrationTest_ExpectedParameters_Ok()
+        {
+            UserDataAccess userDA = new UserDataAccess();
+            UserBusinessLogic userBL = new UserBusinessLogic(userDA);
+            User user1 = Utils.CreateUserForTest();
+            User user2 = Utils.CreateUserForTest();
+            userBL.AddUser(user1);
+            userBL.AddUser(user2);
+
+            user2.Name = "Other name";
+            userBL.ModifyUser(user2);
+
+            userBL.DeleteUser(user1.Username);
+
+            User user2Obtained = userBL.GetUser(user2.Username);
+            IList<User> usersObtained = userBL.GetUsers();
+
+            Assert.IsTrue(!usersObtained.Contains(user1) && usersObtained.Contains(user2Obtained));
         }
     }
 }
