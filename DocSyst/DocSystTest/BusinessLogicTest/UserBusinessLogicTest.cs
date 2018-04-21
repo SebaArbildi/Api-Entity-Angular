@@ -14,12 +14,14 @@ namespace DocSystTest.BusinessLogicTest
     {
         private Mock<IUserDataAccess> mockUserDataAccess;
         private IUserBusinessLogic userBusinessLogic;
+        private User user;
 
         [TestInitialize]
         public void CreateUserBusinessLogicForTest()
         {
             mockUserDataAccess = new Mock<IUserDataAccess>();
             userBusinessLogic = new UserBusinessLogic(mockUserDataAccess.Object);
+            user = Utils.CreateUserForTest();
         }
 
         [TestMethod]
@@ -43,129 +45,152 @@ namespace DocSystTest.BusinessLogicTest
         [TestMethod]
         public void AddUser_ExpectedParameters_Ok()
         {
-            User newUser = Utils.CreateUserForTest();
-
-            mockUserDataAccess.Setup(b1 => b1.Add(newUser));
-
-            userBusinessLogic.AddUser(newUser);
+            userBusinessLogic.AddUser(user);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void AddUser_UserHasNullFields_ArgumentNullException()
         {
-            User newUser = Utils.CreateUserForTest();
-            newUser.Name = null;
+            user.Name = null;
 
-            userBusinessLogic.AddUser(newUser);
+            userBusinessLogic.AddUser(user);
         }
 
         [TestMethod]
         [ExpectedException(typeof(DuplicateWaitObjectException))]
         public void AddUser_UserAlreadyExists_DuplicateException()
         {
-            User newUser = Utils.CreateUserForTest();
+            mockUserDataAccess.Setup(b1 => b1.Exists(user.Username)).Returns(true);
 
-            mockUserDataAccess.Setup(b1 => b1.Exists(newUser.Username)).Returns(true);
-
-            userBusinessLogic.AddUser(newUser);
+            userBusinessLogic.AddUser(user);
         }
 
         [TestMethod]
         [ExpectedException(typeof(Exception))]
         public void AddUser_DataAccessThrowException_ExceptionCatched()
         {
-            User newUser = Utils.CreateUserForTest();
+            mockUserDataAccess.Setup(b1 => b1.Add(user)).Throws(new Exception());
 
-            mockUserDataAccess.Setup(b1 => b1.Add(newUser)).Throws(new Exception());
-
-            userBusinessLogic.AddUser(newUser);
+            userBusinessLogic.AddUser(user);
         }
 
         [TestMethod]
         public void DeleteUser_ExpectedParameters_Ok()
         {
-            User newUser = Utils.CreateUserForTest();
+            mockUserDataAccess.Setup(b1 => b1.Exists(user.Username)).Returns(true);
 
-            mockUserDataAccess.Setup(b1 => b1.Exists(newUser.Username)).Returns(true);
-
-            userBusinessLogic.DeleteUser(newUser.Username);
+            userBusinessLogic.DeleteUser(user.Username);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void DeleteUser_UserHasNullFields_ArgumentNullException()
         {
-            User newUser = Utils.CreateUserForTest();
-            newUser.Username = null;
+            user.Username = null;
 
-            userBusinessLogic.DeleteUser(newUser.Username);
+            userBusinessLogic.DeleteUser(user.Username);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void DeleteUser_UserAlreadyExists_DuplicateException()
+        public void DeleteUser_UserNotExists_DuplicateException()
         {
-            User newUser = Utils.CreateUserForTest();
+            mockUserDataAccess.Setup(b1 => b1.Exists(user.Username)).Returns(false);
 
-            mockUserDataAccess.Setup(b1 => b1.Exists(newUser.Username)).Returns(false);
-
-            userBusinessLogic.DeleteUser(newUser.Username);
+            userBusinessLogic.DeleteUser(user.Username);
         }
 
         [TestMethod]
         [ExpectedException(typeof(Exception))]
         public void DeleteUser_DataAccessThrowException_ExceptionCatched()
         {
-            User newUser = Utils.CreateUserForTest();
+            mockUserDataAccess.Setup(b1 => b1.Exists(user.Username)).Returns(true);
+            mockUserDataAccess.Setup(b1 => b1.Delete(user.Username)).Throws(new Exception());
 
-            mockUserDataAccess.Setup(b1 => b1.Exists(newUser.Username)).Returns(true);
-            mockUserDataAccess.Setup(b1 => b1.Delete(newUser.Username)).Throws(new Exception());
-
-            userBusinessLogic.DeleteUser(newUser.Username);
+            userBusinessLogic.DeleteUser(user.Username);
         }
 
         [TestMethod]
         public void ModifyUser_ExpectedParameters_Ok()
         {
-            User newUser = Utils.CreateUserForTest();
+            mockUserDataAccess.Setup(b1 => b1.Exists(user.Username)).Returns(true);
 
-            mockUserDataAccess.Setup(b1 => b1.Exists(newUser.Username)).Returns(true);
-
-            userBusinessLogic.ModifyUser(newUser);
+            userBusinessLogic.ModifyUser(user);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void ModifyUser_UserHasNullFields_ArgumentNullException()
         {
-            User newUser = Utils.CreateUserForTest();
-            newUser.Name = null;
+            user.Name = null;
 
-            userBusinessLogic.ModifyUser(newUser);
+            userBusinessLogic.ModifyUser(user);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void ModifyUser_UserAlreadyExists_DuplicateException()
+        public void ModifyUser_UserNotExists_DuplicateException()
         {
-            User newUser = Utils.CreateUserForTest();
+            mockUserDataAccess.Setup(b1 => b1.Exists(user.Username)).Returns(false);
 
-            mockUserDataAccess.Setup(b1 => b1.Exists(newUser.Username)).Returns(false);
-
-            userBusinessLogic.ModifyUser(newUser);
+            userBusinessLogic.ModifyUser(user);
         }
 
         [TestMethod]
         [ExpectedException(typeof(Exception))]
         public void ModifyUser_DataAccessThrowException_ExceptionCatched()
         {
-            User newUser = Utils.CreateUserForTest();
+            mockUserDataAccess.Setup(b1 => b1.Exists(user.Username)).Returns(true);
+            mockUserDataAccess.Setup(b1 => b1.Modify(user)).Throws(new Exception());
 
-            mockUserDataAccess.Setup(b1 => b1.Exists(newUser.Username)).Returns(true);
-            mockUserDataAccess.Setup(b1 => b1.Modify(newUser)).Throws(new Exception());
+            userBusinessLogic.ModifyUser(user);
+        }
 
-            userBusinessLogic.ModifyUser(newUser);
+        [TestMethod]
+        public void GetUsers_ExpectedParameters_Ok()
+        {
+            userBusinessLogic.GetUsers();
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(Exception))]
+        public void GetUsers_DataAccessThrowException_ExceptionCatched()
+        {
+            mockUserDataAccess.Setup(b1 => b1.Get()).Throws(new Exception());
+
+            userBusinessLogic.GetUsers(user);
+        }
+
+        [TestMethod]
+        public void GetUser_ExpectedParameters_Ok()
+        {
+            userBusinessLogic.GetUser(user.Username);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void GetUser_UserHasNullFields_ArgumentNullException()
+        {
+            userBusinessLogic.GetUser(user.Username);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(DuplicateWaitObjectException))]
+        public void GetUser_UserNotExists_DuplicateException()
+        {
+            mockUserDataAccess.Setup(b1 => b1.Exists(user.Username)).Returns(false);
+
+            userBusinessLogic.GetUser(user);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(Exception))]
+        public void GetUser_DataAccessThrowException_ExceptionCatched()
+        {
+            mockUserDataAccess.Setup(b1 => b1.Get(user.Username)).Throws(new Exception());
+
+            userBusinessLogic.GetUser(user);
         }
     }
 }
