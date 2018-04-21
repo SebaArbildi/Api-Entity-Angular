@@ -42,6 +42,16 @@ namespace DocSystBusinessLogicImplementation.UserBusinessLogicImplementation
             }
         }
 
+        public void DeleteUser(string username)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ModifyUser(User newUser)
+        {
+            throw new NotImplementedException();
+        }
+
         private bool UserExists(User newUser)
         {
             return userDataAccess.Exists(newUser.Username);

@@ -78,7 +78,7 @@ namespace DocSystTest.BusinessLogicTest
 
             mockUserDataAccess.Setup(b1 => b1.Add(newUser));
 
-            userBusinessLogic.DeleteUser(newUser);
+            userBusinessLogic.DeleteUser(newUser.Username);
         }
 
         [TestMethod]
@@ -88,7 +88,7 @@ namespace DocSystTest.BusinessLogicTest
             User newUser = Utils.CreateUserForTest();
             newUser.Name = null;
 
-            userBusinessLogic.DeleteUser(newUser);
+            userBusinessLogic.DeleteUser(newUser.Username);
         }
 
         [TestMethod]
@@ -99,7 +99,7 @@ namespace DocSystTest.BusinessLogicTest
 
             mockUserDataAccess.Setup(b1 => b1.Exists(newUser.Username)).Returns(true);
 
-            userBusinessLogic.DeleteUser(newUser);
+            userBusinessLogic.DeleteUser(newUser.Username);
         }
 
         [TestMethod]
