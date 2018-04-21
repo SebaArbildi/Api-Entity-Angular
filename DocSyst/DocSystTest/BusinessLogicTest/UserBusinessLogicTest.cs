@@ -5,24 +5,29 @@ using DocSystDataAccessInterface.UserDataAccessInterface;
 using DocSystDataAccess.UserDataAccessImplementation;
 using System;
 using DocSystEntities.User;
+using Moq;
 
 namespace DocSystTest.BusinessLogicTest
 {
     [TestClass]
     public class UserBusinessLogicTest
     {
-        private IUserBusinessLogic CreateUserBusinessLogicForTest()
+        private Mock<IUserDataAccess> mockUserDataAccess;
+        private IUserBusinessLogic userBusinessLogic;
+
+        [TestInitialize]
+        public void CreateUserBusinessLogicForTest()
         {
-            IUserDataAccess userDataAccess = new UserDataAccess();
-            return new UserBusinessLogic(userDataAccess);
+            mockUserDataAccess = new Mock<IUserDataAccess>();
+            userBusinessLogic = new UserBusinessLogic(mockUserDataAccess.Object);
         }
 
         [TestMethod]
         public void CreateUserBL_WithoutParameters_Ok()
         {
-            IUserBusinessLogic userBusinessLogic = new UserBusinessLogic();
+            IUserBusinessLogic userBL = new UserBusinessLogic();
 
-            Assert.IsNotNull(userBusinessLogic);
+            Assert.IsNotNull(userBL);
         }
 
         [TestMethod]
@@ -30,16 +35,17 @@ namespace DocSystTest.BusinessLogicTest
         {
             IUserDataAccess userDataAccess = new UserDataAccess();
 
-            IUserBusinessLogic userBusinessLogic = new UserBusinessLogic(userDataAccess);
+            IUserBusinessLogic userBL = new UserBusinessLogic(userDataAccess);
 
-            Assert.IsNotNull(userBusinessLogic);
+            Assert.IsNotNull(userBL);
         }
 
         [TestMethod]
         public void AddUser_ExpectedParameters_Ok()
         {
-            IUserBusinessLogic userBusinessLogic = CreateUserBusinessLogicForTest();
             User newUser = Utils.CreateUserForTest();
+
+            mockUserDataAccess.Setup(b1 => b1.Add(newUser));
 
             userBusinessLogic.AddUser(newUser);
         }
@@ -48,7 +54,6 @@ namespace DocSystTest.BusinessLogicTest
         [ExpectedException(typeof(ArgumentNullException))]
         public void AddUser_UserHasNullFields_ArgumentNullException()
         {
-            IUserBusinessLogic userBusinessLogic = CreateUserBusinessLogicForTest();
             User newUser = Utils.CreateUserForTest();
             newUser.Name = null;
 
@@ -59,9 +64,9 @@ namespace DocSystTest.BusinessLogicTest
         [ExpectedException(typeof(DuplicateWaitObjectException))]
         public void AddUser_UserAlreadyExists_DuplicateException()
         {
-            IUserBusinessLogic userBusinessLogic = CreateUserBusinessLogicForTest();
             User newUser = Utils.CreateUserForTest();
-            newUser.Name = null;
+
+            mockUserDataAccess.Setup(b1 => b1.Exists(newUser.Username)).Returns(true);
 
             userBusinessLogic.AddUser(newUser);
         }

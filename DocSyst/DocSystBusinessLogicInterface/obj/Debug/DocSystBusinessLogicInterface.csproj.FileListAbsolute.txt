@@ -3,3 +3,5 @@ C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystBusinessLogicInterface
 C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystBusinessLogicInterface\obj\Debug\DocSystBusinessLogicInterface.csprojResolveAssemblyReference.cache
 C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystBusinessLogicInterface\obj\Debug\DocSystBusinessLogicInterface.dll
 C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystBusinessLogicInterface\obj\Debug\DocSystBusinessLogicInterface.pdb
+C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystBusinessLogicInterface\bin\Debug\DocSystEntities.dll
+C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystBusinessLogicInterface\bin\Debug\DocSystEntities.pdb

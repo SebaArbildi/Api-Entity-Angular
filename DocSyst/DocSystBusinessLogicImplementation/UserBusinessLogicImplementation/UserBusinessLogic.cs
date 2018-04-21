@@ -5,7 +5,7 @@ using DocSystEntities.User;
 
 namespace DocSystBusinessLogicImplementation.UserBusinessLogicImplementation
 {
-    public class UserBusinessLogic: IUserBusinessLogic
+    public class UserBusinessLogic : IUserBusinessLogic
     {
         private IUserDataAccess userDataAccess;
 
@@ -18,7 +18,39 @@ namespace DocSystBusinessLogicImplementation.UserBusinessLogicImplementation
 
         public void AddUser(User newUser)
         {
-            throw new NotImplementedException();
+            if (!UserIsNull(newUser))
+            {
+                if (!UserExists(newUser))
+                {
+                    try
+                    {
+                        userDataAccess.Add(newUser);
+                    }
+                    catch (Exception)
+                    {
+                        throw;
+                    }
+                }
+                else
+                {
+                    throw new DuplicateWaitObjectException(newUser.Username + " already exists");
+                }
+            }
+            else
+            {
+                throw new ArgumentNullException("Null references");
+            }
+        }
+
+        private bool UserExists(User newUser)
+        {
+            return userDataAccess.Exists(newUser.Username);
+        }
+
+        private bool UserIsNull(User newUser)
+        {
+            return newUser == null || newUser.Username == null || newUser.Password == null || newUser.Name == null
+                || newUser.Mail == null || newUser.LastName == null;
         }
     }
 }

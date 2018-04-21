@@ -52,6 +52,10 @@
       <Project>{73d5543f-593e-4122-8b7b-b56045b3af69}</Project>
       <Name>DocSystDataAccessInterface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DocSystEntities\DocSystEntities.csproj">
+      <Project>{5b3c42ed-a71e-419b-86e3-32ff647ebd34}</Project>
+      <Name>DocSystEntities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
