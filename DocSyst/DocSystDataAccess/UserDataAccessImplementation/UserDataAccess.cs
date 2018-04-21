@@ -38,19 +38,34 @@ namespace DocSystDataAccess.UserDataAccessImplementation
             }
         }
 
-        public void Modify(User user)
+        public void Modify(User newUser)
         {
-            throw new NotImplementedException();
+            using (DocSystDbContext context = new DocSystDbContext())
+            {
+                User actualUser = context.Users.Where(userDb => userDb.Username == newUser.Username).FirstOrDefault();
+                context.Entry(actualUser).CurrentValues.SetValues(newUser);
+                context.SaveChanges();
+            }
         }
 
         public IList<User> Get()
         {
-            throw new NotImplementedException();
+            IList<User> users = null;
+            using (DocSystDbContext context = new DocSystDbContext())
+            {
+                users = context.Users.ToList<User>();
+            }
+            return users;
         }
 
         public bool Exists(string username)
         {
-            throw new NotImplementedException();
+            bool exists = false;
+            using (DocSystDbContext context = new DocSystDbContext())
+            {
+                exists = context.Users.Any(userDb => userDb.Username == username);
+            }
+            return exists;
         }
     }
 }

@@ -85,5 +85,29 @@ namespace DocSystTest.DataAccessTest
 
             Assert.IsTrue(exists);
         }
+
+        [TestMethod]
+        public void IntegrationTest_ExpectedParameters_Ok()
+        {
+            IUserDataAccess userDataAccess = new UserDataAccess();
+            User user1 = Utils.CreateUserForTest();
+            User user2 = Utils.CreateUserForTest();
+            User user3 = Utils.CreateUserForTest();
+            userDataAccess.Add(user1);
+            userDataAccess.Add(user2);
+            userDataAccess.Add(user3);
+
+            user1.Name = "Pepito";
+            userDataAccess.Modify(user1);
+            Assert.AreEqual(user1, userDataAccess.Get(user1.Username));
+
+            userDataAccess.Delete(user2.Username);
+            IList<User> users = userDataAccess.Get();
+
+            Assert.IsFalse(users.Contains(user2));
+            Assert.IsFalse(userDataAccess.Exists(user2.Username));
+            Assert.IsTrue(users.Contains(user1));
+            Assert.IsTrue(userDataAccess.Exists(user1.Username));
+        }
     }
 }

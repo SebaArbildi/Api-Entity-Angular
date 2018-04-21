@@ -1,5 +1,6 @@
 ﻿using DocSystDataAccess;
 using DocSystEntities.User;
+using System;
 
 namespace DocSystTest
 {
@@ -15,7 +16,8 @@ namespace DocSystTest
 
         internal static User CreateUserForTest()
         {
-            return new User("Name", "LastName", "Username", "Password", "Mail", true);
+            Random random = new Random();
+            return new User("Name", "LastName", random.Next().ToString(), "Password", "Mail", true);
         }
     }
 }
