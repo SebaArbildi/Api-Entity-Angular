@@ -2,6 +2,7 @@
 using DocSystDataAccessInterface.UserDataAccessInterface;
 using DocSystEntities.User;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace DocSystDataAccess.UserDataAccessImplementation
 {
@@ -35,6 +36,21 @@ namespace DocSystDataAccess.UserDataAccessImplementation
                 context.Users.Remove(user);
                 context.SaveChanges();
             }
+        }
+
+        public void Modify(User user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IList<User> Get()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Exists(string username)
+        {
+            throw new NotImplementedException();
         }
     }
 }

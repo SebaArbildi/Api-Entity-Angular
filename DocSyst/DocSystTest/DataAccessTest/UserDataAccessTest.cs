@@ -2,6 +2,7 @@
 using DocSystDataAccessInterface.UserDataAccessInterface;
 using DocSystDataAccess.UserDataAccessImplementation;
 using DocSystEntities.User;
+using System.Collections.Generic;
 
 namespace DocSystTest.DataAccessTest
 {
@@ -58,7 +59,7 @@ namespace DocSystTest.DataAccessTest
             userDataAccess.Modify(user);
 
             User obtained = userDataAccess.Get(user.Username);
-            Assert.IsNull(obtained);
+            Assert.AreEqual(user, obtained);
         }
 
         [TestMethod]
@@ -68,10 +69,9 @@ namespace DocSystTest.DataAccessTest
             User user = Utils.CreateUserForTest();
             userDataAccess.Add(user);
 
-            userDataAccess.Get();
+            IList<User> users = userDataAccess.Get();
 
-            User obtained = userDataAccess.Get(user.Username);
-            Assert.IsNull(obtained);
+            Assert.IsTrue(users.Contains(user));
         }
 
         [TestMethod]
@@ -81,10 +81,9 @@ namespace DocSystTest.DataAccessTest
             User user = Utils.CreateUserForTest();
             userDataAccess.Add(user);
 
-            userDataAccess.Exists(user.Username);
+            bool exists = userDataAccess.Exists(user.Username);
 
-            User obtained = userDataAccess.Get(user.Username);
-            Assert.IsNull(obtained);
+            Assert.IsTrue(exists);
         }
     }
 }
