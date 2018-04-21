@@ -28,7 +28,13 @@ namespace DocSystDataAccess.UserDataAccessImplementation
 
         public void Delete(string username)
         {
-            throw new NotImplementedException();
+            User user = Get(username);
+            using (DocSystDbContext context = new DocSystDbContext())
+            {
+                context.Users.Attach(user);
+                context.Users.Remove(user);
+                context.SaveChanges();
+            }
         }
     }
 }
