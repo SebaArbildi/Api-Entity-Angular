@@ -1,5 +1,7 @@
-﻿using DocSystBusinessLogicInterface.UserBusinessLogicInterface;
+﻿using System;
+using DocSystBusinessLogicInterface.UserBusinessLogicInterface;
 using DocSystDataAccessInterface.UserDataAccessInterface;
+using DocSystEntities.User;
 
 namespace DocSystBusinessLogicImplementation.UserBusinessLogicImplementation
 {
@@ -12,6 +14,11 @@ namespace DocSystBusinessLogicImplementation.UserBusinessLogicImplementation
         public UserBusinessLogic(IUserDataAccess userDataAccess)
         {
             this.userDataAccess = userDataAccess;
+        }
+
+        public void AddUser(User newUser)
+        {
+            throw new NotImplementedException();
         }
     }
 }
