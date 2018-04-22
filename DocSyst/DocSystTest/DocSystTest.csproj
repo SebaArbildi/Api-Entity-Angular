@@ -78,15 +78,11 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-<<<<<<< HEAD
     <Compile Include="DocumentStructureTest\TestDocument.cs" />
     <Compile Include="DocumentStructureTest\TestMargin.cs" />
     <Compile Include="DocumentStructureTest\TestParagraph.cs" />
     <Compile Include="DocumentStructureTest\TestText.cs" />
-    <Compile Include="UnitTest1.cs" />
-=======
     <Compile Include="DataAccessTest\UserDataAccessTest.cs" />
->>>>>>> develop
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="EntitiesTest\UserTest.cs" />
     <Compile Include="Utils.cs" />
@@ -96,8 +92,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
-=======
     <ProjectReference Include="..\DocSystDataAccessInterface\DocSystDataAccessInterface.csproj">
       <Project>{73d5543f-593e-4122-8b7b-b56045b3af69}</Project>
       <Name>DocSystDataAccessInterface</Name>
@@ -106,7 +100,6 @@
       <Project>{5bdc68de-bbe5-4f31-9491-3d470bb29efb}</Project>
       <Name>DocSystDataAccessImplementation</Name>
     </ProjectReference>
->>>>>>> develop
     <ProjectReference Include="..\DocSystEntities\DocSystEntities.csproj">
       <Project>{5b3c42ed-a71e-419b-86e3-32ff647ebd34}</Project>
       <Name>DocSystEntities</Name>

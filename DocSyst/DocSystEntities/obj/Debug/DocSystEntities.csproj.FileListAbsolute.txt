@@ -7,3 +7,14 @@ C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystEntities\bin\Debug\Ent
 C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystEntities\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystEntities\obj\Debug\DocSystEntities.dll
 C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystEntities\obj\Debug\DocSystEntities.pdb
+C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystEntities\bin\Debug\DocSystEntities.dll.config
+C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystEntities\bin\Debug\DocSystEntities.dll
+C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystEntities\bin\Debug\DocSystEntities.pdb
+C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystEntities\bin\Debug\EntityFramework.dll
+C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystEntities\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystEntities\bin\Debug\EntityFramework.xml
+C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystEntities\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystEntities\obj\Debug\DocSystEntities.csproj.CoreCompileInputs.cache
+C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystEntities\obj\Debug\DocSystEntities.csproj.CopyComplete
+C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystEntities\obj\Debug\DocSystEntities.dll
+C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystEntities\obj\Debug\DocSystEntities.pdb
