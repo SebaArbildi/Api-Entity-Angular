@@ -24,7 +24,7 @@ namespace DocSystTest.BusinessLogicTest
         }
 
         [TestInitialize]
-        public void CreateUserBusinessLogicForTest()
+        public void TestInitialize()
         {
             mockUserDataAccess = new Mock<IUserDataAccess>();
             userBusinessLogic = new UserBusinessLogic(mockUserDataAccess.Object);

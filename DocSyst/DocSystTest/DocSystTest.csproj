@@ -78,6 +78,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="ApiTest\UserApiTest.cs" />
     <Compile Include="BusinessLogicTest\UserBusinessLogicTest.cs" />
     <Compile Include="DataAccessTest\UserDataAccessTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -108,6 +109,10 @@
     <ProjectReference Include="..\DocSystEntities\DocSystEntities.csproj">
       <Project>{5b3c42ed-a71e-419b-86e3-32ff647ebd34}</Project>
       <Name>DocSystEntities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DocSystWebApi\DocSystWebApi.csproj">
+      <Project>{95af85ec-7f7c-4baa-a0e8-bc336ab4ef28}</Project>
+      <Name>DocSystWebApi</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>
