@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace DocSystDependencyResolver
 {
-    public class Class1
+    public interface IComponent
     {
+        void SetUp(IRegisterComponent registerComponent);
     }
 }

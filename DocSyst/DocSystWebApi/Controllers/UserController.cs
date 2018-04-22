@@ -1,4 +1,6 @@
 ﻿using DocSystBusinessLogicInterface.UserBusinessLogicInterface;
+using DocSystEntities.User;
+using DocSystWebApi.Models.UserModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +28,15 @@ namespace DocSystWebApi.Controllers
         // GET: api/User/5
         public IHttpActionResult Get([FromUri] string username)
         {
-            return null;
+            try
+            {
+                User user = this.userBusinessLogic.GetUser(username);
+                return Ok(UserModel.ToModel(user));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         // POST: api/User

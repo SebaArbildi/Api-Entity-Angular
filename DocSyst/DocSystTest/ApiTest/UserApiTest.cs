@@ -1,12 +1,6 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using DocSystBusinessLogicInterface.UserBusinessLogicInterface;
-using DocSystDataAccess.UserDataAccessImplementation;
-using DocSystDataAccessInterface.UserDataAccessInterface;
-using DocSystBusinessLogicImplementation.UserBusinessLogicImplementation;
 using DocSystWebApi.Controllers;
 using DocSystEntities.User;
 using System.Web.Http;

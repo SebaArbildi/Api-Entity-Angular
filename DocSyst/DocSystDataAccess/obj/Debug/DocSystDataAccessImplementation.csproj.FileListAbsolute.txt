@@ -10,8 +10,8 @@ C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystDataAccess\bin\Debug\D
 C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystDataAccess\bin\Debug\EntityFramework.xml
 C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystDataAccess\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystDataAccess\obj\Debug\DocSystDataAccessImplementation.csprojResolveAssemblyReference.cache
+C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystDataAccess\obj\Debug\DocSystDataAccess.Migrations.InitialCreate.resources
+C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystDataAccess\obj\Debug\DocSystDataAccess.Migrations.init.resources
+C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystDataAccess\obj\Debug\DocSystDataAccessImplementation.csproj.GenerateResource.Cache
 C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystDataAccess\obj\Debug\DocSystDataAccess.dll
 C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystDataAccess\obj\Debug\DocSystDataAccess.pdb
-C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystDataAccess\obj\Debug\DocSystDataAccess.Migrations.InitialCreate.resources
-C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystDataAccess\obj\Debug\DocSystDataAccessImplementation.csproj.GenerateResource.Cache
-C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystDataAccess\obj\Debug\DocSystDataAccess.Migrations.init.resources

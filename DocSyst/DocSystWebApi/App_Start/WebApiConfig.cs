@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using DocSystDependencyResolver;
 using System.Web.Http;
+using Unity;
+
 
 namespace DocSystWebApi
 {
@@ -10,6 +10,11 @@ namespace DocSystWebApi
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
+            var container = new UnityContainer();
+
+            ComponentLoader.LoadContainer(container, ".\\bin", "*.dll");
+
+            config.DependencyResolver = new UnityResolver(container);
 
             // Web API routes
             config.MapHttpAttributeRoutes();
