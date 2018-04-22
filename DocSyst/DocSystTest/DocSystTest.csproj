@@ -67,11 +67,21 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="DocumentStructureTest\TestDocument.cs" />
+    <Compile Include="DocumentStructureTest\TestMargin.cs" />
+    <Compile Include="DocumentStructureTest\TestParagraph.cs" />
+    <Compile Include="DocumentStructureTest\TestText.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DocSystEntities\DocSystEntities.csproj">
+      <Project>{5b3c42ed-a71e-419b-86e3-32ff647ebd34}</Project>
+      <Name>DocSystEntities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

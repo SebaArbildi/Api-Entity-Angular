@@ -6,7 +6,30 @@ using System.Threading.Tasks;
 
 namespace DocSystEntities.DocumentStructure
 {
-    class Text
+    public class Text
     {
+        public Guid id { get; }
+        public string textContent { get; set; }
+        public string ownStyleClass { get; set; }
+
+        public Text()
+        {
+
+        }
+
+        public Text(String aText)
+        {
+
+        }
+
+        public Text(String aText, string aStyleClass)
+        {
+
+        }
+
+        public bool IsEmpty()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

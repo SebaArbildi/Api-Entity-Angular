@@ -6,7 +6,31 @@ using System.Threading.Tasks;
 
 namespace DocSystEntities.DocumentStructure
 {
-    class Body
+    public abstract class Body
     {
+        public Guid id { get; }
+        public string ownStyleClass { get; set; }
+        public List<Text> texts { get; }
+        public MarginAlign Align { get; set; }
+
+        protected Body()
+        {
+
+        }
+
+        protected Body(List<Text> someTexts)
+        {
+
+        }
+
+        protected Body(List<Text> someTexts, string aStyleClass)
+        {
+
+        }
+
+        public bool ExistText(Guid id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
