@@ -8,28 +8,46 @@ namespace DocSystEntities.DocumentStructure
 {
     public class Text
     {
-        public Guid id { get; }
+        public Guid id { get; set; }
         public string textContent { get; set; }
         public string ownStyleClass { get; set; }
 
         public Text()
         {
-
+            id = Guid.NewGuid();
+            textContent = null;
+            ownStyleClass = null;
         }
 
-        public Text(String aText)
+        public Text(string aTextContent)
         {
-
+            id = Guid.NewGuid();
+            textContent = aTextContent;
+            ownStyleClass = null;
         }
 
-        public Text(String aText, string aStyleClass)
+        public Text(string aTextContent, string aStyleClass)
         {
-
+            id = Guid.NewGuid();
+            textContent = aTextContent;
+            ownStyleClass = aStyleClass;
         }
 
         public bool IsEmpty()
         {
-            throw new NotImplementedException();
+            if(textContent == null || textContent.Length == 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public override bool Equals(object obj)
+        {
+            return id == ((Text)obj).id;
         }
     }
 }

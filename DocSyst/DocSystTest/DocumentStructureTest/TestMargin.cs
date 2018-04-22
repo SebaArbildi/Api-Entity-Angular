@@ -103,9 +103,9 @@ namespace DocSystTest.DocumentStructureTest
         {
             Margin aBodyMargin = new Margin(MarginAlign.HEADER,someTexts);
 
-            aBodyMargin.setText(aText);
+            aBodyMargin.SetText(aText);
 
-            Assert.AreEqual(aText, aBodyMargin.getText());
+            Assert.AreEqual(aText, aBodyMargin.GetText());
         }
 
         [TestMethod]
@@ -113,9 +113,9 @@ namespace DocSystTest.DocumentStructureTest
         {
             Margin aBodyMargin = new Margin(MarginAlign.FOOTER, someTexts);
 
-            aBodyMargin.setText(aText);
+            aBodyMargin.SetText(aText);
 
-            Assert.AreEqual(aText, aBodyMargin.getText());
+            Assert.AreEqual(aText, aBodyMargin.GetText());
         }
 
         [TestMethod]
@@ -123,10 +123,10 @@ namespace DocSystTest.DocumentStructureTest
         {
             Margin aBodyMargin = new Margin(MarginAlign.HEADER, someTexts);
 
-            aBodyMargin.setText(aText);
-            aBodyMargin.clearText();
+            aBodyMargin.SetText(aText);
+            aBodyMargin.ClearText();
 
-            Assert.IsNull(aBodyMargin.getText());
+            Assert.IsFalse(aBodyMargin.HasText());
         }
 
         [TestMethod]
@@ -134,10 +134,10 @@ namespace DocSystTest.DocumentStructureTest
         {
             Margin aBodyMargin = new Margin(MarginAlign.FOOTER, someTexts);
 
-            aBodyMargin.setText(aText);
-            aBodyMargin.clearText();
+            aBodyMargin.SetText(aText);
+            aBodyMargin.ClearText();
 
-            Assert.IsNull(aBodyMargin.getText());
+            Assert.IsFalse(aBodyMargin.HasText());
         }
 
         [TestMethod]
@@ -145,7 +145,7 @@ namespace DocSystTest.DocumentStructureTest
         {
             Margin aBodyMargin = new Margin(MarginAlign.FOOTER, someTexts);
 
-            aBodyMargin.setText(aText);
+            aBodyMargin.SetText(aText);
 
             Assert.IsTrue(aBodyMargin.ExistText(aText.id));
         }
@@ -155,9 +155,9 @@ namespace DocSystTest.DocumentStructureTest
         {
             Margin aBodyMargin = new Margin(MarginAlign.FOOTER, someTexts);
 
-            aBodyMargin.setText(aText);
+            aBodyMargin.SetText(aText);
 
-            Assert.IsTrue(aBodyMargin.ExistText(new Guid()));
+            Assert.IsFalse(aBodyMargin.ExistText(Guid.NewGuid()));
         }
     }
 }

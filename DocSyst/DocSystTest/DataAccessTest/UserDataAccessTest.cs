@@ -9,6 +9,16 @@ namespace DocSystTest.DataAccessTest
     [TestClass]
     public class UserDataAccessTest
     {
+        private IUserDataAccess userDataAccess;
+        private User user;
+
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            userDataAccess = new UserDataAccess();
+            user = Utils.CreateUserForTest();
+        }
+
         [TestCleanup]
         public void CleanDataBase()
         {
@@ -18,17 +28,12 @@ namespace DocSystTest.DataAccessTest
         [TestMethod]
         public void CreateUserDataAccess_WithoutParameters_Ok()
         {
-            IUserDataAccess userDataAccess = new UserDataAccess();
-
             Assert.IsNotNull(userDataAccess);
         }
 
         [TestMethod]
         public void AddUserToDb_ExpectedParameters_Ok()
         {
-            IUserDataAccess userDataAccess = new UserDataAccess();
-            User user = Utils.CreateUserForTest();
-
             userDataAccess.Add(user);
 
             User obtained = userDataAccess.Get(user.Username);
@@ -38,8 +43,6 @@ namespace DocSystTest.DataAccessTest
         [TestMethod]
         public void DeleteUserFromDb_ExpectedParameters_Ok()
         {
-            IUserDataAccess userDataAccess = new UserDataAccess();
-            User user = Utils.CreateUserForTest();
             userDataAccess.Add(user);
 
             userDataAccess.Delete(user.Username);
@@ -51,8 +54,6 @@ namespace DocSystTest.DataAccessTest
         [TestMethod]
         public void ModifyUserFromDb_ExpectedParameters_Ok()
         {
-            IUserDataAccess userDataAccess = new UserDataAccess();
-            User user = Utils.CreateUserForTest();
             userDataAccess.Add(user);
             user.Name = "Pepito";
 
@@ -65,8 +66,6 @@ namespace DocSystTest.DataAccessTest
         [TestMethod]
         public void GetAllUsersFromDb_ExpectedParameters_Ok()
         {
-            IUserDataAccess userDataAccess = new UserDataAccess();
-            User user = Utils.CreateUserForTest();
             userDataAccess.Add(user);
 
             IList<User> users = userDataAccess.Get();
@@ -77,8 +76,6 @@ namespace DocSystTest.DataAccessTest
         [TestMethod]
         public void ExistUserInDb_ExpectedParameters_Ok()
         {
-            IUserDataAccess userDataAccess = new UserDataAccess();
-            User user = Utils.CreateUserForTest();
             userDataAccess.Add(user);
 
             bool exists = userDataAccess.Exists(user.Username);
@@ -89,7 +86,6 @@ namespace DocSystTest.DataAccessTest
         [TestMethod]
         public void IntegrationTest_ExpectedParameters_Ok()
         {
-            IUserDataAccess userDataAccess = new UserDataAccess();
             User user1 = Utils.CreateUserForTest();
             User user2 = Utils.CreateUserForTest();
             User user3 = Utils.CreateUserForTest();

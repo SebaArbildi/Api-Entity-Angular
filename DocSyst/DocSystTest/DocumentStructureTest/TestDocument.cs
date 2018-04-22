@@ -49,7 +49,7 @@ namespace DocSystTest.DocumentStructureTest
 
             Assert.IsNotNull(aDoc.id);
             Assert.IsNull(aDoc.ownStyleClas);
-            Assert.Equals(aDoc.title,aTitle);
+            Assert.AreEqual(aDoc.title,aTitle);
             Assert.IsTrue(aDoc.documentParts.Count == 0);
             Assert.IsTrue((aDoc.creationDate.Year == DateTime.Today.Year) && (aDoc.creationDate.Month == DateTime.Today.Month) && (aDoc.creationDate.Day == DateTime.Today.Day));
             Assert.IsTrue((aDoc.lastModifyDate.Year == DateTime.Today.Year) && (aDoc.lastModifyDate.Month == DateTime.Today.Month) && (aDoc.lastModifyDate.Day == DateTime.Today.Day));
@@ -61,8 +61,8 @@ namespace DocSystTest.DocumentStructureTest
             Document aDoc = new Document(aTitle,aStyleClass);
 
             Assert.IsNotNull(aDoc.id);
-            Assert.Equals(aDoc.ownStyleClas, aStyleClass);
-            Assert.Equals(aDoc.title, aTitle);
+            Assert.AreEqual(aDoc.ownStyleClas, aStyleClass);
+            Assert.AreEqual(aDoc.title, aTitle);
             Assert.IsTrue(aDoc.documentParts.Count == 0);
             Assert.IsTrue((aDoc.creationDate.Year == DateTime.Today.Year) && (aDoc.creationDate.Month == DateTime.Today.Month) && (aDoc.creationDate.Day == DateTime.Today.Day));
             Assert.IsTrue((aDoc.lastModifyDate.Year == DateTime.Today.Year) && (aDoc.lastModifyDate.Month == DateTime.Today.Month) && (aDoc.lastModifyDate.Day == DateTime.Today.Day));
@@ -77,8 +77,8 @@ namespace DocSystTest.DocumentStructureTest
 
             Assert.IsNotNull(aDoc.id);
             Assert.IsNull(aDoc.ownStyleClas);
-            Assert.Equals(aDoc.title, aTitle);
-            Assert.Equals(aDoc.documentParts,someDocumentParts);
+            Assert.AreEqual(aDoc.title, aTitle);
+            Assert.AreEqual(aDoc.documentParts,someDocumentParts);
             Assert.IsTrue((aDoc.creationDate.Year == DateTime.Today.Year) && (aDoc.creationDate.Month == DateTime.Today.Month) && (aDoc.creationDate.Day == DateTime.Today.Day));
             Assert.IsTrue((aDoc.lastModifyDate.Year == DateTime.Today.Year) && (aDoc.lastModifyDate.Month == DateTime.Today.Month) && (aDoc.lastModifyDate.Day == DateTime.Today.Day));
         }
@@ -91,9 +91,9 @@ namespace DocSystTest.DocumentStructureTest
             Document aDoc = new Document(aTitle, someDocumentParts, aStyleClass);
 
             Assert.IsNotNull(aDoc.id);
-            Assert.Equals(aDoc.ownStyleClas, aStyleClass);
-            Assert.Equals(aDoc.title, aTitle);
-            Assert.Equals(aDoc.documentParts, someDocumentParts);
+            Assert.AreEqual(aDoc.ownStyleClas, aStyleClass);
+            Assert.AreEqual(aDoc.title, aTitle);
+            Assert.AreEqual(aDoc.documentParts, someDocumentParts);
             Assert.IsTrue((aDoc.creationDate.Year == DateTime.Today.Year) && (aDoc.creationDate.Month == DateTime.Today.Month) && (aDoc.creationDate.Day == DateTime.Today.Day));
             Assert.IsTrue((aDoc.lastModifyDate.Year == DateTime.Today.Year) && (aDoc.lastModifyDate.Month == DateTime.Today.Month) && (aDoc.lastModifyDate.Day == DateTime.Today.Day));
         }
@@ -104,7 +104,7 @@ namespace DocSystTest.DocumentStructureTest
             someDocumentParts.Add(aMargin);
             Document aDoc = new Document(aTitle, someDocumentParts, aStyleClass);
 
-            Assert.Equals(aDoc.GetDocumentPart(MarginAlign.FOOTER), aMargin);
+            Assert.AreEqual(aDoc.GetDocumentPart(MarginAlign.FOOTER), aMargin);
         }
 
         [TestMethod]
@@ -123,7 +123,7 @@ namespace DocSystTest.DocumentStructureTest
             someDocumentParts.Add(aMargin);
             Document aDoc = new Document(aTitle, someDocumentParts, aStyleClass);
 
-            Assert.Equals(aDoc.GetDocumentPart(MarginAlign.HEADER), aMargin);
+            Assert.AreEqual(aDoc.GetDocumentPart(MarginAlign.HEADER), aMargin);
         }
 
         [TestMethod]
@@ -141,7 +141,7 @@ namespace DocSystTest.DocumentStructureTest
             someDocumentParts.Add(aParagraph);
             Document aDoc = new Document(aTitle, someDocumentParts, aStyleClass);
 
-            Assert.Equals(aDoc.GetDocumentPart(MarginAlign.PARAGRAPH), aParagraph);
+            Assert.AreEqual(aDoc.GetDocumentPart(MarginAlign.PARAGRAPH), aParagraph);
         }
 
         [TestMethod]
@@ -168,7 +168,7 @@ namespace DocSystTest.DocumentStructureTest
             someDocumentParts.Add(aParagraph);
             Document aDoc = new Document(aTitle, someDocumentParts, aStyleClass);
 
-            Assert.IsTrue(aDoc.ExistDocumentPart(MarginAlign.FOOTER));
+            Assert.IsFalse(aDoc.ExistDocumentPart(MarginAlign.FOOTER));
         }
 
         [TestMethod]
@@ -186,7 +186,7 @@ namespace DocSystTest.DocumentStructureTest
             someDocumentParts.Add(aMargin);
             Document aDoc = new Document(aTitle, someDocumentParts, aStyleClass);
 
-            Assert.IsTrue(aDoc.ExistDocumentPart(MarginAlign.PARAGRAPH));
+            Assert.IsFalse(aDoc.ExistDocumentPart(MarginAlign.PARAGRAPH));
         }
 
         [TestMethod]
@@ -206,7 +206,7 @@ namespace DocSystTest.DocumentStructureTest
             aMargin.Align = MarginAlign.HEADER;
             Document aDoc = new Document(aTitle, someDocumentParts, aStyleClass);
 
-            Assert.IsTrue(aDoc.ExistDocumentPart(MarginAlign.PARAGRAPH));
+            Assert.IsFalse(aDoc.ExistDocumentPart(MarginAlign.PARAGRAPH));
         }
     }
 }

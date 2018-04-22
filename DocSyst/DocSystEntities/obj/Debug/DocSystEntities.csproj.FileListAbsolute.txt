@@ -18,3 +18,4 @@ C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystEntities\obj\Debug\
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystEntities\obj\Debug\DocSystEntities.csproj.CopyComplete
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystEntities\obj\Debug\DocSystEntities.dll
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystEntities\obj\Debug\DocSystEntities.pdb
+C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystEntities\obj\Debug\DocSystEntities.csprojResolveAssemblyReference.cache

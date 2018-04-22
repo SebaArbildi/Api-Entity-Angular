@@ -8,49 +8,54 @@ namespace DocSystEntities.DocumentStructure
 {
     public class Paragraph : Body
     {
-        public Paragraph()
+        public Paragraph() : base()
         {
 
         }
 
-        public Paragraph(MarginAlign align)
+        public Paragraph(MarginAlign align) : base(align)
         {
-
         }
 
-        public Paragraph(MarginAlign align, List<Text> someTexts)
+        public Paragraph(MarginAlign align, List<Text> someTexts) : base(align,someTexts)
         {
-
         }
 
-        public Paragraph(MarginAlign align, List<Text> someTexts, string aStyleClass)
+        public Paragraph(MarginAlign align, List<Text> someTexts, string aStyleClass) : base(align,someTexts,aStyleClass)
         {
-
         }
 
-        public Text getText(Guid textId)
+        public Text GetText(Guid textId)
         {
-            throw new NotImplementedException();
+            if (!ExistText(textId))
+            {
+                throw new KeyNotFoundException();
+            }
+
+            return texts.Find(x => x.id == textId);
         }
 
-        public Text getTextAt(int position)
+        public Text GetTextAt(int position)
         {
-            throw new NotImplementedException();
+            return texts[position];
         }
 
-        public void putTextAtLast(Text aText)
+        public void PutTextAtLast(Text aText)
         {
-            throw new NotImplementedException();
+            texts.Add(aText);
         }
 
-        public void putTextAt(int position, Text aText)
+        public void PutTextAt(int position, Text aText)
         {
-            throw new NotImplementedException();
+            texts.Insert(position, aText);
         }
 
-        public void moveTextTo(int newPosition, Guid aTextId)
+        public void MoveTextTo(int newPosition, Guid textId)
         {
-            throw new NotImplementedException();
+            Text aText = texts.Find(x => x.id == textId);
+            
+            texts.Remove(aText);
+            texts.Insert(newPosition, aText);
         }
 
     }

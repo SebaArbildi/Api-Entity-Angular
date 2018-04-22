@@ -7,6 +7,15 @@ namespace DocSystTest.DocumentStructureTest
     [TestClass]
     public class TestText
     {
+        string aStyle;
+        string aTextContent;
+
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            aStyle = "StyleClass";
+            aTextContent = "a random text";
+        }
 
         [TestMethod]
         public void CreateText_WhitoutParameters_Ok()
@@ -22,18 +31,16 @@ namespace DocSystTest.DocumentStructureTest
         [TestMethod]
         public void CreateText_OnlyWhitTextContent_Ok()
         {
-            Text aText = new Text("a random Text");
+            Text aText = new Text(aTextContent);
 
             Assert.IsNotNull(aText.id);
             Assert.IsNull(aText.ownStyleClass);
-            Assert.AreEqual("a random Text", aText.textContent);
+            Assert.AreEqual(aTextContent, aText.textContent);
         }
 
         [TestMethod]
         public void CreateText_WhitTextContentAndStyle_Ok()
         {
-            string aStyle = "StyleClass";
-            string aTextContent = "a random text";
             Text aText = new Text(aTextContent, aStyle);
 
             Assert.IsNotNull(aText.id);
@@ -44,7 +51,6 @@ namespace DocSystTest.DocumentStructureTest
         [TestMethod]
         public void IsEmpty_WhenTextIsNotEmpty_Ok()
         {
-            string aTextContent = "a random text";
             Text aText = new Text(aTextContent);
 
             Assert.IsFalse(aText.IsEmpty());
@@ -53,7 +59,7 @@ namespace DocSystTest.DocumentStructureTest
         [TestMethod]
         public void IsEmpty_WhenTextIsEmpty_Ok()
         {
-            string aTextContent = "";
+            aTextContent = "";
             Text aText = new Text(aTextContent);
 
             Assert.IsTrue(aText.IsEmpty());
@@ -62,10 +68,30 @@ namespace DocSystTest.DocumentStructureTest
         [TestMethod]
         public void IsEmpty_WhenTextIsNull_Ok()
         {
-            string aTextContent = null;
+            aTextContent = null;
             Text aText = new Text(aTextContent);
 
             Assert.IsTrue(aText.IsEmpty());
+        }
+
+        [TestMethod]
+        public void Equals_WhenAreEqual_Ok()
+        {
+            Text aText = new Text();
+            Text otherText = new Text();
+
+            otherText.id = aText.id;
+
+            Assert.IsTrue(aText.Equals(otherText));
+        }
+
+        [TestMethod]
+        public void Equals_WhenAreNotEqual_Ok()
+        {
+            Text aText = new Text();
+            Text otherText = new Text();
+
+            Assert.IsFalse(aText.Equals(otherText));
         }
     }
 }

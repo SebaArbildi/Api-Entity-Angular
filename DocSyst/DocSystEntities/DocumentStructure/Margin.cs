@@ -9,39 +9,36 @@ namespace DocSystEntities.DocumentStructure
     public class Margin : Body
     {
 
-        public Margin()
-        {
-            
+        public Margin() : base()
+        {   
         }
 
-        public Margin(MarginAlign align)
-        {
-
-        }
-
-        public Margin(MarginAlign align, List<Text> someTexts)
+        public Margin(MarginAlign align) : base(align)
         {
 
         }
 
-        public Margin(MarginAlign align, List<Text> someTexts, string aStyleClass)
+        public Margin(MarginAlign align, List<Text> someTexts) : base(align,someTexts)
         {
-
         }
 
-        public void setText(Text aText)
+        public Margin(MarginAlign align, List<Text> someTexts, string aStyleClass) : base(align,someTexts,aStyleClass)
         {
-            throw new NotImplementedException();
         }
 
-        public Text getText()
+        public void SetText(Text aText)
         {
-            throw new NotImplementedException();
+            texts.Add(aText);
         }
 
-        public void clearText()
+        public Text GetText()
         {
-            throw new NotImplementedException();
+            return texts[0];
+        }
+
+        public void ClearText()
+        {
+            texts.Clear();
         }
          
     }

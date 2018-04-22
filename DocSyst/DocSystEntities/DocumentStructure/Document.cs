@@ -16,51 +16,85 @@ namespace DocSystEntities.DocumentStructure
 
     public class Document
     {
-        public Guid id { get; }
+        public Guid id { get; set; }
         public string title { get; set; }
         public DateTime creationDate { get; }
         public DateTime lastModifyDate { get; set; }
         public string ownStyleClas { get; set; }
-        public List<Body> documentParts { get; }
+        public List<Body> documentParts { get; set; }
 
         public Document()
         {
-            
+            id = Guid.NewGuid();
+            title = null;
+            creationDate = DateTime.Today;
+            lastModifyDate = DateTime.Today;
+            ownStyleClas = null;
+            documentParts = new List<Body>();
         }
 
-        public Document(string title)
+        public Document(string aTitle)
         {
-
+            id = Guid.NewGuid();
+            title = aTitle;
+            creationDate = DateTime.Today;
+            lastModifyDate = DateTime.Today;
+            ownStyleClas = null;
+            documentParts = new List<Body>();
         }
 
-        public Document(string title, string aStyleClass)
+        public Document(string aTitle, string aStyleClass)
         {
-
+            id = Guid.NewGuid();
+            title = aTitle;
+            creationDate = DateTime.Today;
+            lastModifyDate = DateTime.Today;
+            ownStyleClas = aStyleClass;
+            documentParts = new List<Body>();
         }
 
-        public Document(string title, List<Body> someDocumentParts)
+        public Document(string aTitle, List<Body> someDocumentParts)
         {
-
+            id = Guid.NewGuid();
+            title = aTitle;
+            creationDate = DateTime.Today;
+            lastModifyDate = DateTime.Today;
+            ownStyleClas = null;
+            documentParts = someDocumentParts;
         }
 
-        public Document(string title, List<Body> someDocumentParts, string aStyleClass)
+        public Document(string aTitle, List<Body> someDocumentParts, string aStyleClass)
         {
-
+            id = Guid.NewGuid();
+            title = aTitle;
+            creationDate = DateTime.Today;
+            lastModifyDate = DateTime.Today;
+            ownStyleClas = aStyleClass;
+            documentParts = someDocumentParts;
         }
 
         public Body GetDocumentPart(MarginAlign align)
         {
-            throw new NotImplementedException();
+            if (!ExistDocumentPart(align))
+            {
+                throw new KeyNotFoundException();
+            }
+
+            return documentParts.Find(x => x.Align == align);
         }
 
         public void SetDocumentPart(MarginAlign align, Body aDocumentPart)
         {
-            throw new NotImplementedException();
+            if (ExistDocumentPart(align))
+            {
+                documentParts.Remove(documentParts.Find(x => x.Align == align));
+            }
+            documentParts.Add(aDocumentPart);
         }
 
         public bool ExistDocumentPart(MarginAlign align)
         {
-            throw new NotImplementedException();
+            return documentParts.Exists(x => x.Align == align);
         }
     }
 }

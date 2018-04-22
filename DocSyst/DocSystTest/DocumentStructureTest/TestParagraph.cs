@@ -37,7 +37,7 @@ namespace DocSystTest.DocumentStructureTest
             Margin aBodyParagraph = new Margin(MarginAlign.PARAGRAPH,someTexts);
 
             Assert.IsNotNull(aBodyParagraph.id);
-            Assert.Equals(aBodyParagraph.Align, MarginAlign.PARAGRAPH);
+            Assert.AreEqual(aBodyParagraph.Align, MarginAlign.PARAGRAPH);
             Assert.IsNull(aBodyParagraph.ownStyleClass);
             Assert.AreEqual(aBodyParagraph.texts, someTexts);
         }
@@ -48,7 +48,7 @@ namespace DocSystTest.DocumentStructureTest
             Margin aBodyParagraph = new Margin(MarginAlign.PARAGRAPH, someTexts, aStyleClass);
 
             Assert.IsNotNull(aBodyParagraph.id);
-            Assert.Equals(aBodyParagraph.Align, MarginAlign.PARAGRAPH);
+            Assert.AreEqual(aBodyParagraph.Align, MarginAlign.PARAGRAPH);
             Assert.AreEqual(aBodyParagraph.ownStyleClass, aStyleClass);
             Assert.AreEqual(aBodyParagraph.texts, someTexts);
         }
@@ -59,7 +59,7 @@ namespace DocSystTest.DocumentStructureTest
             someTexts.Add(aText);
             Paragraph aBodyParagraph = new Paragraph(MarginAlign.PARAGRAPH, someTexts);
 
-            Assert.AreEqual(aBodyParagraph.getText(aText.id),aText);
+            Assert.AreEqual(aBodyParagraph.GetText(aText.id),aText);
         }
 
         [TestMethod]
@@ -70,7 +70,7 @@ namespace DocSystTest.DocumentStructureTest
             someTexts.Add(aText);
             Paragraph aBodyParagraph = new Paragraph(MarginAlign.PARAGRAPH, someTexts);
 
-            aBodyParagraph.getText(new Guid());
+            aBodyParagraph.GetText(new Guid());
         }
 
         [TestMethod]
@@ -83,11 +83,11 @@ namespace DocSystTest.DocumentStructureTest
 
             Paragraph aBodyParagraph = new Paragraph(MarginAlign.PARAGRAPH, someTexts);
 
-            Assert.AreEqual(aBodyParagraph.getTextAt(1), otherText);
+            Assert.AreEqual(aBodyParagraph.GetTextAt(1), otherText);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(IndexOutOfRangeException),
+        [ExpectedException(typeof(ArgumentOutOfRangeException),
         "Text not found at given index.")]
         public void GetTextAt_FromParagraphWhitText_IndexOutOfRangeException()
         {
@@ -95,7 +95,7 @@ namespace DocSystTest.DocumentStructureTest
 
             Paragraph aBodyParagraph = new Paragraph(MarginAlign.PARAGRAPH, someTexts);
 
-            aBodyParagraph.getTextAt(1);
+            aBodyParagraph.GetTextAt(1);
         }
 
         [TestMethod]
@@ -105,15 +105,15 @@ namespace DocSystTest.DocumentStructureTest
 
             Paragraph aBodyParagraph = new Paragraph(MarginAlign.PARAGRAPH, someTexts);
 
-            aBodyParagraph.putTextAt(0, aText);
-            aBodyParagraph.putTextAt(0, otherText);
+            aBodyParagraph.PutTextAt(0, aText);
+            aBodyParagraph.PutTextAt(0, otherText);
 
-            Assert.AreEqual(aBodyParagraph.getTextAt(0), otherText);
-            Assert.AreEqual(aBodyParagraph.getTextAt(1), aText);
+            Assert.AreEqual(aBodyParagraph.GetTextAt(0), otherText);
+            Assert.AreEqual(aBodyParagraph.GetTextAt(1), aText);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(IndexOutOfRangeException),
+        [ExpectedException(typeof(ArgumentOutOfRangeException),
         "Given index is bigger than list length.")]
         public void PutTextAt_FromParagraphWhitOutText_IndexOutOfRangeException()
         {
@@ -121,8 +121,8 @@ namespace DocSystTest.DocumentStructureTest
 
             Paragraph aBodyParagraph = new Paragraph(MarginAlign.PARAGRAPH, someTexts);
 
-            aBodyParagraph.putTextAt(0, aText);
-            aBodyParagraph.putTextAt(2, otherText);
+            aBodyParagraph.PutTextAt(0, aText);
+            aBodyParagraph.PutTextAt(2, otherText);
         }
 
         [TestMethod]
@@ -132,11 +132,11 @@ namespace DocSystTest.DocumentStructureTest
 
             Paragraph aBodyParagraph = new Paragraph(MarginAlign.PARAGRAPH, someTexts);
 
-            aBodyParagraph.putTextAtLast(aText);
-            aBodyParagraph.putTextAtLast(otherText);
+            aBodyParagraph.PutTextAtLast(aText);
+            aBodyParagraph.PutTextAtLast(otherText);
 
-            Assert.AreEqual(aBodyParagraph.getTextAt(1), otherText);
-            Assert.AreEqual(aBodyParagraph.getTextAt(0), aText);
+            Assert.AreEqual(aBodyParagraph.GetTextAt(1), otherText);
+            Assert.AreEqual(aBodyParagraph.GetTextAt(0), aText);
         }
 
         [TestMethod]
@@ -147,19 +147,19 @@ namespace DocSystTest.DocumentStructureTest
 
             Paragraph aBodyParagraph = new Paragraph(MarginAlign.PARAGRAPH, someTexts);
 
-            aBodyParagraph.putTextAtLast(aText);
-            aBodyParagraph.putTextAtLast(otherText);
-            aBodyParagraph.putTextAtLast(oneMoreText);
+            aBodyParagraph.PutTextAtLast(aText);
+            aBodyParagraph.PutTextAtLast(otherText);
+            aBodyParagraph.PutTextAtLast(oneMoreText);
 
-            aBodyParagraph.moveTextTo(0,oneMoreText.id);
-            aBodyParagraph.moveTextTo(2, otherText.id);
+            aBodyParagraph.MoveTextTo(0,oneMoreText.id);
+            aBodyParagraph.MoveTextTo(2, otherText.id);
 
-            Assert.AreEqual(aBodyParagraph.getTextAt(1), otherText);
-            Assert.AreEqual(aBodyParagraph.getTextAt(0), aText);
+            Assert.AreEqual(aBodyParagraph.GetTextAt(2), otherText);
+            Assert.AreEqual(aBodyParagraph.GetTextAt(0), oneMoreText);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(IndexOutOfRangeException),
+        [ExpectedException(typeof(ArgumentOutOfRangeException),
         "Given index is bigger than list length.")]
         public void moveTextTo_FromParagraphWhitText_IndexOutOfRangeException()
         {
@@ -167,10 +167,10 @@ namespace DocSystTest.DocumentStructureTest
 
             Paragraph aBodyParagraph = new Paragraph(MarginAlign.PARAGRAPH, someTexts);
 
-            aBodyParagraph.putTextAtLast(aText);
-            aBodyParagraph.putTextAtLast(otherText);
+            aBodyParagraph.PutTextAtLast(aText);
+            aBodyParagraph.PutTextAtLast(otherText);
 
-            aBodyParagraph.moveTextTo(2, aText.id);
+            aBodyParagraph.MoveTextTo(2, aText.id);
         }
 
         [TestMethod]
@@ -178,7 +178,7 @@ namespace DocSystTest.DocumentStructureTest
         {
             Paragraph aBodyParagraph = new Paragraph(MarginAlign.PARAGRAPH, someTexts);
 
-            aBodyParagraph.putTextAtLast(aText);
+            aBodyParagraph.PutTextAtLast(aText);
 
             Assert.IsTrue(aBodyParagraph.ExistText(aText.id));
         }
@@ -188,9 +188,9 @@ namespace DocSystTest.DocumentStructureTest
         {
             Paragraph aBodyParagraph = new Paragraph(MarginAlign.PARAGRAPH, someTexts);
 
-            aBodyParagraph.putTextAtLast(aText);
+            aBodyParagraph.PutTextAtLast(aText);
 
-            Assert.IsTrue(aBodyParagraph.ExistText(new Guid()));
+            Assert.IsFalse(aBodyParagraph.ExistText(Guid.NewGuid()));
         }
     }
 }
