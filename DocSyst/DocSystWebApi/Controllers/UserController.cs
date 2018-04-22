@@ -24,9 +24,9 @@ namespace DocSystWebApi.Controllers
         }
 
         // GET: api/User/5
-        public string Get(int id)
+        public IHttpActionResult Get([FromUri] string username)
         {
-            return "value";
+            return null;
         }
 
         // POST: api/User
