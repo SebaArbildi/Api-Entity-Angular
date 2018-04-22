@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocSystEntities", "DocSystEntities\DocSystEntities.csproj", "{5B3C42ED-A71E-419B-86E3-32FF647EBD34}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocSystDataAccess", "DocSystDataAccess\DocSystDataAccess.csproj", "{5BDC68DE-BBE5-4F31-9491-3D470BB29EFB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocSystDataAccessImplementation", "DocSystDataAccess\DocSystDataAccessImplementation.csproj", "{5BDC68DE-BBE5-4F31-9491-3D470BB29EFB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocSystTest", "DocSystTest\DocSystTest.csproj", "{A05D6515-17B5-41B4-9370-DDB7A09A257C}"
 EndProject
@@ -14,6 +14,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocSystWebApi", "DocSystWebApi\DocSystWebApi.csproj", "{95AF85EC-7F7C-4BAA-A0E8-BC336AB4EF28}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocSystDependencyResolver", "DocSystDependencyResolver\DocSystDependencyResolver.csproj", "{BAE14646-6DF3-451C-8B73-F84513056D70}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocSystDataAccessInterface", "DocSystDataAccessInterface\DocSystDataAccessInterface.csproj", "{73D5543F-593E-4122-8B7B-B56045B3AF69}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{BAE14646-6DF3-451C-8B73-F84513056D70}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BAE14646-6DF3-451C-8B73-F84513056D70}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BAE14646-6DF3-451C-8B73-F84513056D70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73D5543F-593E-4122-8B7B-B56045B3AF69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73D5543F-593E-4122-8B7B-B56045B3AF69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73D5543F-593E-4122-8B7B-B56045B3AF69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73D5543F-593E-4122-8B7B-B56045B3AF69}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

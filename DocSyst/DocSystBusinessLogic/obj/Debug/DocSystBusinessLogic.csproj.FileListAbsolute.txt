@@ -1,0 +1,4 @@
+C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystBusinessLogic\bin\Debug\DocSystBusinessLogic.dll
+C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystBusinessLogic\bin\Debug\DocSystBusinessLogic.pdb
+C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystBusinessLogic\obj\Debug\DocSystBusinessLogic.dll
+C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystBusinessLogic\obj\Debug\DocSystBusinessLogic.pdb

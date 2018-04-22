@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Created by https://www.gitignore.io/api/csharp
 
 ### Csharp ###
@@ -294,3 +295,8 @@ __pycache__/
 
 
 # End of https://www.gitignore.io/api/csharp
+=======
+
+DocSyst/DocSystTest/obj/Debug/
+
+>>>>>>> develop
