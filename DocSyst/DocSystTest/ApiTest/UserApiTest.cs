@@ -3,6 +3,9 @@ using Moq;
 using DocSystBusinessLogicInterface.UserBusinessLogicInterface;
 using DocSystWebApi.Controllers;
 using DocSystEntities.User;
+using DocSystDataAccessInterface.UserDataAccessInterface;
+using DocSystDataAccess.UserDataAccessImplementation;
+using DocSystBusinessLogicImplementation.UserBusinessLogicImplementation;
 using System.Web.Http;
 
 namespace DocSystTest.ApiTest

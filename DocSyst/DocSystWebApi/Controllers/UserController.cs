@@ -12,11 +12,13 @@ namespace DocSystWebApi.Controllers
 {
     public class UserController : ApiController
     {
-        private IUserBusinessLogic userBusinessLogic;
+        private IUserBusinessLogic UserBusinessLogic { get; set; }
+
+        public UserController() { }
 
         public UserController(IUserBusinessLogic userBusinessLogic)
         {
-            this.userBusinessLogic = userBusinessLogic;
+            UserBusinessLogic = userBusinessLogic;
         }
 
         // GET: api/User
@@ -30,7 +32,7 @@ namespace DocSystWebApi.Controllers
         {
             try
             {
-                User user = this.userBusinessLogic.GetUser(username);
+                User user = UserBusinessLogic.GetUser(username);
                 return Ok(UserModel.ToModel(user));
             }
             catch (Exception e)
