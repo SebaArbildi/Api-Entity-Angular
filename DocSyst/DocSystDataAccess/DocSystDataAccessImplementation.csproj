@@ -50,6 +50,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DocSystDbContext.cs" />
+    <Compile Include="DocumentStructureDataAccessImplementation\DocumentDataAccess.cs" />
+    <Compile Include="DocumentStructureDataAccessImplementation\MarginDataAccess.cs" />
+    <Compile Include="DocumentStructureDataAccessImplementation\ParagraphDataAccess.cs" />
+    <Compile Include="DocumentStructureDataAccessImplementation\TextDataAccess.cs" />
     <Compile Include="Migrations\201804210156338_InitialCreate.cs" />
     <Compile Include="Migrations\201804210156338_InitialCreate.Designer.cs">
       <DependentUpon>201804210156338_InitialCreate.cs</DependentUpon>

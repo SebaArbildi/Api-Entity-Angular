@@ -1,61 +1,60 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace DocSystEntities.DocumentStructure
 {
     public abstract class Body
     {
-        public Guid id { get; set; }
-        public string ownStyleClass { get; set; }
-        public List<Text> texts { get; set; }
+        [Key]
+        public Guid Id { get; set; }
+        public string OwnStyleClass { get; set; }
+        public List<Text> Texts { get; set; }
         public MarginAlign? Align { get; set; }
 
         protected Body()
         {
-            id = Guid.NewGuid();
-            ownStyleClass = null;
-            texts = new List<Text>();
+            Id = Guid.NewGuid();
+            OwnStyleClass = null;
+            Texts = new List<Text>();
             Align = null;
         }
 
         protected Body(MarginAlign align)
         {
-            id = Guid.NewGuid();
-            ownStyleClass = null;
-            texts = new List<Text>();
+            Id = Guid.NewGuid();
+            OwnStyleClass = null;
+            Texts = new List<Text>();
             Align = align;
         }
 
         protected Body(MarginAlign align, List<Text> someTexts)
         {
-            id = Guid.NewGuid();
-            ownStyleClass = null;
-            texts = someTexts;
+            Id = Guid.NewGuid();
+            OwnStyleClass = null;
+            Texts = someTexts;
             Align = align;
         }
 
         protected Body(MarginAlign align, string aStyleClass)
         {
-            id = Guid.NewGuid();
-            ownStyleClass = aStyleClass;
-            texts = new List<Text>();
+            Id = Guid.NewGuid();
+            OwnStyleClass = aStyleClass;
+            Texts = new List<Text>();
             Align = align;
         }
 
         protected Body(MarginAlign align, List<Text> someTexts, string aStyleClass)
         {
-            id = Guid.NewGuid();
-            ownStyleClass = aStyleClass;
-            texts = someTexts;
+            Id = Guid.NewGuid();
+            OwnStyleClass = aStyleClass;
+            Texts = someTexts;
             Align = align;
         }
 
         public bool ExistText(Guid id)
         {
-            if (texts.Exists(x => x.id == id))
+            if (Texts.Exists(x => x.Id == id))
             {
                 return true;
             }
@@ -64,7 +63,12 @@ namespace DocSystEntities.DocumentStructure
 
         public bool HasText()
         {
-            return texts.Count > 0;
+            return Texts.Count > 0;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return Id == ((Body)obj).Id;
         }
     }
 }

@@ -11,8 +11,6 @@ namespace DocSystTest.DocumentStructureTest
         List<Body> someDocumentParts;
         string aStyleClass;
         string aTitle;
-        DateTime aCreationDate;
-        DateTime aModifiyDate;
         Margin aMargin;
         Margin aParagraph;
 
@@ -22,8 +20,6 @@ namespace DocSystTest.DocumentStructureTest
             someDocumentParts = new List<Body>();
             aStyleClass = "a Style Class";
             aTitle = "a Title";
-            aCreationDate = new DateTime(2017, 04, 10);
-            aModifiyDate = new DateTime(2017, 04, 21);
             aMargin = new Margin(MarginAlign.FOOTER);
             aParagraph = new Margin(MarginAlign.PARAGRAPH);
         }
@@ -34,12 +30,12 @@ namespace DocSystTest.DocumentStructureTest
         {
             Document aDoc = new Document();
 
-            Assert.IsNotNull(aDoc.id);
-            Assert.IsNull(aDoc.ownStyleClas);
-            Assert.IsNull(aDoc.title);
-            Assert.IsTrue(aDoc.documentParts.Count == 0);
-            Assert.IsTrue((aDoc.creationDate.Year == DateTime.Today.Year) && (aDoc.creationDate.Month == DateTime.Today.Month) && (aDoc.creationDate.Day == DateTime.Today.Day));
-            Assert.IsTrue((aDoc.lastModifyDate.Year == DateTime.Today.Year) && (aDoc.lastModifyDate.Month == DateTime.Today.Month) && (aDoc.lastModifyDate.Day == DateTime.Today.Day));
+            Assert.IsNotNull(aDoc.Id);
+            Assert.IsNull(aDoc.OwnStyleClass);
+            Assert.IsNull(aDoc.Title);
+            Assert.IsTrue(aDoc.DocumentParts.Count == 0);
+            Assert.IsTrue((aDoc.CreationDate.Year == DateTime.Today.Year) && (aDoc.CreationDate.Month == DateTime.Today.Month) && (aDoc.CreationDate.Day == DateTime.Today.Day));
+            Assert.IsTrue((aDoc.LastModifyDate.Year == DateTime.Today.Year) && (aDoc.LastModifyDate.Month == DateTime.Today.Month) && (aDoc.LastModifyDate.Day == DateTime.Today.Day));
         }
 
         [TestMethod]
@@ -47,12 +43,12 @@ namespace DocSystTest.DocumentStructureTest
         {
             Document aDoc = new Document(aTitle);
 
-            Assert.IsNotNull(aDoc.id);
-            Assert.IsNull(aDoc.ownStyleClas);
-            Assert.AreEqual(aDoc.title,aTitle);
-            Assert.IsTrue(aDoc.documentParts.Count == 0);
-            Assert.IsTrue((aDoc.creationDate.Year == DateTime.Today.Year) && (aDoc.creationDate.Month == DateTime.Today.Month) && (aDoc.creationDate.Day == DateTime.Today.Day));
-            Assert.IsTrue((aDoc.lastModifyDate.Year == DateTime.Today.Year) && (aDoc.lastModifyDate.Month == DateTime.Today.Month) && (aDoc.lastModifyDate.Day == DateTime.Today.Day));
+            Assert.IsNotNull(aDoc.Id);
+            Assert.IsNull(aDoc.OwnStyleClass);
+            Assert.AreEqual(aDoc.Title,aTitle);
+            Assert.IsTrue(aDoc.DocumentParts.Count == 0);
+            Assert.IsTrue((aDoc.CreationDate.Year == DateTime.Today.Year) && (aDoc.CreationDate.Month == DateTime.Today.Month) && (aDoc.CreationDate.Day == DateTime.Today.Day));
+            Assert.IsTrue((aDoc.LastModifyDate.Year == DateTime.Today.Year) && (aDoc.LastModifyDate.Month == DateTime.Today.Month) && (aDoc.LastModifyDate.Day == DateTime.Today.Day));
         }
 
         [TestMethod]
@@ -60,12 +56,12 @@ namespace DocSystTest.DocumentStructureTest
         {
             Document aDoc = new Document(aTitle,aStyleClass);
 
-            Assert.IsNotNull(aDoc.id);
-            Assert.AreEqual(aDoc.ownStyleClas, aStyleClass);
-            Assert.AreEqual(aDoc.title, aTitle);
-            Assert.IsTrue(aDoc.documentParts.Count == 0);
-            Assert.IsTrue((aDoc.creationDate.Year == DateTime.Today.Year) && (aDoc.creationDate.Month == DateTime.Today.Month) && (aDoc.creationDate.Day == DateTime.Today.Day));
-            Assert.IsTrue((aDoc.lastModifyDate.Year == DateTime.Today.Year) && (aDoc.lastModifyDate.Month == DateTime.Today.Month) && (aDoc.lastModifyDate.Day == DateTime.Today.Day));
+            Assert.IsNotNull(aDoc.Id);
+            Assert.AreEqual(aDoc.OwnStyleClass, aStyleClass);
+            Assert.AreEqual(aDoc.Title, aTitle);
+            Assert.IsTrue(aDoc.DocumentParts.Count == 0);
+            Assert.IsTrue((aDoc.CreationDate.Year == DateTime.Today.Year) && (aDoc.CreationDate.Month == DateTime.Today.Month) && (aDoc.CreationDate.Day == DateTime.Today.Day));
+            Assert.IsTrue((aDoc.LastModifyDate.Year == DateTime.Today.Year) && (aDoc.LastModifyDate.Month == DateTime.Today.Month) && (aDoc.LastModifyDate.Day == DateTime.Today.Day));
         }
 
         [TestMethod]
@@ -75,12 +71,12 @@ namespace DocSystTest.DocumentStructureTest
             someDocumentParts.Add(aParagraph);
             Document aDoc = new Document(aTitle, someDocumentParts);
 
-            Assert.IsNotNull(aDoc.id);
-            Assert.IsNull(aDoc.ownStyleClas);
-            Assert.AreEqual(aDoc.title, aTitle);
-            Assert.AreEqual(aDoc.documentParts,someDocumentParts);
-            Assert.IsTrue((aDoc.creationDate.Year == DateTime.Today.Year) && (aDoc.creationDate.Month == DateTime.Today.Month) && (aDoc.creationDate.Day == DateTime.Today.Day));
-            Assert.IsTrue((aDoc.lastModifyDate.Year == DateTime.Today.Year) && (aDoc.lastModifyDate.Month == DateTime.Today.Month) && (aDoc.lastModifyDate.Day == DateTime.Today.Day));
+            Assert.IsNotNull(aDoc.Id);
+            Assert.IsNull(aDoc.OwnStyleClass);
+            Assert.AreEqual(aDoc.Title, aTitle);
+            Assert.AreEqual(aDoc.DocumentParts,someDocumentParts);
+            Assert.IsTrue((aDoc.CreationDate.Year == DateTime.Today.Year) && (aDoc.CreationDate.Month == DateTime.Today.Month) && (aDoc.CreationDate.Day == DateTime.Today.Day));
+            Assert.IsTrue((aDoc.LastModifyDate.Year == DateTime.Today.Year) && (aDoc.LastModifyDate.Month == DateTime.Today.Month) && (aDoc.LastModifyDate.Day == DateTime.Today.Day));
         }
 
         [TestMethod]
@@ -90,12 +86,12 @@ namespace DocSystTest.DocumentStructureTest
             someDocumentParts.Add(aParagraph);
             Document aDoc = new Document(aTitle, someDocumentParts, aStyleClass);
 
-            Assert.IsNotNull(aDoc.id);
-            Assert.AreEqual(aDoc.ownStyleClas, aStyleClass);
-            Assert.AreEqual(aDoc.title, aTitle);
-            Assert.AreEqual(aDoc.documentParts, someDocumentParts);
-            Assert.IsTrue((aDoc.creationDate.Year == DateTime.Today.Year) && (aDoc.creationDate.Month == DateTime.Today.Month) && (aDoc.creationDate.Day == DateTime.Today.Day));
-            Assert.IsTrue((aDoc.lastModifyDate.Year == DateTime.Today.Year) && (aDoc.lastModifyDate.Month == DateTime.Today.Month) && (aDoc.lastModifyDate.Day == DateTime.Today.Day));
+            Assert.IsNotNull(aDoc.Id);
+            Assert.AreEqual(aDoc.OwnStyleClass, aStyleClass);
+            Assert.AreEqual(aDoc.Title, aTitle);
+            Assert.AreEqual(aDoc.DocumentParts, someDocumentParts);
+            Assert.IsTrue((aDoc.CreationDate.Year == DateTime.Today.Year) && (aDoc.CreationDate.Month == DateTime.Today.Month) && (aDoc.CreationDate.Day == DateTime.Today.Day));
+            Assert.IsTrue((aDoc.LastModifyDate.Year == DateTime.Today.Year) && (aDoc.LastModifyDate.Month == DateTime.Today.Month) && (aDoc.LastModifyDate.Day == DateTime.Today.Day));
         }
 
         [TestMethod]

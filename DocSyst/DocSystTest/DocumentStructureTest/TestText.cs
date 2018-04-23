@@ -14,7 +14,7 @@ namespace DocSystTest.DocumentStructureTest
         public void TestInitialize()
         {
             aStyle = "StyleClass";
-            aTextContent = "a random text";
+            aTextContent = "a random paragraph";
         }
 
         [TestMethod]
@@ -22,9 +22,9 @@ namespace DocSystTest.DocumentStructureTest
         {
             Text aText = new Text();
 
-            Assert.IsNull(aText.ownStyleClass);
-            Assert.IsNull(aText.textContent);
-            Assert.IsNotNull(aText.id);
+            Assert.IsNull(aText.OwnStyleClass);
+            Assert.IsNull(aText.TextContent);
+            Assert.IsNotNull(aText.Id);
         }
         
 
@@ -33,9 +33,9 @@ namespace DocSystTest.DocumentStructureTest
         {
             Text aText = new Text(aTextContent);
 
-            Assert.IsNotNull(aText.id);
-            Assert.IsNull(aText.ownStyleClass);
-            Assert.AreEqual(aTextContent, aText.textContent);
+            Assert.IsNotNull(aText.Id);
+            Assert.IsNull(aText.OwnStyleClass);
+            Assert.AreEqual(aTextContent, aText.TextContent);
         }
 
         [TestMethod]
@@ -43,9 +43,9 @@ namespace DocSystTest.DocumentStructureTest
         {
             Text aText = new Text(aTextContent, aStyle);
 
-            Assert.IsNotNull(aText.id);
-            Assert.AreEqual(aStyle,aText.ownStyleClass);
-            Assert.AreEqual(aTextContent, aText.textContent);
+            Assert.IsNotNull(aText.Id);
+            Assert.AreEqual(aStyle,aText.OwnStyleClass);
+            Assert.AreEqual(aTextContent, aText.TextContent);
         }
 
         [TestMethod]
@@ -78,9 +78,10 @@ namespace DocSystTest.DocumentStructureTest
         public void Equals_WhenAreEqual_Ok()
         {
             Text aText = new Text();
-            Text otherText = new Text();
-
-            otherText.id = aText.id;
+            Text otherText = new Text
+            {
+                Id = aText.Id
+            };
 
             Assert.IsTrue(aText.Equals(otherText));
         }

@@ -25,10 +25,10 @@ namespace DocSystTest.DocumentStructureTest
         {
             Margin aBodyParagraph = new Margin();
 
-            Assert.IsNotNull(aBodyParagraph.id);
+            Assert.IsNotNull(aBodyParagraph.Id);
             Assert.IsNull(aBodyParagraph.Align);
-            Assert.IsNull(aBodyParagraph.ownStyleClass);
-            Assert.IsTrue(aBodyParagraph.texts.Count==0);
+            Assert.IsNull(aBodyParagraph.OwnStyleClass);
+            Assert.IsTrue(aBodyParagraph.Texts.Count==0);
         }
 
         [TestMethod]
@@ -36,10 +36,10 @@ namespace DocSystTest.DocumentStructureTest
         {
             Margin aBodyParagraph = new Margin(MarginAlign.PARAGRAPH,someTexts);
 
-            Assert.IsNotNull(aBodyParagraph.id);
+            Assert.IsNotNull(aBodyParagraph.Id);
             Assert.AreEqual(aBodyParagraph.Align, MarginAlign.PARAGRAPH);
-            Assert.IsNull(aBodyParagraph.ownStyleClass);
-            Assert.AreEqual(aBodyParagraph.texts, someTexts);
+            Assert.IsNull(aBodyParagraph.OwnStyleClass);
+            Assert.AreEqual(aBodyParagraph.Texts, someTexts);
         }
 
         [TestMethod]
@@ -47,10 +47,10 @@ namespace DocSystTest.DocumentStructureTest
         {
             Margin aBodyParagraph = new Margin(MarginAlign.PARAGRAPH, someTexts, aStyleClass);
 
-            Assert.IsNotNull(aBodyParagraph.id);
+            Assert.IsNotNull(aBodyParagraph.Id);
             Assert.AreEqual(aBodyParagraph.Align, MarginAlign.PARAGRAPH);
-            Assert.AreEqual(aBodyParagraph.ownStyleClass, aStyleClass);
-            Assert.AreEqual(aBodyParagraph.texts, someTexts);
+            Assert.AreEqual(aBodyParagraph.OwnStyleClass, aStyleClass);
+            Assert.AreEqual(aBodyParagraph.Texts, someTexts);
         }
 
         [TestMethod]
@@ -59,12 +59,12 @@ namespace DocSystTest.DocumentStructureTest
             someTexts.Add(aText);
             Paragraph aBodyParagraph = new Paragraph(MarginAlign.PARAGRAPH, someTexts);
 
-            Assert.AreEqual(aBodyParagraph.GetText(aText.id),aText);
+            Assert.AreEqual(aBodyParagraph.GetText(aText.Id),aText);
         }
 
         [TestMethod]
         [ExpectedException(typeof(KeyNotFoundException),
-        "Text id not found for this Paragraph List.")]
+        "Paragraph id not found for this Paragraph List.")]
         public void GetText_FromParagraphWhitSomeText_KeyNotFoundException()
         {
             someTexts.Add(aText);
@@ -88,7 +88,7 @@ namespace DocSystTest.DocumentStructureTest
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentOutOfRangeException),
-        "Text not found at given index.")]
+        "Paragraph not found at given index.")]
         public void GetTextAt_FromParagraphWhitText_IndexOutOfRangeException()
         {
             someTexts.Add(aText);
@@ -140,7 +140,7 @@ namespace DocSystTest.DocumentStructureTest
         }
 
         [TestMethod]
-        public void moveTextTo_FromParagraphWhitText_Ok()
+        public void MoveTextTo_FromParagraphWhitText_Ok()
         {
             Text otherText = new Text();
             Text oneMoreText = new Text();
@@ -151,8 +151,8 @@ namespace DocSystTest.DocumentStructureTest
             aBodyParagraph.PutTextAtLast(otherText);
             aBodyParagraph.PutTextAtLast(oneMoreText);
 
-            aBodyParagraph.MoveTextTo(0,oneMoreText.id);
-            aBodyParagraph.MoveTextTo(2, otherText.id);
+            aBodyParagraph.MoveTextTo(0,oneMoreText.Id);
+            aBodyParagraph.MoveTextTo(2, otherText.Id);
 
             Assert.AreEqual(aBodyParagraph.GetTextAt(2), otherText);
             Assert.AreEqual(aBodyParagraph.GetTextAt(0), oneMoreText);
@@ -161,7 +161,7 @@ namespace DocSystTest.DocumentStructureTest
         [TestMethod]
         [ExpectedException(typeof(ArgumentOutOfRangeException),
         "Given index is bigger than list length.")]
-        public void moveTextTo_FromParagraphWhitText_IndexOutOfRangeException()
+        public void MoveTextTo_FromParagraphWhitText_IndexOutOfRangeException()
         {
             Text otherText = new Text();
 
@@ -170,7 +170,7 @@ namespace DocSystTest.DocumentStructureTest
             aBodyParagraph.PutTextAtLast(aText);
             aBodyParagraph.PutTextAtLast(otherText);
 
-            aBodyParagraph.MoveTextTo(2, aText.id);
+            aBodyParagraph.MoveTextTo(2, aText.Id);
         }
 
         [TestMethod]
@@ -180,7 +180,7 @@ namespace DocSystTest.DocumentStructureTest
 
             aBodyParagraph.PutTextAtLast(aText);
 
-            Assert.IsTrue(aBodyParagraph.ExistText(aText.id));
+            Assert.IsTrue(aBodyParagraph.ExistText(aText.Id));
         }
 
         [TestMethod]

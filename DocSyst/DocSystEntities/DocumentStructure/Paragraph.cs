@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DocSystEntities.DocumentStructure
 {
@@ -14,6 +11,10 @@ namespace DocSystEntities.DocumentStructure
         }
 
         public Paragraph(MarginAlign align) : base(align)
+        {
+        }
+
+        public Paragraph(MarginAlign align, string aStyleClass) : base(align,aStyleClass)
         {
         }
 
@@ -32,31 +33,35 @@ namespace DocSystEntities.DocumentStructure
                 throw new KeyNotFoundException();
             }
 
-            return texts.Find(x => x.id == textId);
+            return Texts.Find(x => x.Id == textId);
         }
 
         public Text GetTextAt(int position)
         {
-            return texts[position];
+            return Texts[position];
         }
 
         public void PutTextAtLast(Text aText)
         {
-            texts.Add(aText);
+            Texts.Add(aText);
         }
 
         public void PutTextAt(int position, Text aText)
         {
-            texts.Insert(position, aText);
+            Texts.Insert(position, aText);
         }
 
         public void MoveTextTo(int newPosition, Guid textId)
         {
-            Text aText = texts.Find(x => x.id == textId);
+            Text aText = Texts.Find(x => x.Id == textId);
             
-            texts.Remove(aText);
-            texts.Insert(newPosition, aText);
+            Texts.Remove(aText);
+            Texts.Insert(newPosition, aText);
         }
 
+        public override bool Equals(object obj)
+        {
+            return base.Equals(obj);
+        }
     }
 }

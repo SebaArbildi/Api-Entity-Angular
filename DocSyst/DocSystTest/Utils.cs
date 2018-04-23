@@ -1,4 +1,5 @@
 ﻿using DocSystDataAccess;
+using DocSystEntities.DocumentStructure;
 using DocSystEntities.User;
 using System;
 
@@ -18,6 +19,26 @@ namespace DocSystTest
         {
             Random random = new Random();
             return new User("Name", "LastName", random.Next().ToString(), "Password", "Mail", true);
+        }
+
+        internal static Text CreateTextForTest()
+        {
+            return new Text("a Text content","a Style Class");
+        }
+
+        internal static Paragraph CreateParagraphForTest()
+        {
+            return new Paragraph(MarginAlign.PARAGRAPH,"a Style Class");
+        }
+
+        internal static Margin CreateMarginForTest()
+        {
+            return new Margin(MarginAlign.FOOTER,"a Style Class");
+        }
+
+        internal static Document CreateDocumentForTest()
+        {
+            return new Document("a Title","a Style Class");
         }
     }
 }

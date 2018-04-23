@@ -26,9 +26,9 @@ namespace DocSystTest.DocumentStructureTest
         {
             Margin aBodyMargin = new Margin();
 
-            Assert.IsNotNull(aBodyMargin.id);
-            Assert.IsNull(aBodyMargin.ownStyleClass);
-            Assert.IsTrue(aBodyMargin.texts.Count==0);
+            Assert.IsNotNull(aBodyMargin.Id);
+            Assert.IsNull(aBodyMargin.OwnStyleClass);
+            Assert.IsTrue(aBodyMargin.Texts.Count==0);
             Assert.IsNull(aBodyMargin.Align);
         }
 
@@ -37,9 +37,9 @@ namespace DocSystTest.DocumentStructureTest
         {
             Margin aBodyMargin = new Margin(MarginAlign.FOOTER);
 
-            Assert.IsNotNull(aBodyMargin.id);
-            Assert.IsNull(aBodyMargin.ownStyleClass);
-            Assert.IsTrue(aBodyMargin.texts.Count == 0);
+            Assert.IsNotNull(aBodyMargin.Id);
+            Assert.IsNull(aBodyMargin.OwnStyleClass);
+            Assert.IsTrue(aBodyMargin.Texts.Count == 0);
             Assert.AreEqual(MarginAlign.FOOTER,aBodyMargin.Align);
         }
 
@@ -48,9 +48,9 @@ namespace DocSystTest.DocumentStructureTest
         {
             Margin aBodyMargin = new Margin(MarginAlign.HEADER);
 
-            Assert.IsNotNull(aBodyMargin.id);
-            Assert.IsNull(aBodyMargin.ownStyleClass);
-            Assert.IsTrue(aBodyMargin.texts.Count == 0);
+            Assert.IsNotNull(aBodyMargin.Id);
+            Assert.IsNull(aBodyMargin.OwnStyleClass);
+            Assert.IsTrue(aBodyMargin.Texts.Count == 0);
             Assert.AreEqual(MarginAlign.HEADER, aBodyMargin.Align);
         }
 
@@ -59,9 +59,9 @@ namespace DocSystTest.DocumentStructureTest
         {
             Margin aBodyMargin = new Margin(MarginAlign.HEADER,someTexts);
 
-            Assert.IsNotNull(aBodyMargin.id);
-            Assert.IsNull(aBodyMargin.ownStyleClass);
-            Assert.AreEqual(aBodyMargin.texts,someTexts);
+            Assert.IsNotNull(aBodyMargin.Id);
+            Assert.IsNull(aBodyMargin.OwnStyleClass);
+            Assert.AreEqual(aBodyMargin.Texts,someTexts);
             Assert.AreEqual(MarginAlign.HEADER, aBodyMargin.Align);
         }
 
@@ -70,9 +70,9 @@ namespace DocSystTest.DocumentStructureTest
         {
             Margin aBodyMargin = new Margin(MarginAlign.FOOTER, someTexts);
 
-            Assert.IsNotNull(aBodyMargin.id);
-            Assert.IsNull(aBodyMargin.ownStyleClass);
-            Assert.AreEqual(aBodyMargin.texts,someTexts);
+            Assert.IsNotNull(aBodyMargin.Id);
+            Assert.IsNull(aBodyMargin.OwnStyleClass);
+            Assert.AreEqual(aBodyMargin.Texts,someTexts);
             Assert.AreEqual(MarginAlign.FOOTER, aBodyMargin.Align);
         }
 
@@ -81,9 +81,9 @@ namespace DocSystTest.DocumentStructureTest
         {
             Margin aBodyMargin = new Margin(MarginAlign.FOOTER, someTexts, aStyleClass);
 
-            Assert.IsNotNull(aBodyMargin.id);
-            Assert.AreEqual(aBodyMargin.ownStyleClass,aStyleClass);
-            Assert.AreEqual(aBodyMargin.texts,someTexts);
+            Assert.IsNotNull(aBodyMargin.Id);
+            Assert.AreEqual(aBodyMargin.OwnStyleClass,aStyleClass);
+            Assert.AreEqual(aBodyMargin.Texts,someTexts);
             Assert.AreEqual(MarginAlign.FOOTER, aBodyMargin.Align);
         }
 
@@ -92,9 +92,9 @@ namespace DocSystTest.DocumentStructureTest
         {
             Margin aBodyMargin = new Margin(MarginAlign.HEADER, someTexts, aStyleClass);
 
-            Assert.IsNotNull(aBodyMargin.id);
-            Assert.AreEqual(aBodyMargin.ownStyleClass,aStyleClass);
-            Assert.AreEqual(aBodyMargin.texts,someTexts);
+            Assert.IsNotNull(aBodyMargin.Id);
+            Assert.AreEqual(aBodyMargin.OwnStyleClass,aStyleClass);
+            Assert.AreEqual(aBodyMargin.Texts,someTexts);
             Assert.AreEqual(MarginAlign.HEADER, aBodyMargin.Align);
         }
 
@@ -147,7 +147,7 @@ namespace DocSystTest.DocumentStructureTest
 
             aBodyMargin.SetText(aText);
 
-            Assert.IsTrue(aBodyMargin.ExistText(aText.id));
+            Assert.IsTrue(aBodyMargin.ExistText(aText.Id));
         }
 
         [TestMethod]

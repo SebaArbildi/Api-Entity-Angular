@@ -1,41 +1,39 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace DocSystEntities.DocumentStructure
 {
     public class Text
-    {
-        public Guid id { get; set; }
-        public string textContent { get; set; }
-        public string ownStyleClass { get; set; }
+    {   
+        [Key]
+        public Guid Id { get; set; }
+        public string TextContent { get; set; }
+        public string OwnStyleClass { get; set; }
 
         public Text()
         {
-            id = Guid.NewGuid();
-            textContent = null;
-            ownStyleClass = null;
+            Id = Guid.NewGuid();
+            TextContent = null;
+            OwnStyleClass = null;
         }
 
         public Text(string aTextContent)
         {
-            id = Guid.NewGuid();
-            textContent = aTextContent;
-            ownStyleClass = null;
+            Id = Guid.NewGuid();
+            TextContent = aTextContent;
+            OwnStyleClass = null;
         }
 
         public Text(string aTextContent, string aStyleClass)
         {
-            id = Guid.NewGuid();
-            textContent = aTextContent;
-            ownStyleClass = aStyleClass;
+            Id = Guid.NewGuid();
+            TextContent = aTextContent;
+            OwnStyleClass = aStyleClass;
         }
 
         public bool IsEmpty()
         {
-            if(textContent == null || textContent.Length == 0)
+            if(TextContent == null || TextContent.Length == 0)
             {
                 return true;
             }
@@ -47,7 +45,7 @@ namespace DocSystEntities.DocumentStructure
 
         public override bool Equals(object obj)
         {
-            return id == ((Text)obj).id;
+            return Id == ((Text)obj).Id;
         }
     }
 }

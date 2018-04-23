@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace DocSystEntities.DocumentStructure
 {
@@ -15,7 +11,10 @@ namespace DocSystEntities.DocumentStructure
 
         public Margin(MarginAlign align) : base(align)
         {
+        }
 
+        public Margin(MarginAlign align, string aStyleClass) : base(align,aStyleClass)
+        {
         }
 
         public Margin(MarginAlign align, List<Text> someTexts) : base(align,someTexts)
@@ -28,18 +27,22 @@ namespace DocSystEntities.DocumentStructure
 
         public void SetText(Text aText)
         {
-            texts.Add(aText);
+            Texts.Add(aText);
         }
 
         public Text GetText()
         {
-            return texts[0];
+            return Texts[0];
         }
 
         public void ClearText()
         {
-            texts.Clear();
+            Texts.Clear();
         }
-         
+
+        public override bool Equals(object obj)
+        {
+            return base.Equals(obj);
+        }
     }
 }
