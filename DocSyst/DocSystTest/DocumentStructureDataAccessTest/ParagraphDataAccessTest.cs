@@ -98,11 +98,11 @@ namespace DocSystTest.DocumentStructureDataAccessTest
             Assert.AreEqual(paragraph1, paragraphDataAccess.Get(paragraph1.Id));
 
             paragraphDataAccess.Delete(paragraph2.Id);
-            IList<Paragraph> users = paragraphDataAccess.Get();
+            IList<Paragraph> paragraphs = paragraphDataAccess.Get();
 
-            Assert.IsFalse(users.Contains(paragraph2));
+            Assert.IsFalse(paragraphs.Contains(paragraph2));
             Assert.IsFalse(paragraphDataAccess.Exists(paragraph2.Id));
-            Assert.IsTrue(users.Contains(paragraph1));
+            Assert.IsTrue(paragraphs.Contains(paragraph1));
             Assert.IsTrue(paragraphDataAccess.Exists(paragraph1.Id));
         }
     }

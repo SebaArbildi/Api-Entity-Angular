@@ -100,11 +100,11 @@ namespace DocSystTest.DocumentStructureDataAccessTest
             Assert.AreEqual(document1, documentDataAccess.Get(document1.Id));
 
             documentDataAccess.Delete(document2.Id);
-            IList<Document> users = documentDataAccess.Get();
+            IList<Document> documents = documentDataAccess.Get();
 
-            Assert.IsFalse(users.Contains(document2));
+            Assert.IsFalse(documents.Contains(document2));
             Assert.IsFalse(documentDataAccess.Exists(document2.Id));
-            Assert.IsTrue(users.Contains(document1));
+            Assert.IsTrue(documents.Contains(document1));
             Assert.IsTrue(documentDataAccess.Exists(document1.Id));
         }
     }

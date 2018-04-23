@@ -98,11 +98,11 @@ namespace DocSystTest.DocumentStructureDataAccessTest
             Assert.AreEqual(margin1, marginDataAccess.Get(margin1.Id));
 
             marginDataAccess.Delete(margin2.Id);
-            IList<Margin> users = marginDataAccess.Get();
+            IList<Margin> margins = marginDataAccess.Get();
 
-            Assert.IsFalse(users.Contains(margin2));
+            Assert.IsFalse(margins.Contains(margin2));
             Assert.IsFalse(marginDataAccess.Exists(margin2.Id));
-            Assert.IsTrue(users.Contains(margin1));
+            Assert.IsTrue(margins.Contains(margin1));
             Assert.IsTrue(marginDataAccess.Exists(margin1.Id));
         }
     }
