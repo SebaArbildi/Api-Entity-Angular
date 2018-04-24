@@ -7,12 +7,15 @@ using DocSystDataAccessInterface.UserDataAccessInterface;
 using DocSystDataAccess.UserDataAccessImplementation;
 using DocSystBusinessLogicImplementation.UserBusinessLogicImplementation;
 using System.Web.Http;
+using DocSystWebApi.Models.UserModel;
+using System;
 
 namespace DocSystTest.ApiTest
 {
     [TestClass]
     public class UserApiTest
     {
+        private UserModel userModel;
         private User user;
         private Mock<IUserBusinessLogic> mockUserBusinessLogic;
         private UserController userController;
@@ -27,6 +30,7 @@ namespace DocSystTest.ApiTest
         public void TestInitialize()
         {
             user = Utils.CreateUserForTest();
+            userModel = UserModel.ToModel(user);
             mockUserBusinessLogic = new Mock<IUserBusinessLogic>();
             userController = new UserController(mockUserBusinessLogic.Object);
         }
@@ -42,6 +46,20 @@ namespace DocSystTest.ApiTest
         {
             mockUserBusinessLogic.Setup(b1 => b1.GetUser(user.Username)).Returns(user);
             IHttpActionResult statusObtained = userController.Get(user.Username);
+        }
+
+        [TestMethod]
+        public void GetUser_BadRequest_Exception()
+        {
+            mockUserBusinessLogic.Setup(b1 => b1.GetUser(user.Username)).Throws(new Exception());
+            IHttpActionResult statusObtained = userController.Get(user.Username);
+        }
+
+        [TestMethod]
+        public void AddUser_ExpectedParameters_Ok()
+        {
+            mockUserBusinessLogic.Setup(b1 => b1.AddUser(user));
+            //IHttpActionResult statusObtained = userController.Post();
         }
     }
 }

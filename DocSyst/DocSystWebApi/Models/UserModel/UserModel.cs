@@ -31,12 +31,12 @@ namespace DocSystWebApi.Models.UserModel
 
         protected override UserModel SetModel(User user)
         {
-            Name = this.Name;
-            LastName = this.LastName;
-            Username = this.Username;
-            Password = this.Password;
-            Mail = this.Mail;
-            IsAdmin = this.IsAdmin;
+            Name = user.Name;
+            LastName = user.LastName;
+            Username = user.Username;
+            Password = user.Password;
+            Mail = user.Mail;
+            IsAdmin = user.IsAdmin;
             return this;
         }
 
