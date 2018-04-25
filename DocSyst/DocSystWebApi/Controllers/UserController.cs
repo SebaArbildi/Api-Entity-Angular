@@ -65,8 +65,17 @@ namespace DocSystWebApi.Controllers
         }
 
         // PUT: api/User/5
-        public void Put(int id, [FromBody]string value)
+        public IHttpActionResult Put([FromBody]UserModel userModel)
         {
+            try
+            {
+                UserBusinessLogic.ModifyUser(userModel.ToEntity());
+                return Ok("User Modified");
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         // DELETE: api/User/5
