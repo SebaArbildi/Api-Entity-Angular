@@ -79,8 +79,17 @@ namespace DocSystWebApi.Controllers
         }
 
         // DELETE: api/User/5
-        public void Delete(int id)
+        public IHttpActionResult Delete([FromUri] string username)
         {
+            try
+            {
+                UserBusinessLogic.DeleteUser(username);
+                return Ok("User deleted");
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         private IList<UserModel> ConvertEntitiesToModels(IList<User> users)
