@@ -117,5 +117,19 @@ namespace DocSystTest.ApiTest
             mockUserBusinessLogic.Setup(b1 => b1.DeleteUser(user.Username)).Throws(new Exception());
             IHttpActionResult statusObtained = userController.Delete(user.Username);
         }
+
+        [TestMethod]
+        public void IntegrationTest_ExpectedParameters_Ok()
+        {
+            UserBusinessLogic userBL = new UserBusinessLogic(new UserDataAccess());
+            UserController userC = new UserController(userBL);
+            UserModel user2 = UserModel.ToModel(Utils.CreateUserForTest());
+            userC.Post(userModel);
+            userC.Post(user2);
+            user2.Name = "modified";
+            userC.Put(user2);
+            userC.Delete(userModel.Username);
+            IHttpActionResult statusObtained = userC.Get();
+        }
     }
 }
