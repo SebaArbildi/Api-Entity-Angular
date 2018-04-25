@@ -59,7 +59,7 @@ namespace DocSystTest.ApiTest
         public void AddUser_ExpectedParameters_Ok()
         {
             mockUserBusinessLogic.Setup(b1 => b1.AddUser(user));
-            //IHttpActionResult statusObtained = userController.Post();
+            IHttpActionResult statusObtained = userController.Post(userModel);
         }
     }
 }
