@@ -18,3 +18,4 @@ C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystDependencyResolver\bin
 C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystDependencyResolver\bin\Debug\Unity.ServiceLocation.pdb
 C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystDependencyResolver\obj\Debug\DocSystDependencyResolver.dll
 C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystDependencyResolver\obj\Debug\DocSystDependencyResolver.pdb
+C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystDependencyResolver\obj\Debug\DocSystDependencyResolver.csprojResolveAssemblyReference.cache

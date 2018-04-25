@@ -14,7 +14,7 @@ namespace DocSystWebApi.Controllers
     {
         private IUserBusinessLogic UserBusinessLogic { get; set; }
 
-        public UserController() { }
+        //public UserController() { }
 
         public UserController(IUserBusinessLogic userBusinessLogic)
         {
