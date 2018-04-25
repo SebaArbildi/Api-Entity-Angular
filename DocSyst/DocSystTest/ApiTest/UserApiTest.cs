@@ -103,5 +103,19 @@ namespace DocSystTest.ApiTest
             mockUserBusinessLogic.Setup(b1 => b1.ModifyUser(user)).Throws(new Exception());
             IHttpActionResult statusObtained = userController.Put(userModel);
         }
+
+        [TestMethod]
+        public void DeleteUser_ExpectedParameters_Ok()
+        {
+            mockUserBusinessLogic.Setup(b1 => b1.DeleteUser(user.Username));
+            IHttpActionResult statusObtained = userController.Delete(user.Username);
+        }
+
+        [TestMethod]
+        public void DeleteUser_BadRequest_Exception()
+        {
+            mockUserBusinessLogic.Setup(b1 => b1.DeleteUser(user.Username)).Throws(new Exception());
+            IHttpActionResult statusObtained = userController.Delete(user.Username);
+        }
     }
 }
