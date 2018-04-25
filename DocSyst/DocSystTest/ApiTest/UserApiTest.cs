@@ -73,16 +73,19 @@ namespace DocSystTest.ApiTest
         [TestMethod]
         public void GetUsers_ExpectedParameters_Ok()
         {
-            IList<UserModel> usersModel = new IList<UserModel>();
-            mockUserBusinessLogic.Setup(b1 => b1.GetUsers(user));
-            IHttpActionResult statusObtained = userController.Post(userModel);
+            IList<User> users = new List<User>();
+            users.Add(user);
+            mockUserBusinessLogic.Setup(b1 => b1.GetUsers()).Returns(users);
+            IHttpActionResult statusObtained = userController.Get();
         }
 
         [TestMethod]
         public void GetUsers_BadRequest_Exception()
         {
-            mockUserBusinessLogic.Setup(b1 => b1.AddUser(user)).Throws(new Exception());
-            IHttpActionResult statusObtained = userController.Post(userModel);
+            IList<UserModel> usersModel = new List<UserModel>();
+            usersModel.Add(userModel);
+            mockUserBusinessLogic.Setup(b1 => b1.GetUsers()).Throws(new Exception());
+            IHttpActionResult statusObtained = userController.Get();
         }
 
     }

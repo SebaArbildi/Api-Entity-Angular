@@ -22,9 +22,18 @@ namespace DocSystWebApi.Controllers
         }
 
         // GET: api/User
-        public IEnumerable<string> Get()
+        public IHttpActionResult Get()
         {
-            return new string[] { "value1", "value2" };
+            try
+            {
+                IList<User> users = UserBusinessLogic.GetUsers();
+                IList<UserModel> usersModel = ConvertEntitiesToModels(users);
+                return Ok(usersModel);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         // GET: api/User/5
@@ -63,6 +72,16 @@ namespace DocSystWebApi.Controllers
         // DELETE: api/User/5
         public void Delete(int id)
         {
+        }
+
+        private IList<UserModel> ConvertEntitiesToModels(IList<User> users)
+        {
+            IList<UserModel> usersModels = new List<UserModel>();
+            foreach(User user in users)
+            {
+                usersModels.Add(UserModel.ToModel(user));
+            }
+            return usersModels;
         }
     }
 }
