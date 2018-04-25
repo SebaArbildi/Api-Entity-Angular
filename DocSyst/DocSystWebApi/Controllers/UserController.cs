@@ -42,7 +42,7 @@ namespace DocSystWebApi.Controllers
         }
 
         // POST: api/User
-        public void Post([FromBody]string value)
+        public void Post([FromBody]UserModel userModel)
         {
         }
 
