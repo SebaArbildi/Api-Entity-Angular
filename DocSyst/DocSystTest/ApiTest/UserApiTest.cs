@@ -9,6 +9,7 @@ using DocSystBusinessLogicImplementation.UserBusinessLogicImplementation;
 using System.Web.Http;
 using DocSystWebApi.Models.UserModel;
 using System;
+using System.Collections.Generic;
 
 namespace DocSystTest.ApiTest
 {
@@ -68,5 +69,21 @@ namespace DocSystTest.ApiTest
             mockUserBusinessLogic.Setup(b1 => b1.AddUser(user)).Throws(new Exception());
             IHttpActionResult statusObtained = userController.Post(userModel);
         }
+
+        [TestMethod]
+        public void GetUsers_ExpectedParameters_Ok()
+        {
+            IList<UserModel> usersModel = new IList<UserModel>();
+            mockUserBusinessLogic.Setup(b1 => b1.GetUsers(user));
+            IHttpActionResult statusObtained = userController.Post(userModel);
+        }
+
+        [TestMethod]
+        public void GetUsers_BadRequest_Exception()
+        {
+            mockUserBusinessLogic.Setup(b1 => b1.AddUser(user)).Throws(new Exception());
+            IHttpActionResult statusObtained = userController.Post(userModel);
+        }
+
     }
 }
