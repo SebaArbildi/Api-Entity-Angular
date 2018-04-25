@@ -88,5 +88,20 @@ namespace DocSystTest.ApiTest
             IHttpActionResult statusObtained = userController.Get();
         }
 
+        [TestMethod]
+        public void ModifyUser_ExpectedParameters_Ok()
+        {
+            mockUserBusinessLogic.Setup(b1 => b1.ModifyUser(user));
+            IHttpActionResult statusObtained = userController.Put(userModel);
+        }
+
+        [TestMethod]
+        public void ModifyUser_BadRequest_Exception()
+        {
+            IList<UserModel> usersModel = new List<UserModel>();
+            usersModel.Add(userModel);
+            mockUserBusinessLogic.Setup(b1 => b1.ModifyUser(user)).Throws(new Exception());
+            IHttpActionResult statusObtained = userController.Put(userModel);
+        }
     }
 }
