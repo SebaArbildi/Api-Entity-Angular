@@ -42,8 +42,17 @@ namespace DocSystWebApi.Controllers
         }
 
         // POST: api/User
-        public void Post([FromBody]UserModel userModel)
+        public IHttpActionResult Post([FromBody]UserModel userModel)
         {
+            try
+            {
+                UserBusinessLogic.AddUser(userModel.ToEntity());
+                return Ok("User added");
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         // PUT: api/User/5
