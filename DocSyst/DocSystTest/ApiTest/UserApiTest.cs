@@ -9,6 +9,7 @@ using DocSystWebApi.Models.UserModel;
 using System;
 using System.Collections.Generic;
 using DocSystDataAccessImplementation.UserDataAccessImplementation;
+using System.Web.Http.Results;
 
 namespace DocSystTest.ApiTest
 {
@@ -46,6 +47,7 @@ namespace DocSystTest.ApiTest
         {
             mockUserBusinessLogic.Setup(b1 => b1.GetUser(user.Username)).Returns(user);
             IHttpActionResult statusObtained = userController.Get(user.Username);
+            Assert.IsNotNull(statusObtained as OkNegotiatedContentResult<UserModel>);
         }
 
         [TestMethod]
@@ -53,6 +55,7 @@ namespace DocSystTest.ApiTest
         {
             mockUserBusinessLogic.Setup(b1 => b1.GetUser(user.Username)).Throws(new Exception());
             IHttpActionResult statusObtained = userController.Get(user.Username);
+            Assert.IsNull(statusObtained as OkNegotiatedContentResult<UserModel>);
         }
 
         [TestMethod]
@@ -60,6 +63,7 @@ namespace DocSystTest.ApiTest
         {
             mockUserBusinessLogic.Setup(b1 => b1.AddUser(user));
             IHttpActionResult statusObtained = userController.Post(userModel);
+            Assert.IsNotNull(statusObtained as OkNegotiatedContentResult<string>);
         }
 
         [TestMethod]
@@ -67,6 +71,7 @@ namespace DocSystTest.ApiTest
         {
             mockUserBusinessLogic.Setup(b1 => b1.AddUser(user)).Throws(new Exception());
             IHttpActionResult statusObtained = userController.Post(userModel);
+            Assert.IsNull(statusObtained as OkNegotiatedContentResult<string>);
         }
 
         [TestMethod]
@@ -76,6 +81,7 @@ namespace DocSystTest.ApiTest
             users.Add(user);
             mockUserBusinessLogic.Setup(b1 => b1.GetUsers()).Returns(users);
             IHttpActionResult statusObtained = userController.Get();
+            Assert.IsNotNull(statusObtained as OkNegotiatedContentResult<IList<UserModel>>);
         }
 
         [TestMethod]
@@ -85,6 +91,7 @@ namespace DocSystTest.ApiTest
             usersModel.Add(userModel);
             mockUserBusinessLogic.Setup(b1 => b1.GetUsers()).Throws(new Exception());
             IHttpActionResult statusObtained = userController.Get();
+            Assert.IsNull(statusObtained as OkNegotiatedContentResult<IList<UserModel>>);
         }
 
         [TestMethod]
@@ -92,6 +99,7 @@ namespace DocSystTest.ApiTest
         {
             mockUserBusinessLogic.Setup(b1 => b1.ModifyUser(user));
             IHttpActionResult statusObtained = userController.Put(userModel);
+            Assert.IsNotNull(statusObtained as OkNegotiatedContentResult<string>);
         }
 
         [TestMethod]
@@ -101,6 +109,7 @@ namespace DocSystTest.ApiTest
             usersModel.Add(userModel);
             mockUserBusinessLogic.Setup(b1 => b1.ModifyUser(user)).Throws(new Exception());
             IHttpActionResult statusObtained = userController.Put(userModel);
+            Assert.IsNull(statusObtained as OkNegotiatedContentResult<string>);
         }
 
         [TestMethod]
@@ -108,6 +117,7 @@ namespace DocSystTest.ApiTest
         {
             mockUserBusinessLogic.Setup(b1 => b1.DeleteUser(user.Username));
             IHttpActionResult statusObtained = userController.Delete(user.Username);
+            Assert.IsNotNull(statusObtained as OkNegotiatedContentResult<string>);
         }
 
         [TestMethod]
@@ -115,6 +125,7 @@ namespace DocSystTest.ApiTest
         {
             mockUserBusinessLogic.Setup(b1 => b1.DeleteUser(user.Username)).Throws(new Exception());
             IHttpActionResult statusObtained = userController.Delete(user.Username);
+            Assert.IsNull(statusObtained as OkNegotiatedContentResult<string>);
         }
 
         [TestMethod]
