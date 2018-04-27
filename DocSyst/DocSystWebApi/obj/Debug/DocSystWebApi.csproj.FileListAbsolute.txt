@@ -15,7 +15,6 @@ C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystWebApi\bin\DocSystWebA
 C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystWebApi\bin\DocSystWebApi.dll
 C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystWebApi\bin\DocSystWebApi.pdb
 C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystWebApi\bin\CommonServiceLocator.dll
-C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystWebApi\bin\DocSystBusinessLogicImplementation.dll
 C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystWebApi\bin\DocSystBusinessLogicInterface.dll
 C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystWebApi\bin\DocSystDependencyResolver.dll
 C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystWebApi\bin\DocSystEntities.dll
@@ -40,9 +39,6 @@ C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystWebApi\bin\Unity.Inter
 C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystWebApi\bin\Unity.Interception.dll
 C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystWebApi\bin\Unity.RegistrationByConvention.dll
 C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystWebApi\bin\Unity.ServiceLocation.dll
-C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystWebApi\bin\DocSystDataAccessInterface.dll
-C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystWebApi\bin\DocSystDataAccess.dll
-C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystWebApi\bin\DocSystBusinessLogicImplementation.pdb
 C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystWebApi\bin\DocSystBusinessLogicInterface.pdb
 C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystWebApi\bin\DocSystDependencyResolver.pdb
 C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystWebApi\bin\DocSystEntities.pdb
@@ -66,8 +62,6 @@ C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystWebApi\bin\Unity.Inter
 C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystWebApi\bin\Unity.Interception.Configuration.pdb
 C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystWebApi\bin\Unity.RegistrationByConvention.pdb
 C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystWebApi\bin\Unity.ServiceLocation.pdb
-C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystWebApi\bin\DocSystDataAccessInterface.pdb
-C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystWebApi\bin\DocSystDataAccess.pdb
 C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystWebApi\obj\Debug\DocSystWebApi.csprojResolveAssemblyReference.cache
 C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystWebApi\obj\Debug\DocSystWebApi.dll
 C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystWebApi\obj\Debug\DocSystWebApi.pdb

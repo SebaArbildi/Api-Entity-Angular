@@ -3,13 +3,12 @@ using Moq;
 using DocSystBusinessLogicInterface.UserBusinessLogicInterface;
 using DocSystWebApi.Controllers;
 using DocSystEntities.User;
-using DocSystDataAccessInterface.UserDataAccessInterface;
-using DocSystDataAccess.UserDataAccessImplementation;
 using DocSystBusinessLogicImplementation.UserBusinessLogicImplementation;
 using System.Web.Http;
 using DocSystWebApi.Models.UserModel;
 using System;
 using System.Collections.Generic;
+using DocSystDataAccessImplementation.UserDataAccessImplementation;
 
 namespace DocSystTest.ApiTest
 {

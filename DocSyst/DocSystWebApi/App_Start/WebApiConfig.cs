@@ -1,4 +1,7 @@
-﻿using DocSystDependencyResolver;
+﻿using DocSystBusinessLogicInterface.UserBusinessLogicInterface;
+using DocSystDependencyResolver;
+using System;
+using System.Configuration;
 using System.Web.Http;
 using Unity;
 
@@ -12,7 +15,13 @@ namespace DocSystWebApi
             // Web API configuration and services
             var container = new UnityContainer();
 
-            ComponentLoader.LoadContainer(container, ".\\bin", "*.dll");
+#if DEBUG
+            ComponentLoader.LoadContainer(container, AppDomain.CurrentDomain.BaseDirectory + @"..\DocSystBusinessLogicImplementation\bin\Debug\", "*.dll");
+            ComponentLoader.LoadContainer(container, AppDomain.CurrentDomain.BaseDirectory + @"..\DocSystDataAccessImplementation\bin\Debug\", "*.dll");
+#else
+            ComponentLoader.LoadContainer(container, ConfigurationManager.AppSettings["LogicAssemblyPath"], "*.dll");
+
+#endif
 
             config.DependencyResolver = new UnityResolver(container);
 
@@ -24,6 +33,9 @@ namespace DocSystWebApi
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            // Controllers with Actions
+
         }
     }
 }

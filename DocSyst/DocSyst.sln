@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocSystEntities", "DocSystEntities\DocSystEntities.csproj", "{5B3C42ED-A71E-419B-86E3-32FF647EBD34}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocSystDataAccessImplementation", "DocSystDataAccess\DocSystDataAccessImplementation.csproj", "{5BDC68DE-BBE5-4F31-9491-3D470BB29EFB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocSystDataAccessImplementation", "DocSystDataAccessImplementation\DocSystDataAccessImplementation.csproj", "{5BDC68DE-BBE5-4F31-9491-3D470BB29EFB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocSystTest", "DocSystTest\DocSystTest.csproj", "{A05D6515-17B5-41B4-9370-DDB7A09A257C}"
 EndProject

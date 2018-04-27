@@ -1,14 +1,16 @@
-﻿using DocSystDataAccess.UserDataAccessImplementation;
-using DocSystDataAccessInterface.UserDataAccessInterface;
+﻿using DocSystBusinessLogicImplementation.UserBusinessLogicImplementation;
+using DocSystBusinessLogicInterface.UserBusinessLogicInterface;
 using DocSystDependencyResolver;
+using System.ComponentModel.Composition;
 
 namespace DocSystBusinessLogicImplementation
 {
-    class DependencyResolverBusinessLogic: IComponent
+    [Export(typeof(IComponent))]
+    public class DependencyResolverBusinessLogic: IComponent
     {
         public void SetUp(IRegisterComponent registerComponent)
         {
-            registerComponent.RegisterType<IUserDataAccess, UserDataAccess>();
+            registerComponent.RegisterType<IUserBusinessLogic, UserBusinessLogic>();
         }
     }
 }
