@@ -1,0 +1,15 @@
+C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystBusinessLogicImplementation\bin\Debug\DocSystBusinessLogicImplementation.dll
+C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystBusinessLogicImplementation\bin\Debug\DocSystBusinessLogicImplementation.pdb
+C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystBusinessLogicImplementation\bin\Debug\DocSystBusinessLogicInterface.dll
+C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystBusinessLogicImplementation\bin\Debug\DocSystDataAccessInterface.dll
+C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystBusinessLogicImplementation\bin\Debug\DocSystDependencyResolver.dll
+C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystBusinessLogicImplementation\bin\Debug\DocSystEntities.dll
+C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystBusinessLogicImplementation\bin\Debug\Unity.Abstractions.dll
+C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystBusinessLogicImplementation\bin\Debug\DocSystBusinessLogicInterface.pdb
+C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystBusinessLogicImplementation\bin\Debug\DocSystDataAccessInterface.pdb
+C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystBusinessLogicImplementation\bin\Debug\DocSystDependencyResolver.pdb
+C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystBusinessLogicImplementation\bin\Debug\DocSystEntities.pdb
+C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystBusinessLogicImplementation\bin\Debug\Unity.Abstractions.pdb
+C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystBusinessLogicImplementation\obj\Debug\DocSystBusinessLogicImplementation.csprojResolveAssemblyReference.cache
+C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystBusinessLogicImplementation\obj\Debug\DocSystBusinessLogicImplementation.dll
+C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystBusinessLogicImplementation\obj\Debug\DocSystBusinessLogicImplementation.pdb

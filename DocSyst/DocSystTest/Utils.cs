@@ -1,4 +1,4 @@
-﻿using DocSystDataAccess;
+﻿using DocSystDataAccessImplementation;
 using DocSystEntities.User;
 using System;
 
@@ -6,6 +6,8 @@ namespace DocSystTest
 {
     internal static class Utils
     {
+
+        private static Random random = new Random();
         internal static void DeleteBd()
         {
             using (DocSystDbContext context = new DocSystDbContext())
@@ -15,8 +17,7 @@ namespace DocSystTest
         }
 
         internal static User CreateUserForTest()
-        {
-            Random random = new Random();
+        {          
             return new User("Name", "LastName", random.Next().ToString(), "Password", "Mail", true);
         }
     }
