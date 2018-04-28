@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DocumentStructureDataAccessInterface\IBodyDataAccess.cs" />
     <Compile Include="DocumentStructureDataAccessInterface\IDocumentDataAccess.cs" />
     <Compile Include="DocumentStructureDataAccessInterface\IMarginDataAccess.cs" />
     <Compile Include="DocumentStructureDataAccessInterface\IParagraphDataAccess.cs" />

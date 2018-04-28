@@ -81,16 +81,19 @@ namespace DocSystEntities.DocumentStructure
             return DocumentParts.Find(x => x.Align == align);
         }
 
-        public void SetDocumentPart(MarginAlign align, Body aDocumentPart)
+        public void SetDocumentPart(MarginAlign? align, Body aDocumentPart)
         {
             if (ExistDocumentPart(align))
             {
                 DocumentParts.Remove(DocumentParts.Find(x => x.Align == align));
             }
+
+            aDocumentPart.FatherDocument = this;
+            aDocumentPart.DocumentId = this.Id;
             DocumentParts.Add(aDocumentPart);
         }
 
-        public bool ExistDocumentPart(MarginAlign align)
+        public bool ExistDocumentPart(MarginAlign? align)
         {
             return DocumentParts.Exists(x => x.Align == align);
         }

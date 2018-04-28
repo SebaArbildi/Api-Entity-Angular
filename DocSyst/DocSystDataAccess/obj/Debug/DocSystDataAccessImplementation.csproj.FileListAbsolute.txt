@@ -36,3 +36,8 @@ C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystDataAccess\obj\Debu
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystDataAccess\obj\Debug\DocSystDataAccessImplementation.csproj.CopyComplete
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystDataAccess\obj\Debug\DocSystDataAccess.dll
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystDataAccess\obj\Debug\DocSystDataAccess.pdb
+C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystDataAccess\obj\Debug\DocSystDataAccess.Migrations._201804230210000_InitialCreate.resources
+C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystDataAccess\obj\Debug\DocSystDataAccess.Migrations.init1.resources
+C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystDataAccess\obj\Debug\DocSystDataAccess.Migrations.init2.resources
+C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystDataAccess\obj\Debug\DocSystDataAccess.Migrations.init3.resources
+C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystDataAccess\obj\Debug\DocSystDataAccess.Migrations.init4.resources

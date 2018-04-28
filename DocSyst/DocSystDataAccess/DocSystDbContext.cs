@@ -7,12 +7,12 @@ namespace DocSystDataAccess
     public class DocSystDbContext: DbContext
     {
         public DocSystDbContext() { }
+        public DbSet<Body> Bodys { get; set; }
         public DbSet<User> Users { get; set; }
-        public DbSet<Document> Document { get; set; }
-        public DbSet<Body> Body { get; set; }
-        public DbSet<Margin> Margin { get; set; }
-        public DbSet<Paragraph> Paragraph { get; set; }
-        public DbSet<Paragraph> Text { get; set; }
+        public DbSet<Document> Documents { get; set; }
+        public DbSet<Margin> Margins { get; set; }
+        public DbSet<Paragraph> Paragraphs { get; set; }
+        public DbSet<Text> Texts { get; set; }
 
     }
 }

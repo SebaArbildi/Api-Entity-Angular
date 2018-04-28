@@ -1,10 +1,9 @@
-﻿using System;
-using DocSystDataAccessInterface.DocumentStructureDataAccessInterface;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DocSystDataAccessInterface.DocumentStructureDataAccessInterface;
 using DocSystEntities.DocumentStructure;
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
 
 namespace DocSystDataAccess.DocumentStructureDataAccessImplementation
 {
@@ -12,32 +11,89 @@ namespace DocSystDataAccess.DocumentStructureDataAccessImplementation
     {
         public void Add(Document aDocument)
         {
-            throw new NotImplementedException();
+            using (DocSystDbContext context = new DocSystDbContext())
+            {
+                context.Documents.Add(aDocument);
+                context.SaveChanges();
+            }
         }
 
         public void Delete(Guid id)
         {
-            throw new NotImplementedException();
+            Document document = Get(id);
+
+            using (DocSystDbContext context = new DocSystDbContext())
+            {
+                
+                foreach (Body aDocumentPart in document.DocumentParts)
+                {
+                    foreach (Text aText in aDocumentPart.Texts)
+                    {
+                        context.Texts.Attach(aText);
+                        //context.Texts.Remove(aText);
+                    }
+
+                    if (aDocumentPart.Align == MarginAlign.PARAGRAPH)
+                    {
+                        context.Paragraphs.Attach((Paragraph)aDocumentPart);
+                        //context.Paragraphs.Remove((Paragraph)aDocumentPart);
+                    }
+                    else if(aDocumentPart.Align == MarginAlign.HEADER || aDocumentPart.Align == MarginAlign.FOOTER)
+                    {
+                        context.Margins.Attach((Margin)aDocumentPart);
+                        //context.Margins.Remove((Margin)aDocumentPart);
+                    }
+                }
+
+                context.Documents.Attach(document);
+                context.Documents.Remove(document);
+                context.SaveChanges();
+            }
         }
 
         public bool Exists(Guid aDocument)
         {
-            throw new NotImplementedException();
+            bool exists = false;
+            using (DocSystDbContext context = new DocSystDbContext())
+            {
+                exists = context.Documents.Any(documentDb => documentDb.Id == aDocument);
+            }
+            return exists;
         }
 
         public Document Get(Guid id)
         {
-            throw new NotImplementedException();
+            Document document = null;
+            using (DocSystDbContext context = new DocSystDbContext())
+            {
+                document = context.Documents.Include(documenthDb => documenthDb.DocumentParts)
+                                            .Include(documenthDb => documenthDb.DocumentParts.Select(bodyDb => bodyDb.Texts))
+                                            .FirstOrDefault(documenthDb => documenthDb.Id == id);
+            }
+            return document;
         }
 
         public IList<Document> Get()
         {
-            throw new NotImplementedException();
+            IList<Document> document = null;
+            using (DocSystDbContext context = new DocSystDbContext())
+            {
+                document = (context.Documents.Include(documenthDb => documenthDb.DocumentParts)
+                                            .Include(documenthDb => documenthDb.DocumentParts.Select(bodyDb => bodyDb.Texts))).ToList<Document>();
+            }
+            return document;
         }
 
         public void Modify(Document aDocument)
         {
-            throw new NotImplementedException();
+            using (DocSystDbContext context = new DocSystDbContext())
+            {
+                Document actualDocument = context.Documents.Include(documenthDb => documenthDb.DocumentParts)
+                                            .Include(documenthDb => documenthDb.DocumentParts.Select(bodyDb => bodyDb.Texts))
+                                            .FirstOrDefault(documenthDb => documenthDb.Id == aDocument.Id);
+                context.Entry(actualDocument).CurrentValues.SetValues(aDocument);
+                context.SaveChanges();
+            }
         }
     }
 }

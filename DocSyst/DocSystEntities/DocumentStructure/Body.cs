@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DocSystEntities.DocumentStructure
 {
@@ -11,6 +12,9 @@ namespace DocSystEntities.DocumentStructure
         public string OwnStyleClass { get; set; }
         public List<Text> Texts { get; set; }
         public MarginAlign? Align { get; set; }
+        [ForeignKey("FatherDocument")]
+        public Guid? DocumentId { get; set; }
+        public Document FatherDocument { get; set; }
 
         protected Body()
         {

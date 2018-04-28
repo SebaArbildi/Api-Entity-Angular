@@ -1,10 +1,9 @@
-﻿using System;
-using DocSystDataAccessInterface.DocumentStructureDataAccessInterface;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DocSystDataAccessInterface.DocumentStructureDataAccessInterface;
 using DocSystEntities.DocumentStructure;
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
 
 namespace DocSystDataAccess.DocumentStructureDataAccessImplementation
 {
@@ -12,32 +11,71 @@ namespace DocSystDataAccess.DocumentStructureDataAccessImplementation
     {
         public void Add(Paragraph aParagraph)
         {
-            throw new NotImplementedException();
+            using (DocSystDbContext context = new DocSystDbContext())
+            {
+                context.Paragraphs.Add(aParagraph);
+                context.SaveChanges();
+            }
         }
 
         public void Delete(Guid id)
         {
-            throw new NotImplementedException();
+            Paragraph paragraph = Get(id);
+
+            using (DocSystDbContext context = new DocSystDbContext())
+            {
+                foreach (Text aText in paragraph.Texts)
+                {
+                    context.Texts.Attach(aText);
+                    //context.Texts.Remove(aText);
+                }
+
+                context.Paragraphs.Attach(paragraph);
+                context.Paragraphs.Remove(paragraph);
+                context.SaveChanges();
+            }
         }
 
         public bool Exists(Guid aParagraph)
         {
-            throw new NotImplementedException();
+            bool exists = false;
+            using (DocSystDbContext context = new DocSystDbContext())
+            {
+                exists = context.Paragraphs.Any(paragraphDb => paragraphDb.Id == aParagraph);
+            }
+            return exists;
         }
 
         public Paragraph Get(Guid id)
         {
-            throw new NotImplementedException();
+            Paragraph paragraph = null;
+            using (DocSystDbContext context = new DocSystDbContext())
+            {
+                paragraph = context.Paragraphs.Include(paragraphDb => paragraphDb.Texts)
+                                              .FirstOrDefault(paragraphDb => paragraphDb.Id == id);
+            }
+            return paragraph;
         }
 
         public IList<Paragraph> Get()
         {
-            throw new NotImplementedException();
+            IList<Paragraph> paragraphs = null;
+            using (DocSystDbContext context = new DocSystDbContext())
+            {
+                paragraphs = (context.Paragraphs.Include(paragraphDb => paragraphDb.Texts)).ToList<Paragraph>();
+            }
+            return paragraphs;
         }
 
         public void Modify(Paragraph aParagraph)
         {
-            throw new NotImplementedException();
+            using (DocSystDbContext context = new DocSystDbContext())
+            {
+                Paragraph actualParagraph = context.Paragraphs.Include(paragraphDb => paragraphDb.Texts)
+                                              .FirstOrDefault(paragraphDb => paragraphDb.Id == aParagraph.Id);
+                context.Entry(actualParagraph).CurrentValues.SetValues(aParagraph);
+                context.SaveChanges();
+            }
         }
     }
 }

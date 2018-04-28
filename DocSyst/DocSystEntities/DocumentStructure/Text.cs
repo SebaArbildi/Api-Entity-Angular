@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DocSystEntities.DocumentStructure
 {
@@ -9,6 +10,9 @@ namespace DocSystEntities.DocumentStructure
         public Guid Id { get; set; }
         public string TextContent { get; set; }
         public string OwnStyleClass { get; set; }
+        [ForeignKey("FatherBody")]
+        public Guid? BodyId { get; set; }
+        public Body FatherBody { get; set; }
 
         public Text()
         {

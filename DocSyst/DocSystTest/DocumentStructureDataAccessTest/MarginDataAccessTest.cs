@@ -10,13 +10,17 @@ namespace DocSystTest.DocumentStructureDataAccessTest
     public class MarginDataAccessTest
     {
         private IMarginDataAccess marginDataAccess;
+        private ITextDataAccess textDataAccess;
         private Margin margin;
+        private Text aText;
 
         [TestInitialize]
         public void TestInitialize()
         {
             marginDataAccess = new MarginDataAccess();
             margin = Utils.CreateMarginForTest();
+            textDataAccess = new TextDataAccess();
+            aText = Utils.CreateTextForTest();
         }
 
         [TestCleanup]
@@ -49,6 +53,20 @@ namespace DocSystTest.DocumentStructureDataAccessTest
 
             Margin obtained = marginDataAccess.Get(margin.Id);
             Assert.IsNull(obtained);
+        }
+
+        [TestMethod]
+        public void DeleteMarginFromDb_ExpectedParametersAndTextToDelete_Ok()
+        {
+            margin.SetText(aText);
+            marginDataAccess.Add(margin);
+
+            marginDataAccess.Delete(margin.Id);
+
+            Margin obtained = marginDataAccess.Get(margin.Id);
+            Text textObtained = textDataAccess.Get(aText.Id);
+            Assert.IsNull(obtained);
+            Assert.IsNull(textObtained);
         }
 
         [TestMethod]

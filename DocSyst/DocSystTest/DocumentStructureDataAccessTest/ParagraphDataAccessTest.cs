@@ -10,13 +10,17 @@ namespace DocSystTest.DocumentStructureDataAccessTest
     public class ParagraphDataAccessTest
     {
         private IParagraphDataAccess paragraphDataAccess;
+        private ITextDataAccess textDataAccess;
         private Paragraph paragraph;
+        private Text aText;
 
         [TestInitialize]
         public void TestInitialize()
         {
             paragraphDataAccess = new ParagraphDataAccess();
             paragraph = Utils.CreateParagraphForTest();
+            textDataAccess = new TextDataAccess();
+            aText = Utils.CreateTextForTest();
         }
 
         [TestCleanup]
@@ -49,6 +53,20 @@ namespace DocSystTest.DocumentStructureDataAccessTest
 
             Paragraph obtained = paragraphDataAccess.Get(paragraph.Id);
             Assert.IsNull(obtained);
+        }
+
+        [TestMethod]
+        public void DeleteParagraphFromDb_ExpectedParametersAndTextToDelete_Ok()
+        {
+            paragraph.PutTextAtLast(aText);
+            paragraphDataAccess.Add(paragraph);
+
+            paragraphDataAccess.Delete(paragraph.Id);
+
+            Paragraph obtained = paragraphDataAccess.Get(paragraph.Id);
+            Text textObtained = textDataAccess.Get(aText.Id);
+            Assert.IsNull(obtained);
+            Assert.IsNull(textObtained);
         }
 
         [TestMethod]

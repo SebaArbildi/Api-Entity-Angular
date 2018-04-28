@@ -1,10 +1,9 @@
-﻿using System;
-using DocSystDataAccessInterface.DocumentStructureDataAccessInterface;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DocSystDataAccessInterface.DocumentStructureDataAccessInterface;
 using DocSystEntities.DocumentStructure;
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
 
 namespace DocSystDataAccess.DocumentStructureDataAccessImplementation
 {
@@ -12,32 +11,72 @@ namespace DocSystDataAccess.DocumentStructureDataAccessImplementation
     {
         public void Add(Margin aMargin)
         {
-            throw new NotImplementedException();
+            using (DocSystDbContext context = new DocSystDbContext())
+            {
+                context.Margins.Add(aMargin);
+                context.SaveChanges();
+            }
         }
 
         public void Delete(Guid id)
         {
-            throw new NotImplementedException();
+            Margin margin = Get(id);
+
+            using (DocSystDbContext context = new DocSystDbContext())
+            {
+
+                foreach (Text aText in margin.Texts)
+                {
+                    context.Texts.Attach(aText);
+                    //context.Texts.Remove(aText);
+                }
+
+                context.Margins.Attach(margin);
+                context.Margins.Remove(margin);
+                context.SaveChanges();
+            }
         }
 
         public bool Exists(Guid aMargin)
         {
-            throw new NotImplementedException();
+            bool exists = false;
+            using (DocSystDbContext context = new DocSystDbContext())
+            {
+                exists = context.Margins.Any(marginDb => marginDb.Id == aMargin);
+            }
+            return exists;
         }
 
         public Margin Get(Guid id)
         {
-            throw new NotImplementedException();
+            Margin margin = null;
+            using (DocSystDbContext context = new DocSystDbContext())
+            {
+                margin = context.Margins.Include(marginhDb => marginhDb.Texts)
+                                              .FirstOrDefault(marginhDb => marginhDb.Id == id);
+            }
+            return margin;
         }
 
         public IList<Margin> Get()
         {
-            throw new NotImplementedException();
+            IList<Margin> margins = null;
+            using (DocSystDbContext context = new DocSystDbContext())
+            {
+                margins = (context.Margins.Include(marginsDb => marginsDb.Texts)).ToList<Margin>();
+            }
+            return margins;
         }
 
         public void Modify(Margin aMargin)
         {
-            throw new NotImplementedException();
+            using (DocSystDbContext context = new DocSystDbContext())
+            {
+                Margin actualMargin = context.Margins.Include(marginhDb => marginhDb.Texts)
+                                              .FirstOrDefault(marginhDb => marginhDb.Id == aMargin.Id);
+                context.Entry(actualMargin).CurrentValues.SetValues(aMargin);
+                context.SaveChanges();
+            }
         }
     }
 }

@@ -13,12 +13,16 @@ namespace DocSystTest.DocumentStructureDataAccessTest
     {
         private IDocumentDataAccess documentDataAccess;
         private Document document;
+        private Paragraph aDocumentPart;
+        private IParagraphDataAccess paragraphDataAccess;
 
         [TestInitialize]
         public void TestInitialize()
         {
             documentDataAccess = new DocumentDataAccess();
             document = Utils.CreateDocumentForTest();
+            aDocumentPart = Utils.CreateParagraphForTest();
+            paragraphDataAccess = new ParagraphDataAccess();
         }
 
         [TestCleanup]
@@ -51,6 +55,20 @@ namespace DocSystTest.DocumentStructureDataAccessTest
 
             Document obtained = documentDataAccess.Get(document.Id);
             Assert.IsNull(obtained);
+        }
+
+        [TestMethod]
+        public void DeleteMarginFromDb_ExpectedParametersAndTextToDelete_Ok()
+        {
+            document.SetDocumentPart(aDocumentPart.Align,aDocumentPart);
+            documentDataAccess.Add(document);
+
+            documentDataAccess.Delete(document.Id);
+
+            Document obtained = documentDataAccess.Get(document.Id);
+            Paragraph textObtained = paragraphDataAccess.Get(aDocumentPart.Id);
+            Assert.IsNull(obtained);
+            Assert.IsNull(textObtained);
         }
 
         [TestMethod]
