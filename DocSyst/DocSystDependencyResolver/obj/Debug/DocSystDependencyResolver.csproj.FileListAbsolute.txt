@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystDependencyResolver\bin\Debug\DocSystDependencyResolver.dll
 C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystDependencyResolver\bin\Debug\DocSystDependencyResolver.pdb
 C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystDependencyResolver\bin\Debug\CommonServiceLocator.dll
@@ -42,3 +43,5 @@ C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystDependencyResolver\
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystDependencyResolver\obj\Debug\DocSystDependencyResolver.csproj.CopyComplete
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystDependencyResolver\obj\Debug\DocSystDependencyResolver.dll
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystDependencyResolver\obj\Debug\DocSystDependencyResolver.pdb
+=======
+>>>>>>> develop
