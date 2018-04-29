@@ -14,6 +14,7 @@ namespace DocSystBusinessLogicImplementation
         {
             registerComponent.RegisterType<IUserBusinessLogic, UserBusinessLogic>();
             registerComponent.RegisterType<IAuthorizationBusinessLogic, AuthorizationBusinessLogic>();
+            registerComponent.RegisterType<ILoginBusinessLogic, LoginBusinessLogic>();
         }
     }
 }
