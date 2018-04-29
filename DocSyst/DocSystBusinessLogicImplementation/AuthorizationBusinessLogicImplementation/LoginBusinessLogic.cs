@@ -1,5 +1,6 @@
 ﻿using DocSystBusinessLogicInterface.AuthorizationBusinessLogicInterface;
 using DocSystDataAccessInterface.UserDataAccessInterface;
+using DocSystEntities.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,26 @@ namespace DocSystBusinessLogicImplementation.AuthorizationBusinessLogicImplement
 
         public Guid Login(string username, string password)
         {
-            throw new NotImplementedException();
+            Guid token;
+            if (userDataAccess.Exists(username))
+            {
+                User user = userDataAccess.Get(username);
+                if (user.Password == password)
+                {
+                    token = Guid.NewGuid();
+                    user.Token = token;
+                    userDataAccess.Modify(user);
+                }
+                else
+                {
+                    throw new ArgumentException("Incorrect password");
+                }
+            }
+            else
+            {
+                throw new ArgumentException("Username doesn't exists");
+            }
+            return token;
         }
     }
 }

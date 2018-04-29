@@ -23,7 +23,6 @@ namespace DocSystEntities.User
             this.Password = password;
             this.Mail = mail;
             this.IsAdmin = isAdmin;
-            token = Guid.NewGuid();
         }
 
         public string Name

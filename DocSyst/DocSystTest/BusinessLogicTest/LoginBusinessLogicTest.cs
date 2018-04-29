@@ -7,6 +7,7 @@ using DocSystDataAccessInterface.UserDataAccessInterface;
 using DocSystEntities.User;
 using DocSystBusinessLogicInterface.AuthorizationBusinessLogicInterface;
 using DocSystBusinessLogicImplementation.AuthorizationBusinessLogicImplementation;
+using DocSystDataAccessImplementation.UserDataAccessImplementation;
 
 namespace DocSystTest.BusinessLogicTest
 {
@@ -36,6 +37,9 @@ namespace DocSystTest.BusinessLogicTest
         [TestMethod]
         public void Login_validParameters_Ok()
         {
+            mockUserDataAccess.Setup(b1 => b1.Exists(user.Username)).Returns(true);
+            mockUserDataAccess.Setup(b1 => b1.Get(user.Username)).Returns(user);
+            mockUserDataAccess.Setup(b1 => b1.Modify(user));
             loginBusinessLogic.Login(user.Username, user.Password);
         }
 
@@ -44,6 +48,19 @@ namespace DocSystTest.BusinessLogicTest
         public void Login_notValidParameters_Ok()
         {
             loginBusinessLogic.Login(user.Username, "asdf");
+        }
+
+        [TestMethod]
+        public void LoginIntegrationTest_validParameters_Ok()
+        {
+            IUserDataAccess da = new UserDataAccess();
+            ILoginBusinessLogic login = new LoginBusinessLogic(da);
+            Guid guid = user.Token;
+
+            da.Add(user);
+            login.Login(user.Username, user.Password);
+            Guid tokenObtained = da.Get(user.Username).Token;
+            Assert.AreNotEqual(guid, tokenObtained);
         }
     }
 }

@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuthorizationBusinessLogicInterface\IAuthorizationBusinessLogic.cs" />
+    <Compile Include="AuthorizationBusinessLogicInterface\ILoginBusinessLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserBusinessLogicInterface\IUserBusinessLogic.cs" />
   </ItemGroup>
