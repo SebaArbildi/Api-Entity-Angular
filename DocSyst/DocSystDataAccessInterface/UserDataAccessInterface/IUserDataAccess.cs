@@ -11,6 +11,7 @@ namespace DocSystDataAccessInterface.UserDataAccessInterface
     {
         void Add(User user);
         User Get(string username);
+        User Get(Guid token);
         void Delete(string username);
         void Modify(User user);
         IList<User> Get();

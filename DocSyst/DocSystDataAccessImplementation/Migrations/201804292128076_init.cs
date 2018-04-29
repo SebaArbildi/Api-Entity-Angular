@@ -3,7 +3,7 @@ namespace DocSystDataAccessImplementation.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialCreate : DbMigration
+    public partial class init : DbMigration
     {
         public override void Up()
         {
@@ -11,14 +11,15 @@ namespace DocSystDataAccessImplementation.Migrations
                 "dbo.Users",
                 c => new
                     {
-                        UserName = c.String(nullable: false, maxLength: 128),
+                        Username = c.String(nullable: false, maxLength: 128),
                         Name = c.String(),
                         LastName = c.String(),
                         Password = c.String(),
                         Mail = c.String(),
                         IsAdmin = c.Boolean(nullable: false),
+                        Token = c.Guid(nullable: false),
                     })
-                .PrimaryKey(t => t.UserName);
+                .PrimaryKey(t => t.Username);
             
         }
         

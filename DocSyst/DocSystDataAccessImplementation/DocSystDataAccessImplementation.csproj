@@ -52,13 +52,9 @@
   <ItemGroup>
     <Compile Include="DependencyResolverDataAccess.cs" />
     <Compile Include="DocSystDbContext.cs" />
-    <Compile Include="Migrations\201804210156338_InitialCreate.cs" />
-    <Compile Include="Migrations\201804210156338_InitialCreate.Designer.cs">
-      <DependentUpon>201804210156338_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804210158048_init.cs" />
-    <Compile Include="Migrations\201804210158048_init.Designer.cs">
-      <DependentUpon>201804210158048_init.cs</DependentUpon>
+    <Compile Include="Migrations\201804292128076_init.cs" />
+    <Compile Include="Migrations\201804292128076_init.Designer.cs">
+      <DependentUpon>201804292128076_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -83,11 +79,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201804210156338_InitialCreate.resx">
-      <DependentUpon>201804210156338_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804210158048_init.resx">
-      <DependentUpon>201804210158048_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201804292128076_init.resx">
+      <DependentUpon>201804292128076_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
