@@ -36,6 +36,11 @@ namespace DocSystEntities.DocumentStructure
             return Texts.Find(x => x.Id == textId);
         }
 
+        public void ClearText()
+        {
+            Texts.Clear();
+        }
+
         public Text GetTextAt(int position)
         {
             return Texts[position];

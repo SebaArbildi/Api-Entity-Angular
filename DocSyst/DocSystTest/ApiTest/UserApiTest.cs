@@ -77,8 +77,10 @@ namespace DocSystTest.ApiTest
         [TestMethod]
         public void GetUsers_ExpectedParameters_Ok()
         {
-            IList<User> users = new List<User>();
-            users.Add(user);
+            IList<User> users = new List<User>
+            {
+                user
+            };
             mockUserBusinessLogic.Setup(b1 => b1.GetUsers()).Returns(users);
             IHttpActionResult statusObtained = userController.Get();
             Assert.IsNotNull(statusObtained as OkNegotiatedContentResult<IList<UserModel>>);
@@ -87,8 +89,10 @@ namespace DocSystTest.ApiTest
         [TestMethod]
         public void GetUsers_BadRequest_Exception()
         {
-            IList<UserModel> usersModel = new List<UserModel>();
-            usersModel.Add(userModel);
+            IList<UserModel> usersModel = new List<UserModel>
+            {
+                userModel
+            };
             mockUserBusinessLogic.Setup(b1 => b1.GetUsers()).Throws(new Exception());
             IHttpActionResult statusObtained = userController.Get();
             Assert.IsNull(statusObtained as OkNegotiatedContentResult<IList<UserModel>>);
@@ -105,8 +109,10 @@ namespace DocSystTest.ApiTest
         [TestMethod]
         public void ModifyUser_BadRequest_Exception()
         {
-            IList<UserModel> usersModel = new List<UserModel>();
-            usersModel.Add(userModel);
+            IList<UserModel> usersModel = new List<UserModel>
+            {
+                userModel
+            };
             mockUserBusinessLogic.Setup(b1 => b1.ModifyUser(user)).Throws(new Exception());
             IHttpActionResult statusObtained = userController.Put(userModel);
             Assert.IsNull(statusObtained as OkNegotiatedContentResult<string>);

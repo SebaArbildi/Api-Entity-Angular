@@ -16,10 +16,12 @@ C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystDataAccessInterface
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystDataAccessInterface\bin\Debug\DocSystEntities.dll
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystDataAccessInterface\bin\Debug\EntityFramework.dll
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystDataAccessInterface\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystDataAccessInterface\bin\Debug\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystDataAccessInterface\bin\Debug\DocSystEntities.pdb
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystDataAccessInterface\bin\Debug\DocSystEntities.dll.config
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystDataAccessInterface\bin\Debug\EntityFramework.xml
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystDataAccessInterface\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystDataAccessInterface\bin\Debug\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystDataAccessInterface\obj\Debug\DocSystDataAccessInterface.csprojResolveAssemblyReference.cache
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystDataAccessInterface\obj\Debug\DocSystDataAccessInterface.csproj.CoreCompileInputs.cache
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystDataAccessInterface\obj\Debug\DocSystDataAccessInterface.csproj.CopyComplete

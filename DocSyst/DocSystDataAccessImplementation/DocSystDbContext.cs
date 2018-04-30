@@ -1,9 +1,8 @@
-<<<<<<< HEAD:DocSyst/DocSystDataAccess/DocSystDbContext.cs
 ﻿using DocSystEntities.DocumentStructure;
 using DocSystEntities.User;
 using System.Data.Entity;
 
-namespace DocSystDataAccess
+namespace DocSystDataAccessImplementation
 {
     public class DocSystDbContext: DbContext
     {
@@ -17,16 +16,3 @@ namespace DocSystDataAccess
 
     }
 }
-=======
-﻿using DocSystEntities.User;
-using System.Data.Entity;
-
-namespace DocSystDataAccessImplementation
-{
-    public class DocSystDbContext: DbContext
-    {
-        public DocSystDbContext() { }
-        public DbSet<User> Users { get; set; }
-    }
-}
->>>>>>> develop:DocSyst/DocSystDataAccessImplementation/DocSystDbContext.cs

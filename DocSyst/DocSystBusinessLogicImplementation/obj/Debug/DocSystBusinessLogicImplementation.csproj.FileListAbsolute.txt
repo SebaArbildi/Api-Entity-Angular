@@ -19,6 +19,7 @@ C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystBusinessLogicImplem
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystBusinessLogicImplementation\bin\Debug\DocSystDataAccessInterface.dll
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystBusinessLogicImplementation\bin\Debug\DocSystDependencyResolver.dll
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystBusinessLogicImplementation\bin\Debug\DocSystEntities.dll
+C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystBusinessLogicImplementation\bin\Debug\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystBusinessLogicImplementation\bin\Debug\Unity.Abstractions.dll
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystBusinessLogicImplementation\bin\Debug\DocSystBusinessLogicInterface.pdb
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystBusinessLogicImplementation\bin\Debug\DocSystDataAccessInterface.pdb
@@ -26,6 +27,7 @@ C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystBusinessLogicImplem
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystBusinessLogicImplementation\bin\Debug\DocSystDependencyResolver.pdb
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystBusinessLogicImplementation\bin\Debug\DocSystEntities.pdb
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystBusinessLogicImplementation\bin\Debug\DocSystEntities.dll.config
+C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystBusinessLogicImplementation\bin\Debug\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystBusinessLogicImplementation\bin\Debug\Unity.Abstractions.pdb
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystBusinessLogicImplementation\obj\Debug\DocSystBusinessLogicImplementation.csprojResolveAssemblyReference.cache
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystBusinessLogicImplementation\obj\Debug\DocSystBusinessLogicImplementation.csproj.CoreCompileInputs.cache

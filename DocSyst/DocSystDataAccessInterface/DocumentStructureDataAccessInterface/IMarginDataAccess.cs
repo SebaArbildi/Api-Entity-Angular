@@ -15,5 +15,6 @@ namespace DocSystDataAccessInterface.DocumentStructureDataAccessInterface
         void Modify(Margin aMargin);
         IList<Margin> Get();
         bool Exists(Guid aMargin);
+        void ClearText(Guid aMargin);
     }
 }

@@ -15,5 +15,6 @@ namespace DocSystDataAccessInterface.DocumentStructureDataAccessInterface
         void Modify(Paragraph aParagraph);
         IList<Paragraph> Get();
         bool Exists(Guid aParagraph);
+        void ClearText(Guid aParagraph);
     }
 }

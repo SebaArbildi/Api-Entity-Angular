@@ -1,10 +1,8 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using DocSystDataAccessImplementation.DocumentStructureDataAccessImplementation;
 using DocSystDataAccessInterface.DocumentStructureDataAccessInterface;
 using DocSystEntities.DocumentStructure;
-using DocSystDataAccess.DocumentStructureDataAccessImplementation;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
 
 namespace DocSystTest.DocumentStructureDataAccessTest
 {
