@@ -35,7 +35,7 @@ C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystDataAccessImplementati
 C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystDataAccessImplementation\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystDataAccessImplementation\bin\Debug\Unity.Abstractions.pdb
 C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystDataAccessImplementation\obj\Debug\DocSystDataAccessImplementation.csprojResolveAssemblyReference.cache
-C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystDataAccessImplementation\obj\Debug\DocSystDataAccessImplementation.dll
-C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystDataAccessImplementation\obj\Debug\DocSystDataAccessImplementation.pdb
 C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystDataAccessImplementation\obj\Debug\DocSystDataAccessImplementation.Migrations.init.resources
 C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystDataAccessImplementation\obj\Debug\DocSystDataAccessImplementation.csproj.GenerateResource.Cache
+C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystDataAccessImplementation\obj\Debug\DocSystDataAccessImplementation.dll
+C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystDataAccessImplementation\obj\Debug\DocSystDataAccessImplementation.pdb
