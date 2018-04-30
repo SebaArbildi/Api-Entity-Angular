@@ -76,6 +76,16 @@ namespace DocSystTest.DataAccessTest
         }
 
         [TestMethod]
+        public void GetUserByToken_ExpectedParameters_Ok()
+        {
+            userDataAccess.Add(user);
+
+            User userObtained = userDataAccess.Get(user.Token);
+
+            Assert.AreEqual(user.Token, userObtained.Token);
+        }
+
+        [TestMethod]
         public void ExistUserInDb_ExpectedParameters_Ok()
         {
             userDataAccess.Add(user);

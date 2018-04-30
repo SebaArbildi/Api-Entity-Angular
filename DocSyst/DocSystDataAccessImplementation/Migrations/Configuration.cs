@@ -10,7 +10,6 @@ namespace DocSystDataAccessImplementation.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "DocSystDataAccess.DocSystDbContext";
         }
 
         protected override void Seed(DocSystDataAccessImplementation.DocSystDbContext context)

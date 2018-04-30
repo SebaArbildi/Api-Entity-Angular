@@ -67,5 +67,15 @@ namespace DocSystDataAccessImplementation.UserDataAccessImplementation
             }
             return exists;
         }
+
+        public User Get(Guid token)
+        {
+            User user = null;
+            using (DocSystDbContext context = new DocSystDbContext())
+            {
+                user = context.Users.Where(userDb => userDb.Token == token).FirstOrDefault();
+            }
+            return user;
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace DocSystEntities.User
 {
@@ -10,6 +11,7 @@ namespace DocSystEntities.User
         private string password;
         private string mail;
         private bool isAdmin;
+        private Guid token;
 
         public User() { }
 
@@ -99,6 +101,19 @@ namespace DocSystEntities.User
             set
             {
                 isAdmin = value;
+            }
+        }
+
+        public Guid Token
+        {
+            get
+            {
+                return token;
+            }
+
+            set
+            {
+                token = value;
             }
         }
 

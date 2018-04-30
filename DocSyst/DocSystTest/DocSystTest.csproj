@@ -95,7 +95,10 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="ApiTest\LoginControllerTest.cs" />
     <Compile Include="ApiTest\UserApiTest.cs" />
+    <Compile Include="BusinessLogicTest\AuthorizationBusinessLogicTest.cs" />
+    <Compile Include="BusinessLogicTest\LoginBusinessLogicTest.cs" />
     <Compile Include="BusinessLogicTest\UserBusinessLogicTest.cs" />
     <Compile Include="DataAccessTest\UserDataAccessTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
