@@ -95,6 +95,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="ApiTest\LoginControllerTest.cs" />
     <Compile Include="ApiTest\UserApiTest.cs" />
     <Compile Include="BusinessLogicTest\AuthorizationBusinessLogicTest.cs" />
     <Compile Include="BusinessLogicTest\LoginBusinessLogicTest.cs" />
