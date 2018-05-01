@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using DocSystEntities.StyleStructure;
+using System.Collections.Generic;
 
 namespace DocSystTest.EntitiesTest.StyleStructure
 {
@@ -43,7 +44,9 @@ namespace DocSystTest.EntitiesTest.StyleStructure
         {
             SpecificStyle specificStyle = new SpecificStyle("name", "<html><body>{0}</body></html>");
             Style style = new Style("name", specificStyle);
-            StyleClass styleClass = new StyleClass("name", style);
+            IList<Style> styleList = new List<Style>();
+            styleList.Add(style);
+            StyleClass styleClass = new StyleClass("name", styleList);
         }
 
     }

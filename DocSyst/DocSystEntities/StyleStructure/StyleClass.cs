@@ -9,14 +9,14 @@ namespace DocSystEntities.StyleStructure
     public class StyleClass
     {
         private string name;
-        private Style style;
+        private IList<Style> styles;
 
         public StyleClass() { }
 
-        public StyleClass(string name, Style style)
+        public StyleClass(string name, IList<Style> styles)
         {
             this.Name = name;
-            this.Style = style;
+            this.Styles = styles;
         }
 
         public string Name
@@ -32,16 +32,16 @@ namespace DocSystEntities.StyleStructure
             }
         }
 
-        public Style Style
+        public IList<Style> Styles
         {
             get
             {
-                return style;
+                return styles;
             }
 
             set
             {
-                style = value;
+                styles = value;
             }
         }
     }
