@@ -148,10 +148,12 @@ namespace DocSystTest.ApiTest
         [TestMethod]
         public void IntegrationTest_ExpectedParameters_Ok()
         {
+            var requestMessage = new HttpRequestMessage();
             IUserDataAccess da = new UserDataAccess();
             IUserBusinessLogic userBL = new UserBusinessLogic(new UserDataAccess());
             IAuthorizationBusinessLogic auth = new AuthorizationBusinessLogic(da);
             UserController userC = new UserController(userBL, auth);
+            userC.Request = requestMessage;
             UserModel user2 = UserModel.ToModel(Utils.CreateUserForTest());
             userC.Post(userModel);
             userC.Post(user2);
