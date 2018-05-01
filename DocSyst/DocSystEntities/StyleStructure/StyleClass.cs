@@ -11,6 +11,7 @@ namespace DocSystEntities.StyleStructure
         private Guid id;
         private string name;
         private IList<Style> styles;
+        private StyleClass inheritedStyleClass;
 
         public StyleClass() { }
 
@@ -19,6 +20,22 @@ namespace DocSystEntities.StyleStructure
             this.Id = Guid.NewGuid();
             this.Name = name;
             this.Styles = styles;
+        }
+
+        public StyleClass(string name, IList<Style> styles, StyleClass inherited)
+        {
+            this.Id = Guid.NewGuid();
+            this.Name = name;
+            this.Styles = styles;
+            this.inheritedStyleClass = inherited;
+        }
+
+        public StyleClass(string name, StyleClass inherited)
+        {
+            this.Id = Guid.NewGuid();
+            this.Name = name;
+            this.Styles = styles;
+            this.inheritedStyleClass = inherited;
         }
 
         public Guid Id
@@ -57,6 +74,19 @@ namespace DocSystEntities.StyleStructure
             set
             {
                 styles = value;
+            }
+        }
+
+        public StyleClass InheritedStyleClass
+        {
+            get
+            {
+                return inheritedStyleClass;
+            }
+
+            set
+            {
+                inheritedStyleClass = value;
             }
         }
 

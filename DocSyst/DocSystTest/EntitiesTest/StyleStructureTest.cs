@@ -103,5 +103,22 @@ namespace DocSystTest.EntitiesTest.StyleStructure
             styleClass.RemoveStyle(style);
             Assert.IsTrue(styleClass.Styles.Count == originalCount);
         }
+
+        [TestMethod]
+        public void CreateSpecificStyle_WithParameters2_Ok()
+        {
+            IList<Style> styleList = new List<Style>();
+            StyleClass inheritedStyleClass = CreateStyleClassForTest();
+
+            StyleClass styleClass = new StyleClass("name", styleList, inheritedStyleClass);
+        }
+
+        [TestMethod]
+        public void CreateSpecificStyle_WithParameters3_Ok()
+        {
+            StyleClass inheritedStyleClass = CreateStyleClassForTest();
+
+            StyleClass styleClass = new StyleClass("name", inheritedStyleClass);
+        }
     }
 }
