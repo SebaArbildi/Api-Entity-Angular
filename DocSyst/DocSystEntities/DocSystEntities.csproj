@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StyleStructure\SpecificStyle.cs" />
+    <Compile Include="StyleStructure\Style.cs" />
     <Compile Include="User\User.cs" />
   </ItemGroup>
   <ItemGroup>

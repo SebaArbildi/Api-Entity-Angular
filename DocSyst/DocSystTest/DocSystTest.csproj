@@ -101,7 +101,7 @@
     <Compile Include="BusinessLogicTest\LoginBusinessLogicTest.cs" />
     <Compile Include="BusinessLogicTest\UserBusinessLogicTest.cs" />
     <Compile Include="DataAccessTest\UserDataAccessTest.cs" />
-    <Compile Include="EntitiesTest\StyleStructure\SpecificStyleTest.cs" />
+    <Compile Include="EntitiesTest\StyleStructureTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="EntitiesTest\UserTest.cs" />
     <Compile Include="Utils.cs" />
