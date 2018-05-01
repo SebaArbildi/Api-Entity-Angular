@@ -8,6 +8,21 @@ namespace DocSystTest.EntitiesTest.StyleStructure
     [TestClass]
     public class StyleStructureTest
     {
+        private StyleClass CreateStyleClassForTest()
+        {
+            SpecificStyle specificStyle = new SpecificStyle("name", "<html><body>{0}</body></html>");
+            Style style = new Style("name", specificStyle);
+            IList<Style> styleList = new List<Style>();
+            styleList.Add(style);
+            return new StyleClass("name", styleList);
+        }
+
+        private Style CreateStyleForTest()
+        {
+            SpecificStyle specificStyle = new SpecificStyle("name", "<html><body>{0}</body></html>");
+            return new Style("name", specificStyle);
+        }
+
         [TestMethod]
         public void CreateSpecificStyle_WithoutParameters_Ok()
         {
@@ -49,5 +64,23 @@ namespace DocSystTest.EntitiesTest.StyleStructure
             StyleClass styleClass = new StyleClass("name", styleList);
         }
 
+        [TestMethod]
+        public void AddStyleToStyleClass_ExpectedParameters_Ok()
+        {
+            StyleClass styleClass = CreateStyleClassForTest();
+            Style style = CreateStyleForTest();
+            styleClass.AddStyle(style);
+            Assert.IsTrue(styleClass.Styles.Contains(style));
+        }
+
+        [TestMethod]
+        public void RemoveStyleFromStyleClass_ExpectedParameters_Ok()
+        {
+            StyleClass styleClass = CreateStyleClassForTest();
+            Style style = CreateStyleForTest();
+            styleClass.AddStyle(style);
+            styleClass.RemoveStyle(style);
+            Assert.IsFalse(styleClass.Styles.Contains(style));
+        }
     }
 }
