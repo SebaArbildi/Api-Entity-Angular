@@ -5,7 +5,7 @@ using DocSystEntities.StyleStructure;
 namespace DocSystTest.EntitiesTest.StyleStructure
 {
     [TestClass]
-    public class SpecificStyleTest
+    public class StyleStructureTest
     {
         [TestMethod]
         public void CreateSpecificStyle_WithoutParameters_Ok()
@@ -18,5 +18,19 @@ namespace DocSystTest.EntitiesTest.StyleStructure
         {
             SpecificStyle specificStyle = new SpecificStyle("name", "<html><body>{0}</body></html>");
         }
+
+        [TestMethod]
+        public void CreateStyle_WithoutParameters_Ok()
+        {
+            Style style = new Style();
+        }
+
+        [TestMethod]
+        public void CreateStyle_WithParameters_Ok()
+        {
+            SpecificStyle specificStyle = new SpecificStyle("name", "<html><body>{0}</body></html>");
+            Style style = new Style("name", specificStyle);
+        }
+
     }
 }
