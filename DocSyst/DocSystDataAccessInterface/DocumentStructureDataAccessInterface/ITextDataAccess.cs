@@ -11,6 +11,7 @@ namespace DocSystDataAccessInterface.DocumentStructureDataAccessInterface
     {
         void Add(Text aText);
         Text Get(Guid id);
+        List<Text> GetTextsInBody(Guid BodyId);
         void Delete(Guid id);
         void Modify(Text aText);
         IList<Text> Get();

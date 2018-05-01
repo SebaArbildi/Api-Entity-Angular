@@ -91,7 +91,10 @@ namespace DocSystDataAccessImplementation.DocumentStructureDataAccessImplementat
                 Document actualDocument = context.Documents.Include(documenthDb => documenthDb.DocumentParts)
                                             .Include(documenthDb => documenthDb.DocumentParts.Select(bodyDb => bodyDb.Texts))
                                             .FirstOrDefault(documenthDb => documenthDb.Id == aDocument.Id);
+
                 context.Entry(actualDocument).CurrentValues.SetValues(aDocument);
+                actualDocument.DocumentParts = aDocument.DocumentParts;
+
                 context.SaveChanges();
             }
         }

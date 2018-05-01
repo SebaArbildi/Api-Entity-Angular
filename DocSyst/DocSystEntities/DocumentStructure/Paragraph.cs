@@ -36,11 +36,6 @@ namespace DocSystEntities.DocumentStructure
             return Texts.Find(x => x.Id == textId);
         }
 
-        public void ClearText()
-        {
-            Texts.Clear();
-        }
-
         public Text GetTextAt(int position)
         {
             return Texts[position];
@@ -48,14 +43,14 @@ namespace DocSystEntities.DocumentStructure
 
         public void PutTextAtLast(Text aText)
         {
-            aText.FatherBody = this;
+            //aText.FatherBody = this;
             aText.BodyId = this.Id;
             Texts.Add(aText);
         }
 
         public void PutTextAt(int position, Text aText)
         {
-            aText.FatherBody = this;
+            //aText.FatherBody = this;
             aText.BodyId = this.Id;
             Texts.Insert(position, aText);
         }

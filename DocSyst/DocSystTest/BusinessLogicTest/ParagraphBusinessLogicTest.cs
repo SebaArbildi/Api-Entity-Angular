@@ -158,7 +158,7 @@ namespace DocSystTest.BusinessLogicTest
                 new Paragraph()
                 {
                     Id = paragraph.Id,
-                    Texts = new List<Text>() { text }
+                    Texts = new List<Text>()
                 });
 
             paragraphBusinessLogic.PutTextAtLast(paragraph.Id, text);
@@ -178,7 +178,7 @@ namespace DocSystTest.BusinessLogicTest
                 new Paragraph()
                 {
                     Id = paragraph.Id,
-                    Texts = new List<Text>() { text, otherText }
+                    Texts = new List<Text>()
                 });
 
             paragraphBusinessLogic.PutTextAtLast(paragraph.Id,text);
@@ -195,50 +195,74 @@ namespace DocSystTest.BusinessLogicTest
         [ExpectedException(typeof(DuplicateWaitObjectException))]
         public void PutTextAtLast_TextAlreadyExists_DuplicateException()
         {
-            paragraphBusinessLogic.PutTextAtLast(paragraph.Id, text);
+            mockParagraphDataAccess.Setup(b1 => b1.Exists(paragraph.Id)).Returns(true);
+            mockParagraphDataAccess.Setup(b1 => b1.Get(paragraph.Id)).Returns(
+                new Paragraph()
+                {
+                    Id = paragraph.Id,
+                    Texts = new List<Text>() { text }
+                });
+
             paragraphBusinessLogic.PutTextAtLast(paragraph.Id, text);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void PutTextAtLast_TextNull_ArgumentNullException()
+        [ExpectedException(typeof(NullReferenceException))]
+        public void PutTextAtLast_TextNull_NullReferenceException()
         {
+            mockParagraphDataAccess.Setup(b1 => b1.Exists(paragraph.Id)).Returns(true);
+            mockParagraphDataAccess.Setup(b1 => b1.Get(paragraph.Id)).Returns(
+                new Paragraph()
+                {
+                    Id = paragraph.Id,
+                    Texts = new List<Text>()
+                });
+
             paragraphBusinessLogic.PutTextAtLast(paragraph.Id, null);
         }
 
         [TestMethod]
         public void PutTextAtPos_ExpectedParameters_Ok()
         {
-            Text otherText = new Text();
-
             mockParagraphDataAccess.Setup(b1 => b1.Exists(paragraph.Id)).Returns(true);
             mockParagraphDataAccess.Setup(b1 => b1.Modify(paragraph)).Verifiable();
             mockParagraphDataAccess.Setup(b1 => b1.Get(paragraph.Id)).Returns(
                 new Paragraph()
                 {
                     Id = paragraph.Id,
-                    Texts = new List<Text>() { text, otherText }
+                    Texts = new List<Text>()
                 });
 
             paragraphBusinessLogic.PutTextAt(paragraph.Id, text, 0);
-
-            Text textObtained = paragraphBusinessLogic.GetText(paragraph.Id, text.Id);
-
-            Assert.AreEqual(textObtained, text);
         }
 
         [TestMethod]
         [ExpectedException(typeof(DuplicateWaitObjectException))]
         public void PutTextAtPos_TextAlreadyExists_DuplicateException()
         {
+            mockParagraphDataAccess.Setup(b1 => b1.Exists(paragraph.Id)).Returns(true);
+            mockParagraphDataAccess.Setup(b1 => b1.Get(paragraph.Id)).Returns(
+                new Paragraph()
+                {
+                    Id = paragraph.Id,
+                    Texts = new List<Text>() { text }
+                });
+
             paragraphBusinessLogic.PutTextAt(paragraph.Id, text, 0);
-            paragraphBusinessLogic.PutTextAt(paragraph.Id, text, 1);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof(NullReferenceException))]
         public void PutTextAtPos_TextNull_ArgumentNullException()
         {
+            mockParagraphDataAccess.Setup(b1 => b1.Exists(paragraph.Id)).Returns(true);
+            mockParagraphDataAccess.Setup(b1 => b1.Get(paragraph.Id)).Returns(
+                new Paragraph()
+                {
+                    Id = paragraph.Id,
+                    Texts = new List<Text>() { text }
+                });
+
             paragraphBusinessLogic.PutTextAt(paragraph.Id, null, 0);
         }
 
@@ -268,6 +292,13 @@ namespace DocSystTest.BusinessLogicTest
         {
             Paragraph aSecondParagraph = Utils.CreateParagraphForTest();
             aSecondParagraph.Id = paragraph.Id;
+
+            mockParagraphDataAccess.Setup(b1 => b1.Exists(paragraph.Id)).Returns(true);
+            mockParagraphDataAccess.Setup(b1 => b1.Exists(aSecondParagraph.Id)).Returns(true);
+            mockParagraphDataAccess.Setup(b1 => b1.Get(paragraph.Id)).Returns(new Paragraph()
+            {
+                Id = paragraph.Id
+            });
 
             paragraphBusinessLogic.AreEqual(paragraph.Id, aSecondParagraph.Id);
         }

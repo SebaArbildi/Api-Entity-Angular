@@ -10,6 +10,7 @@ C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystDataAccessInterface\bi
 C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystDataAccessInterface\obj\Debug\DocSystDataAccessInterface.csprojResolveAssemblyReference.cache
 C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystDataAccessInterface\obj\Debug\DocSystDataAccessInterface.dll
 C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystDataAccessInterface\obj\Debug\DocSystDataAccessInterface.pdb
+C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystDataAccessInterface\obj\Debug\DocSystDataAccessInterface.csproj.CoreCompileInputs.cache
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystDataAccessInterface\bin\Debug\DocSystDataAccessInterface.dll.config
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystDataAccessInterface\bin\Debug\DocSystDataAccessInterface.dll
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystDataAccessInterface\bin\Debug\DocSystDataAccessInterface.pdb
@@ -23,7 +24,6 @@ C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystDataAccessInterface
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystDataAccessInterface\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystDataAccessInterface\bin\Debug\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystDataAccessInterface\obj\Debug\DocSystDataAccessInterface.csprojResolveAssemblyReference.cache
-C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystDataAccessInterface\obj\Debug\DocSystDataAccessInterface.csproj.CoreCompileInputs.cache
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystDataAccessInterface\obj\Debug\DocSystDataAccessInterface.csproj.CopyComplete
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystDataAccessInterface\obj\Debug\DocSystDataAccessInterface.dll
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystDataAccessInterface\obj\Debug\DocSystDataAccessInterface.pdb

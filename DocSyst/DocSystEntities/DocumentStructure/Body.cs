@@ -12,9 +12,9 @@ namespace DocSystEntities.DocumentStructure
         public string OwnStyleClass { get; set; }
         public List<Text> Texts { get; set; }
         public MarginAlign? Align { get; set; }
-        [ForeignKey("FatherDocument")]
+        //[ForeignKey("FatherDocument")]
         public Guid? DocumentId { get; set; }
-        public Document FatherDocument { get; set; }
+        //public Document FatherDocument { get; set; }
 
         protected Body()
         {
@@ -73,6 +73,11 @@ namespace DocSystEntities.DocumentStructure
         public override bool Equals(object obj)
         {
             return Id == ((Body)obj).Id;
+        }
+
+        public void ClearText()
+        {
+            Texts.Clear();
         }
     }
 }

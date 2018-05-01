@@ -5,6 +5,8 @@ C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystBusinessLogicInterface
 C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystBusinessLogicInterface\obj\Debug\DocSystBusinessLogicInterface.csprojResolveAssemblyReference.cache
 C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystBusinessLogicInterface\obj\Debug\DocSystBusinessLogicInterface.dll
 C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystBusinessLogicInterface\obj\Debug\DocSystBusinessLogicInterface.pdb
+C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystBusinessLogicInterface\obj\Debug\DocSystBusinessLogicInterface.csprojResolveAssemblyReference.cache
+C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystBusinessLogicInterface\obj\Debug\DocSystBusinessLogicInterface.csproj.CoreCompileInputs.cache
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystBusinessLogicInterface\bin\Debug\DocSystBusinessLogicInterface.dll
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystBusinessLogicInterface\bin\Debug\DocSystBusinessLogicInterface.pdb
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystBusinessLogicInterface\bin\Debug\DocSystEntities.dll
@@ -12,8 +14,6 @@ C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystBusinessLogicInterf
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystBusinessLogicInterface\bin\Debug\DocSystEntities.pdb
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystBusinessLogicInterface\bin\Debug\DocSystEntities.dll.config
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystBusinessLogicInterface\bin\Debug\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystBusinessLogicInterface\obj\Debug\DocSystBusinessLogicInterface.csprojResolveAssemblyReference.cache
-C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystBusinessLogicInterface\obj\Debug\DocSystBusinessLogicInterface.csproj.CoreCompileInputs.cache
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystBusinessLogicInterface\obj\Debug\DocSystBusinessLogicInterface.csproj.CopyComplete
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystBusinessLogicInterface\obj\Debug\DocSystBusinessLogicInterface.dll
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystBusinessLogicInterface\obj\Debug\DocSystBusinessLogicInterface.pdb

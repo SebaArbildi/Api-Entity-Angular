@@ -183,7 +183,7 @@ namespace DocSystTest.BusinessLogicTest
         [ExpectedException(typeof(Exception))]
         public void GetDocumentPart_DataAccessThrowException_ExceptionCatched()
         {
-            mockDocumentDataAccess.Setup(b1 => b1.Exists(document.Id)).Returns(false);
+            mockDocumentDataAccess.Setup(b1 => b1.Exists(document.Id)).Returns(true);
             mockDocumentDataAccess.Setup(b1 => b1.Get(document.Id)).Throws(new Exception());
 
             documentBusinessLogic.GetDocumentPart(document.Id, MarginAlign.PARAGRAPH);
@@ -195,22 +195,23 @@ namespace DocSystTest.BusinessLogicTest
         {
             mockDocumentDataAccess.Setup(b1 => b1.Exists(document.Id)).Returns(false);
 
-            document.SetDocumentPart(MarginAlign.PARAGRAPH, paragraph);
+            documentBusinessLogic.SetDocumentPart(document.Id, MarginAlign.PARAGRAPH, paragraph);
         }
 
         [TestMethod]
         [ExpectedException(typeof(Exception))]
         public void SetDocumentPart_DataAccessThrowException_ExceptionCatched()
         {
-            mockDocumentDataAccess.Setup(b1 => b1.Exists(document.Id)).Returns(false);
+            mockDocumentDataAccess.Setup(b1 => b1.Exists(document.Id)).Returns(true);
             mockDocumentDataAccess.Setup(b1 => b1.Get(document.Id)).Throws(new Exception());
 
-            document.SetDocumentPart(MarginAlign.PARAGRAPH, paragraph);
+            documentBusinessLogic.SetDocumentPart(document.Id, MarginAlign.PARAGRAPH, paragraph);
         }
 
         [TestMethod]
         public void ExistDocumentPart_ExpectedParameters_True()
         {
+            mockDocumentDataAccess.Setup(b1 => b1.Exists(document.Id)).Returns(true);
             mockDocumentDataAccess.Setup(b1 => b1.Get(document.Id)).Returns(
                 new Document()
                 {
@@ -225,6 +226,7 @@ namespace DocSystTest.BusinessLogicTest
         [TestMethod]
         public void ExistDocumentPart_ExpectedParameters_False()
         {
+            mockDocumentDataAccess.Setup(b1 => b1.Exists(document.Id)).Returns(true);
             mockDocumentDataAccess.Setup(b1 => b1.Get(document.Id)).Returns(
                 new Document()
                 {
@@ -232,7 +234,7 @@ namespace DocSystTest.BusinessLogicTest
                     DocumentParts = new List<Body>()
                 });
 
-            Assert.IsTrue(documentBusinessLogic.ExistDocumentPart(document.Id, MarginAlign.PARAGRAPH));
+            Assert.IsFalse(documentBusinessLogic.ExistDocumentPart(document.Id, MarginAlign.PARAGRAPH));
         }
 
         [TestMethod]
@@ -248,9 +250,31 @@ namespace DocSystTest.BusinessLogicTest
         [ExpectedException(typeof(Exception))]
         public void ExistDocumentPart_ThrowsException_ExceptionCatched()
         {
+            mockDocumentDataAccess.Setup(b1 => b1.Exists(document.Id)).Returns(true);
             mockDocumentDataAccess.Setup(b1 => b1.Get(document.Id)).Throws(new Exception());
 
             documentBusinessLogic.ExistDocumentPart(document.Id, MarginAlign.PARAGRAPH);
+        }
+
+        [TestMethod]
+        public void IntegrationTest_ExpectedParameters_Ok()
+        {
+            DocumentDataAccess documentDA = new DocumentDataAccess();
+            DocumentBusinessLogic documentBL = new DocumentBusinessLogic(documentDA);
+            Document document1 = Utils.CreateDocumentForTest();
+            Document document2 = Utils.CreateDocumentForTest();
+            documentBL.AddDocument(document1);
+            documentBL.AddDocument(document2);
+
+            document2.SetDocumentPart(MarginAlign.PARAGRAPH, paragraph);
+            documentBL.ModifyDocument(document2);
+
+            documentBL.DeleteDocument(document1.Id);
+
+            Document document2Obtained = documentBL.GetDocument(document2.Id);
+            IList<Document> documentsObtained = documentBL.GetDocuments();
+
+            Assert.IsTrue(!documentsObtained.Contains(document1) && documentsObtained.Contains(document2Obtained));
         }
     }
 }

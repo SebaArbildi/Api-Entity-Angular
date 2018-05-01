@@ -82,6 +82,19 @@ namespace DocSystTest.DocumentStructureDataAccessTest
         }
 
         [TestMethod]
+        public void ModifyMarginFromDb_ExpectedParametersModifyObject_Ok()
+        {
+            marginDataAccess.Add(margin);
+            margin.SetText(aText);
+
+            marginDataAccess.Modify(margin);
+
+            Margin obtained = marginDataAccess.Get(margin.Id);
+
+            Assert.AreEqual(aText, obtained.GetText());
+        }
+
+        [TestMethod]
         public void GetAllMarginsFromDb_ExpectedParameters_Ok()
         {
             marginDataAccess.Add(margin);

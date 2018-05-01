@@ -1,3 +1,5 @@
+C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystWebApi\obj\Debug\DocSystWebApi.csprojResolveAssemblyReference.cache
+C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystWebApi\obj\Debug\DocSystWebApi.csproj.CoreCompileInputs.cache
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystWebApi\bin\ApplicationInsights.config
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystWebApi\bin\DocSystWebApi.dll.config
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystWebApi\bin\DocSystWebApi.dll
@@ -77,8 +79,6 @@ C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystWebApi\bin\Unity.In
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystWebApi\bin\Unity.Interception.Configuration.pdb
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystWebApi\bin\Unity.RegistrationByConvention.pdb
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystWebApi\bin\Unity.ServiceLocation.pdb
-C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystWebApi\obj\Debug\DocSystWebApi.csprojResolveAssemblyReference.cache
-C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystWebApi\obj\Debug\DocSystWebApi.csproj.CoreCompileInputs.cache
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystWebApi\obj\Debug\DocSystWebApi.csproj.CopyComplete
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystWebApi\obj\Debug\DocSystWebApi.dll
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystWebApi\obj\Debug\DocSystWebApi.pdb

@@ -27,7 +27,7 @@ namespace DocSystEntities.DocumentStructure
 
         public void SetText(Text aText)
         {
-            aText.FatherBody = this;
+            //aText.FatherBody = this;
             aText.BodyId = this.Id;
             Texts.Add(aText);
         }
@@ -35,11 +35,6 @@ namespace DocSystEntities.DocumentStructure
         public Text GetText()
         {
             return Texts[0];
-        }
-
-        public void ClearText()
-        {
-            Texts.Clear();
         }
 
         public override bool Equals(object obj)

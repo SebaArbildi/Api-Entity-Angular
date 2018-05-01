@@ -82,6 +82,19 @@ namespace DocSystTest.DocumentStructureDataAccessTest
         }
 
         [TestMethod]
+        public void ModifyParagraphFromDb_ExpectedParametersModifyObject_Ok()
+        {
+            paragraphDataAccess.Add(paragraph);
+            paragraph.PutTextAtLast(aText);
+
+            paragraphDataAccess.Modify(paragraph);
+
+            Paragraph obtained = paragraphDataAccess.Get(paragraph.Id);
+
+            Assert.AreEqual(aText, obtained.GetText(aText.Id));
+        }
+
+        [TestMethod]
         public void GetAllParagraphsFromDb_ExpectedParameters_Ok()
         {
             paragraphDataAccess.Add(paragraph);

@@ -56,7 +56,7 @@ namespace DocSystTest.DocumentStructureDataAccessTest
         }
 
         [TestMethod]
-        public void DeleteMarginFromDb_ExpectedParametersAndTextToDelete_Ok()
+        public void DeleteDocumentFromDb_ExpectedParametersAndParagraphToDelete_Ok()
         {
             document.SetDocumentPart(aDocumentPart.Align,aDocumentPart);
             documentDataAccess.Add(document);
@@ -79,6 +79,24 @@ namespace DocSystTest.DocumentStructureDataAccessTest
 
             Document obtained = documentDataAccess.Get(document.Id);
             Assert.AreEqual(document, obtained);
+        }
+
+        [TestMethod]
+        public void ModifyDocumentFromDb_ExpectedParametersModifyObject_Ok()
+        {
+            documentDataAccess.Add(document);
+            Text aText = new Text();
+            aDocumentPart.PutTextAtLast(aText);
+
+            document.SetDocumentPart(MarginAlign.PARAGRAPH, aDocumentPart);
+
+            documentDataAccess.Modify(document);
+
+            Document obtained = documentDataAccess.Get(document.Id);
+
+            Assert.AreEqual(aDocumentPart, obtained.GetDocumentPart(MarginAlign.PARAGRAPH));
+            Assert.AreEqual(aDocumentPart.GetText(aText.Id)
+                ,((Paragraph)(obtained.GetDocumentPart(MarginAlign.PARAGRAPH))).GetText(aText.Id));
         }
 
         [TestMethod]

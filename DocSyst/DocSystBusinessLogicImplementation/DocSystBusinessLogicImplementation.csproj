@@ -49,7 +49,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DependencyResolverBusinessLogic.cs" />
-    <Compile Include="DocumentStructureLogicImplementation\BodyBusinessLogic.cs" />
     <Compile Include="DocumentStructureLogicImplementation\DocumentBusinessLogic.cs" />
     <Compile Include="DocumentStructureLogicImplementation\MarginBussinesLogic.cs" />
     <Compile Include="DocumentStructureLogicImplementation\ParagraphBusinessLogic.cs" />

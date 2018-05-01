@@ -88,7 +88,7 @@ namespace DocSystEntities.DocumentStructure
                 DocumentParts.Remove(DocumentParts.Find(x => x.Align == align));
             }
 
-            aDocumentPart.FatherDocument = this;
+            //aDocumentPart.FatherDocument = this;
             aDocumentPart.DocumentId = this.Id;
             DocumentParts.Add(aDocumentPart);
         }

@@ -19,67 +19,204 @@ namespace DocSystBusinessLogicImplementation.DocumentStructureLogicImplementatio
 
         public ParagraphBusinessLogic(IParagraphDataAccess aParagraphDataAccess)
         {
-
+            paragraphDataAccess = aParagraphDataAccess;
         }
 
         public void AddParagraph(Paragraph newParagraph)
         {
-            throw new NotImplementedException();
+            if (paragraphDataAccess.Exists(newParagraph.Id))
+            {
+                throw new DuplicateWaitObjectException("newParagraph.Id"
+                    , "The Paragraph you want to enter already exists in the database.");
+            }
+
+            paragraphDataAccess.Add(newParagraph);
         }
 
         public bool AreEqual(Guid firstParagraphId, Guid secondParagraphId)
         {
-            throw new NotImplementedException();
+            if (!paragraphDataAccess.Exists(firstParagraphId))
+            {
+                throw new ArgumentException("The first paragraph argument not exist in database."
+                    , "firstParagraphId");
+            }
+            if (!paragraphDataAccess.Exists(secondParagraphId))
+            {
+                throw new ArgumentException("The second paragraph argument not exist in database."
+                    , "secondParagraphId");
+            }
+
+            Paragraph firstParagraph = paragraphDataAccess.Get(firstParagraphId);
+            Paragraph secondParagraph = paragraphDataAccess.Get(secondParagraphId);
+
+            return firstParagraph.Equals(secondParagraph);
+        }
+
+        public void ClearText(Guid aParagraphId)
+        {
+            if (!paragraphDataAccess.Exists(aParagraphId))
+            {
+                throw new ArgumentException("The paragraph argument not exist in database."
+                    , "aParagraphId");
+            }
+
+            paragraphDataAccess.ClearText(aParagraphId);
         }
 
         public void DeleteParagraph(Guid aParagraphId)
         {
-            throw new NotImplementedException();
+            if (!paragraphDataAccess.Exists(aParagraphId))
+            {
+                throw new ArgumentException("The paragraph argument not exist in database."
+                    , "aParagraphId");
+            }
+
+            paragraphDataAccess.Delete(aParagraphId);
+        }
+
+        public bool Exist(Guid aParagraphId)
+        {
+            return paragraphDataAccess.Exists(aParagraphId);
         }
 
         public Paragraph GetParagraph(Guid aParagraphId)
         {
-            throw new NotImplementedException();
+            if (!paragraphDataAccess.Exists(aParagraphId))
+            {
+                throw new ArgumentException("The paragraph argument not exist in database."
+                    , "aParagraphId");
+            }
+
+            return paragraphDataAccess.Get(aParagraphId);
         }
 
         public IList<Paragraph> GetParagraphs()
         {
-            throw new NotImplementedException();
+            return paragraphDataAccess.Get();
         }
 
         public Text GetText(Guid aParagraphId, Guid aTextId)
         {
-            throw new NotImplementedException();
+            if (!paragraphDataAccess.Exists(aParagraphId))
+            {
+                throw new ArgumentException("The paragraph argument not exist in database."
+                    , "aParagraphId");
+            }
+
+            Paragraph paragraph = paragraphDataAccess.Get(aParagraphId);
+
+            if (!paragraph.ExistText(aTextId))
+            {
+                throw new ArgumentException("The text argument not exist in the actual paragraph."
+                    , "aTextId");
+            }
+
+            return paragraph.GetText(aTextId);
         }
 
         public Text GetTextAt(Guid aParagraphId, int position)
         {
-            throw new NotImplementedException();
+            if (!paragraphDataAccess.Exists(aParagraphId))
+            {
+                throw new ArgumentException("The paragraph argument not exist in database."
+                    , "aParagraphId");
+            }
+
+            Paragraph paragraph = paragraphDataAccess.Get(aParagraphId);
+
+            return paragraph.GetTextAt(position);
+        }
+
+        public List<Text> GetTextsInParagraph(Guid aParagraphId)
+        {
+            if (!paragraphDataAccess.Exists(aParagraphId))
+            {
+                throw new ArgumentException("The paragraph argument not exist in database."
+                    , "aParagraphId");
+            }
+
+            Paragraph paragraph = paragraphDataAccess.Get(aParagraphId);
+
+            if (!paragraph.HasText())
+            {
+                throw new ArgumentException("The text list are empty in actual paragraph.");
+            }
+
+            return paragraph.Texts;
         }
 
         public void ModifyParagraph(Paragraph newParagraph)
         {
-            throw new NotImplementedException();
+            if (!paragraphDataAccess.Exists(newParagraph.Id))
+            {
+                throw new ArgumentException("The paragraph argument not exist in database."
+                    , "newParagraph.Id");
+            }
+
+            paragraphDataAccess.Modify(newParagraph);
         }
 
         public void MoveTextTo(Guid aParagraphId, Guid textId, int newPosition)
         {
-            throw new NotImplementedException();
+            if (!paragraphDataAccess.Exists(aParagraphId))
+            {
+                throw new ArgumentException("The paragraph argument not exist in database."
+                    , "aParagraphId");
+            }
+
+            Paragraph paragraph = paragraphDataAccess.Get(aParagraphId);
+
+            if (!paragraph.ExistText(textId))
+            {
+                throw new ArgumentException("The text argument not exist in the actual paragraph."
+                    , "textId");
+            }
+
+            paragraph.MoveTextTo(newPosition, textId);
+
+            paragraphDataAccess.Modify(paragraph);
         }
 
         public void PutTextAt(Guid aParagraphId, Text aText, int position)
         {
-            throw new NotImplementedException();
-        }
+            if (!paragraphDataAccess.Exists(aParagraphId))
+            {
+                throw new ArgumentException("The paragraph argument not exist in database."
+                    , "aParagraphId");
+            }
 
-        public void PutTextAtLast(Text aText)
-        {
-            throw new NotImplementedException();
+            Paragraph paragraph = paragraphDataAccess.Get(aParagraphId);
+
+            if (paragraph.ExistText(aText.Id))
+            {
+                throw new DuplicateWaitObjectException("aText"
+                    , "The Text you want to enter already exists in the current Paragraph.");
+            }
+
+            paragraph.PutTextAt(position,aText);
+
+            paragraphDataAccess.Modify(paragraph);
         }
 
         public void PutTextAtLast(Guid aParagraphId, Text aText)
         {
-            throw new NotImplementedException();
+            if (!paragraphDataAccess.Exists(aParagraphId))
+            {
+                throw new ArgumentException("The paragraph argument not exist in database."
+                    , "aParagraphId");
+            }
+
+            Paragraph paragraph = paragraphDataAccess.Get(aParagraphId);
+
+            if (paragraph.ExistText(aText.Id))
+            {
+                throw new DuplicateWaitObjectException("aText"
+                    , "The Text you want to enter already exists in the current Paragraph.");
+            }
+
+            paragraph.PutTextAtLast(aText);
+
+            paragraphDataAccess.Modify(paragraph);
         }
     }
 }

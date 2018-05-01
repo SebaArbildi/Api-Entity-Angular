@@ -31,14 +31,13 @@ namespace DocSystDataAccessImplementation.DocumentStructureDataAccessImplementat
 
             using (DocSystDbContext context = new DocSystDbContext())
             {
+                context.Margins.Attach(margin);
 
                 foreach (Text aText in margin.Texts)
                 {
                     context.Texts.Attach(aText);
-                    //context.Texts.Remove(aText);
                 }
 
-                context.Margins.Attach(margin);
                 context.Margins.Remove(margin);
                 context.SaveChanges();
             }
@@ -81,7 +80,10 @@ namespace DocSystDataAccessImplementation.DocumentStructureDataAccessImplementat
             {
                 Margin actualMargin = context.Margins.Include(marginhDb => marginhDb.Texts)
                                               .FirstOrDefault(marginhDb => marginhDb.Id == aMargin.Id);
+
                 context.Entry(actualMargin).CurrentValues.SetValues(aMargin);
+                actualMargin.Texts = aMargin.Texts;
+
                 context.SaveChanges();
             }
         }

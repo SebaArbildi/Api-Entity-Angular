@@ -15,5 +15,6 @@ namespace DocSystBusinessLogicInterface.DocumentStructureLogicInterface
         Text GetText(Guid aMarginId);
         void ClearText(Guid aMarginId);
         bool AreEqual(Guid firstMarginId, Guid secondMarginId);
+        bool Exist(Guid aMarginId);
     }
 }

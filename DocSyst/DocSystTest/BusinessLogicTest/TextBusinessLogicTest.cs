@@ -43,6 +43,7 @@ namespace DocSystTest.BusinessLogicTest
         public void CreateTextBL_WithParameters_Ok()
         {
             ITextDataAccess textDataAccess = new TextDataAccess();
+            IBodyDataAccess bodyDataAccess = new BodyDataAccess();
 
             ITextBusinessLogic textBL = new TextBusinessLogic(textDataAccess);
 
@@ -154,8 +155,41 @@ namespace DocSystTest.BusinessLogicTest
         public void AreEqual_ExpectedParameters_Ok()
         {
             Text aSecondText = Utils.CreateTextForTest();
+            aSecondText.Id = text.Id;
+            mockTextDataAccess.Setup(b1 => b1.Exists(text.Id)).Returns(true);
+            mockTextDataAccess.Setup(b1 => b1.Exists(aSecondText.Id)).Returns(true);
+            mockTextDataAccess.Setup(b1 => b1.Get(text.Id)).Returns(new Text()
+            {
+                Id = text.Id
+            });
 
             textBusinessLogic.AreEqual(text.Id,aSecondText.Id);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void AreEqual_FirstTextNotExist_ArgumentException()
+        {
+            Text aSecondText = Utils.CreateTextForTest();
+            mockTextDataAccess.Setup(b1 => b1.Exists(text.Id)).Returns(false);
+            mockTextDataAccess.Setup(b1 => b1.Exists(aSecondText.Id)).Returns(true);
+            mockTextDataAccess.Setup(b1 => b1.Get(text.Id)).Returns(new Text()
+            {
+                Id = text.Id
+            });
+
+            textBusinessLogic.AreEqual(text.Id, aSecondText.Id);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void AreEqual_SecondTextNotExist_ArgumentException()
+        {
+            Text aSecondText = Utils.CreateTextForTest();
+            mockTextDataAccess.Setup(b1 => b1.Exists(text.Id)).Returns(true);
+            mockTextDataAccess.Setup(b1 => b1.Exists(aSecondText.Id)).Returns(false);
+
+            textBusinessLogic.AreEqual(text.Id, aSecondText.Id);
         }
 
         [TestMethod]
@@ -178,9 +212,32 @@ namespace DocSystTest.BusinessLogicTest
         }
 
         [TestMethod]
+        public void IsEmpty_ExpectedParameters_Ok()
+        {
+            mockTextDataAccess.Setup(b1 => b1.Exists(text.Id)).Returns(true);
+            mockTextDataAccess.Setup(b1 => b1.Get(text.Id)).Returns(new Text()
+            {
+                Id = text.Id,
+                TextContent = ""
+            });
+
+            Assert.IsTrue(textBusinessLogic.IsEmpty(text.Id));
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void IsEmpty_TextNotExist_ArgumentException()
+        {
+            mockTextDataAccess.Setup(b1 => b1.Exists(text.Id)).Returns(false);
+
+            textBusinessLogic.IsEmpty(text.Id);
+        }
+
+        [TestMethod]
         public void IntegrationTest_ExpectedParameters_Ok()
         {
             TextDataAccess textDA = new TextDataAccess();
+            BodyDataAccess bodyDA = new BodyDataAccess();
             TextBusinessLogic textBL = new TextBusinessLogic(textDA);
             Text text1 = Utils.CreateTextForTest();
             Text text2 = Utils.CreateTextForTest();

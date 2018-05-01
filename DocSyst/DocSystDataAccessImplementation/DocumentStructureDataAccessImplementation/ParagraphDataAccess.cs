@@ -74,7 +74,10 @@ namespace DocSystDataAccessImplementation.DocumentStructureDataAccessImplementat
             {
                 Paragraph actualParagraph = context.Paragraphs.Include(paragraphDb => paragraphDb.Texts)
                                               .FirstOrDefault(paragraphDb => paragraphDb.Id == aParagraph.Id);
+
                 context.Entry(actualParagraph).CurrentValues.SetValues(aParagraph);
+                actualParagraph.Texts = aParagraph.Texts;
+
                 context.SaveChanges();
             }
         }

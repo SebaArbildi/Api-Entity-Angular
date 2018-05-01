@@ -47,7 +47,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DocumentStructureLogicInterface\IBodyBusinessLogic.cs" />
     <Compile Include="DocumentStructureLogicInterface\IDocumentBusinessLogic.cs" />
     <Compile Include="DocumentStructureLogicInterface\IMarginBusinessLogic.cs" />
     <Compile Include="DocumentStructureLogicInterface\IParagraphBussinesLogic.cs" />

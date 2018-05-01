@@ -13,6 +13,8 @@ C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystBusinessLogicImplement
 C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystBusinessLogicImplementation\obj\Debug\DocSystBusinessLogicImplementation.csprojResolveAssemblyReference.cache
 C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystBusinessLogicImplementation\obj\Debug\DocSystBusinessLogicImplementation.dll
 C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystBusinessLogicImplementation\obj\Debug\DocSystBusinessLogicImplementation.pdb
+C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystBusinessLogicImplementation\obj\Debug\DocSystBusinessLogicImplementation.csprojResolveAssemblyReference.cache
+C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystBusinessLogicImplementation\obj\Debug\DocSystBusinessLogicImplementation.csproj.CoreCompileInputs.cache
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystBusinessLogicImplementation\bin\Debug\DocSystBusinessLogicImplementation.dll
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystBusinessLogicImplementation\bin\Debug\DocSystBusinessLogicImplementation.pdb
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystBusinessLogicImplementation\bin\Debug\DocSystBusinessLogicInterface.dll
@@ -29,8 +31,6 @@ C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystBusinessLogicImplem
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystBusinessLogicImplementation\bin\Debug\DocSystEntities.dll.config
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystBusinessLogicImplementation\bin\Debug\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystBusinessLogicImplementation\bin\Debug\Unity.Abstractions.pdb
-C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystBusinessLogicImplementation\obj\Debug\DocSystBusinessLogicImplementation.csprojResolveAssemblyReference.cache
-C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystBusinessLogicImplementation\obj\Debug\DocSystBusinessLogicImplementation.csproj.CoreCompileInputs.cache
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystBusinessLogicImplementation\obj\Debug\DocSystBusinessLogicImplementation.csproj.CopyComplete
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystBusinessLogicImplementation\obj\Debug\DocSystBusinessLogicImplementation.dll
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystBusinessLogicImplementation\obj\Debug\DocSystBusinessLogicImplementation.pdb

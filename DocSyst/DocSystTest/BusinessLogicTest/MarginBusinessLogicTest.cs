@@ -136,7 +136,7 @@ namespace DocSystTest.BusinessLogicTest
             marginBusinessLogic.ModifyMargin(margin);
 
             Assert.AreEqual(margin, marginBusinessLogic.GetMargin(margin.Id));
-            
+
         }
 
         [TestMethod]
@@ -170,9 +170,9 @@ namespace DocSystTest.BusinessLogicTest
         }
 
         [TestMethod]
-        public void GetTextAndSetText_ExpectedParameters_Ok()
+        public void GetText_ExpectedParameters_Ok()
         {
-            mockMarginDataAccess.Setup(b1 => b1.Exists(margin.Id)).Returns(true);   
+            mockMarginDataAccess.Setup(b1 => b1.Exists(margin.Id)).Returns(true);
             mockMarginDataAccess.Setup(b1 => b1.Modify(margin)).Verifiable();
             mockMarginDataAccess.Setup(b1 => b1.Get(margin.Id)).Returns(
                 new Margin()
@@ -181,25 +181,53 @@ namespace DocSystTest.BusinessLogicTest
                     Texts = new List<Text>() { text }
                 });
 
-            marginBusinessLogic.SetText(margin.Id, text);
-
             Text textObtained = marginBusinessLogic.GetText(margin.Id);
 
             Assert.AreEqual(textObtained, text);
+        }
+        
+        [TestMethod]
+        public void SetText_ExpetedParameters_Ok()
+        {
+            mockMarginDataAccess.Setup(b1 => b1.Exists(margin.Id)).Returns(true);
+            mockMarginDataAccess.Setup(b1 => b1.Modify(margin)).Verifiable();
+            mockMarginDataAccess.Setup(b1 => b1.Get(margin.Id)).Returns(
+                new Margin()
+                {
+                    Id = margin.Id,
+                    Texts = new List<Text>()
+                });
+
+            marginBusinessLogic.SetText(margin.Id, text);
         }
 
         [TestMethod]
         [ExpectedException(typeof(DuplicateWaitObjectException))]
         public void SetText_TextAlreadyExists_DuplicateException()
         {
-            mockMarginDataAccess.Setup(b1 => b1.Exists(margin.Id)).Returns(false);
+            mockMarginDataAccess.Setup(b1 => b1.Exists(margin.Id)).Returns(true);
+            mockMarginDataAccess.Setup(b1 => b1.Get(margin.Id)).Returns(
+                new Margin()
+                {
+                    Id = margin.Id,
+                    Texts = new List<Text>() { text }
+                });
+
             marginBusinessLogic.SetText(margin.Id, text);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void SetText_TextNull_ArgumentNullException()
+        [ExpectedException(typeof(NullReferenceException))]
+        public void SetText_TextNull_NullReferenceException()
         {
+            mockMarginDataAccess.Setup(b1 => b1.Exists(margin.Id)).Returns(true);
+            mockMarginDataAccess.Setup(b1 => b1.Get(margin.Id)).Returns(
+                new Margin()
+                {
+                    Id = margin.Id,
+                    Texts = new List<Text>()
+                });
+
             marginBusinessLogic.SetText(margin.Id, null);
         }
 
@@ -229,6 +257,13 @@ namespace DocSystTest.BusinessLogicTest
         {
             Margin aSecondMargin = Utils.CreateMarginForTest();
             aSecondMargin.Id = margin.Id;
+
+            mockMarginDataAccess.Setup(b1 => b1.Exists(margin.Id)).Returns(true);
+            mockMarginDataAccess.Setup(b1 => b1.Exists(aSecondMargin.Id)).Returns(true);
+            mockMarginDataAccess.Setup(b1 => b1.Get(margin.Id)).Returns(new Margin()
+            {
+                Id = margin.Id
+            });
 
             marginBusinessLogic.AreEqual(margin.Id, aSecondMargin.Id);
         }
