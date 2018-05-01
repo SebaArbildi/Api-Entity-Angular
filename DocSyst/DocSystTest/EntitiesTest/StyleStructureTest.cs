@@ -82,5 +82,26 @@ namespace DocSystTest.EntitiesTest.StyleStructure
             styleClass.RemoveStyle(style);
             Assert.IsFalse(styleClass.Styles.Contains(style));
         }
+
+        [TestMethod]
+        public void AddStyleToStyleClass_AlreadyExists_Ok()
+        {
+            StyleClass styleClass = CreateStyleClassForTest();
+            int originalCount = styleClass.Styles.Count;
+            Style style = CreateStyleForTest();
+            styleClass.AddStyle(style);
+            styleClass.AddStyle(style);
+            Assert.IsTrue(styleClass.Styles.Count == (originalCount + 1));
+        }
+
+        [TestMethod]
+        public void RemoveStyleFromStyleClass_NotExist_Ok()
+        {
+            StyleClass styleClass = CreateStyleClassForTest();
+            int originalCount = styleClass.Styles.Count;
+            Style style = CreateStyleForTest();
+            styleClass.RemoveStyle(style);
+            Assert.IsTrue(styleClass.Styles.Count == originalCount);
+        }
     }
 }

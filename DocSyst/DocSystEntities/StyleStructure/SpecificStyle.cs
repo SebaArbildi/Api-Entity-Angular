@@ -16,6 +16,7 @@ namespace DocSystEntities.StyleStructure
 
         public SpecificStyle(string name, string implementation)
         {
+            Id = Guid.NewGuid();
             this.Name = name;
             this.Implementation = implementation;
         }
@@ -58,9 +59,5 @@ namespace DocSystEntities.StyleStructure
                 implementation = value;
             }
         }
-
-        
-
-        
     }
 }

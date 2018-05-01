@@ -8,6 +8,7 @@ namespace DocSystEntities.StyleStructure
 {
     public class Style
     {
+        private Guid id;
         private string name;
         private SpecificStyle implementation;
 
@@ -15,6 +16,7 @@ namespace DocSystEntities.StyleStructure
 
         public Style(string name, SpecificStyle implementation)
         {
+            this.Id = Guid.NewGuid();
             this.Name = name;
             this.Implementation = implementation;
         }
@@ -42,6 +44,19 @@ namespace DocSystEntities.StyleStructure
             set
             {
                 implementation = value;
+            }
+        }
+
+        public Guid Id
+        {
+            get
+            {
+                return id;
+            }
+
+            set
+            {
+                id = value;
             }
         }
     }

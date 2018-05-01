@@ -8,6 +8,7 @@ namespace DocSystEntities.StyleStructure
 {
     public class StyleClass
     {
+        private Guid id;
         private string name;
         private IList<Style> styles;
 
@@ -15,8 +16,22 @@ namespace DocSystEntities.StyleStructure
 
         public StyleClass(string name, IList<Style> styles)
         {
+            this.Id = Guid.NewGuid();
             this.Name = name;
             this.Styles = styles;
+        }
+
+        public Guid Id
+        {
+            get
+            {
+                return id;
+            }
+
+            set
+            {
+                id = value;
+            }
         }
 
         public string Name
@@ -42,6 +57,22 @@ namespace DocSystEntities.StyleStructure
             set
             {
                 styles = value;
+            }
+        }
+
+        public void AddStyle(Style style)
+        {
+            if (!Styles.Contains(style))
+            {
+                Styles.Add(style);
+            }
+        }
+
+        public void RemoveStyle(Style style)
+        {
+            if (Styles.Contains(style))
+            {
+                Styles.Remove(style);
             }
         }
     }
