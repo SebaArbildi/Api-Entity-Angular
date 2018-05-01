@@ -32,5 +32,19 @@ namespace DocSystTest.EntitiesTest.StyleStructure
             Style style = new Style("name", specificStyle);
         }
 
+        [TestMethod]
+        public void CreateStyleClass_WithoutParameters_Ok()
+        {
+            StyleClass styleClass = new StyleClass();
+        }
+
+        [TestMethod]
+        public void CreateStyleClass_WithParameters_Ok()
+        {
+            SpecificStyle specificStyle = new SpecificStyle("name", "<html><body>{0}</body></html>");
+            Style style = new Style("name", specificStyle);
+            StyleClass styleClass = new StyleClass("name", style);
+        }
+
     }
 }
