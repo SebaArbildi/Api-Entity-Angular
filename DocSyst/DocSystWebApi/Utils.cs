@@ -7,31 +7,49 @@ using System.Web;
 
 namespace DocSystWebApi
 {
-    internal class Utils
+    internal static class Utils
     {
-        private IAuthorizationBusinessLogic AuthorizationBusinessLogic { get; set; }
 
-        internal Utils(IAuthorizationBusinessLogic authorizationBusinessLogic)
+        private static Guid GetToken(HttpRequestMessage request)
         {
-            AuthorizationBusinessLogic = authorizationBusinessLogic;
-        }
-        internal void ValidateToken(HttpRequestMessage request)
-        {
-            bool isAuthorized = false;
-            Guid token = Guid.Empty;
             var headers = request.Headers;
 
             if (headers.Contains("Token"))
             {
-                token = Guid.Parse(headers.GetValues("Token").First());
-                isAuthorized = AuthorizationBusinessLogic.IsAValidToken(token);
+                return Guid.Parse(headers.GetValues("Token").First());
             }
-
-            if (!isAuthorized)
+            else
             {
-                throw new ArgumentException("Token not valid");
+                throw new ArgumentNullException("request.Headers", "Doen't contains the token");
             }
+        }
 
+        internal static bool IsAValidToken(HttpRequestMessage request, IAuthorizationBusinessLogic authorizationBusinessLogic)
+        {
+            bool isAValidToken = false;
+            Guid token = GetToken(request);
+
+            if (authorizationBusinessLogic.IsAValidToken(token))
+            {
+                return true;
+            }
+            else
+            {
+                throw new UnauthorizedAccessException("Token is not valid.");
+            }
+        }
+
+        internal static bool HasAdminPermissions(HttpRequestMessage request, IAuthorizationBusinessLogic authorizationBusinessLogic)
+        {
+            Guid token = GetToken(request);
+            if (authorizationBusinessLogic.IsAdmin(token))
+            {
+                return true;
+            }
+            else
+            {
+                throw new UnauthorizedAccessException("User has not admin permissions");
+            }
         }
     }
 }

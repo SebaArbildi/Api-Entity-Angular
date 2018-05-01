@@ -10,6 +10,10 @@ using System;
 using System.Collections.Generic;
 using DocSystDataAccessImplementation.UserDataAccessImplementation;
 using System.Web.Http.Results;
+using DocSystBusinessLogicInterface.AuthorizationBusinessLogicInterface;
+using DocSystBusinessLogicImplementation.AuthorizationBusinessLogicImplementation;
+using DocSystDataAccessInterface.UserDataAccessInterface;
+using System.Net.Http;
 
 namespace DocSystTest.ApiTest
 {
@@ -19,7 +23,9 @@ namespace DocSystTest.ApiTest
         private UserModel userModel;
         private User user;
         private Mock<IUserBusinessLogic> mockUserBusinessLogic;
+        private Mock<IAuthorizationBusinessLogic> mockUserAuthorizationLogic;
         private UserController userController;
+
 
         [TestCleanup]
         public void CleanDataBase()
@@ -32,8 +38,19 @@ namespace DocSystTest.ApiTest
         {
             user = Utils.CreateUserForTest();
             userModel = UserModel.ToModel(user);
+            mockUserAuthorizationLogic = new Mock<IAuthorizationBusinessLogic>();
             mockUserBusinessLogic = new Mock<IUserBusinessLogic>();
-            userController = new UserController(mockUserBusinessLogic.Object);
+            userController = new UserController(mockUserBusinessLogic.Object, mockUserAuthorizationLogic.Object);
+            InitializeToken();
+        }
+
+        private void InitializeToken()
+        {
+            var requestMessage = new HttpRequestMessage();
+            requestMessage.Headers.Add("Token", user.Token + "");
+            mockUserAuthorizationLogic.Setup(b1 => b1.IsAValidToken(user.Token)).Returns(true);
+            mockUserAuthorizationLogic.Setup(b1 => b1.IsAdmin(user.Token)).Returns(true);
+            userController.Request = requestMessage;
         }
 
         [TestMethod]
@@ -131,8 +148,10 @@ namespace DocSystTest.ApiTest
         [TestMethod]
         public void IntegrationTest_ExpectedParameters_Ok()
         {
-            UserBusinessLogic userBL = new UserBusinessLogic(new UserDataAccess());
-            UserController userC = new UserController(userBL);
+            IUserDataAccess da = new UserDataAccess();
+            IUserBusinessLogic userBL = new UserBusinessLogic(new UserDataAccess());
+            IAuthorizationBusinessLogic auth = new AuthorizationBusinessLogic(da);
+            UserController userC = new UserController(userBL, auth);
             UserModel user2 = UserModel.ToModel(Utils.CreateUserForTest());
             userC.Post(userModel);
             userC.Post(user2);

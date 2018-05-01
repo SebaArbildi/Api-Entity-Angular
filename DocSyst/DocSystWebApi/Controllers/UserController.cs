@@ -15,17 +15,21 @@ namespace DocSystWebApi.Controllers
     public class UserController : ApiController
     {
         private IUserBusinessLogic UserBusinessLogic { get; set; }
+        private IAuthorizationBusinessLogic AuthorizationBusinessLogic { get; set; }
 
-        public UserController(IUserBusinessLogic userBusinessLogic)
+        public UserController(IUserBusinessLogic userBusinessLogic, IAuthorizationBusinessLogic authorizationBusinessLogic)
         {
             UserBusinessLogic = userBusinessLogic;
+            AuthorizationBusinessLogic = authorizationBusinessLogic;
         }
 
         // GET: api/User
         public IHttpActionResult Get()
         {
-            try
-            {
+           try
+           {
+                Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
+                Utils.HasAdminPermissions(Request, AuthorizationBusinessLogic);
                 IList<User> users = UserBusinessLogic.GetUsers();
                 IList<UserModel> usersModel = ConvertEntitiesToModels(users);
                 return Ok(usersModel);
