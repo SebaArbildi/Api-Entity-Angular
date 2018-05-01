@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using DocSystEntities.StyleStructure;
 
 namespace DocSystTest.EntitiesTest.StyleStructure
 {
@@ -9,13 +10,13 @@ namespace DocSystTest.EntitiesTest.StyleStructure
         [TestMethod]
         public void CreateSpecificStyle_WithoutParameters_Ok()
         {
-            SpecificStyleTest specificStyle = new SpecificStyleTest();
+            SpecificStyle specificStyle = new SpecificStyle();
         }
 
         [TestMethod]
         public void CreateSpecificStyle_WithParameters_Ok()
         {
-            SpecificStyleTest specificStyle = new SpecificStyle("name", "<html><body>{0}</body></html>");
+            SpecificStyle specificStyle = new SpecificStyle("name", "<html><body>{0}</body></html>");
         }
     }
 }
