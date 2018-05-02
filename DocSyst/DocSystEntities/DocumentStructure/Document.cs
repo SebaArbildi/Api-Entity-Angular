@@ -15,6 +15,7 @@ namespace DocSystEntities.DocumentStructure
     {
         [Key]
         public Guid Id { get; set; }
+        public User.User CreatorUser { get; set; }
         public string Title { get; set; }
         public DateTime CreationDate { get; }
         public DateTime LastModifyDate { get; set; }
@@ -24,6 +25,7 @@ namespace DocSystEntities.DocumentStructure
         public Document()
         {
             Id = Guid.NewGuid();
+            CreatorUser = null;
             Title = null;
             CreationDate = DateTime.Today;
             LastModifyDate = DateTime.Today;
@@ -31,9 +33,10 @@ namespace DocSystEntities.DocumentStructure
             DocumentParts = new List<Body>();
         }
 
-        public Document(string aTitle)
+        public Document(string aTitle, User.User aCreatorUser)
         {
             Id = Guid.NewGuid();
+            CreatorUser = aCreatorUser;
             Title = aTitle;
             CreationDate = DateTime.Today;
             LastModifyDate = DateTime.Today;
@@ -41,9 +44,10 @@ namespace DocSystEntities.DocumentStructure
             DocumentParts = new List<Body>();
         }
 
-        public Document(string aTitle, string aStyleClass)
+        public Document(string aTitle, string aStyleClass, User.User aCreatorUser)
         {
             Id = Guid.NewGuid();
+            CreatorUser = aCreatorUser;
             Title = aTitle;
             CreationDate = DateTime.Today;
             LastModifyDate = DateTime.Today;
@@ -51,9 +55,10 @@ namespace DocSystEntities.DocumentStructure
             DocumentParts = new List<Body>();
         }
 
-        public Document(string aTitle, List<Body> someDocumentParts)
+        public Document(string aTitle, List<Body> someDocumentParts, User.User aCreatorUser)
         {
             Id = Guid.NewGuid();
+            CreatorUser = aCreatorUser;
             Title = aTitle;
             CreationDate = DateTime.Today;
             LastModifyDate = DateTime.Today;
@@ -61,9 +66,10 @@ namespace DocSystEntities.DocumentStructure
             DocumentParts = someDocumentParts;
         }
 
-        public Document(string aTitle, List<Body> someDocumentParts, string aStyleClass)
+        public Document(string aTitle, List<Body> someDocumentParts, string aStyleClass, User.User aCreatorUser)
         {
             Id = Guid.NewGuid();
+            CreatorUser = aCreatorUser;
             Title = aTitle;
             CreationDate = DateTime.Today;
             LastModifyDate = DateTime.Today;
@@ -96,6 +102,11 @@ namespace DocSystEntities.DocumentStructure
         public bool ExistDocumentPart(MarginAlign? align)
         {
             return DocumentParts.Exists(x => x.Align == align);
+        }
+
+        public string GetCreatorUsername()
+        {
+            return CreatorUser.Username;
         }
 
         public override bool Equals(object obj)

@@ -1,5 +1,6 @@
 ﻿using DocSystBusinessLogicInterface.DocumentStructureLogicInterface;
 using DocSystDataAccessInterface.DocumentStructureDataAccessInterface;
+using DocSystDataAccessInterface.UserDataAccessInterface;
 using DocSystEntities.DocumentStructure;
 using System;
 using System.Collections.Generic;
@@ -12,14 +13,16 @@ namespace DocSystBusinessLogicImplementation.DocumentStructureLogicImplementatio
     public class DocumentBusinessLogic : IDocumentBusinessLogic
     {
         private IDocumentDataAccess documentDataAccess;
+        private IUserDataAccess userDataAccess;
 
         public DocumentBusinessLogic()
         {
         }
 
-        public DocumentBusinessLogic(IDocumentDataAccess aDocumentDataAccess)
+        public DocumentBusinessLogic(IDocumentDataAccess aDocumentDataAccess, IUserDataAccess aUserDataAccess)
         {
             documentDataAccess = aDocumentDataAccess;
+            userDataAccess = aUserDataAccess;
         }
 
         public void AddDocument(Document newDocument)
@@ -90,6 +93,19 @@ namespace DocSystBusinessLogicImplementation.DocumentStructureLogicImplementatio
             }
 
             return documentDataAccess.Get(aDocumentId);
+        }
+
+        public IList<Document> GetDocument(string aUsername)
+        {
+            if (!userDataAccess.Exists(aUsername))
+            {
+                throw new ArgumentException("The User argument not exist in database."
+                    , "aUsername");
+            }
+
+            IList<Document> documents = documentDataAccess.Get(aUsername);
+
+            return documents;
         }
 
         public Body GetDocumentPart(Guid aDocumentId, MarginAlign align)

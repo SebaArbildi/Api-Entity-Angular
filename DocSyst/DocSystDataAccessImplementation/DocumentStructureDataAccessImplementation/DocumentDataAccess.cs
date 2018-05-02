@@ -84,6 +84,18 @@ namespace DocSystDataAccessImplementation.DocumentStructureDataAccessImplementat
             return document;
         }
 
+        public IList<Document> Get(string Username)
+        {
+            IList<Document> document = null;
+            using (DocSystDbContext context = new DocSystDbContext())
+            {
+                document = (context.Documents.Where(documenthDb =>  Username == documenthDb.GetCreatorUsername())
+                                            .Include(documenthDb => documenthDb.DocumentParts)
+                                            .Include(documenthDb => documenthDb.DocumentParts.Select(bodyDb => bodyDb.Texts))).ToList<Document>();
+            }
+            return document;
+        }
+
         public void Modify(Document aDocument)
         {
             using (DocSystDbContext context = new DocSystDbContext())

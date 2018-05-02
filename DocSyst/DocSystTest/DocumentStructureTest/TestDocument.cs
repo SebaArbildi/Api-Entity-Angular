@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using DocSystEntities.DocumentStructure;
+using DocSystEntities.User;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace DocSystTest.DocumentStructureTest
@@ -13,6 +14,7 @@ namespace DocSystTest.DocumentStructureTest
         string aTitle;
         Margin aMargin;
         Margin aParagraph;
+        User aUser;
 
         [TestInitialize]
         public void TestInitialize()
@@ -22,6 +24,7 @@ namespace DocSystTest.DocumentStructureTest
             aTitle = "a Title";
             aMargin = new Margin(MarginAlign.FOOTER);
             aParagraph = new Margin(MarginAlign.PARAGRAPH);
+            aUser = Utils.CreateUserForTest();
         }
 
 
@@ -41,7 +44,7 @@ namespace DocSystTest.DocumentStructureTest
         [TestMethod]
         public void CreateDocument_OnlyWhitTitle_Ok()
         {
-            Document aDoc = new Document(aTitle);
+            Document aDoc = new Document(aTitle,aUser);
 
             Assert.IsNotNull(aDoc.Id);
             Assert.IsNull(aDoc.OwnStyleClass);
@@ -54,7 +57,7 @@ namespace DocSystTest.DocumentStructureTest
         [TestMethod]
         public void CreateDocument_WhitTitleAndStyle_Ok()
         {
-            Document aDoc = new Document(aTitle,aStyleClass);
+            Document aDoc = new Document(aTitle,aStyleClass,aUser);
 
             Assert.IsNotNull(aDoc.Id);
             Assert.AreEqual(aDoc.OwnStyleClass, aStyleClass);
@@ -69,7 +72,7 @@ namespace DocSystTest.DocumentStructureTest
         {
             someDocumentParts.Add(aMargin);
             someDocumentParts.Add(aParagraph);
-            Document aDoc = new Document(aTitle, someDocumentParts);
+            Document aDoc = new Document(aTitle, someDocumentParts,aUser);
 
             Assert.IsNotNull(aDoc.Id);
             Assert.IsNull(aDoc.OwnStyleClass);
@@ -84,7 +87,7 @@ namespace DocSystTest.DocumentStructureTest
         {
             someDocumentParts.Add(aMargin);
             someDocumentParts.Add(aParagraph);
-            Document aDoc = new Document(aTitle, someDocumentParts, aStyleClass);
+            Document aDoc = new Document(aTitle, someDocumentParts, aStyleClass,aUser);
 
             Assert.IsNotNull(aDoc.Id);
             Assert.AreEqual(aDoc.OwnStyleClass, aStyleClass);
@@ -98,7 +101,7 @@ namespace DocSystTest.DocumentStructureTest
         public void GetDocumentPart_WhenDocumentHasPartFooter_Ok()
         {
             someDocumentParts.Add(aMargin);
-            Document aDoc = new Document(aTitle, someDocumentParts, aStyleClass);
+            Document aDoc = new Document(aTitle, someDocumentParts, aStyleClass,aUser);
 
             Assert.AreEqual(aDoc.GetDocumentPart(MarginAlign.FOOTER), aMargin);
         }
@@ -108,7 +111,7 @@ namespace DocSystTest.DocumentStructureTest
         "Given margin align not exist in this document.")]
         public void GetDocumentPart_WhenDocumentHasPartFooter_KeyNotFoundException()
         {
-            Document aDoc = new Document(aTitle, someDocumentParts, aStyleClass);
+            Document aDoc = new Document(aTitle, someDocumentParts, aStyleClass,aUser);
             aDoc.GetDocumentPart(MarginAlign.FOOTER);
         }
 
@@ -117,7 +120,7 @@ namespace DocSystTest.DocumentStructureTest
         {
             aMargin.Align = MarginAlign.HEADER;
             someDocumentParts.Add(aMargin);
-            Document aDoc = new Document(aTitle, someDocumentParts, aStyleClass);
+            Document aDoc = new Document(aTitle, someDocumentParts, aStyleClass,aUser);
 
             Assert.AreEqual(aDoc.GetDocumentPart(MarginAlign.HEADER), aMargin);
         }
@@ -127,7 +130,7 @@ namespace DocSystTest.DocumentStructureTest
         "Given margin align not exist in this document.")]
         public void GetDocumentPart_WhenDocumentHasPartHeader_KeyNotFoundException()
         {
-            Document aDoc = new Document(aTitle, someDocumentParts, aStyleClass);
+            Document aDoc = new Document(aTitle, someDocumentParts, aStyleClass,aUser);
             aDoc.GetDocumentPart(MarginAlign.HEADER);
         }
 
@@ -135,7 +138,7 @@ namespace DocSystTest.DocumentStructureTest
         public void GetDocumentPart_WhenDocumentHasPartParagraph_Ok()
         {
             someDocumentParts.Add(aParagraph);
-            Document aDoc = new Document(aTitle, someDocumentParts, aStyleClass);
+            Document aDoc = new Document(aTitle, someDocumentParts, aStyleClass,aUser);
 
             Assert.AreEqual(aDoc.GetDocumentPart(MarginAlign.PARAGRAPH), aParagraph);
         }
@@ -145,7 +148,7 @@ namespace DocSystTest.DocumentStructureTest
         "Given margin align not exist in this document.")]
         public void GetDocumentPart_WhenDocumentHasPartParagraph_KeyNotFoundException()
         {
-            Document aDoc = new Document(aTitle, someDocumentParts, aStyleClass);
+            Document aDoc = new Document(aTitle, someDocumentParts, aStyleClass,aUser);
             aDoc.GetDocumentPart(MarginAlign.PARAGRAPH);
         }
 
@@ -153,7 +156,7 @@ namespace DocSystTest.DocumentStructureTest
         public void ExistDocPart_WhenDocPartExistParagraph_Ok()
         {
             someDocumentParts.Add(aParagraph);
-            Document aDoc = new Document(aTitle, someDocumentParts, aStyleClass);
+            Document aDoc = new Document(aTitle, someDocumentParts, aStyleClass,aUser);
 
             Assert.IsTrue(aDoc.ExistDocumentPart(MarginAlign.PARAGRAPH));
         }
@@ -162,7 +165,7 @@ namespace DocSystTest.DocumentStructureTest
         public void ExistDocPart_WhenDocPartNotExistParagraph_Ok()
         {
             someDocumentParts.Add(aParagraph);
-            Document aDoc = new Document(aTitle, someDocumentParts, aStyleClass);
+            Document aDoc = new Document(aTitle, someDocumentParts, aStyleClass,aUser);
 
             Assert.IsFalse(aDoc.ExistDocumentPart(MarginAlign.FOOTER));
         }
@@ -171,7 +174,7 @@ namespace DocSystTest.DocumentStructureTest
         public void ExistDocPart_WhenDocPartExistFooter_Ok()
         {
             someDocumentParts.Add(aMargin);
-            Document aDoc = new Document(aTitle, someDocumentParts, aStyleClass);
+            Document aDoc = new Document(aTitle, someDocumentParts, aStyleClass,aUser);
 
             Assert.IsTrue(aDoc.ExistDocumentPart(MarginAlign.FOOTER));
         }
@@ -180,7 +183,7 @@ namespace DocSystTest.DocumentStructureTest
         public void ExistDocPart_WhenDocPartNotExistFooter_Ok()
         {
             someDocumentParts.Add(aMargin);
-            Document aDoc = new Document(aTitle, someDocumentParts, aStyleClass);
+            Document aDoc = new Document(aTitle, someDocumentParts, aStyleClass,aUser);
 
             Assert.IsFalse(aDoc.ExistDocumentPart(MarginAlign.PARAGRAPH));
         }
@@ -190,7 +193,7 @@ namespace DocSystTest.DocumentStructureTest
         {
             someDocumentParts.Add(aMargin);
             aMargin.Align = MarginAlign.HEADER;
-            Document aDoc = new Document(aTitle, someDocumentParts, aStyleClass);
+            Document aDoc = new Document(aTitle, someDocumentParts, aStyleClass,aUser);
 
             Assert.IsTrue(aDoc.ExistDocumentPart(MarginAlign.HEADER));
         }
@@ -200,7 +203,7 @@ namespace DocSystTest.DocumentStructureTest
         {
             someDocumentParts.Add(aMargin);
             aMargin.Align = MarginAlign.HEADER;
-            Document aDoc = new Document(aTitle, someDocumentParts, aStyleClass);
+            Document aDoc = new Document(aTitle, someDocumentParts, aStyleClass, aUser);
 
             Assert.IsFalse(aDoc.ExistDocumentPart(MarginAlign.PARAGRAPH));
         }

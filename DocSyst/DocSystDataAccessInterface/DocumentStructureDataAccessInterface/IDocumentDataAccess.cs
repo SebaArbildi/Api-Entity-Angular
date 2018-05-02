@@ -14,6 +14,7 @@ namespace DocSystDataAccessInterface.DocumentStructureDataAccessInterface
         void Delete(Guid id);
         void Modify(Document aDocument);
         IList<Document> Get();
+        IList<Document> Get(string Username);
         bool Exists(Guid aDocument);
     }
 }

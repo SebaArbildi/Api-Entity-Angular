@@ -38,7 +38,7 @@ namespace DocSystTest
 
         internal static Document CreateDocumentForTest()
         {
-            return new Document("a Title","a Style Class");
+            return new Document("a Title","a Style Class",CreateUserForTest());
         }
     }
 }

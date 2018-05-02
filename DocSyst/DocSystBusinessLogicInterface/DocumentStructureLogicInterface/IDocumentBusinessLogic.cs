@@ -11,7 +11,7 @@ namespace DocSystBusinessLogicInterface.DocumentStructureLogicInterface
         void ModifyDocument(Document newDocument);
         IList<Document> GetDocuments();
         Document GetDocument(Guid aDocumentId);
-        List<Document> GetDocument(Guid aDocumentId, Guid aUserId);
+        IList<Document> GetDocument(string aUsername);
         Body GetDocumentPart(Guid aDocumentId, MarginAlign align);
         void SetDocumentPart(Guid aDocumentId, MarginAlign? align, Body aDocumentPart);
         bool ExistDocumentPart(Guid aDocumentId, MarginAlign? align);
