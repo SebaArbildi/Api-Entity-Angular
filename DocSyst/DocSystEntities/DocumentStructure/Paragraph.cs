@@ -43,14 +43,12 @@ namespace DocSystEntities.DocumentStructure
 
         public void PutTextAtLast(Text aText)
         {
-            //aText.FatherBody = this;
             aText.BodyId = this.Id;
             Texts.Add(aText);
         }
 
         public void PutTextAt(int position, Text aText)
         {
-            //aText.FatherBody = this;
             aText.BodyId = this.Id;
             Texts.Insert(position, aText);
         }

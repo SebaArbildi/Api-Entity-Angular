@@ -17,7 +17,7 @@ namespace DocSystEntities.DocumentStructure
         public Guid Id { get; set; }
         public User.User CreatorUser { get; set; }
         public string Title { get; set; }
-        public DateTime CreationDate { get; }
+        public DateTime CreationDate { get; set; }
         public DateTime LastModifyDate { get; set; }
         public string OwnStyleClass { get; set; }
         public List<Body> DocumentParts { get; set; }
@@ -93,8 +93,7 @@ namespace DocSystEntities.DocumentStructure
             {
                 DocumentParts.Remove(DocumentParts.Find(x => x.Align == align));
             }
-
-            //aDocumentPart.FatherDocument = this;
+            
             aDocumentPart.DocumentId = this.Id;
             DocumentParts.Add(aDocumentPart);
         }

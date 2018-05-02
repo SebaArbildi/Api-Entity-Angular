@@ -8,7 +8,7 @@ namespace DocSystEntities.User
         public string Name { get; set; }
         public string LastName { get; set; }
         [Key]
-        public string Username { get; private set; }
+        public string Username { get; set; }
         public string Password { get; set; }
         public string Mail { get; set; }
         public bool IsAdmin { get; set; }

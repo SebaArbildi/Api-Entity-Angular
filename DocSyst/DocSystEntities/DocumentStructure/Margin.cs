@@ -27,7 +27,6 @@ namespace DocSystEntities.DocumentStructure
 
         public void SetText(Text aText)
         {
-            //aText.FatherBody = this;
             aText.BodyId = this.Id;
             Texts.Add(aText);
         }

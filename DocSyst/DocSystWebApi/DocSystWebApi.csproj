@@ -161,10 +161,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\DocumentController.cs" />
+    <Compile Include="Controllers\MarginController.cs" />
+    <Compile Include="Controllers\ParagraphController.cs" />
+    <Compile Include="Controllers\TextController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\DocumentStructureModels\DocumentModel.cs" />
+    <Compile Include="Models\DocumentStructureModels\MarginModel.cs" />
+    <Compile Include="Models\DocumentStructureModels\ParagraphModel.cs" />
+    <Compile Include="Models\DocumentStructureModels\TextModel.cs" />
     <Compile Include="Models\Model.cs" />
     <Compile Include="Models\UserModel\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
