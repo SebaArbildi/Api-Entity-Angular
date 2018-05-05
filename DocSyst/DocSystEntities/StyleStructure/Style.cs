@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,6 +25,7 @@ namespace DocSystEntities.StyleStructure
             this.Implementation = implementation;
         }
 
+        [Index(IsUnique = true)]
         public string Name
         {
             get
@@ -61,6 +63,17 @@ namespace DocSystEntities.StyleStructure
             {
                 id = value;
             }
+        }
+
+        public override bool Equals(object obj)
+        {
+            bool equals = false;
+            Style style = (Style)obj;
+            if (this.Name.Equals(style.Name))
+            {
+                equals = true;
+            }
+            return equals;
         }
     }
 }

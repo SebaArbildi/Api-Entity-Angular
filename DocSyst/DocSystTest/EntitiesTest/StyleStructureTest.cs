@@ -19,7 +19,7 @@ namespace DocSystTest.EntitiesTest.StyleStructure
             Style style = new Style("name", specificStyle);
             IList<Style> styleList = new List<Style>();
             styleList.Add(style);
-            return new StyleClass("name", styleList);
+            return new StyleClass("name", styleList, null);
         }
 
         private Style CreateStyleForTest()
@@ -66,7 +66,7 @@ namespace DocSystTest.EntitiesTest.StyleStructure
             Style style = new Style("name", specificStyle);
             IList<Style> styleList = new List<Style>();
             styleList.Add(style);
-            StyleClass styleClass = new StyleClass("name", styleList);
+            StyleClass styleClass = new StyleClass("name", styleList, null);
         }
 
         [TestMethod]
@@ -75,7 +75,7 @@ namespace DocSystTest.EntitiesTest.StyleStructure
             StyleClass styleClass = CreateStyleClassForTest();
             Style style = CreateStyleForTest();
             styleClass.AddStyle(style);
-            Assert.IsTrue(styleClass.Styles.Contains(style));
+            Assert.IsTrue(styleClass.ProperStyles.Contains(style));
         }
 
         [TestMethod]
@@ -85,28 +85,30 @@ namespace DocSystTest.EntitiesTest.StyleStructure
             Style style = CreateStyleForTest();
             styleClass.AddStyle(style);
             styleClass.RemoveStyle(style);
-            Assert.IsFalse(styleClass.Styles.Contains(style));
+            Assert.IsFalse(styleClass.ProperStyles.Contains(style));
         }
 
         [TestMethod]
         public void AddStyleToStyleClass_AlreadyExists_Ok()
         {
             StyleClass styleClass = CreateStyleClassForTest();
-            int originalCount = styleClass.Styles.Count;
+            int originalCount = styleClass.ProperStyles.Count;
             Style style = CreateStyleForTest();
+            style.Name = "newStyle";
             styleClass.AddStyle(style);
             styleClass.AddStyle(style);
-            Assert.IsTrue(styleClass.Styles.Count == (originalCount + 1));
+            Assert.IsTrue(styleClass.ProperStyles.Count == (originalCount + 1));
         }
 
         [TestMethod]
         public void RemoveStyleFromStyleClass_NotExist_Ok()
         {
             StyleClass styleClass = CreateStyleClassForTest();
-            int originalCount = styleClass.Styles.Count;
+            int originalCount = styleClass.ProperStyles.Count;
             Style style = CreateStyleForTest();
+            style.Name = "newStyle";
             styleClass.RemoveStyle(style);
-            Assert.IsTrue(styleClass.Styles.Count == originalCount);
+            Assert.IsTrue(styleClass.ProperStyles.Count == originalCount);
         }
 
         [TestMethod]
@@ -115,15 +117,7 @@ namespace DocSystTest.EntitiesTest.StyleStructure
             IList<Style> styleList = new List<Style>();
             StyleClass inheritedStyleClass = CreateStyleClassForTest();
 
-            StyleClass styleClass = new StyleClass("name", styleList, inheritedStyleClass);
-        }
-
-        [TestMethod]
-        public void CreateStyleClass_WithParameters3_Ok()
-        {
-            StyleClass inheritedStyleClass = CreateStyleClassForTest();
-
-            StyleClass styleClass = new StyleClass("name", inheritedStyleClass);
+            StyleClass styleClass = new StyleClass("name", styleList, inheritedStyleClass.InheritedPlusProperStyles);
         }
 
         [TestMethod]
