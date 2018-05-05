@@ -75,5 +75,10 @@ namespace DocSystEntities.StyleStructure
         {
             throw new NotImplementedException();
         }
+
+        public void RemoveStyleClass(StyleClass styleClass)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
