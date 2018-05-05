@@ -52,6 +52,11 @@
   <ItemGroup>
     <Compile Include="DependencyResolverDataAccess.cs" />
     <Compile Include="DocSystDbContext.cs" />
+    <Compile Include="DocumentStructureDataAccessImplementation\BodyDataAccess.cs" />
+    <Compile Include="DocumentStructureDataAccessImplementation\DocumentDataAccess.cs" />
+    <Compile Include="DocumentStructureDataAccessImplementation\MarginDataAccess.cs" />
+    <Compile Include="DocumentStructureDataAccessImplementation\ParagraphDataAccess.cs" />
+    <Compile Include="DocumentStructureDataAccessImplementation\TextDataAccess.cs" />
     <Compile Include="Migrations\201804292128076_init.cs" />
     <Compile Include="Migrations\201804292128076_init.Designer.cs">
       <DependentUpon>201804292128076_init.cs</DependentUpon>

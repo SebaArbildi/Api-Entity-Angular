@@ -48,6 +48,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuthorizationBusinessLogicImplementation\AuthorizationBusinessLogic.cs" />
+    <Compile Include="AuthorizationBusinessLogicImplementation\LoginBusinessLogic.cs" />
     <Compile Include="DependencyResolverBusinessLogic.cs" />
     <Compile Include="DocumentStructureLogicImplementation\DocumentBusinessLogic.cs" />
     <Compile Include="DocumentStructureLogicImplementation\MarginBussinesLogic.cs" />

@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using DocSystBusinessLogicImplementation.DocumentStructureLogicImplementation;
 using DocSystBusinessLogicInterface.DocumentStructureLogicInterface;
 using DocSystDataAccessImplementation.DocumentStructureDataAccessImplementation;
+using DocSystDataAccessImplementation.UserDataAccessImplementation;
 using DocSystDataAccessInterface.DocumentStructureDataAccessInterface;
+using DocSystDataAccessInterface.UserDataAccessInterface;
 using DocSystEntities.DocumentStructure;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -14,6 +16,7 @@ namespace DocSystTest.BusinessLogicTest
     public class DocumentBusinessLogicTest
     {
         Mock<IDocumentDataAccess> mockDocumentDataAccess;
+        Mock<IUserDataAccess> mockUserDataAccess;
         IDocumentBusinessLogic documentBusinessLogic;
         Document document;
         Paragraph paragraph;
@@ -28,7 +31,8 @@ namespace DocSystTest.BusinessLogicTest
         public void TestInitialize()
         {
             mockDocumentDataAccess = new Mock<IDocumentDataAccess>();
-            documentBusinessLogic = new DocumentBusinessLogic(mockDocumentDataAccess.Object);
+            mockUserDataAccess = new Mock<IUserDataAccess>();
+            documentBusinessLogic = new DocumentBusinessLogic(mockDocumentDataAccess.Object,mockUserDataAccess.Object);
             document = Utils.CreateDocumentForTest();
             paragraph = Utils.CreateParagraphForTest();
         }
@@ -45,8 +49,9 @@ namespace DocSystTest.BusinessLogicTest
         public void CreateDocumentBL_WithParameters_Ok()
         {
             IDocumentDataAccess documentDataAccess = new DocumentDataAccess();
+            IUserDataAccess userDataAccess = new UserDataAccess();
 
-            IDocumentBusinessLogic documentBL = new DocumentBusinessLogic(documentDataAccess);
+            IDocumentBusinessLogic documentBL = new DocumentBusinessLogic(documentDataAccess,userDataAccess);
 
             Assert.IsNotNull(documentBL);
         }
@@ -260,7 +265,8 @@ namespace DocSystTest.BusinessLogicTest
         public void IntegrationTest_ExpectedParameters_Ok()
         {
             DocumentDataAccess documentDA = new DocumentDataAccess();
-            DocumentBusinessLogic documentBL = new DocumentBusinessLogic(documentDA);
+            UserDataAccess userDA = new UserDataAccess();
+            DocumentBusinessLogic documentBL = new DocumentBusinessLogic(documentDA,userDA);
             Document document1 = Utils.CreateDocumentForTest();
             Document document2 = Utils.CreateDocumentForTest();
             documentBL.AddDocument(document1);
