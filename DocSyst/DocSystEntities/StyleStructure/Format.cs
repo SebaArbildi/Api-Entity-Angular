@@ -73,12 +73,18 @@ namespace DocSystEntities.StyleStructure
 
         public void AddStyleClass(StyleClass styleClass)
         {
-            throw new NotImplementedException();
+            if (!StyleClasses.Contains(styleClass))
+            {
+                StyleClasses.Add(styleClass);
+            }
         }
 
         public void RemoveStyleClass(StyleClass styleClass)
         {
-            throw new NotImplementedException();
+            if (StyleClasses.Contains(styleClass))
+            {
+                StyleClasses.Remove(styleClass);
+            }
         }
     }
 }
