@@ -117,7 +117,7 @@ namespace DocSystTest.EntitiesTest.StyleStructure
             IList<Style> styleList = new List<Style>();
             StyleClass inheritedStyleClass = CreateStyleClassForTest();
 
-            StyleClass styleClass = new StyleClass("name", styleList, inheritedStyleClass.InheritedPlusProperStyles);
+            StyleClass styleClass = new StyleClass("name", styleList, inheritedStyleClass);
         }
 
         [TestMethod]

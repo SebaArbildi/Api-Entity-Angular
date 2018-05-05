@@ -11,7 +11,6 @@ namespace DocSystEntities.StyleStructure
         private string name;
         private IList<Style> properStyles;
         private StyleClass inheritedStyleClass;
-        private IList<Style> inheritedStyles;
         private IList<Style> inheritedPlusProperStyles;
 
         public StyleClass()
@@ -19,7 +18,7 @@ namespace DocSystEntities.StyleStructure
             this.Id = Guid.NewGuid();
             this.ProperStyles = new List<Style>();
             this.InheritedPlusProperStyles = new List<Style>();
-            this.InheritedStyles = new List<Style>();
+            this.InheritedStyleClass = null;
         }
 
         public StyleClass(string name)
@@ -28,10 +27,10 @@ namespace DocSystEntities.StyleStructure
             this.Name = name;
             this.ProperStyles = new List<Style>();
             this.InheritedPlusProperStyles = new List<Style>();
-            this.InheritedStyles = new List<Style>();
+            this.InheritedStyleClass = null;
         }
 
-        public StyleClass(string name, IList<Style> properStyles, IList<Style> inheritedStyles)
+        public StyleClass(string name, IList<Style> properStyles, StyleClass inheritedStyleClass)
         {
             this.Id = Guid.NewGuid();
             this.Name = name;
@@ -43,14 +42,8 @@ namespace DocSystEntities.StyleStructure
             {
                 this.ProperStyles = new List<Style>();
             }
-            if (inheritedStyles != null)
-            {
-                this.InheritedStyles = inheritedStyles;
-            }
-            else
-            {
-                this.InheritedStyles = new List<Style>();
-            }
+            this.InheritedStyleClass = inheritedStyleClass;
+            this.InheritedPlusProperStyles = new List<Style>();
             MergeInheritedAndProperStyles();
         }
 
@@ -87,7 +80,7 @@ namespace DocSystEntities.StyleStructure
                 return properStyles;
             }
 
-            set
+            private set
             {
                 properStyles = value;
             }
@@ -100,7 +93,7 @@ namespace DocSystEntities.StyleStructure
                 return inheritedStyleClass;
             }
 
-            set
+            private set
             {
                 inheritedStyleClass = value;
             }
@@ -113,22 +106,9 @@ namespace DocSystEntities.StyleStructure
                 return inheritedPlusProperStyles;
             }
 
-            set
+            private set
             {
                 inheritedPlusProperStyles = value;
-            }
-        }
-
-        public IList<Style> InheritedStyles
-        {
-            get
-            {
-                return inheritedStyles;
-            }
-
-            set
-            {
-                inheritedStyles = value;
             }
         }
 
@@ -153,8 +133,19 @@ namespace DocSystEntities.StyleStructure
 
         private void MergeInheritedAndProperStyles()
         {
-            InheritedPlusProperStyles = this.InheritedStyles;
-            foreach(Style properStyle in this.ProperStyles)
+            if (this.InheritedStyleClass != null)
+            {
+                foreach(Style inheritStyle in InheritedStyleClass.InheritedPlusProperStyles)
+                {
+                    if (InheritedPlusProperStyles.Contains(inheritStyle))
+                    {
+                        InheritedPlusProperStyles.Remove(inheritStyle);
+                    }
+                    InheritedPlusProperStyles.Add(inheritStyle);
+                }
+            }
+
+            foreach (Style properStyle in this.ProperStyles)
             {
                 if (InheritedPlusProperStyles.Contains(properStyle))
                 {
