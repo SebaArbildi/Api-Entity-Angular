@@ -137,7 +137,7 @@ namespace DocSystTest.EntitiesTest.StyleStructure
         public void AddStyleClassToFormat_ExpectedParameters_Ok()
         {
             StyleClass styleClass = CreateStyleClassForTest();
-            Format format = CreateFormatForTest;
+            Format format = CreateFormatForTest();
             format.AddStyleClass(styleClass);
             Assert.IsTrue(format.StyleClasses.Contains(styleClass));
         }
@@ -146,7 +146,7 @@ namespace DocSystTest.EntitiesTest.StyleStructure
         public void RemoveStyleClassFromFormat_ExpectedParameters_Ok()
         {
             StyleClass styleClass = CreateStyleClassForTest();
-            Format format = CreateFormatForTest;
+            Format format = CreateFormatForTest();
             format.RemoveStyleClass(styleClass);
             Assert.IsFalse(format.StyleClasses.Contains(styleClass));
         }
@@ -154,8 +154,8 @@ namespace DocSystTest.EntitiesTest.StyleStructure
         [TestMethod]
         public void AddStyleClassToFormat_AlreadyExists_Ok()
         {
-            Format format = CreateFormatForTest;
-            int originalCount = styleClass.Styles.Count;
+            Format format = CreateFormatForTest();
+            int originalCount = format.StyleClasses.Count;
             StyleClass styleClass = CreateStyleClassForTest();
 
             format.AddStyleClass(styleClass);
@@ -167,8 +167,8 @@ namespace DocSystTest.EntitiesTest.StyleStructure
         [TestMethod]
         public void RemoveStyleClassFromFormat_NotExist_Ok()
         {
-            Format format = CreateFormatForTest;
-            int originalCount = styleClass.Styles.Count;
+            Format format = CreateFormatForTest();
+            int originalCount = format.StyleClasses.Count;
             StyleClass styleClass = CreateStyleClassForTest();
 
             format.RemoveStyleClass(styleClass);
@@ -179,7 +179,7 @@ namespace DocSystTest.EntitiesTest.StyleStructure
         [TestMethod]
         public void CreateFormat_WithParameters2_Ok()
         {
-            FormatException format = new Format("Name")
+            Format format = new Format("Name");
             Assert.IsNotNull(format);
         }
 
@@ -187,7 +187,7 @@ namespace DocSystTest.EntitiesTest.StyleStructure
         public void CreateFormat_WithParameters3_Ok()
         {
             IList<StyleClass> styleClassList = new List<StyleClass>();
-            FormatException format = new Format("Name", styleClassList)
+            Format format = new Format("Name", styleClassList);
             Assert.IsNotNull(format);
         }
     }

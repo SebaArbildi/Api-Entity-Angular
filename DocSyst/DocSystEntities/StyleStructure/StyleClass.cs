@@ -13,7 +13,11 @@ namespace DocSystEntities.StyleStructure
         private IList<Style> styles;
         private StyleClass inheritedStyleClass;
 
-        public StyleClass() { }
+        public StyleClass()
+        {
+            this.Id = Guid.NewGuid();
+            this.Styles = new List<Style>();
+        }
 
         public StyleClass(string name, IList<Style> styles)
         {
@@ -34,7 +38,7 @@ namespace DocSystEntities.StyleStructure
         {
             this.Id = Guid.NewGuid();
             this.Name = name;
-            this.Styles = styles;
+            this.Styles = new List<Style>();
             this.inheritedStyleClass = inherited;
         }
 

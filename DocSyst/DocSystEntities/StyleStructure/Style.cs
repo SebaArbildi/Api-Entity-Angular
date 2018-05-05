@@ -12,7 +12,10 @@ namespace DocSystEntities.StyleStructure
         private string name;
         private SpecificStyle implementation;
 
-        public Style() { }
+        public Style()
+        {
+            this.Id = Guid.NewGuid();
+        }
 
         public Style(string name, SpecificStyle implementation)
         {

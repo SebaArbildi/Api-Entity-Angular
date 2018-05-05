@@ -6,22 +6,30 @@ using System.Threading.Tasks;
 
 namespace DocSystEntities.StyleStructure
 {
-    public class SpecificStyle
+    public class Format
     {
         private Guid id;
         private string name;
-        private string implementation;
+        private IList<StyleClass> styleClasses;
 
-        public SpecificStyle()
+        public Format()
         {
             this.Id = Guid.NewGuid();
+            this.StyleClasses = new List<StyleClass>();
         }
 
-        public SpecificStyle(string name, string implementation)
+        public Format(string name, IList<StyleClass> styleClasses)
         {
-            Id = Guid.NewGuid();
+            this.Id = Guid.NewGuid();
             this.Name = name;
-            this.Implementation = implementation;
+            this.StyleClasses = styleClasses;
+        }
+
+        public Format(string name)
+        {
+            this.Id = Guid.NewGuid();
+            this.Name = name;
+            this.StyleClasses = new List<StyleClass>();
         }
 
         public Guid Id
@@ -50,17 +58,22 @@ namespace DocSystEntities.StyleStructure
             }
         }
 
-        public string Implementation
+        public IList<StyleClass> StyleClasses
         {
             get
             {
-                return implementation;
+                return styleClasses;
             }
 
             set
             {
-                implementation = value;
+                styleClasses = value;
             }
+        }
+
+        public void AddStyleClass(StyleClass styleClass)
+        {
+            throw new NotImplementedException();
         }
     }
 }
