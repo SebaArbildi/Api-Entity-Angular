@@ -8,6 +8,11 @@ namespace DocSystTest.EntitiesTest.StyleStructure
     [TestClass]
     public class StyleStructureTest
     {
+        private Format CreateFormatForTest()
+        {
+            return new Format("FormatName");
+        }
+
         private StyleClass CreateStyleClassForTest()
         {
             SpecificStyle specificStyle = new SpecificStyle("name", "<html><body>{0}</body></html>");
@@ -105,7 +110,7 @@ namespace DocSystTest.EntitiesTest.StyleStructure
         }
 
         [TestMethod]
-        public void CreateSpecificStyle_WithParameters2_Ok()
+        public void CreateStyleClass_WithParameters2_Ok()
         {
             IList<Style> styleList = new List<Style>();
             StyleClass inheritedStyleClass = CreateStyleClassForTest();
@@ -114,11 +119,76 @@ namespace DocSystTest.EntitiesTest.StyleStructure
         }
 
         [TestMethod]
-        public void CreateSpecificStyle_WithParameters3_Ok()
+        public void CreateStyleClass_WithParameters3_Ok()
         {
             StyleClass inheritedStyleClass = CreateStyleClassForTest();
 
             StyleClass styleClass = new StyleClass("name", inheritedStyleClass);
+        }
+
+        [TestMethod]
+        public void CreateFormat_WithoutParameters_Ok()
+        {
+            Format format = new Format();
+            Assert.IsNotNull(format);
+        }
+
+        [TestMethod]
+        public void AddStyleClassToFormat_ExpectedParameters_Ok()
+        {
+            StyleClass styleClass = CreateStyleClassForTest();
+            Format format = CreateFormatForTest;
+            format.AddStyleClass(styleClass);
+            Assert.IsTrue(format.StyleClasses.Contains(styleClass));
+        }
+
+        [TestMethod]
+        public void RemoveStyleClassFromFormat_ExpectedParameters_Ok()
+        {
+            StyleClass styleClass = CreateStyleClassForTest();
+            Format format = CreateFormatForTest;
+            format.RemoveStyleClass(styleClass);
+            Assert.IsFalse(format.StyleClasses.Contains(styleClass));
+        }
+
+        [TestMethod]
+        public void AddStyleClassToFormat_AlreadyExists_Ok()
+        {
+            Format format = CreateFormatForTest;
+            int originalCount = styleClass.Styles.Count;
+            StyleClass styleClass = CreateStyleClassForTest();
+
+            format.AddStyleClass(styleClass);
+            format.AddStyleClass(styleClass);     
+
+            Assert.IsTrue(format.StyleClasses.Count == originalCount + 1);
+        }
+
+        [TestMethod]
+        public void RemoveStyleClassFromFormat_NotExist_Ok()
+        {
+            Format format = CreateFormatForTest;
+            int originalCount = styleClass.Styles.Count;
+            StyleClass styleClass = CreateStyleClassForTest();
+
+            format.RemoveStyleClass(styleClass);
+
+            Assert.IsTrue(format.StyleClasses.Count == originalCount);
+        }
+
+        [TestMethod]
+        public void CreateFormat_WithParameters2_Ok()
+        {
+            FormatException format = new Format("Name")
+            Assert.IsNotNull(format);
+        }
+
+        [TestMethod]
+        public void CreateFormat_WithParameters3_Ok()
+        {
+            IList<StyleClass> styleClassList = new List<StyleClass>();
+            FormatException format = new Format("Name", styleClassList)
+            Assert.IsNotNull(format);
         }
     }
 }
