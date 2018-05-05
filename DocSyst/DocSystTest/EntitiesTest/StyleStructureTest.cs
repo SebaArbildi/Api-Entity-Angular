@@ -190,5 +190,7 @@ namespace DocSystTest.EntitiesTest.StyleStructure
             Format format = new Format("Name", styleClassList);
             Assert.IsNotNull(format);
         }
+
+
     }
 }
