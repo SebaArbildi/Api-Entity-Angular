@@ -17,6 +17,8 @@ namespace DocSystBusinessLogicImplementation
             registerComponent.RegisterType<IMarginBusinessLogic, MarginBusinessLogic>();
             registerComponent.RegisterType<IParagraphBusinessLogic, ParagraphBusinessLogic>();
             registerComponent.RegisterType<IDocumentBusinessLogic, DocumentBusinessLogic>();
+			registerComponent.RegisterType<IAuthorizationBusinessLogic, AuthorizationBusinessLogic>();
+            registerComponent.RegisterType<ILoginBusinessLogic, LoginBusinessLogic>();
         }
     }
 }

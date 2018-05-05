@@ -1,5 +1,7 @@
-﻿using DocSystBusinessLogicInterface.UserBusinessLogicInterface;
+﻿using DocSystBusinessLogicInterface.AuthorizationBusinessLogicInterface;
+using DocSystBusinessLogicInterface.UserBusinessLogicInterface;
 using DocSystEntities.User;
+using DocSystWebApi.Filters;
 using DocSystWebApi.Models.UserModel;
 using System;
 using System.Collections.Generic;
@@ -13,17 +15,21 @@ namespace DocSystWebApi.Controllers
     public class UserController : ApiController
     {
         private IUserBusinessLogic UserBusinessLogic { get; set; }
+        private IAuthorizationBusinessLogic AuthorizationBusinessLogic { get; set; }
 
-        public UserController(IUserBusinessLogic userBusinessLogic)
+        public UserController(IUserBusinessLogic userBusinessLogic, IAuthorizationBusinessLogic authorizationBusinessLogic)
         {
             UserBusinessLogic = userBusinessLogic;
+            AuthorizationBusinessLogic = authorizationBusinessLogic;
         }
 
         // GET: api/User
         public IHttpActionResult Get()
         {
-            try
-            {
+           try
+           {
+                Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
+                Utils.HasAdminPermissions(Request, AuthorizationBusinessLogic);
                 IList<User> users = UserBusinessLogic.GetUsers();
                 IList<UserModel> usersModel = ConvertEntitiesToModels(users);
                 return Ok(usersModel);
@@ -39,6 +45,8 @@ namespace DocSystWebApi.Controllers
         {
             try
             {
+                Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
+                Utils.HasAdminPermissions(Request, AuthorizationBusinessLogic);
                 User user = UserBusinessLogic.GetUser(username);
                 return Ok(UserModel.ToModel(user));
             }
@@ -53,6 +61,8 @@ namespace DocSystWebApi.Controllers
         {
             try
             {
+                Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
+                Utils.HasAdminPermissions(Request, AuthorizationBusinessLogic);
                 UserBusinessLogic.AddUser(userModel.ToEntity());
                 return Ok("User added");
             }
@@ -67,6 +77,8 @@ namespace DocSystWebApi.Controllers
         {
             try
             {
+                Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
+                Utils.HasAdminPermissions(Request, AuthorizationBusinessLogic);
                 UserBusinessLogic.ModifyUser(userModel.ToEntity());
                 return Ok("User Modified");
             }
@@ -81,6 +93,8 @@ namespace DocSystWebApi.Controllers
         {
             try
             {
+                Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
+                Utils.HasAdminPermissions(Request, AuthorizationBusinessLogic);
                 UserBusinessLogic.DeleteUser(username);
                 return Ok("User deleted");
             }
@@ -92,6 +106,8 @@ namespace DocSystWebApi.Controllers
 
         private IList<UserModel> ConvertEntitiesToModels(IList<User> users)
         {
+            Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
+            Utils.HasAdminPermissions(Request, AuthorizationBusinessLogic);
             IList<UserModel> usersModels = new List<UserModel>();
             foreach(User user in users)
             {

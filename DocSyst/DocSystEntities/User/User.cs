@@ -5,13 +5,13 @@ namespace DocSystEntities.User
 {
     public class User
     {
-        public string Name { get; set; }
-        public string LastName { get; set; }
-        [Key]
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public string Mail { get; set; }
-        public bool IsAdmin { get; set; }
+        private string name;
+        private string lastName;
+        private string username;
+        private string password;
+        private string mail;
+        private bool isAdmin;
+        private Guid token;
 
         public User() { }
 
@@ -23,6 +23,98 @@ namespace DocSystEntities.User
             this.Password = password;
             this.Mail = mail;
             this.IsAdmin = isAdmin;
+        }
+
+        public string Name
+        {
+            get
+            {
+                return name;
+            }
+
+            set
+            {
+                name = value;
+            }
+        }
+
+        public string LastName
+        {
+            get
+            {
+                return lastName;
+            }
+
+            set
+            {
+                lastName = value;
+            }
+        }
+
+        [Key]
+        public string Username
+        {
+            get
+            {
+                return username;
+            }
+
+            set
+            {
+                username = value;
+            }
+        }
+
+        public string Password
+        {
+            get
+            {
+                return password;
+            }
+
+            set
+            {
+                password = value;
+            }
+        }
+
+        public string Mail
+        {
+            get
+            {
+                return mail;
+            }
+
+            set
+            {
+                mail = value;
+            }
+        }
+
+        public bool IsAdmin
+        {
+            get
+            {
+                return isAdmin;
+            }
+
+            set
+            {
+                isAdmin = value;
+            }
+        }
+
+        public Guid Token
+        {
+            get
+            {
+                return token;
+            }
+
+            set
+            {
+                token = value;
+            }
         }
 
         public override bool Equals(object obj)
