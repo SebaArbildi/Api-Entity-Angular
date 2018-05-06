@@ -8,8 +8,8 @@ namespace DocSystEntities.ObserverInterface
 {
     public interface ISubject
     {
-        void Add(IObserver observer);
-        void Delete(IObserver observer);
-        void Notify();
+        void AddObserver(IObserver observer);
+        void DeleteObserver(IObserver observer);
+        void NotifyObservers();
     }
 }

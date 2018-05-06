@@ -8,6 +8,6 @@ namespace DocSystEntities.ObserverInterface
 {
      public interface IObserver
     {
-        void Update();
+        void UpdateSubject();
     }
 }

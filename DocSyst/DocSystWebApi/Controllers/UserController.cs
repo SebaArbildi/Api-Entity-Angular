@@ -1,7 +1,6 @@
 ﻿using DocSystBusinessLogicInterface.AuthorizationBusinessLogicInterface;
 using DocSystBusinessLogicInterface.UserBusinessLogicInterface;
 using DocSystEntities.User;
-using DocSystWebApi.Filters;
 using DocSystWebApi.Models.UserModel;
 using System;
 using System.Collections.Generic;

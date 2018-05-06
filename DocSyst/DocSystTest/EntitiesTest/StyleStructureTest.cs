@@ -185,6 +185,20 @@ namespace DocSystTest.EntitiesTest.StyleStructure
             Assert.IsNotNull(format);
         }
 
+        [TestMethod]
+        public void TryObserver_ExpectedParam_Ok()
+        {
+            StyleClass inheritStyleClass = CreateStyleClassForTest();
+            SpecificStyle specificStyle = new SpecificStyle("name", "<html><body>{0}</body></html>");
+            Style style = new Style("name2", specificStyle);
+            IList<Style> styleList = new List<Style>();
+            styleList.Add(style);
+            StyleClass newStyleClass = new StyleClass("name", styleList, inheritStyleClass);
 
+
+            Style style2 = new Style("name3", specificStyle);
+            inheritStyleClass.AddStyle(style2);
+            Assert.IsTrue(newStyleClass.InheritedPlusProperStyles.Count == 3);
+        }
     }
 }
