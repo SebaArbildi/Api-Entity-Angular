@@ -27,10 +27,7 @@ namespace DocSystTest
 
         internal static StyleClass CreateStyleClassForTest()
         {
-            ISpecificStyleDataAccess specificStyleDataAccess = new SpecificStyleDataAccess();
-            SpecificStyle specificStyle = CreateSpecificStyleForTest("name");
-            specificStyleDataAccess.Add(specificStyle);
-            Style style = new Style("name", specificStyle);
+            Style style = CreateStyleForTest();
             IList<Style> styleList = new List<Style>();
             styleList.Add(style);
             return new StyleClass("name", styleList, null);
