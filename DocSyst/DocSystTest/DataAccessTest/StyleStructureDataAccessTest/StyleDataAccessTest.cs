@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using DocSystEntities.StyleStructure;
 using System.Collections.Generic;
+using DocSystDataAccessInterface.StyleStructureDataAccessInterface;
 
 namespace DocSystTest.DataAccessTest.StyleStructureDataAccessTest
 {
@@ -10,11 +11,6 @@ namespace DocSystTest.DataAccessTest.StyleStructureDataAccessTest
     {
         private IStyleDataAccess styleDataAccess;
         private Style style;
-
-        private SpecificStyle CreateSpecificStyleForTest()
-        {
-            return new SpecificStyle("name", "<html><body>{0}</body></html>");
-        }
 
         [TestCleanup]
         public void CleanDataBase()
