@@ -62,5 +62,16 @@ namespace DocSystEntities.StyleStructure
                 implementation = value;
             }
         }
+
+        public override bool Equals(object obj)
+        {
+            bool equals = false;
+            SpecificStyle specificStyle = (SpecificStyle)obj;
+            if (this.Id.Equals(specificStyle.Id))
+            {
+                equals = true;
+            }
+            return equals;
+        }
     }
 }

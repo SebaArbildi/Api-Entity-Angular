@@ -12,27 +12,52 @@ namespace DocSystDataAccessImplementation.StyleStructureDataAccess
     {
         public void Add(SpecificStyle specificStyle)
         {
-            throw new NotImplementedException();
+            using (DocSystDbContext context = new DocSystDbContext())
+            {
+                context.SpecificStyles.Add(specificStyle);
+                context.SaveChanges();
+            }
         }
 
         public void Delete(Guid id)
         {
-            throw new NotImplementedException();
+            SpecificStyle specificStyle = Get(id);
+            using (DocSystDbContext context = new DocSystDbContext())
+            {
+                context.SpecificStyles.Attach(specificStyle);
+                context.SpecificStyles.Remove(specificStyle);
+                context.SaveChanges();
+            }
         }
 
         public IList<SpecificStyle> Get()
         {
-            throw new NotImplementedException();
+            IList<SpecificStyle> specificStyles = null;
+            using (DocSystDbContext context = new DocSystDbContext())
+            {
+                specificStyles = context.SpecificStyles.ToList<SpecificStyle>();
+            }
+            return specificStyles;
         }
 
         public SpecificStyle Get(Guid id)
         {
-            throw new NotImplementedException();
+            SpecificStyle specificStyle = null;
+            using (DocSystDbContext context = new DocSystDbContext())
+            {
+                specificStyle = context.SpecificStyles.Where(specificStyleDb => specificStyleDb.Id == id).FirstOrDefault();
+            }
+            return specificStyle;
         }
 
         public void Modify(SpecificStyle specificStyle)
         {
-            throw new NotImplementedException();
+            using (DocSystDbContext context = new DocSystDbContext())
+            {
+                SpecificStyle actualSpecificStyle = context.SpecificStyles.Where(specificStyleDb => specificStyleDb.Id == specificStyle.Id).FirstOrDefault();
+                context.Entry(actualSpecificStyle).CurrentValues.SetValues(specificStyle);
+                context.SaveChanges();
+            }
         }
     }
 }

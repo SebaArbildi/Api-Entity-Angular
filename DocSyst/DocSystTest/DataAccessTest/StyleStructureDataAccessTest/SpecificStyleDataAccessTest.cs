@@ -3,11 +3,12 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using DocSystEntities.StyleStructure;
 using System.Collections.Generic;
 using DocSystDataAccessInterface.StyleStructureDataAccessInterface;
+using DocSystDataAccessImplementation.StyleStructureDataAccess;
 
 namespace DocSystTest.DataAccessTest
 {
     [TestClass]
-    public class StyleStructureDataAccessTest
+    public class SpecificStyleDataAccessTest
     {
         private ISpecificStyleDataAccess specificStyleDataAccess;
         private SpecificStyle specificStyle;
