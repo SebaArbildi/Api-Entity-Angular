@@ -23,7 +23,7 @@ namespace DocSystTest.DataAccessTest
         public void TestInitialize()
         {
             specificStyleDataAccess = new SpecificStyleDataAccess();
-            specificStyle = Utils.CreateSpecificStyleForTest();
+            specificStyle = Utils.CreateSpecificStyleForTest("name");
         }
 
         [TestMethod]

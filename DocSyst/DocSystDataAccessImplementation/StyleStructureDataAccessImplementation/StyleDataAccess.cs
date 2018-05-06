@@ -12,27 +12,55 @@ namespace DocSystDataAccessImplementation.StyleStructureDataAccessImplementation
     {
         public void Add(Style style)
         {
-            throw new NotImplementedException();
+            using (DocSystDbContext context = new DocSystDbContext())
+            {
+                context.SpecificStyles.Attach(style.Implementation);
+                context.Styles.Add(style);
+                context.SaveChanges();
+            }
         }
 
         public void Delete(string name)
         {
-            throw new NotImplementedException();
+            Style style = Get(name);
+            using (DocSystDbContext context = new DocSystDbContext())
+            {
+                context.Styles.Attach(style);
+                context.Styles.Remove(style);
+                context.SaveChanges();
+            }
         }
 
         public IList<Style> Get()
         {
-            throw new NotImplementedException();
+            IList<Style> styles = null;
+            using (DocSystDbContext context = new DocSystDbContext())
+            {
+                styles = context.Styles.Include("Implementation").ToList<Style>();
+            }
+            return styles;
         }
 
         public Style Get(string name)
         {
-            throw new NotImplementedException();
+            Style style = null;
+            using (DocSystDbContext context = new DocSystDbContext())
+            {
+                style = context.Styles.Include("Implementation").Where(styleDb => styleDb.Name == name).FirstOrDefault();
+            }
+            return style;
         }
 
         public void Modify(Style style)
         {
-            throw new NotImplementedException();
+            using (DocSystDbContext context = new DocSystDbContext())
+            {
+                context.SpecificStyles.Attach(style.Implementation);
+                Style actualStyle = context.Styles.Include("Implementation").Where(styleDb => styleDb.Name == styleDb.Name).FirstOrDefault();
+                context.Entry(actualStyle).Entity.Implementation = style.Implementation;
+                context.Entry(actualStyle).CurrentValues.SetValues(style);
+                context.SaveChanges();
+            }
         }
     }
 }

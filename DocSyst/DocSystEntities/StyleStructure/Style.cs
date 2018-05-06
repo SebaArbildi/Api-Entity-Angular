@@ -25,7 +25,6 @@ namespace DocSystEntities.StyleStructure
             this.Implementation = implementation;
         }
 
-        [Index(IsUnique = true)]
         public string Name
         {
             get

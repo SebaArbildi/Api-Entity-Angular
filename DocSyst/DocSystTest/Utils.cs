@@ -1,4 +1,6 @@
 ﻿using DocSystDataAccessImplementation;
+using DocSystDataAccessImplementation.StyleStructureDataAccess;
+using DocSystDataAccessInterface.StyleStructureDataAccessInterface;
 using DocSystEntities.StyleStructure;
 using DocSystEntities.User;
 using System;
@@ -25,7 +27,9 @@ namespace DocSystTest
 
         internal static StyleClass CreateStyleClassForTest()
         {
-            SpecificStyle specificStyle = new SpecificStyle("name", "<html><body>{0}</body></html>");
+            ISpecificStyleDataAccess specificStyleDataAccess = new SpecificStyleDataAccess();
+            SpecificStyle specificStyle = CreateSpecificStyleForTest("name");
+            specificStyleDataAccess.Add(specificStyle);
             Style style = new Style("name", specificStyle);
             IList<Style> styleList = new List<Style>();
             styleList.Add(style);
@@ -34,13 +38,23 @@ namespace DocSystTest
 
         internal static Style CreateStyleForTest()
         {
-            SpecificStyle specificStyle = new SpecificStyle("name", "<html><body>{0}</body></html>");
+            ISpecificStyleDataAccess specificStyleDataAccess = new SpecificStyleDataAccess();
+            SpecificStyle specificStyle = CreateSpecificStyleForTest("name");
+            specificStyleDataAccess.Add(specificStyle);
             return new Style("name", specificStyle);
         }
 
-        internal static SpecificStyle CreateSpecificStyleForTest()
+        internal static SpecificStyle CreateSpecificStyleForTest(String name)
         {
-            return new SpecificStyle("name", "<html><body>{0}</body></html>");
+            return new SpecificStyle(name, "<html><body>{0}</body></html>");
+        }
+
+        internal static SpecificStyle CreateSpecificStyleInDataBaseForTest(String name)
+        {
+            ISpecificStyleDataAccess specificStyleDataAccess = new SpecificStyleDataAccess();
+            SpecificStyle specificStyle = CreateSpecificStyleForTest(name);
+            specificStyleDataAccess.Add(specificStyle);
+            return specificStyle;
         }
     }
 }

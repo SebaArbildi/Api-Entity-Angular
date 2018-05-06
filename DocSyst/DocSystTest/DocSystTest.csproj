@@ -100,7 +100,8 @@
     <Compile Include="BusinessLogicTest\AuthorizationBusinessLogicTest.cs" />
     <Compile Include="BusinessLogicTest\LoginBusinessLogicTest.cs" />
     <Compile Include="BusinessLogicTest\UserBusinessLogicTest.cs" />
-    <Compile Include="DataAccessTest\StyleStructureDataAccessTest.cs" />
+    <Compile Include="DataAccessTest\StyleStructureDataAccessTest\SpecificStyleDataAccessTest.cs" />
+    <Compile Include="DataAccessTest\StyleStructureDataAccessTest\StyleDataAccessTest.cs" />
     <Compile Include="DataAccessTest\UserDataAccessTest.cs" />
     <Compile Include="EntitiesTest\StyleStructureTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

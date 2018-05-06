@@ -9,6 +9,7 @@ namespace DocSystDataAccessImplementation
         public DocSystDbContext() { }
         public DbSet<User> Users { get; set; }
         public DbSet<SpecificStyle> SpecificStyles { get; set; }
+        public DbSet<Style> Styles { get; set; }
 
     }
 }
