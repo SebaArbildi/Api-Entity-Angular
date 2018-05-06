@@ -13,11 +13,6 @@ namespace DocSystTest.DataAccessTest
         private ISpecificStyleDataAccess specificStyleDataAccess;
         private SpecificStyle specificStyle;
 
-        private SpecificStyle CreateSpecificStyleForTest()
-        {
-            return new SpecificStyle("name", "<html><body>{0}</body></html>");
-        }
-
         [TestCleanup]
         public void CleanDataBase()
         {
@@ -28,7 +23,7 @@ namespace DocSystTest.DataAccessTest
         public void TestInitialize()
         {
             specificStyleDataAccess = new SpecificStyleDataAccess();
-            specificStyle = CreateSpecificStyleForTest();
+            specificStyle = Utils.CreateSpecificStyleForTest();
         }
 
         [TestMethod]

@@ -13,21 +13,6 @@ namespace DocSystTest.EntitiesTest.StyleStructure
             return new Format("FormatName");
         }
 
-        private StyleClass CreateStyleClassForTest()
-        {
-            SpecificStyle specificStyle = new SpecificStyle("name", "<html><body>{0}</body></html>");
-            Style style = new Style("name", specificStyle);
-            IList<Style> styleList = new List<Style>();
-            styleList.Add(style);
-            return new StyleClass("name", styleList, null);
-        }
-
-        private Style CreateStyleForTest()
-        {
-            SpecificStyle specificStyle = new SpecificStyle("name", "<html><body>{0}</body></html>");
-            return new Style("name", specificStyle);
-        }
-
         [TestMethod]
         public void CreateSpecificStyle_WithoutParameters_Ok()
         {
@@ -72,8 +57,8 @@ namespace DocSystTest.EntitiesTest.StyleStructure
         [TestMethod]
         public void AddStyleToStyleClass_ExpectedParameters_Ok()
         {
-            StyleClass styleClass = CreateStyleClassForTest();
-            Style style = CreateStyleForTest();
+            StyleClass styleClass = Utils.CreateStyleClassForTest();
+            Style style = Utils.CreateStyleForTest();
             styleClass.AddStyle(style);
             Assert.IsTrue(styleClass.ProperStyles.Contains(style));
         }
@@ -81,8 +66,8 @@ namespace DocSystTest.EntitiesTest.StyleStructure
         [TestMethod]
         public void RemoveStyleFromStyleClass_ExpectedParameters_Ok()
         {
-            StyleClass styleClass = CreateStyleClassForTest();
-            Style style = CreateStyleForTest();
+            StyleClass styleClass = Utils.CreateStyleClassForTest();
+            Style style = Utils.CreateStyleForTest();
             styleClass.AddStyle(style);
             styleClass.RemoveStyle(style);
             Assert.IsFalse(styleClass.ProperStyles.Contains(style));
@@ -91,9 +76,9 @@ namespace DocSystTest.EntitiesTest.StyleStructure
         [TestMethod]
         public void AddStyleToStyleClass_AlreadyExists_Ok()
         {
-            StyleClass styleClass = CreateStyleClassForTest();
+            StyleClass styleClass = Utils.CreateStyleClassForTest();
             int originalCount = styleClass.ProperStyles.Count;
-            Style style = CreateStyleForTest();
+            Style style = Utils.CreateStyleForTest();
             style.Name = "newStyle";
             styleClass.AddStyle(style);
             styleClass.AddStyle(style);
@@ -103,9 +88,9 @@ namespace DocSystTest.EntitiesTest.StyleStructure
         [TestMethod]
         public void RemoveStyleFromStyleClass_NotExist_Ok()
         {
-            StyleClass styleClass = CreateStyleClassForTest();
+            StyleClass styleClass = Utils.CreateStyleClassForTest();
             int originalCount = styleClass.ProperStyles.Count;
-            Style style = CreateStyleForTest();
+            Style style = Utils.CreateStyleForTest();
             style.Name = "newStyle";
             styleClass.RemoveStyle(style);
             Assert.IsTrue(styleClass.ProperStyles.Count == originalCount);
@@ -115,7 +100,7 @@ namespace DocSystTest.EntitiesTest.StyleStructure
         public void CreateStyleClass_WithParameters2_Ok()
         {
             IList<Style> styleList = new List<Style>();
-            StyleClass inheritedStyleClass = CreateStyleClassForTest();
+            StyleClass inheritedStyleClass = Utils.CreateStyleClassForTest();
 
             StyleClass styleClass = new StyleClass("name", styleList, inheritedStyleClass);
         }
@@ -130,7 +115,7 @@ namespace DocSystTest.EntitiesTest.StyleStructure
         [TestMethod]
         public void AddStyleClassToFormat_ExpectedParameters_Ok()
         {
-            StyleClass styleClass = CreateStyleClassForTest();
+            StyleClass styleClass = Utils.CreateStyleClassForTest();
             Format format = CreateFormatForTest();
             format.AddStyleClass(styleClass);
             Assert.IsTrue(format.StyleClasses.Contains(styleClass));
@@ -139,7 +124,7 @@ namespace DocSystTest.EntitiesTest.StyleStructure
         [TestMethod]
         public void RemoveStyleClassFromFormat_ExpectedParameters_Ok()
         {
-            StyleClass styleClass = CreateStyleClassForTest();
+            StyleClass styleClass = Utils.CreateStyleClassForTest();
             Format format = CreateFormatForTest();
             format.RemoveStyleClass(styleClass);
             Assert.IsFalse(format.StyleClasses.Contains(styleClass));
@@ -150,7 +135,7 @@ namespace DocSystTest.EntitiesTest.StyleStructure
         {
             Format format = CreateFormatForTest();
             int originalCount = format.StyleClasses.Count;
-            StyleClass styleClass = CreateStyleClassForTest();
+            StyleClass styleClass = Utils.CreateStyleClassForTest();
 
             format.AddStyleClass(styleClass);
             format.AddStyleClass(styleClass);     
@@ -163,7 +148,7 @@ namespace DocSystTest.EntitiesTest.StyleStructure
         {
             Format format = CreateFormatForTest();
             int originalCount = format.StyleClasses.Count;
-            StyleClass styleClass = CreateStyleClassForTest();
+            StyleClass styleClass = Utils.CreateStyleClassForTest();
 
             format.RemoveStyleClass(styleClass);
 
@@ -188,7 +173,7 @@ namespace DocSystTest.EntitiesTest.StyleStructure
         [TestMethod]
         public void TryObserver_ExpectedParam_Ok()
         {
-            StyleClass inheritStyleClass = CreateStyleClassForTest();
+            StyleClass inheritStyleClass = Utils.CreateStyleClassForTest();
             SpecificStyle specificStyle = new SpecificStyle("name", "<html><body>{0}</body></html>");
             Style style = new Style("name2", specificStyle);
             IList<Style> styleList = new List<Style>();
