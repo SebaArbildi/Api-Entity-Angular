@@ -18,6 +18,7 @@ C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystDependencyResolver\
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystDependencyResolver\bin\Debug\Unity.Interception.Configuration.pdb
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystDependencyResolver\bin\Debug\Unity.RegistrationByConvention.pdb
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystDependencyResolver\bin\Debug\Unity.ServiceLocation.pdb
+C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystDependencyResolver\obj\Debug\DocSystDependencyResolver.csprojResolveAssemblyReference.cache
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystDependencyResolver\obj\Debug\DocSystDependencyResolver.csproj.CoreCompileInputs.cache
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystDependencyResolver\obj\Debug\DocSystDependencyResolver.csproj.CopyComplete
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystDependencyResolver\obj\Debug\DocSystDependencyResolver.dll

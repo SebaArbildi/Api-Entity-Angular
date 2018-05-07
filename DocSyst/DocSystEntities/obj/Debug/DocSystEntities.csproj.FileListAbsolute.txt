@@ -7,6 +7,7 @@ C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystEntities\bin\Debug\
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystEntities\bin\Debug\EntityFramework.xml
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystEntities\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystEntities\bin\Debug\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystEntities\obj\Debug\DocSystEntities.csprojResolveAssemblyReference.cache
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystEntities\obj\Debug\DocSystEntities.csproj.CoreCompileInputs.cache
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystEntities\obj\Debug\DocSystEntities.csproj.CopyComplete
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystEntities\obj\Debug\DocSystEntities.dll

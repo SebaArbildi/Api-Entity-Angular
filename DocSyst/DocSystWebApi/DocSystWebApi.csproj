@@ -171,6 +171,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\DocumentStructureModels\BodyModel.cs" />
     <Compile Include="Models\DocumentStructureModels\DocumentModel.cs" />
     <Compile Include="Models\DocumentStructureModels\MarginModel.cs" />
     <Compile Include="Models\DocumentStructureModels\ParagraphModel.cs" />

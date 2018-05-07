@@ -2,6 +2,7 @@
 using DocSystDataAccessInterface.DocumentStructureDataAccessInterface;
 using DocSystDataAccessInterface.UserDataAccessInterface;
 using DocSystEntities.DocumentStructure;
+using DocSystEntities.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -95,15 +96,18 @@ namespace DocSystBusinessLogicImplementation.DocumentStructureLogicImplementatio
             return documentDataAccess.Get(aDocumentId);
         }
 
-        public IList<Document> GetDocument(string aUsername)
+        public IList<Document> GetDocuments(string userToken)
         {
-            if (!userDataAccess.Exists(aUsername))
+            if (userDataAccess.Get(userToken)==null)
             {
                 throw new ArgumentException("The User argument not exist in database."
-                    , "aUsername");
+                    , "userToken");
             }
 
-            IList<Document> documents = documentDataAccess.Get(aUsername);
+            Guid guid = Guid.Parse(userToken);
+            User user = userDataAccess.Get(guid);
+
+            IList<Document> documents = documentDataAccess.Get(user.Username);
 
             return documents;
         }

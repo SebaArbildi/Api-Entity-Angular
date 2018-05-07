@@ -1,5 +1,6 @@
 ﻿using DocSystEntities.DocumentStructure;
 using System;
+using System.Collections.Generic;
 
 namespace DocSystWebApi.Models.DocumentStructureModels
 {
@@ -19,7 +20,6 @@ namespace DocSystWebApi.Models.DocumentStructureModels
 
         public override Text ToEntity() => new Text()
         {
-            Id = this.Id,
             TextContent = this.TextContent,
             OwnStyleClass = this.OwnStyleClass,
             BodyId = this.BodyId

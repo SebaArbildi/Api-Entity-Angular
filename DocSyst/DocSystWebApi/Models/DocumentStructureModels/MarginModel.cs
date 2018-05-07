@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace DocSystWebApi.Models.DocumentStructureModels
 {
@@ -9,7 +10,7 @@ namespace DocSystWebApi.Models.DocumentStructureModels
     {
         public Guid Id { get; set; }
         public string OwnStyleClass { get; set; }
-        public List<Text> Texts { get; set; }
+        public List<TextModel> Texts { get; set; }
         [Required]
         public MarginAlign? Align { get; set; }
         public Guid? DocumentId { get; set; }
@@ -21,23 +22,41 @@ namespace DocSystWebApi.Models.DocumentStructureModels
             SetModel(margin);
         }
 
-        public override Margin ToEntity() => new Margin()
+        public override Margin ToEntity()
         {
-            Id = this.Id,
-            OwnStyleClass = this.OwnStyleClass,
-            Texts = this.Texts,
-            Align = this.Align,
-            DocumentId = this.DocumentId
-        };
+            List<Text> texts = ConvertModelsToTexts(this.Texts);
+
+            Margin thisMargin = new Margin()
+            {
+                OwnStyleClass = this.OwnStyleClass,
+                Texts = texts,
+                Align = this.Align,
+                DocumentId = this.DocumentId
+            };
+
+            return thisMargin;
+        }
 
         protected override MarginModel SetModel(Margin entity)
         {
+            List<TextModel> textModels = ConvertTextsToModels(entity.Texts);
+
             Id = entity.Id;
             OwnStyleClass = entity.OwnStyleClass;
-            Texts = entity.Texts;
+            Texts = textModels;
             Align = entity.Align;
             DocumentId = entity.DocumentId;
             return this;
+        }
+
+        private List<TextModel> ConvertTextsToModels(List<Text> texts)
+        {
+            return TextModel.ToModel(texts).ToList();
+        }
+
+        private List<Text> ConvertModelsToTexts(List<TextModel> textModels)
+        {
+            return TextModel.ToEntity(textModels).ToList();
         }
 
         public override bool Equals(object obj)

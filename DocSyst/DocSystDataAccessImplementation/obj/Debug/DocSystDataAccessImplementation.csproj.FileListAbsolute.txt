@@ -17,6 +17,7 @@ C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystDataAccessImplement
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystDataAccessImplementation\bin\Debug\Unity.Abstractions.pdb
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystDataAccessImplementation\obj\Debug\DocSystDataAccessImplementation.csprojResolveAssemblyReference.cache
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystDataAccessImplementation\obj\Debug\DocSystDataAccessImplementation.Migrations.InitialCreate.resources
+C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystDataAccessImplementation\obj\Debug\DocSystDataAccessImplementation.Migrations.init2.resources
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystDataAccessImplementation\obj\Debug\DocSystDataAccessImplementation.csproj.GenerateResource.cache
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystDataAccessImplementation\obj\Debug\DocSystDataAccessImplementation.csproj.CoreCompileInputs.cache
 C:\Users\mathi\Documents\GitHub\Arbildi-Nunez\DocSyst\DocSystDataAccessImplementation\obj\Debug\DocSystDataAccessImplementation.csproj.CopyComplete
