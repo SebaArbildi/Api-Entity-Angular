@@ -34,6 +34,14 @@ namespace DocSystTest
             return new StyleClass("name", styleList, null);
         }
 
+        internal static StyleClass CreateStyleClassInDataBaseForTest()
+        {
+            IStyleClassDataAccess styleClassDataAccess = new StyleClassDataAccess();
+            StyleClass styleClass = CreateStyleClassForTest();
+            styleClassDataAccess.Add(styleClass);
+            return styleClass;
+        }
+
         internal static Style CreateStyleForTest()
         {
             SpecificStyle specificStyle = CreateSpecificStyleInDataBaseForTest("Name");

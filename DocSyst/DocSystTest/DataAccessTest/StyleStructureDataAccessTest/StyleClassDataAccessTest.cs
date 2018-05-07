@@ -54,7 +54,12 @@ namespace DocSystTest.DataAccessTest.StyleStructureDataAccessTest
         [TestMethod]
         public void ModifyStyleClass_ExpectedParameters_Ok()
         {
-
+            styleClassDataAccess.Add(styleClass);
+            StyleClass inheritedStyleClass = Utils.CreateStyleClassInDataBaseForTest();
+            styleClass.InheritedStyleClass = inheritedStyleClass;
+            styleClassDataAccess.Modify(styleClass);
+            StyleClass obtained = styleClassDataAccess.Get(styleClass.Id);
+            Assert.AreEqual(inheritedStyleClass, obtained.InheritedStyleClass);
         }
     }
 }

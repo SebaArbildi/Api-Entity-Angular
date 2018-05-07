@@ -16,10 +16,6 @@ namespace DocSystDataAccessImplementation.StyleStructureDataAccessImplementation
         private static String INHERITED_PLUS_PROPER_STYLES = "InheritedPlusProperStyles";
         private static String OBSERVERS = "Observers";
 
-
-
-
-
         public void Add(StyleClass styleClass)
         {
             using (DocSystDbContext context = new DocSystDbContext())
