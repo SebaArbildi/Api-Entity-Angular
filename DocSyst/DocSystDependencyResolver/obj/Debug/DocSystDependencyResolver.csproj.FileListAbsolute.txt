@@ -16,6 +16,5 @@ C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystDependencyResolver\bin
 C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystDependencyResolver\bin\Debug\Unity.Interception.Configuration.pdb
 C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystDependencyResolver\bin\Debug\Unity.RegistrationByConvention.pdb
 C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystDependencyResolver\bin\Debug\Unity.ServiceLocation.pdb
-C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystDependencyResolver\obj\Debug\DocSystDependencyResolver.csprojResolveAssemblyReference.cache
 C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystDependencyResolver\obj\Debug\DocSystDependencyResolver.dll
 C:\Users\Seba\Documents\Obli\Arbildi-Nunez\DocSyst\DocSystDependencyResolver\obj\Debug\DocSystDependencyResolver.pdb

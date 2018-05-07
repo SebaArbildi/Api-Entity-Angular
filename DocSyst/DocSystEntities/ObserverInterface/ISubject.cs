@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DocSystEntities.StyleStructure;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,8 +9,8 @@ namespace DocSystEntities.ObserverInterface
 {
     public interface ISubject
     {
-        void AddObserver(IObserver observer);
-        void DeleteObserver(IObserver observer);
+        void AddObserver(StyleClass observer);
+        void DeleteObserver(StyleClass observer);
         void NotifyObservers();
     }
 }

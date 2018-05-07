@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using DocSystEntities.StyleStructure;
 using System.Collections.Generic;
 using DocSystDataAccessInterface.StyleStructureDataAccessInterface;
+using DocSystDataAccessImplementation.StyleStructureDataAccessImplementation;
 
 namespace DocSystTest.DataAccessTest.StyleStructureDataAccessTest
 {

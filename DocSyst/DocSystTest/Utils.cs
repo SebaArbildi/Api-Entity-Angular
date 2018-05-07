@@ -1,5 +1,6 @@
 ﻿using DocSystDataAccessImplementation;
 using DocSystDataAccessImplementation.StyleStructureDataAccess;
+using DocSystDataAccessImplementation.StyleStructureDataAccessImplementation;
 using DocSystDataAccessInterface.StyleStructureDataAccessInterface;
 using DocSystEntities.StyleStructure;
 using DocSystEntities.User;
@@ -27,7 +28,7 @@ namespace DocSystTest
 
         internal static StyleClass CreateStyleClassForTest()
         {
-            Style style = CreateStyleForTest();
+            Style style = CreateStyleInDataBaseForTest();
             IList<Style> styleList = new List<Style>();
             styleList.Add(style);
             return new StyleClass("name", styleList, null);
@@ -35,10 +36,16 @@ namespace DocSystTest
 
         internal static Style CreateStyleForTest()
         {
-            ISpecificStyleDataAccess specificStyleDataAccess = new SpecificStyleDataAccess();
-            SpecificStyle specificStyle = CreateSpecificStyleForTest("name");
-            specificStyleDataAccess.Add(specificStyle);
+            SpecificStyle specificStyle = CreateSpecificStyleInDataBaseForTest("Name");
             return new Style("name", specificStyle);
+        }
+
+        internal static Style CreateStyleInDataBaseForTest()
+        {
+            IStyleDataAccess styleDataAccess = new StyleDataAccess();
+            Style style = CreateStyleForTest();
+            styleDataAccess.Add(style);
+            return style;
         }
 
         internal static SpecificStyle CreateSpecificStyleForTest(String name)

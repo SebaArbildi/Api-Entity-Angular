@@ -12,7 +12,7 @@ namespace DocSystEntities.StyleStructure
         private IList<Style> properStyles;
         private StyleClass inheritedStyleClass;
         private IList<Style> inheritedPlusProperStyles;
-        private IList<IObserver> observers;
+        private IList<StyleClass> observers;
 
         ~StyleClass()
         {
@@ -25,7 +25,7 @@ namespace DocSystEntities.StyleStructure
             this.ProperStyles = new List<Style>();
             this.InheritedPlusProperStyles = new List<Style>();
             this.InheritedStyleClass = null;
-            this.Observers = new List<IObserver>();
+            this.Observers = new List<StyleClass>();
         }
 
         public StyleClass(string name)
@@ -35,7 +35,7 @@ namespace DocSystEntities.StyleStructure
             this.ProperStyles = new List<Style>();
             this.InheritedPlusProperStyles = new List<Style>();
             this.InheritedStyleClass = null;
-            this.Observers = new List<IObserver>();
+            this.Observers = new List<StyleClass>();
 
 
         }
@@ -44,7 +44,7 @@ namespace DocSystEntities.StyleStructure
         {
             this.Id = Guid.NewGuid();
             this.Name = name;
-            this.Observers = new List<IObserver>();
+            this.Observers = new List<StyleClass>();
             if (properStyles != null)
             {
                 this.ProperStyles = properStyles;
@@ -96,7 +96,7 @@ namespace DocSystEntities.StyleStructure
                 return properStyles;
             }
 
-            private set
+            set
             {
                 properStyles = value;
             }
@@ -109,7 +109,7 @@ namespace DocSystEntities.StyleStructure
                 return inheritedStyleClass;
             }
 
-            private set
+            set
             {
                 inheritedStyleClass = value;
             }
@@ -122,13 +122,13 @@ namespace DocSystEntities.StyleStructure
                 return inheritedPlusProperStyles;
             }
 
-            private set
+            set
             {
                 inheritedPlusProperStyles = value;
             }
         }
 
-        public IList<IObserver> Observers
+        public IList<StyleClass> Observers
         {
             get
             {
@@ -191,22 +191,33 @@ namespace DocSystEntities.StyleStructure
             MergeInheritedAndProperStyles();
         }
 
-        public void AddObserver(IObserver observer)
+        public void AddObserver(StyleClass observer)
         {
-            this.Observers.Add(observer);
+            this.Observers.Add((StyleClass)observer);
         }
 
-        public void DeleteObserver(IObserver observer)
+        public void DeleteObserver(StyleClass observer)
         {
-            this.Observers.Remove(observer);
+            this.Observers.Remove((StyleClass)observer);
         }
 
         public void NotifyObservers()
         {
-            foreach(IObserver observer in this.Observers)
+            foreach(StyleClass observer in this.Observers)
             {
                 observer.UpdateSubject();
             }
+        }
+
+        public override bool Equals(object obj)
+        {
+            bool equals = false;
+            StyleClass styleClass = (StyleClass)obj;
+            if (this.Id.Equals(styleClass.Id))
+            {
+                equals = true;
+            }
+            return equals;
         }
     }
 }
