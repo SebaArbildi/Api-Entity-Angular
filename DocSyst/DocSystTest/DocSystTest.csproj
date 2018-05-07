@@ -103,6 +103,7 @@
     <Compile Include="DataAccessTest\StyleStructureDataAccessTest\SpecificStyleDataAccessTest.cs" />
     <Compile Include="DataAccessTest\StyleStructureDataAccessTest\StyleClassDataAccessTest.cs" />
     <Compile Include="DataAccessTest\StyleStructureDataAccessTest\StyleDataAccessTest.cs" />
+    <Compile Include="DataAccessTest\StyleStructureDataAccessTest\FormatDataAccessTest.cs" />
     <Compile Include="DataAccessTest\UserDataAccessTest.cs" />
     <Compile Include="EntitiesTest\StyleStructureTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

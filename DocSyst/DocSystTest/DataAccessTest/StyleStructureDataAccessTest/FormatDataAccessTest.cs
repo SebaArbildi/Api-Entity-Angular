@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using DocSystEntities.StyleStructure;
 using System.Collections.Generic;
 using DocSystDataAccessInterface.StyleStructureDataAccessInterface;
+using DocSystDataAccessImplementation.StyleStructureDataAccessImplementation;
 
 namespace DocSystTest.DataAccessTest.StyleStructureDataAccessTest
 {
@@ -53,9 +54,12 @@ namespace DocSystTest.DataAccessTest.StyleStructureDataAccessTest
         [TestMethod]
         public void ModifyFormats_ExpectedParameters_Ok()
         {
-
+            StyleClass styleClass = Utils.CreateStyleClassInDataBaseForTest();
+            formatDataAccess.Add(format);
+            format.StyleClasses.Add(styleClass);
             formatDataAccess.Modify(format);
-
+            Format obtained = formatDataAccess.Get(format.Id);
+            Assert.IsTrue(obtained.StyleClasses.Contains(styleClass));
         }
     }
 }

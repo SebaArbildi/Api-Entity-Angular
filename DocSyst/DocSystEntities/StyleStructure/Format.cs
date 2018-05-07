@@ -86,5 +86,16 @@ namespace DocSystEntities.StyleStructure
                 StyleClasses.Remove(styleClass);
             }
         }
+
+        public override bool Equals(object obj)
+        {
+            bool equals = false;
+            Format format = (Format)obj;
+            if (this.Id.Equals(format.Id))
+            {
+                equals = true;
+            }
+            return equals;
+        }
     }
 }
