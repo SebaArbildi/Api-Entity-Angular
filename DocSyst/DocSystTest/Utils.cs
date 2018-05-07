@@ -68,5 +68,13 @@ namespace DocSystTest
             specificStyleDataAccess.Add(specificStyle);
             return specificStyle;
         }
+
+        internal static Format CreateFormatForTest()
+        {
+            StyleClass styleClass = CreateStyleClassInDataBaseForTest();
+            IList<StyleClass> styleClasses = new List<StyleClass>();
+            styleClasses.Add(styleClass);
+            return new Format("FormatName", styleClasses);
+        }
     }
 }
