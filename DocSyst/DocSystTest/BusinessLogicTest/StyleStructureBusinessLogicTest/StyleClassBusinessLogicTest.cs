@@ -1,4 +1,6 @@
-﻿using DocSystDataAccessImplementation.StyleStructureDataAccessImplementation;
+﻿using DocSystBusinessLogicImplementation.StyleStructureBusinessLogic;
+using DocSystBusinessLogicInterface.StyleStructureBusinessLogicInterface;
+using DocSystDataAccessImplementation.StyleStructureDataAccessImplementation;
 using DocSystDataAccessInterface.StyleStructureDataAccessInterface;
 using DocSystEntities.StyleStructure;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -104,32 +106,48 @@ namespace DocSystTest.BusinessLogicTest.StyleStructureBusinessLogicTest
         [ExpectedException(typeof(ArgumentNullException))]
         public void ModifyStyleClass_StyleClassHasNullFields_ArgumentNullException()
         {
-            styleClass.Implementation = null;
+            styleClass.Name = null;
             styleClassBusinessLogic.Modify(styleClass);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void ModifyStyleClass_StyleClassNotExists_DuplicateException()
+        public void ModifyStyleClasses_StyleClassNotExists_DuplicateException()
         {
             mockStyleDataAccess.Setup(b1 => b1.Exists(styleClass.Id)).Returns(false);
             styleClassBusinessLogic.Modify(styleClass);
         }
 
         [TestMethod]
-        public void GetStyleClass_ExpectedParameters_Ok()
+        public void GetStyleClasses_ExpectedParameters_Ok()
         {
 
-            mockStyleDataAccess.Setup(b1 => b1.Get()).Returns(new List<SpecificStyle>());
-            IList<SpecificStyle> specificsStyles = styleClassBusinessLogic.Get();
+            mockStyleDataAccess.Setup(b1 => b1.Get()).Returns(new List<StyleClass>());
+            IList<StyleClass> styleClasses = styleClassBusinessLogic.Get();
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void GetStyleClass_PersistenceException_ArgumentException()
+        public void GetStyleClasses_PersistenceException_ArgumentException()
         {
             mockStyleDataAccess.Setup(b1 => b1.Get()).Throws(new ArgumentException());
-            IList<SpecificStyle> specificsStyles = styleClassBusinessLogic.Get();
+            IList<StyleClass> specificsStyles = styleClassBusinessLogic.Get();
         }
+
+        [TestMethod]
+        public void GetStyleClass_ExpectedParameters_Ok()
+        {
+            mockStyleDataAccess.Setup(b1 => b1.Get(styleClass.Id)).Returns(styleClass);
+            styleClassBusinessLogic.Get(styleClass.Id);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void GetStyleClass_ExpectedParameters_ArgumentNullException()
+        {
+            mockStyleDataAccess.Setup(b1 => b1.Exists(styleClass.Id)).Throws(new ArgumentNullException());
+            styleClassBusinessLogic.Get(styleClass.Id);
+        }
+
     }
 }
