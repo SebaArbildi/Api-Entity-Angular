@@ -54,7 +54,7 @@ namespace DocSystTest.BusinessLogicTest.StyleStructureBusinessLogicTest
         {
             mockStyleDataAccess.Setup(b1 => b1.Add(style));
             mockStyleDataAccess.Setup(b1 => b1.Exists(style.Name)).Returns(false);
-            StyleBusinessLogic.Add(style);
+            styleBusinessLogic.Add(style);
         }
 
         [TestMethod]
@@ -63,7 +63,7 @@ namespace DocSystTest.BusinessLogicTest.StyleStructureBusinessLogicTest
         {
             style.Name = null;
 
-            StyleBusinessLogic.Add(style);
+            styleBusinessLogic.Add(style);
         }
 
         [TestMethod]
@@ -72,7 +72,7 @@ namespace DocSystTest.BusinessLogicTest.StyleStructureBusinessLogicTest
         {
             mockStyleDataAccess.Setup(b1 => b1.Exists(style.Name)).Returns(true);
 
-            StyleBusinessLogic.Add(style);
+            styleBusinessLogic.Add(style);
         }
 
         [TestMethod]
@@ -80,7 +80,7 @@ namespace DocSystTest.BusinessLogicTest.StyleStructureBusinessLogicTest
         {
             mockStyleDataAccess.Setup(b1 => b1.Delete(style.Name));
             mockStyleDataAccess.Setup(b1 => b1.Exists(style.Name)).Returns(true);
-            StyleBusinessLogic.Delete(style.Name);
+            styleBusinessLogic.Delete(style.Name);
         }
 
         [TestMethod]
@@ -88,7 +88,7 @@ namespace DocSystTest.BusinessLogicTest.StyleStructureBusinessLogicTest
         public void DeleteStyle_StyleDontExists_ArgumentNullException()
         {
             mockStyleDataAccess.Setup(b1 => b1.Exists(style.Name)).Returns(false);
-            StyleBusinessLogic.Delete("asdasd");
+            styleBusinessLogic.Delete("asdasd");
         }
 
         [TestMethod]
@@ -96,7 +96,7 @@ namespace DocSystTest.BusinessLogicTest.StyleStructureBusinessLogicTest
         {
             mockStyleDataAccess.Setup(b1 => b1.Modify(style));
             mockStyleDataAccess.Setup(b1 => b1.Exists(style.Name)).Returns(true);
-            StyleBusinessLogic.Modify(style);
+            styleBusinessLogic.Modify(style);
         }
 
         [TestMethod]
@@ -104,7 +104,7 @@ namespace DocSystTest.BusinessLogicTest.StyleStructureBusinessLogicTest
         public void ModifyStyle_StyleHasNullFields_ArgumentNullException()
         {
             style.Implementation = null;
-            StyleBusinessLogic.Modify(style);
+            styleBusinessLogic.Modify(style);
         }
 
         [TestMethod]
@@ -112,7 +112,7 @@ namespace DocSystTest.BusinessLogicTest.StyleStructureBusinessLogicTest
         public void ModifyStyle_StyleNotExists_DuplicateException()
         {
             mockStyleDataAccess.Setup(b1 => b1.Exists(style.Name)).Returns(false);
-            StyleBusinessLogic.Modify(style);
+            styleBusinessLogic.Modify(style);
         }
 
         [TestMethod]
@@ -120,7 +120,7 @@ namespace DocSystTest.BusinessLogicTest.StyleStructureBusinessLogicTest
         {
 
             mockStyleDataAccess.Setup(b1 => b1.Get()).Returns(new List<Style>());
-            IList<Style> specificsStyles = StyleBusinessLogic.Get();
+            IList<Style> specificsStyles = styleBusinessLogic.Get();
         }
 
         [TestMethod]
@@ -128,7 +128,23 @@ namespace DocSystTest.BusinessLogicTest.StyleStructureBusinessLogicTest
         public void GetStyles_PersistenceException_ArgumentException()
         {
             mockStyleDataAccess.Setup(b1 => b1.Get()).Throws(new ArgumentException());
-            IList<Style> specificsStyles = StyleBusinessLogic.Get();
+            IList<Style> specificsStyles = styleBusinessLogic.Get();
+        }
+
+        [TestMethod]
+        public void GetStyle_ExpectedParameters_Ok()
+        {
+
+            mockStyleDataAccess.Setup(b1 => b1.Get(style.Name)).Returns(style);
+            Style obtained = styleBusinessLogic.Get(style.Name);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void GetStyle_PersistenceException_ArgumentException()
+        {
+            mockStyleDataAccess.Setup(b1 => b1.Get()).Throws(new ArgumentException());
+            IList<Style> specificsStyles = styleBusinessLogic.Get();
         }
     }
 }

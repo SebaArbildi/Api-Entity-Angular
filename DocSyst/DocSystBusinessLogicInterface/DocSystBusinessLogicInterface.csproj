@@ -44,6 +44,7 @@
     <Compile Include="AuthorizationBusinessLogicInterface\ILoginBusinessLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StyleStructureBusinessLogicInterface\ISpecificStyleBusinessLogic.cs" />
+    <Compile Include="StyleStructureBusinessLogicInterface\IStyleBusinessLogic.cs" />
     <Compile Include="UserBusinessLogicInterface\IUserBusinessLogic.cs" />
   </ItemGroup>
   <ItemGroup>

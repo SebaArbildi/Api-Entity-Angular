@@ -61,11 +61,6 @@ namespace DocSystBusinessLogicImplementation.StyleStructureBusinessLogic
             }
         }
 
-        public bool Exists(Guid id)
-        {
-            return SpecificStyleDataAccess.Exists(id);
-        }
-
         public IList<SpecificStyle> Get()
         {
             return SpecificStyleDataAccess.Get();
@@ -106,6 +101,11 @@ namespace DocSystBusinessLogicImplementation.StyleStructureBusinessLogic
         private bool SpecificStyleIsNull(SpecificStyle specificStyle)
         {
             return specificStyle == null || specificStyle.Implementation == null || specificStyle.Name == null;
+        }
+
+        private bool Exists(Guid id)
+        {
+            return SpecificStyleDataAccess.Exists(id);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using DocSystDataAccessImplementation.StyleStructureDataAccess;
+using DocSystDataAccessImplementation.StyleStructureDataAccessImplementation;
 using DocSystDataAccessImplementation.UserDataAccessImplementation;
 using DocSystDataAccessInterface.StyleStructureDataAccessInterface;
 using DocSystDataAccessInterface.UserDataAccessInterface;
@@ -14,6 +15,7 @@ namespace DocSystDataAccessImplementation
         {
             registerComponent.RegisterType<IUserDataAccess, UserDataAccess>();
             registerComponent.RegisterType<ISpecificStyleDataAccess, SpecificStyleDataAccess>();
+            registerComponent.RegisterType<IStyleDataAccess, StyleDataAccess>();
         }
     }
 }
