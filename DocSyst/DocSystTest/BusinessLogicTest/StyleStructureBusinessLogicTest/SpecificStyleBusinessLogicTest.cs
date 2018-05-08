@@ -6,6 +6,7 @@ using DocSystDataAccessInterface.StyleStructureDataAccessInterface;
 using DocSystDataAccessImplementation.StyleStructureDataAccess;
 using DocSystBusinessLogicInterface.StyleStructureBusinessLogicInterface;
 using DocSystBusinessLogicImplementation.StyleStructureBusinessLogic;
+using System.Collections.Generic;
 
 namespace DocSystTest.BusinessLogicTest.StyleStructureBusinessLogicTest
 {
@@ -52,6 +53,8 @@ namespace DocSystTest.BusinessLogicTest.StyleStructureBusinessLogicTest
         public void AddSpecificStyle_ExpectedParameters_Ok()
         {
             specificStyleBusinessLogic.Add(specificStyle);
+            SpecificStyle obtained = specificStyleBusinessLogic.Get(specificStyle.Id);
+            Assert.AreEqual(specificStyle, obtained);
         }
 
         [TestMethod]
@@ -71,5 +74,65 @@ namespace DocSystTest.BusinessLogicTest.StyleStructureBusinessLogicTest
 
             specificStyleBusinessLogic.Add(specificStyle);
         }
+
+        [TestMethod]
+        public void DeleteSpecificStyle_ExpectedParameters_Ok()
+        {
+            specificStyleBusinessLogic.Add(specificStyle);
+            specificStyleBusinessLogic.Delete(specificStyle.Id);
+            bool obtained = specificStyleBusinessLogic.Exists(specificStyle.Id);
+            Assert.IsFalse(obtained);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void DeleteSpecificStyle_SpecificStyleDontExists_ArgumentNullException()
+        {
+            specificStyleBusinessLogic.Delete(Guid.NewGuid());
+        }
+
+        [TestMethod]
+        public void ModifySpecificStyle_ExpectedParameters_Ok()
+        {
+            specificStyleBusinessLogic.Add(specificStyle);
+            specificStyle.Implementation = "asdasd";
+            specificStyleBusinessLogic.Modify(specificStyle);
+            SpecificStyle obtained = specificStyleBusinessLogic.Get(specificStyle.Id);
+            Assert.AreEqual(specificStyle.Implementation, obtained.Implementation);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ModifySpecificStyle_SpecificStyleHasNullFields_ArgumentNullException()
+        {
+            specificStyleBusinessLogic.Add(specificStyle);
+            specificStyle.Implementation = null;
+            specificStyleBusinessLogic.Modify(specificStyle);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(DuplicateWaitObjectException))]
+        public void ModifySpecificStyle_SpecificStyleNotExists_DuplicateException()
+        {
+            specificStyleBusinessLogic.Modify(specificStyle);
+        }
+
+        [TestMethod]
+        public void GetSpecificStyles_ExpectedParameters_Ok()
+        {
+            specificStyleBusinessLogic.Add(specificStyle);
+            IList<SpecificStyle> specificsStyles = specificStyleBusinessLogic.Get();
+            Assert.IsTrue(specificsStyles.Contains(specificStyle));
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void GetSpecificStyles_PersistenceException_ArgumentException()
+        {
+            specificStyleBusinessLogic.Add(specificStyle);
+            IList<SpecificStyle> specificsStyles = specificStyleBusinessLogic.Get();
+        }
+
+
     }
 }

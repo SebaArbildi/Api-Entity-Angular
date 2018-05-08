@@ -37,5 +37,30 @@ namespace DocSystBusinessLogicImplementation.StyleStructureBusinessLogic
         {
             throw new NotImplementedException();
         }
+
+        public void Delete(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Exists(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IList<SpecificStyle> Get()
+        {
+            throw new NotImplementedException();
+        }
+
+        public SpecificStyle Get(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Modify(SpecificStyle specificStyle)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
