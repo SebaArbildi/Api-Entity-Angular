@@ -130,7 +130,5 @@ namespace DocSystTest.BusinessLogicTest.StyleStructureBusinessLogicTest
             mockSpecificStyleDataAccess.Setup(b1 => b1.Get()).Throws(new ArgumentException());
             IList<SpecificStyle> specificsStyles = specificStyleBusinessLogic.Get();
         }
-
-
     }
 }

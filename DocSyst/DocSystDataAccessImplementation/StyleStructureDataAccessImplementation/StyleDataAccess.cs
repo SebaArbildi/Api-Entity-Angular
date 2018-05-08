@@ -31,6 +31,16 @@ namespace DocSystDataAccessImplementation.StyleStructureDataAccessImplementation
             }
         }
 
+        public bool Exists(string name)
+        {
+            bool exists = false;
+            using (DocSystDbContext context = new DocSystDbContext())
+            {
+                exists = context.Styles.Any(styleDb => styleDb.Name == name);
+            }
+            return exists;
+        }
+
         public IList<Style> Get()
         {
             IList<Style> styles = null;

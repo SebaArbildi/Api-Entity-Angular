@@ -14,5 +14,6 @@ namespace DocSystDataAccessInterface.StyleStructureDataAccessInterface
         void Delete(string name);
         IList<Style> Get();
         void Modify(Style style);
+        bool Exists(string name);
     }
 }

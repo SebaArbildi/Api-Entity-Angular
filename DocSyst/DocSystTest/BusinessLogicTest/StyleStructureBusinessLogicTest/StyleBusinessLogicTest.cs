@@ -3,6 +3,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using DocSystDataAccessInterface.StyleStructureDataAccessInterface;
 using DocSystEntities.StyleStructure;
+using DocSystBusinessLogicInterface.StyleStructureBusinessLogicInterface;
+using DocSystBusinessLogicImplementation.StyleStructureBusinessLogic;
+using DocSystDataAccessImplementation.StyleStructureDataAccessImplementation;
+using System.Collections.Generic;
 
 namespace DocSystTest.BusinessLogicTest.StyleStructureBusinessLogicTest
 {
@@ -49,7 +53,7 @@ namespace DocSystTest.BusinessLogicTest.StyleStructureBusinessLogicTest
         public void AddStyle_ExpectedParameters_Ok()
         {
             mockStyleDataAccess.Setup(b1 => b1.Add(style));
-            mockStyleDataAccess.Setup(b1 => b1.Exists(style.Id)).Returns(false);
+            mockStyleDataAccess.Setup(b1 => b1.Exists(style.Name)).Returns(false);
             StyleBusinessLogic.Add(style);
         }
 
@@ -66,7 +70,7 @@ namespace DocSystTest.BusinessLogicTest.StyleStructureBusinessLogicTest
         [ExpectedException(typeof(DuplicateWaitObjectException))]
         public void AddStyle_StyleAlreadyExists_DuplicateException()
         {
-            mockStyleDataAccess.Setup(b1 => b1.Exists(style.Id)).Returns(true);
+            mockStyleDataAccess.Setup(b1 => b1.Exists(style.Name)).Returns(true);
 
             StyleBusinessLogic.Add(style);
         }
@@ -74,24 +78,24 @@ namespace DocSystTest.BusinessLogicTest.StyleStructureBusinessLogicTest
         [TestMethod]
         public void DeleteStyle_ExpectedParameters_Ok()
         {
-            mockStyleDataAccess.Setup(b1 => b1.Delete(style.Id));
-            mockStyleDataAccess.Setup(b1 => b1.Exists(style.Id)).Returns(true);
-            StyleBusinessLogic.Delete(style.Id);
+            mockStyleDataAccess.Setup(b1 => b1.Delete(style.Name));
+            mockStyleDataAccess.Setup(b1 => b1.Exists(style.Name)).Returns(true);
+            StyleBusinessLogic.Delete(style.Name);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void DeleteStyle_StyleDontExists_ArgumentNullException()
         {
-            mockStyleDataAccess.Setup(b1 => b1.Exists(style.Id)).Returns(false);
-            StyleBusinessLogic.Delete(Guid.NewGuid());
+            mockStyleDataAccess.Setup(b1 => b1.Exists(style.Name)).Returns(false);
+            StyleBusinessLogic.Delete("asdasd");
         }
 
         [TestMethod]
         public void ModifyStyle_ExpectedParameters_Ok()
         {
             mockStyleDataAccess.Setup(b1 => b1.Modify(style));
-            mockStyleDataAccess.Setup(b1 => b1.Exists(style.Id)).Returns(true);
+            mockStyleDataAccess.Setup(b1 => b1.Exists(style.Name)).Returns(true);
             StyleBusinessLogic.Modify(style);
         }
 
@@ -107,7 +111,7 @@ namespace DocSystTest.BusinessLogicTest.StyleStructureBusinessLogicTest
         [ExpectedException(typeof(ArgumentException))]
         public void ModifyStyle_StyleNotExists_DuplicateException()
         {
-            mockStyleDataAccess.Setup(b1 => b1.Exists(style.Id)).Returns(false);
+            mockStyleDataAccess.Setup(b1 => b1.Exists(style.Name)).Returns(false);
             StyleBusinessLogic.Modify(style);
         }
 
@@ -115,8 +119,8 @@ namespace DocSystTest.BusinessLogicTest.StyleStructureBusinessLogicTest
         public void GetStyles_ExpectedParameters_Ok()
         {
 
-            mockStyleDataAccess.Setup(b1 => b1.Get()).Returns(new List<style>());
-            IList<style> specificsStyles = StyleBusinessLogic.Get();
+            mockStyleDataAccess.Setup(b1 => b1.Get()).Returns(new List<Style>());
+            IList<Style> specificsStyles = StyleBusinessLogic.Get();
         }
 
         [TestMethod]
@@ -124,7 +128,7 @@ namespace DocSystTest.BusinessLogicTest.StyleStructureBusinessLogicTest
         public void GetStyles_PersistenceException_ArgumentException()
         {
             mockStyleDataAccess.Setup(b1 => b1.Get()).Throws(new ArgumentException());
-            IList<style> specificsStyles = StyleBusinessLogic.Get();
+            IList<Style> specificsStyles = StyleBusinessLogic.Get();
         }
     }
 }
