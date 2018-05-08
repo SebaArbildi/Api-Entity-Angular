@@ -1,9 +1,6 @@
 ﻿using DocSystBusinessLogicInterface.StyleStructureBusinessLogicInterface;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DocSystEntities.StyleStructure;
 using DocSystDataAccessInterface.StyleStructureDataAccessInterface;
 
@@ -35,32 +32,81 @@ namespace DocSystBusinessLogicImplementation.StyleStructureBusinessLogic
 
         public void Add(SpecificStyle specificStyle)
         {
-            throw new NotImplementedException();
+            if (!SpecificStyleIsNull(specificStyle))
+            {
+                if (!Exists(specificStyle.Id))
+                {
+                    SpecificStyleDataAccess.Add(specificStyle);
+                }
+                else
+                {
+                    throw new DuplicateWaitObjectException(specificStyle.Id + " already exists");
+                }
+            }
+            else
+            {
+                throw new ArgumentNullException("Null references");
+            }
         }
 
         public void Delete(Guid id)
         {
-            throw new NotImplementedException();
+            if (Exists(id))
+            {
+                SpecificStyleDataAccess.Delete(id);
+            }
+            else
+            {
+                throw new ArgumentException("Id doesn't exist " + id);
+            }
         }
 
         public bool Exists(Guid id)
         {
-            throw new NotImplementedException();
+            return SpecificStyleDataAccess.Exists(id);
         }
 
         public IList<SpecificStyle> Get()
         {
-            throw new NotImplementedException();
+            return SpecificStyleDataAccess.Get();
         }
 
         public SpecificStyle Get(Guid id)
         {
-            throw new NotImplementedException();
+            if (Exists(id))
+            {
+                return SpecificStyleDataAccess.Get(id);
+            }
+            else
+            {
+                throw new ArgumentException("Id doesn't exist " + id);
+            }
         }
 
         public void Modify(SpecificStyle specificStyle)
         {
-            throw new NotImplementedException();
+            if (!SpecificStyleIsNull(specificStyle))
+            {
+                if (Exists(specificStyle.Id))
+                {
+
+                    SpecificStyleDataAccess.Modify(specificStyle);
+                }
+                else
+                {
+                    throw new ArgumentException("SpecificStyle doesn't exist " + specificStyle.Id);
+                }
+            }
+            else
+            {
+                throw new ArgumentNullException("Null references");
+            }
+        }
+
+        private bool SpecificStyleIsNull(SpecificStyle specificStyle)
+        {
+            return specificStyle == null || specificStyle.Implementation == null || specificStyle.Name == null;
         }
     }
 }
+

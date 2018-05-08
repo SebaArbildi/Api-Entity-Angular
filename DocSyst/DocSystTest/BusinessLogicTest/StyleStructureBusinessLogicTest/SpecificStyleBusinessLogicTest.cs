@@ -52,9 +52,9 @@ namespace DocSystTest.BusinessLogicTest.StyleStructureBusinessLogicTest
         [TestMethod]
         public void AddSpecificStyle_ExpectedParameters_Ok()
         {
+            mockSpecificStyleDataAccess.Setup(b1 => b1.Add(specificStyle));
+            mockSpecificStyleDataAccess.Setup(b1 => b1.Exists(specificStyle.Id)).Returns(false);
             specificStyleBusinessLogic.Add(specificStyle);
-            SpecificStyle obtained = specificStyleBusinessLogic.Get(specificStyle.Id);
-            Assert.AreEqual(specificStyle, obtained);
         }
 
         [TestMethod]
@@ -78,58 +78,56 @@ namespace DocSystTest.BusinessLogicTest.StyleStructureBusinessLogicTest
         [TestMethod]
         public void DeleteSpecificStyle_ExpectedParameters_Ok()
         {
-            specificStyleBusinessLogic.Add(specificStyle);
+            mockSpecificStyleDataAccess.Setup(b1 => b1.Delete(specificStyle.Id));
+            mockSpecificStyleDataAccess.Setup(b1 => b1.Exists(specificStyle.Id)).Returns(true);
             specificStyleBusinessLogic.Delete(specificStyle.Id);
-            bool obtained = specificStyleBusinessLogic.Exists(specificStyle.Id);
-            Assert.IsFalse(obtained);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void DeleteSpecificStyle_SpecificStyleDontExists_ArgumentNullException()
         {
+            mockSpecificStyleDataAccess.Setup(b1 => b1.Exists(specificStyle.Id)).Returns(false);
             specificStyleBusinessLogic.Delete(Guid.NewGuid());
         }
 
         [TestMethod]
         public void ModifySpecificStyle_ExpectedParameters_Ok()
         {
-            specificStyleBusinessLogic.Add(specificStyle);
-            specificStyle.Implementation = "asdasd";
+            mockSpecificStyleDataAccess.Setup(b1 => b1.Modify(specificStyle));
+            mockSpecificStyleDataAccess.Setup(b1 => b1.Exists(specificStyle.Id)).Returns(true);
             specificStyleBusinessLogic.Modify(specificStyle);
-            SpecificStyle obtained = specificStyleBusinessLogic.Get(specificStyle.Id);
-            Assert.AreEqual(specificStyle.Implementation, obtained.Implementation);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void ModifySpecificStyle_SpecificStyleHasNullFields_ArgumentNullException()
         {
-            specificStyleBusinessLogic.Add(specificStyle);
             specificStyle.Implementation = null;
             specificStyleBusinessLogic.Modify(specificStyle);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(DuplicateWaitObjectException))]
+        [ExpectedException(typeof(ArgumentException))]
         public void ModifySpecificStyle_SpecificStyleNotExists_DuplicateException()
         {
+            mockSpecificStyleDataAccess.Setup(b1 => b1.Exists(specificStyle.Id)).Returns(false);
             specificStyleBusinessLogic.Modify(specificStyle);
         }
 
         [TestMethod]
         public void GetSpecificStyles_ExpectedParameters_Ok()
         {
-            specificStyleBusinessLogic.Add(specificStyle);
+
+            mockSpecificStyleDataAccess.Setup(b1 => b1.Get()).Returns(new List<SpecificStyle>());
             IList<SpecificStyle> specificsStyles = specificStyleBusinessLogic.Get();
-            Assert.IsTrue(specificsStyles.Contains(specificStyle));
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void GetSpecificStyles_PersistenceException_ArgumentException()
         {
-            specificStyleBusinessLogic.Add(specificStyle);
+            mockSpecificStyleDataAccess.Setup(b1 => b1.Get()).Throws(new ArgumentException());
             IList<SpecificStyle> specificsStyles = specificStyleBusinessLogic.Get();
         }
 
