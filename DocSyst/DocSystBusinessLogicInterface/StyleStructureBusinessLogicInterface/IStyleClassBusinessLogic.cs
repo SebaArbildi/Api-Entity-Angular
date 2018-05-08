@@ -10,7 +10,7 @@ namespace DocSystBusinessLogicInterface.StyleStructureBusinessLogicInterface
     public interface IStyleClassBusinessLogic
     {
         void Add(StyleClass styleClass);
-        void Delete(Guid guid);
+        void Delete(Guid id);
         void Modify(StyleClass styleClass);
         IList<StyleClass> Get();
         StyleClass Get(Guid id);

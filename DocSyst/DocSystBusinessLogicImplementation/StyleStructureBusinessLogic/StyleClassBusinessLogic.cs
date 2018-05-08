@@ -32,30 +32,84 @@ namespace DocSystBusinessLogicImplementation.StyleStructureBusinessLogic
             }
         }
 
-         
+
         public void Add(StyleClass styleClass)
         {
-            throw new NotImplementedException();
+            if (!StyleClassIsNull(styleClass))
+            {
+                if (!Exists(styleClass.Id))
+                {
+                    StyleClassDataAccess.Add(styleClass);
+                }
+                else
+                {
+                    throw new DuplicateWaitObjectException(styleClass.Id + " already exists");
+                }
+            }
+            else
+            {
+                throw new ArgumentNullException("Null references");
+            }
         }
 
-        public void Delete(Guid guid)
+        public void Delete(Guid id)
         {
-            throw new NotImplementedException();
+            if (Exists(id))
+            {
+                StyleClassDataAccess.Delete(id);
+            }
+            else
+            {
+                throw new ArgumentException("Id doesn't exist " + id);
+            }
         }
 
         public IList<StyleClass> Get()
         {
-            throw new NotImplementedException();
+            return StyleClassDataAccess.Get();
         }
 
         public StyleClass Get(Guid id)
         {
-            throw new NotImplementedException();
+            if (Exists(id))
+            {
+                return StyleClassDataAccess.Get(id);
+            }
+            else
+            {
+                throw new ArgumentException("Id doesn't exist " + id);
+            }
         }
 
         public void Modify(StyleClass styleClass)
         {
-            throw new NotImplementedException();
+            if (!StyleClassIsNull(styleClass))
+            {
+                if (Exists(styleClass.Id))
+                {
+
+                    StyleClassDataAccess.Modify(styleClass);
+                }
+                else
+                {
+                    throw new ArgumentException("StyleClass doesn't exist " + styleClass.Id);
+                }
+            }
+            else
+            {
+                throw new ArgumentNullException("Null references");
+            }
+        }
+
+        private bool StyleClassIsNull(StyleClass styleClass)
+        {
+            return styleClass == null || styleClass.Name == null || styleClass.InheritedPlusProperStyles == null ||
+                styleClass.InheritedStyleClass == null || styleClass.Observers == null || styleClass.ProperStyles == null;
+        }
+
+        private bool Exists(Guid id)
+        {
+            return this.StyleClassDataAccess.Exists(id);
         }
     }
 }
