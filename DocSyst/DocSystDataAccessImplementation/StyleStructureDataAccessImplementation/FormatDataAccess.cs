@@ -33,6 +33,16 @@ namespace DocSystDataAccessImplementation.StyleStructureDataAccessImplementation
             }
         }
 
+        public bool Exists(Guid id)
+        {
+            bool exists = false;
+            using (DocSystDbContext context = new DocSystDbContext())
+            {
+                exists = context.Formats.Any(formatDb => formatDb.Id == id);
+            }
+            return exists;
+        }
+
         public IList<Format> Get()
         {
             IList<Format> formats = null;

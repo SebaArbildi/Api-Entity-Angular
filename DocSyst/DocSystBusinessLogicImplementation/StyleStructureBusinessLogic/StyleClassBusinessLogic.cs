@@ -158,16 +158,15 @@ namespace DocSystBusinessLogicImplementation.StyleStructureBusinessLogic
             }
         }
 
+        public bool Exists(Guid id)
+        {
+            return this.StyleClassDataAccess.Exists(id);
+        }
 
         private bool StyleClassIsNull(StyleClass styleClass)
         {
             return styleClass == null || styleClass.Name == null || styleClass.InheritedPlusProperStyles == null ||
                 styleClass.Observers == null || styleClass.ProperStyles == null;
-        }
-
-        private bool Exists(Guid id)
-        {
-            return this.StyleClassDataAccess.Exists(id);
         }
     }
 }
