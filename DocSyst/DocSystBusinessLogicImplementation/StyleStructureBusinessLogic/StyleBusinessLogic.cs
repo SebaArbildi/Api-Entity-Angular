@@ -117,14 +117,14 @@ namespace DocSystBusinessLogicImplementation.StyleStructureBusinessLogic
             }
         }
 
+        public bool Exists(string name)
+        {
+            return this.StyleDataAccess.Exists(name);
+        }
+
         private bool StyleIsNull(Style style)
         {
             return style == null || style.Name == null || style.Implementation == null;
-        }
-
-        private bool Exists(string name)
-        {
-            return this.StyleDataAccess.Exists(name);
         }
     }
 }

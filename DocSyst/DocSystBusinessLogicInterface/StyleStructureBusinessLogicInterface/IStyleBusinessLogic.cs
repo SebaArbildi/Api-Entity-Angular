@@ -14,5 +14,6 @@ namespace DocSystBusinessLogicInterface.StyleStructureBusinessLogicInterface
         void Modify(Style style);
         IList<Style> Get();
         Style Get(string name);
+        bool Exists(string name);
     }
 }

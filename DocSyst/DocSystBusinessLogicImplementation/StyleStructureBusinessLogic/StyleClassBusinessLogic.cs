@@ -12,11 +12,13 @@ namespace DocSystBusinessLogicImplementation.StyleStructureBusinessLogic
     public class StyleClassBusinessLogic : IStyleClassBusinessLogic
     {
         private IStyleClassDataAccess styleClassDataAccess;
+        private IStyleBusinessLogic styleBusinessLogic;
         public StyleClassBusinessLogic() { }
 
-        public StyleClassBusinessLogic(IStyleClassDataAccess styleClassDataAccess)
+        public StyleClassBusinessLogic(IStyleClassDataAccess styleClassDataAccess, IStyleBusinessLogic styleBusinessLogic)
         {
             this.StyleClassDataAccess = styleClassDataAccess;
+            this.StyleBusinessLogic = styleBusinessLogic;
         }
 
         public IStyleClassDataAccess StyleClassDataAccess
@@ -32,6 +34,18 @@ namespace DocSystBusinessLogicImplementation.StyleStructureBusinessLogic
             }
         }
 
+        public IStyleBusinessLogic StyleBusinessLogic
+        {
+            get
+            {
+                return styleBusinessLogic;
+            }
+
+            set
+            {
+                styleBusinessLogic = value;
+            }
+        }
 
         public void Add(StyleClass styleClass)
         {
@@ -101,10 +115,54 @@ namespace DocSystBusinessLogicImplementation.StyleStructureBusinessLogic
             }
         }
 
+        public void AddStyle(Guid styleClassId, Style style)
+        {
+            if (Exists(styleClassId))
+            {
+                if (StyleBusinessLogic.Exists(style.Name))
+                {
+                    StyleClass styleClass = StyleClassDataAccess.Get(styleClassId);
+                    styleClass.AddStyle(style);
+                    StyleClassDataAccess.Modify(styleClass);
+                }
+                else
+                {
+                    throw new ArgumentException("Style doesn't exist " + style.Name);
+                }
+            }
+            else
+            {
+                throw new ArgumentException("StyleClass doesn't exist " + styleClassId);
+            }
+        }
+
+        public void RemoveStyle(Guid styleClassId, string styleName)
+        {
+            if (Exists(styleClassId))
+            {
+                if (StyleBusinessLogic.Exists(styleName))
+                {
+                    StyleClass styleClass = StyleClassDataAccess.Get(styleClassId);
+                    Style style = StyleBusinessLogic.Get(styleName);
+                    styleClass.RemoveStyle(style);
+                    StyleClassDataAccess.Modify(styleClass);
+                }
+                else
+                {
+                    throw new ArgumentException("Style doesn't exist " + styleName);
+                }
+            }
+            else
+            {
+                throw new ArgumentException("StyleClass doesn't exist " + styleClassId);
+            }
+        }
+
+
         private bool StyleClassIsNull(StyleClass styleClass)
         {
             return styleClass == null || styleClass.Name == null || styleClass.InheritedPlusProperStyles == null ||
-                styleClass.InheritedStyleClass == null || styleClass.Observers == null || styleClass.ProperStyles == null;
+                styleClass.Observers == null || styleClass.ProperStyles == null;
         }
 
         private bool Exists(Guid id)

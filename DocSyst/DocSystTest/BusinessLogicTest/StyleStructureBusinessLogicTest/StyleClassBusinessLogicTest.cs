@@ -16,9 +16,11 @@ namespace DocSystTest.BusinessLogicTest.StyleStructureBusinessLogicTest
     [TestClass]
     public class StyleClassBusinessLogicTest
     {
-        private Mock<IStyleClassDataAccess> mockStyleDataAccess;
+        private Mock<IStyleClassDataAccess> mockStyleClassDataAccess;
+        private Mock<IStyleBusinessLogic> mockStyleBusinessLogic;
         private IStyleClassBusinessLogic styleClassBusinessLogic;
         private StyleClass styleClass;
+        private Style style;
 
         [TestCleanup]
         public void CleanDataBase()
@@ -29,9 +31,11 @@ namespace DocSystTest.BusinessLogicTest.StyleStructureBusinessLogicTest
         [TestInitialize]
         public void TestInitialize()
         {
-            mockStyleDataAccess = new Mock<IStyleClassDataAccess>();
-            styleClassBusinessLogic = new StyleClassBusinessLogic(mockStyleDataAccess.Object);
+            mockStyleBusinessLogic = new Mock<IStyleBusinessLogic>();
+            mockStyleClassDataAccess = new Mock<IStyleClassDataAccess>();
+            styleClassBusinessLogic = new StyleClassBusinessLogic(mockStyleClassDataAccess.Object, mockStyleBusinessLogic.Object);
             styleClass = Utils.CreateStyleClassForTest();
+            style = Utils.CreateStyleForTest();
         }
 
         [TestMethod]
@@ -47,7 +51,7 @@ namespace DocSystTest.BusinessLogicTest.StyleStructureBusinessLogicTest
         {
             IStyleClassDataAccess styleClassDataAccess = new StyleClassDataAccess();
 
-            IStyleClassBusinessLogic styleClassBL = new SpecificStyleBusinessLogic(styleClassDataAccess);
+            IStyleClassBusinessLogic styleClassBL = new StyleClassBusinessLogic(styleClassDataAccess, mockStyleBusinessLogic.Object);
 
             Assert.IsNotNull(styleClassBL);
         }
@@ -55,8 +59,8 @@ namespace DocSystTest.BusinessLogicTest.StyleStructureBusinessLogicTest
         [TestMethod]
         public void AddStyleClass_ExpectedParameters_Ok()
         {
-            mockStyleDataAccess.Setup(b1 => b1.Add(styleClass));
-            mockStyleDataAccess.Setup(b1 => b1.Exists(styleClass.Id)).Returns(false);
+            mockStyleClassDataAccess.Setup(b1 => b1.Add(styleClass));
+            mockStyleClassDataAccess.Setup(b1 => b1.Exists(styleClass.Id)).Returns(false);
             styleClassBusinessLogic.Add(styleClass);
         }
 
@@ -73,7 +77,7 @@ namespace DocSystTest.BusinessLogicTest.StyleStructureBusinessLogicTest
         [ExpectedException(typeof(DuplicateWaitObjectException))]
         public void AddStyleClass_StyleClassAlreadyExists_DuplicateException()
         {
-            mockStyleDataAccess.Setup(b1 => b1.Exists(styleClass.Id)).Returns(true);
+            mockStyleClassDataAccess.Setup(b1 => b1.Exists(styleClass.Id)).Returns(true);
 
             styleClassBusinessLogic.Add(styleClass);
         }
@@ -81,8 +85,8 @@ namespace DocSystTest.BusinessLogicTest.StyleStructureBusinessLogicTest
         [TestMethod]
         public void DeleteStyleClass_ExpectedParameters_Ok()
         {
-            mockStyleDataAccess.Setup(b1 => b1.Delete(styleClass.Id));
-            mockStyleDataAccess.Setup(b1 => b1.Exists(styleClass.Id)).Returns(true);
+            mockStyleClassDataAccess.Setup(b1 => b1.Delete(styleClass.Id));
+            mockStyleClassDataAccess.Setup(b1 => b1.Exists(styleClass.Id)).Returns(true);
             styleClassBusinessLogic.Delete(styleClass.Id);
         }
 
@@ -90,15 +94,15 @@ namespace DocSystTest.BusinessLogicTest.StyleStructureBusinessLogicTest
         [ExpectedException(typeof(ArgumentException))]
         public void DeleteStyleClasse_StyleClassDontExists_ArgumentNullException()
         {
-            mockStyleDataAccess.Setup(b1 => b1.Exists(styleClass.Id)).Returns(false);
+            mockStyleClassDataAccess.Setup(b1 => b1.Exists(styleClass.Id)).Returns(false);
             styleClassBusinessLogic.Delete(Guid.NewGuid());
         }
 
         [TestMethod]
         public void ModifyStyleClass_ExpectedParameters_Ok()
         {
-            mockStyleDataAccess.Setup(b1 => b1.Modify(styleClass));
-            mockStyleDataAccess.Setup(b1 => b1.Exists(styleClass.Id)).Returns(true);
+            mockStyleClassDataAccess.Setup(b1 => b1.Modify(styleClass));
+            mockStyleClassDataAccess.Setup(b1 => b1.Exists(styleClass.Id)).Returns(true);
             styleClassBusinessLogic.Modify(styleClass);
         }
 
@@ -114,7 +118,7 @@ namespace DocSystTest.BusinessLogicTest.StyleStructureBusinessLogicTest
         [ExpectedException(typeof(ArgumentException))]
         public void ModifyStyleClasses_StyleClassNotExists_DuplicateException()
         {
-            mockStyleDataAccess.Setup(b1 => b1.Exists(styleClass.Id)).Returns(false);
+            mockStyleClassDataAccess.Setup(b1 => b1.Exists(styleClass.Id)).Returns(false);
             styleClassBusinessLogic.Modify(styleClass);
         }
 
@@ -122,7 +126,7 @@ namespace DocSystTest.BusinessLogicTest.StyleStructureBusinessLogicTest
         public void GetStyleClasses_ExpectedParameters_Ok()
         {
 
-            mockStyleDataAccess.Setup(b1 => b1.Get()).Returns(new List<StyleClass>());
+            mockStyleClassDataAccess.Setup(b1 => b1.Get()).Returns(new List<StyleClass>());
             IList<StyleClass> styleClasses = styleClassBusinessLogic.Get();
         }
 
@@ -130,14 +134,15 @@ namespace DocSystTest.BusinessLogicTest.StyleStructureBusinessLogicTest
         [ExpectedException(typeof(ArgumentException))]
         public void GetStyleClasses_PersistenceException_ArgumentException()
         {
-            mockStyleDataAccess.Setup(b1 => b1.Get()).Throws(new ArgumentException());
+            mockStyleClassDataAccess.Setup(b1 => b1.Get()).Throws(new ArgumentException());
             IList<StyleClass> specificsStyles = styleClassBusinessLogic.Get();
         }
 
         [TestMethod]
         public void GetStyleClass_ExpectedParameters_Ok()
         {
-            mockStyleDataAccess.Setup(b1 => b1.Get(styleClass.Id)).Returns(styleClass);
+            mockStyleClassDataAccess.Setup(b1 => b1.Exists(styleClass.Id)).Returns(true);
+            mockStyleClassDataAccess.Setup(b1 => b1.Get(styleClass.Id)).Returns(styleClass);
             styleClassBusinessLogic.Get(styleClass.Id);
         }
 
@@ -145,8 +150,63 @@ namespace DocSystTest.BusinessLogicTest.StyleStructureBusinessLogicTest
         [ExpectedException(typeof(ArgumentNullException))]
         public void GetStyleClass_ExpectedParameters_ArgumentNullException()
         {
-            mockStyleDataAccess.Setup(b1 => b1.Exists(styleClass.Id)).Throws(new ArgumentNullException());
+            mockStyleClassDataAccess.Setup(b1 => b1.Exists(styleClass.Id)).Throws(new ArgumentNullException());
             styleClassBusinessLogic.Get(styleClass.Id);
+        }
+
+        [TestMethod]
+        public void AddStyleToStyleClass_ExpectedParameters_Ok()
+        {
+            mockStyleClassDataAccess.Setup(b1 => b1.Exists(styleClass.Id)).Returns(true);
+            mockStyleBusinessLogic.Setup(b1 => b1.Exists(style.Name)).Returns(true);
+            mockStyleClassDataAccess.Setup(b1 => b1.Get(styleClass.Id)).Returns(styleClass);
+            mockStyleClassDataAccess.Setup(b1 => b1.Modify(styleClass));
+            styleClassBusinessLogic.AddStyle(styleClass.Id, style);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void AddStyleToStyleClass_StyleDontExists_ArgumentNullException()
+        {
+            mockStyleClassDataAccess.Setup(b1 => b1.Exists(styleClass.Id)).Returns(true);
+            mockStyleBusinessLogic.Setup(b1 => b1.Exists(style.Name)).Returns(false);
+            styleClassBusinessLogic.AddStyle(styleClass.Id, style);
+        }
+
+        [ExpectedException(typeof(ArgumentException))]
+        public void AddStyleToStyleClass_StyleClassDontExists_ArgumentNullException()
+        {
+            mockStyleClassDataAccess.Setup(b1 => b1.Exists(styleClass.Id)).Returns(false);
+            mockStyleBusinessLogic.Setup(b1 => b1.Exists(style.Name)).Returns(true);
+            styleClassBusinessLogic.AddStyle(styleClass.Id, style);
+        }
+
+        [TestMethod]
+        public void RemoveStyleFromStyleClass_ExpectedParameters_Ok()
+        {
+            mockStyleClassDataAccess.Setup(b1 => b1.Exists(styleClass.Id)).Returns(true);
+            mockStyleBusinessLogic.Setup(b1 => b1.Exists(style.Name)).Returns(true);
+            mockStyleBusinessLogic.Setup(b1 => b1.Get(style.Name)).Returns(style);
+            mockStyleClassDataAccess.Setup(b1 => b1.Get(styleClass.Id)).Returns(styleClass);
+            mockStyleClassDataAccess.Setup(b1 => b1.Modify(styleClass));
+            styleClassBusinessLogic.RemoveStyle(styleClass.Id, style.Name);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void RemoveStyleFromStyleClass_StyleDontExists_ArgumentNullException()
+        {
+            mockStyleClassDataAccess.Setup(b1 => b1.Exists(styleClass.Id)).Returns(true);
+            mockStyleBusinessLogic.Setup(b1 => b1.Exists(style.Name)).Returns(false);
+            styleClassBusinessLogic.RemoveStyle(styleClass.Id, style.Name);
+        }
+
+        [ExpectedException(typeof(ArgumentException))]
+        public void RemoveStyleFromStyleClass_StyleClassDontExists_ArgumentNullException()
+        {
+            mockStyleClassDataAccess.Setup(b1 => b1.Exists(styleClass.Id)).Returns(false);
+            mockStyleBusinessLogic.Setup(b1 => b1.Exists(style.Name)).Returns(true);
+            styleClassBusinessLogic.RemoveStyle(styleClass.Id, style.Name);
         }
 
     }

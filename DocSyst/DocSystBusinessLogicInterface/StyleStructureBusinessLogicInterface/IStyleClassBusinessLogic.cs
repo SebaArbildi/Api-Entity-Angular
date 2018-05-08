@@ -14,5 +14,7 @@ namespace DocSystBusinessLogicInterface.StyleStructureBusinessLogicInterface
         void Modify(StyleClass styleClass);
         IList<StyleClass> Get();
         StyleClass Get(Guid id);
+        void AddStyle(Guid styleClassId, Style style);
+        void RemoveStyle(Guid styleClassId, string styleName);
     }
 }
