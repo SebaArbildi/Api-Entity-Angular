@@ -38,7 +38,7 @@ namespace DocSystTest.BusinessLogicTest.StyleStructureBusinessLogicTest
         {
             mockFormatDataAccess.Setup(b1 => b1.Add(format));
             mockFormatDataAccess.Setup(b1 => b1.Exists(format.Id)).Returns(true);
-            formatBusinessLogic.Add(styleClass);
+            formatBusinessLogic.Add(format);
         }
 
         [TestMethod]
