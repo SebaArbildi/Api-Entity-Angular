@@ -134,7 +134,7 @@ namespace DocSystTest.BusinessLogicTest.StyleStructureBusinessLogicTest
         [TestMethod]
         public void GetStyle_ExpectedParameters_Ok()
         {
-
+            mockStyleDataAccess.Setup(b1 => b1.Exists(style.Name)).Returns(true);
             mockStyleDataAccess.Setup(b1 => b1.Get(style.Name)).Returns(style);
             Style obtained = styleBusinessLogic.Get(style.Name);
         }
