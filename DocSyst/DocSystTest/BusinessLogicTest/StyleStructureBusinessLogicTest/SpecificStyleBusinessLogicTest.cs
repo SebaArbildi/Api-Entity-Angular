@@ -4,6 +4,8 @@ using DocSystEntities.StyleStructure;
 using Moq;
 using DocSystDataAccessInterface.StyleStructureDataAccessInterface;
 using DocSystDataAccessImplementation.StyleStructureDataAccess;
+using DocSystBusinessLogicInterface.StyleStructureBusinessLogicInterface;
+using DocSystBusinessLogicImplementation.StyleStructureBusinessLogic;
 
 namespace DocSystTest.BusinessLogicTest.StyleStructureBusinessLogicTest
 {

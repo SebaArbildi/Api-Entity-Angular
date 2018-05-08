@@ -60,5 +60,13 @@ namespace DocSystTest.DataAccessTest
             SpecificStyle obtained = specificStyleDataAccess.Get(specificStyle.Id);
             Assert.AreEqual(specificStyle.Name, obtained.Name);
         }
+
+        [TestMethod]
+        public void ExistsSpecificStyle_ExpectedParameters_Ok()
+        {
+            specificStyleDataAccess.Add(specificStyle);
+            bool obtained = specificStyleDataAccess.Exists(specificStyle.Id);
+            Assert.IsTrue(obtained);
+        }
     }
 }

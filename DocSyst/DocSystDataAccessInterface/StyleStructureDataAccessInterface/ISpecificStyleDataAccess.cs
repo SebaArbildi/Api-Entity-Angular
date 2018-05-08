@@ -14,5 +14,6 @@ namespace DocSystDataAccessInterface.StyleStructureDataAccessInterface
         SpecificStyle Get(Guid id);
         void Modify(SpecificStyle specificStyle);
         IList<SpecificStyle> Get();
+        bool Exists(Guid id);
     }
 }

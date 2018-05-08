@@ -30,6 +30,16 @@ namespace DocSystDataAccessImplementation.StyleStructureDataAccess
             }
         }
 
+        public bool Exists(Guid id)
+        {
+            bool exists = false;
+            using (DocSystDbContext context = new DocSystDbContext())
+            {
+                exists = context.SpecificStyles.Any(specificStyleDb => specificStyleDb.Id == id);
+            }
+            return exists;
+        }
+
         public IList<SpecificStyle> Get()
         {
             IList<SpecificStyle> specificStyles = null;
