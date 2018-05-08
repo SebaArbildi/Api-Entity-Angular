@@ -83,6 +83,16 @@ namespace DocSystDataAccessImplementation.StyleStructureDataAccessImplementation
             }
         }
 
+        public bool Exists(Guid id)
+        {
+            bool exists = false;
+            using (DocSystDbContext context = new DocSystDbContext())
+            {
+                exists = context.StyleClasses.Any(styleClassDb => styleClassDb.Id == id);
+            }
+            return exists;
+        }
+
         private void AttachStyleList(DocSystDbContext context, IList<Style> styleList)
         {
             foreach (Style style in styleList)

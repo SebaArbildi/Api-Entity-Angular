@@ -14,5 +14,6 @@ namespace DocSystDataAccessInterface.StyleStructureDataAccessInterface
         void Delete(Guid id);
         IList<StyleClass> Get();
         void Modify(StyleClass styleClass);
+        bool Exists(Guid id);
     }
 }
