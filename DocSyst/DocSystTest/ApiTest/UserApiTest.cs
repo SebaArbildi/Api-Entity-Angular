@@ -115,7 +115,7 @@ namespace DocSystTest.ApiTest
         public void ModifyUser_ExpectedParameters_Ok()
         {
             mockUserBusinessLogic.Setup(b1 => b1.ModifyUser(user));
-            IHttpActionResult statusObtained = userController.Put(userModel);
+            IHttpActionResult statusObtained = userController.Put(userModel.Username, userModel);
             Assert.IsNotNull(statusObtained as OkNegotiatedContentResult<string>);
         }
 
@@ -125,7 +125,7 @@ namespace DocSystTest.ApiTest
             IList<UserModel> usersModel = new List<UserModel>();
             usersModel.Add(userModel);
             mockUserBusinessLogic.Setup(b1 => b1.ModifyUser(user)).Throws(new Exception());
-            IHttpActionResult statusObtained = userController.Put(userModel);
+            IHttpActionResult statusObtained = userController.Put(userModel.Username, userModel);
             Assert.IsNull(statusObtained as OkNegotiatedContentResult<string>);
         }
 
@@ -158,7 +158,7 @@ namespace DocSystTest.ApiTest
             userC.Post(userModel);
             userC.Post(user2);
             user2.Name = "modified";
-            userC.Put(user2);
+            userC.Put(user2.Username, user2);
             userC.Delete(userModel.Username);
             IHttpActionResult statusObtained = userC.Get();
         }

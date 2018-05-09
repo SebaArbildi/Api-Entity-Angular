@@ -1,5 +1,7 @@
 ﻿using DocSystBusinessLogicInterface.AuthorizationBusinessLogicInterface;
 using DocSystBusinessLogicInterface.StyleStructureBusinessLogicInterface;
+using DocSystEntities.StyleStructure;
+using DocSystWebApi.Models.StyleStructureModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,30 +23,95 @@ namespace DocSystWebApi.Controllers
         }
 
         // GET: api/SpecificStyle
-        public IEnumerable<string> Get()
+        public IHttpActionResult Get()
         {
-            return new string[] { "value1", "value2" };
+            try
+            {
+                Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
+                Utils.HasAdminPermissions(Request, AuthorizationBusinessLogic);
+                IList<SpecificStyle> specificStyles = SpecificStyleBusinessLogic.Get();
+                IList<SpecificStyleModel> specificStylesModels = ConvertEntitiesToModels(specificStyles);
+                return Ok(specificStylesModels);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         // GET: api/SpecificStyle/5
-        public string Get(int id)
+        public IHttpActionResult Get([FromUri] Guid id)
         {
-            return "value";
+            try
+            {
+                Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
+                Utils.HasAdminPermissions(Request, AuthorizationBusinessLogic);
+                SpecificStyle specificStyle = SpecificStyleBusinessLogic.Get(id);
+                return Ok(SpecificStyleModel.ToModel(specificStyle));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         // POST: api/SpecificStyle
-        public void Post([FromBody]string value)
+        public IHttpActionResult Post([FromBody]SpecificStyleModel specificStyleModel)
         {
+            try
+            {
+                Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
+                Utils.HasAdminPermissions(Request, AuthorizationBusinessLogic);
+                SpecificStyleBusinessLogic.Add(specificStyleModel.ToEntity());
+                return Ok("Specific Style added");
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         // PUT: api/SpecificStyle/5
-        public void Put(int id, [FromBody]string value)
+        public IHttpActionResult Put([FromUri] Guid id, [FromBody]SpecificStyleModel specificStyleModel)
         {
+            try
+            {
+                specificStyleModel.Id = id;
+                Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
+                Utils.HasAdminPermissions(Request, AuthorizationBusinessLogic);
+                SpecificStyleBusinessLogic.Modify(specificStyleModel.ToEntity());
+                return Ok("Specific Style Modified");
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         // DELETE: api/SpecificStyle/5
-        public void Delete(int id)
+        public IHttpActionResult Delete([FromUri] Guid id)
         {
+            try
+            {
+                Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
+                Utils.HasAdminPermissions(Request, AuthorizationBusinessLogic);
+                SpecificStyleBusinessLogic.Delete(id);
+                return Ok("Specific Style deleted");
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        private IList<SpecificStyleModel> ConvertEntitiesToModels(IList<SpecificStyle> specificStyles)
+        {
+            IList<SpecificStyleModel> specificStylesModels = new List<SpecificStyleModel>();
+            foreach (SpecificStyle specificStyle in specificStyles)
+            {
+                specificStylesModels.Add(SpecificStyleModel.ToModel(specificStyle));
+            }
+            return specificStylesModels;
         }
     }
 }

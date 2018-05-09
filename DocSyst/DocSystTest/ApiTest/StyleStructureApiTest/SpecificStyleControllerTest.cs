@@ -10,6 +10,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Results;
 using System.Collections.Generic;
+using DocSystWebApi.Controllers;
 
 namespace DocSystTest.ApiTest.StyleStructureApiTest
 {
@@ -106,7 +107,7 @@ namespace DocSystTest.ApiTest.StyleStructureApiTest
         public void ModifyUser_ExpectedParameters_Ok()
         {
             mockSpecificStyleBusinessLogic.Setup(b1 => b1.Modify(specificStyle));
-            IHttpActionResult statusObtained = specificStyleController.Put(specificStyleModel);
+            IHttpActionResult statusObtained = specificStyleController.Put(specificStyleModel.Id, specificStyleModel);
             Assert.IsNotNull(statusObtained as OkNegotiatedContentResult<string>);
         }
 
@@ -116,7 +117,7 @@ namespace DocSystTest.ApiTest.StyleStructureApiTest
             IList<SpecificStyleModel> specificStylesModel = new List<SpecificStyleModel>();
             specificStylesModel.Add(specificStyleModel);
             mockSpecificStyleBusinessLogic.Setup(b1 => b1.Modify(specificStyle)).Throws(new Exception());
-            IHttpActionResult statusObtained = specificStyleController.Put(specificStyleModel);
+            IHttpActionResult statusObtained = specificStyleController.Put(specificStyleModel.Id, specificStyleModel);
             Assert.IsNull(statusObtained as OkNegotiatedContentResult<string>);
         }
 
