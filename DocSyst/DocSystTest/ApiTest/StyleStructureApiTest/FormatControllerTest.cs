@@ -9,6 +9,7 @@ using System.Web.Http;
 using System.Web.Http.Results;
 using System.Collections.Generic;
 using DocSystWebApi.Models.StyleStructureModels;
+using DocSystWebApi.Controllers;
 
 namespace DocSystTest.ApiTest.StyleStructureApiTest
 {
@@ -52,7 +53,7 @@ namespace DocSystTest.ApiTest.StyleStructureApiTest
         }
 
         [TestMethod]
-        public void GetStyleClass_ExpectedParameters_Ok()
+        public void GetFormat_ExpectedParameters_Ok()
         {
             mockFormatsBusinessLogic.Setup(b1 => b1.Get(format.Id)).Returns(format);
             IHttpActionResult statusObtained = formatController.Get(format.Id);
@@ -60,7 +61,7 @@ namespace DocSystTest.ApiTest.StyleStructureApiTest
         }
 
         [TestMethod]
-        public void GetStyleClass_BadRequest_Exception()
+        public void GetFormat_BadRequest_Exception()
         {
             mockFormatsBusinessLogic.Setup(b1 => b1.Get(format.Id)).Throws(new Exception());
             IHttpActionResult statusObtained = formatController.Get(format.Id);
@@ -68,7 +69,7 @@ namespace DocSystTest.ApiTest.StyleStructureApiTest
         }
 
         [TestMethod]
-        public void AddStyleClass_ExpectedParameters_Ok()
+        public void AddFormat_ExpectedParameters_Ok()
         {
             mockFormatsBusinessLogic.Setup(b1 => b1.Add(format));
             IHttpActionResult statusObtained = formatController.Post(formatModel);
@@ -76,7 +77,7 @@ namespace DocSystTest.ApiTest.StyleStructureApiTest
         }
 
         [TestMethod]
-        public void AddStyleClass_BadRequest_Exception()
+        public void AddFormat_BadRequest_Exception()
         {
             mockFormatsBusinessLogic.Setup(b1 => b1.Add(format)).Throws(new Exception());
             IHttpActionResult statusObtained = formatController.Post(formatModel);
@@ -84,7 +85,7 @@ namespace DocSystTest.ApiTest.StyleStructureApiTest
         }
 
         [TestMethod]
-        public void GetStyleClasses_ExpectedParameters_Ok()
+        public void GetFormats_ExpectedParameters_Ok()
         {
             IList<Format> specificStyles = new List<Format>();
             specificStyles.Add(format);
@@ -94,7 +95,7 @@ namespace DocSystTest.ApiTest.StyleStructureApiTest
         }
 
         [TestMethod]
-        public void GetStyleClasses_BadRequest_Exception()
+        public void GetFormats_BadRequest_Exception()
         {
             IList<Format> formats = new List<Format>();
             formats.Add(format);
@@ -104,7 +105,7 @@ namespace DocSystTest.ApiTest.StyleStructureApiTest
         }
 
         [TestMethod]
-        public void ModifyStyleClass_ExpectedParameters_Ok()
+        public void ModifyFormat_ExpectedParameters_Ok()
         {
             mockFormatsBusinessLogic.Setup(b1 => b1.Modify(format));
             IHttpActionResult statusObtained = formatController.Put(formatModel.Id, formatModel);
@@ -112,7 +113,7 @@ namespace DocSystTest.ApiTest.StyleStructureApiTest
         }
 
         [TestMethod]
-        public void ModifyStyleClass_BadRequest_Exception()
+        public void ModifyFormat_BadRequest_Exception()
         {
             IList<FormatModel> specificStylesModel = new List<FormatModel>();
             specificStylesModel.Add(formatModel);
@@ -122,7 +123,7 @@ namespace DocSystTest.ApiTest.StyleStructureApiTest
         }
 
         [TestMethod]
-        public void DeleteStyleClass_ExpectedParameters_Ok()
+        public void DeleteFormat_ExpectedParameters_Ok()
         {
             mockFormatsBusinessLogic.Setup(b1 => b1.Delete(format.Id));
             IHttpActionResult statusObtained = formatController.Delete(format.Id);
@@ -130,7 +131,7 @@ namespace DocSystTest.ApiTest.StyleStructureApiTest
         }
 
         [TestMethod]
-        public void DeleteStyleClass_BadRequest_Exception()
+        public void DeleteFormat_BadRequest_Exception()
         {
             mockFormatsBusinessLogic.Setup(b1 => b1.Delete(format.Id)).Throws(new Exception());
             IHttpActionResult statusObtained = formatController.Delete(format.Id);
@@ -138,7 +139,7 @@ namespace DocSystTest.ApiTest.StyleStructureApiTest
         }
 
         [TestMethod]
-        public void AddStyleToStyleClass_ExpectedParameters_Ok()
+        public void AddStyleClassToFormat_ExpectedParameters_Ok()
         {
             mockFormatsBusinessLogic.Setup(b1 => b1.AddStyle(format.Id, styleClass));
             IHttpActionResult statusObtained = formatController.AddStyleToStyleClass(format.Id, StyleClassModel.ToModel(styleClass));
@@ -146,7 +147,7 @@ namespace DocSystTest.ApiTest.StyleStructureApiTest
         }
 
         [TestMethod]
-        public void AddStyleToStyleClass_BadRequest_Exception()
+        public void AddStyleClassToFormat_BadRequest_Exception()
         {
             mockFormatsBusinessLogic.Setup(b1 => b1.AddStyle(format.Id, styleClass)).Throws(new Exception());
             IHttpActionResult statusObtained = formatController.AddStyleToStyleClass(format.Id, StyleClassModel.ToModel(styleClass));
@@ -154,18 +155,19 @@ namespace DocSystTest.ApiTest.StyleStructureApiTest
         }
 
         [TestMethod]
-        public void RemoveStyleFromStyleClass_ExpectedParameters_Ok()
+        public void RemoveStyleClassFromFormat_ExpectedParameters_Ok()
         {
             mockFormatsBusinessLogic.Setup(b1 => b1.RemoveStyle(format.Id, styleClass.Id));
-            IHttpActionResult statusObtained = formatController.RemoveStyleFromStyleClass(format.Id, styleClass.Name);
+            IHttpActionResult statusObtained = formatController.RemoveStyleFromStyleClass(format.Id, styleClass.Id);
             Assert.IsNotNull(statusObtained as OkNegotiatedContentResult<string>);
         }
 
         [TestMethod]
-        public void RemoveStyleFromStyleClass_BadRequest_Exception()
+        public void RemoveStyleClassFromFormat_BadRequest_Exception()
         {
             mockFormatsBusinessLogic.Setup(b1 => b1.RemoveStyle(format.Id, styleClass.Id)).Throws(new Exception());
-            IHttpActionResult statusObtained = formatController.RemoveStyleFromStyleClass(format.Id, styleClass.Name);
+            IHttpActionResult statusObtained = formatController.RemoveStyleFromStyleClass(format.Id, styleClass.Id);
             Assert.IsNull(statusObtained as OkNegotiatedContentResult<string>);
         }
     }
+}

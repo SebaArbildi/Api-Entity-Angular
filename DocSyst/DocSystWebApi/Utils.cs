@@ -94,5 +94,25 @@ namespace DocSystWebApi
             }
             return styleClass;
         }
+
+        internal static IList<FormatModel> ConvertEntitiesToModels(IList<Format> formats)
+        {
+            IList<FormatModel> formatsModels = new List<FormatModel>();
+            foreach (Format format in formats)
+            {
+                formatsModels.Add(FormatModel.ToModel(format));
+            }
+            return formatsModels;
+        }
+
+        internal static IList<Format> ConvertModelsToEntities(IList<FormatModel> formatsModels)
+        {
+            IList<Format> formats = new List<Format>();
+            foreach (FormatModel formatModel in formatsModels)
+            {
+                formats.Add(formatModel.ToEntity());
+            }
+            return formats;
+        }
     }
 }

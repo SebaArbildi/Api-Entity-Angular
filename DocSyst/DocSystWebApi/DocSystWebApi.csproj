@@ -161,6 +161,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\FormatController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\SpecificStyleController.cs" />
     <Compile Include="Controllers\StyleClassController.cs" />
@@ -170,6 +171,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Model.cs" />
+    <Compile Include="Models\StyleStructureModels\FormatModel.cs" />
     <Compile Include="Models\StyleStructureModels\SpecificStyleModel.cs" />
     <Compile Include="Models\StyleStructureModels\StyleClassModel.cs" />
     <Compile Include="Models\StyleStructureModels\StyleModel.cs" />

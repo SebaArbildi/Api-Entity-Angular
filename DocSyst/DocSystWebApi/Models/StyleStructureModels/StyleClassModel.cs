@@ -6,7 +6,7 @@ using System.Web;
 
 namespace DocSystWebApi.Models.StyleStructureModels
 {
-    public class StyleClassModel: Model<StyleClass, StyleClassModel>
+    public class StyleClassModel : Model<StyleClass, StyleClassModel>
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
@@ -22,24 +22,37 @@ namespace DocSystWebApi.Models.StyleStructureModels
             SetModel(styleClass);
         }
 
-        public override StyleClass ToEntity() => new StyleClass()
+        public override StyleClass ToEntity()
         {
-            Id = this.Id,
-            Name = this.Name,
-            ProperStyles = Utils.ConvertModelsToEntities(this.ProperStyles),
-            InheritedStyleClass = this.InheritedStyleClass.ToEntity(),
-            InheritedPlusProperStyles = Utils.ConvertModelsToEntities(this.InheritedPlusProperStyles),
-            Observers = Utils.ConvertModelsToEntities(this.Observers),
-        };
+            StyleClass styleClass = new StyleClass()
+            {
+                Id = this.Id,
+                Name = this.Name,
+                ProperStyles = Utils.ConvertModelsToEntities(this.ProperStyles),
+                InheritedPlusProperStyles = Utils.ConvertModelsToEntities(this.InheritedPlusProperStyles),
+                Observers = Utils.ConvertModelsToEntities(this.Observers)
+            };
+
+            /*TODO: Another solution, so there is not need to handle if InheritedStyleClass is null*/
+            if (this.InheritedStyleClass != null)
+            {
+                styleClass.InheritedStyleClass = this.InheritedStyleClass.ToEntity();
+            }
+
+            return styleClass;
+        }
 
         protected override StyleClassModel SetModel(StyleClass styleClass)
         {
             Id = styleClass.Id;
             Name = styleClass.Name;
             ProperStyles = Utils.ConvertEntitiesToModels(styleClass.ProperStyles);
-            InheritedStyleClass = StyleClassModel.ToModel(styleClass.InheritedStyleClass);
             InheritedPlusProperStyles = Utils.ConvertEntitiesToModels(styleClass.InheritedPlusProperStyles);
             Observers = Utils.ConvertEntitiesToModels(styleClass.Observers);
+            if (styleClass.InheritedStyleClass != null)
+            {
+                InheritedStyleClass = StyleClassModel.ToModel(styleClass.InheritedStyleClass);
+            }
             return this;
         }
 
