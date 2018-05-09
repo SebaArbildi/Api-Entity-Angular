@@ -9,6 +9,7 @@ using DocSystWebApi.Models.StyleStructureModels;
 using System.Web.Http;
 using System.Web.Http.Results;
 using System.Collections.Generic;
+using DocSystWebApi.Controllers;
 
 namespace DocSystTest.ApiTest.StyleStructureApiTest
 {
@@ -23,7 +24,7 @@ namespace DocSystTest.ApiTest.StyleStructureApiTest
             private StyleClass styleClass;
             private Mock<IStyleClassBusinessLogic> mockStyleClassBusinessLogic;
             private Mock<IAuthorizationBusinessLogic> mockUserAuthorizationLogic;
-            private StyleClassControllerTest StyleClassController;
+            private StyleClassController StyleClassController;
             private Style style;
 
 
@@ -145,7 +146,7 @@ namespace DocSystTest.ApiTest.StyleStructureApiTest
             public void AddStyleToStyleClass_ExpectedParameters_Ok()
             {
                 mockStyleClassBusinessLogic.Setup(b1 => b1.AddStyle(styleClass.Id, style));
-                IHttpActionResult statusObtained = StyleClassController.AddStyle(styleClass.Id, StyleModel.ToModel(style));
+                IHttpActionResult statusObtained = StyleClassController.AddStyleToStyleClass(styleClass.Id, StyleModel.ToModel(style));
                 Assert.IsNotNull(statusObtained as OkNegotiatedContentResult<string>);
             }
 
@@ -153,7 +154,7 @@ namespace DocSystTest.ApiTest.StyleStructureApiTest
             public void AddStyleToStyleClass_BadRequest_Exception()
             {
                 mockStyleClassBusinessLogic.Setup(b1 => b1.AddStyle(styleClass.Id, style)).Throws(new Exception());
-                IHttpActionResult statusObtained = StyleClassController.AddStyle(styleClass.Id, StyleModel.ToModel(style));
+                IHttpActionResult statusObtained = StyleClassController.AddStyleToStyleClass(styleClass.Id, StyleModel.ToModel(style));
                 Assert.IsNull(statusObtained as OkNegotiatedContentResult<string>);
             }
 
@@ -161,7 +162,7 @@ namespace DocSystTest.ApiTest.StyleStructureApiTest
             public void RemoveStyleFromStyleClass_ExpectedParameters_Ok()
             {
                 mockStyleClassBusinessLogic.Setup(b1 => b1.RemoveStyle(styleClass.Id, style.Name));
-                IHttpActionResult statusObtained = StyleClassController.RemoveStyle(styleClass.Id, style.Name);
+                IHttpActionResult statusObtained = StyleClassController.RemoveStyleFromStyleClass(styleClass.Id, style.Name);
                 Assert.IsNotNull(statusObtained as OkNegotiatedContentResult<string>);
             }
 
@@ -169,7 +170,7 @@ namespace DocSystTest.ApiTest.StyleStructureApiTest
             public void RemoveStyleFromStyleClass_BadRequest_Exception()
             {
                 mockStyleClassBusinessLogic.Setup(b1 => b1.RemoveStyle(styleClass.Id, style.Name)).Throws(new Exception());
-                IHttpActionResult statusObtained = StyleClassController.RemoveStyle(styleClass.Id, style.Name);
+                IHttpActionResult statusObtained = StyleClassController.RemoveStyleFromStyleClass(styleClass.Id, style.Name);
                 Assert.IsNull(statusObtained as OkNegotiatedContentResult<string>);
             }
         }

@@ -62,8 +62,8 @@ namespace DocSystWebApi.Controllers
             {
                 Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
                 Utils.HasAdminPermissions(Request, AuthorizationBusinessLogic);
-                SpecificStyleBusinessLogic.Add(specificStyleModel.ToEntity());
-                return Ok("Specific Style added");
+                StyleClassBusinessLogic.Add(styleClassModel.ToEntity());
+                return Ok("Style Class added");
             }
             catch (Exception e)
             {
@@ -72,13 +72,72 @@ namespace DocSystWebApi.Controllers
         }
 
         // PUT: api/StyleClass/5
-        public void Put(int id, [FromBody]string value)
+        public IHttpActionResult Put([FromUri] Guid id, [FromBody]StyleClassModel styleClassModel)
         {
+            try
+            {
+                styleClassModel.Id = id;
+                Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
+                Utils.HasAdminPermissions(Request, AuthorizationBusinessLogic);
+                StyleClassBusinessLogic.Modify(styleClassModel.ToEntity());
+                return Ok("Style Class Modified");
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         // DELETE: api/StyleClass/5
-        public void Delete(int id)
+        public IHttpActionResult Delete([FromUri] Guid id)
         {
+            try
+            {
+                Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
+                Utils.HasAdminPermissions(Request, AuthorizationBusinessLogic);
+                StyleClassBusinessLogic.Delete(id);
+                return Ok("Style Class deleted");
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
+
+        [Route("api/StyleClass", Name = "AddStyleToStyleClass")]
+        [HttpPut]
+        public IHttpActionResult AddStyleToStyleClass([FromUri] Guid styleClassId, [FromBody]StyleModel styleModel)
+        {
+            try
+            {
+                Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
+                Utils.HasAdminPermissions(Request, AuthorizationBusinessLogic);
+                StyleClassBusinessLogic.AddStyle(styleClassId, styleModel.ToEntity());
+                return Ok("Style added to Style Class");
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [Route("api/StyleClass", Name = "RemoveStyleFromStyleClass")]
+        [HttpPut]
+        public IHttpActionResult RemoveStyleFromStyleClass([FromUri] Guid styleClassId, [FromBody]string styleName)
+        {
+            try
+            {
+                Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
+                Utils.HasAdminPermissions(Request, AuthorizationBusinessLogic);
+                StyleClassBusinessLogic.RemoveStyle(styleClassId, styleName);
+                return Ok("Style removed from Style Class");
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+
     }
 }
