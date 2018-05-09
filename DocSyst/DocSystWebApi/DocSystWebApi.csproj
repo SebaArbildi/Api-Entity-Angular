@@ -167,6 +167,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Model.cs" />
+    <Compile Include="Models\StyleStructureModels\SpecificStyleModel.cs" />
     <Compile Include="Models\UserModel\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnityResolver.cs" />

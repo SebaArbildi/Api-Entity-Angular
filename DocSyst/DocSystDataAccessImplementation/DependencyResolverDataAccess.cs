@@ -16,6 +16,8 @@ namespace DocSystDataAccessImplementation
             registerComponent.RegisterType<IUserDataAccess, UserDataAccess>();
             registerComponent.RegisterType<ISpecificStyleDataAccess, SpecificStyleDataAccess>();
             registerComponent.RegisterType<IStyleDataAccess, StyleDataAccess>();
+            registerComponent.RegisterType<IStyleClassDataAccess, StyleClassDataAccess>();
+            registerComponent.RegisterType<IFormatDataAccess, FormatDataAccess>();
         }
     }
 }
