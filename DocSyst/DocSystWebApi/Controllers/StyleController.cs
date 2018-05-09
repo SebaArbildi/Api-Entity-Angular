@@ -29,7 +29,7 @@ namespace DocSystWebApi.Controllers
                 Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
                 Utils.HasAdminPermissions(Request, AuthorizationBusinessLogic);
                 IList<Style> styles = StyleBusinessLogic.Get();
-                IList<StyleModel> stylesModels = ConvertEntitiesToModels(styles);
+                IList<StyleModel> stylesModels = Utils.ConvertEntitiesToModels(styles);
                 return Ok(stylesModels);
             }
             catch (Exception e)
@@ -104,16 +104,6 @@ namespace DocSystWebApi.Controllers
                 return BadRequest(e.Message);
             }
 
-        }
-
-        private IList<StyleModel> ConvertEntitiesToModels(IList<Style> styles)
-        {
-            IList<StyleModel> stylesModels = new List<StyleModel>();
-            foreach (Style style in styles)
-            {
-                stylesModels.Add(StyleModel.ToModel(style));
-            }
-            return stylesModels;
         }
     }
 }

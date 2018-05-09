@@ -36,10 +36,10 @@ namespace DocSystWebApi.Models.StyleStructureModels
 
         public override bool Equals(object obj)
         {
-            var specificStyle = obj as SpecificStyleModel;
-            if (specificStyle == null)
+            var style = obj as StyleModel;
+            if (style == null)
                 return false;
-            return this.Id == specificStyle.Id;
+            return this.Name == style.Name;
         }
 
         public override int GetHashCode()
