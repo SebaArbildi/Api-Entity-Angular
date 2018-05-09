@@ -49,37 +49,121 @@ namespace DocSystBusinessLogicImplementation.StyleStructureBusinessLogic
 
         public void Add(Format format)
         {
-            throw new NotImplementedException();
-        }
-
-        public void AddStyle(Guid id, StyleClass styleClass)
-        {
-            throw new NotImplementedException();
+            if (!FormatIsNull(format))
+            {
+                if (!Exists(format.Id))
+                {
+                    FormatDataAccess.Add(format);
+                }
+                else
+                {
+                    throw new DuplicateWaitObjectException(format.Id + " already exists");
+                }
+            }
+            else
+            {
+                throw new ArgumentNullException("Null references");
+            }
         }
 
         public void Delete(Guid id)
         {
-            throw new NotImplementedException();
+            if (Exists(id))
+            {
+                FormatDataAccess.Delete(id);
+            }
+            else
+            {
+                throw new ArgumentException("Format doesn't exist " + id);
+            }
         }
 
         public IList<Format> Get()
         {
-            throw new NotImplementedException();
+            return FormatDataAccess.Get();
         }
 
-        public void Get(Guid id)
+        public Format Get(Guid id)
         {
-            throw new NotImplementedException();
+            if (Exists(id))
+            {
+                return FormatDataAccess.Get(id);
+            }
+            else
+            {
+                throw new ArgumentException("Format doesn't exist " + id);
+            }
         }
 
         public void Modify(Format format)
         {
-            throw new NotImplementedException();
+            if (!FormatIsNull(format))
+            {
+                if (Exists(format.Id))
+                {
+                    FormatDataAccess.Modify(format);
+                }
+                else
+                {
+                    throw new ArgumentException("Format doesn't exist " + format.Id);
+                }
+            }
+            else
+            {
+                throw new ArgumentNullException("Null references");
+            }
+        }
+        public void AddStyle(Guid formatId, StyleClass styleClass)
+        {
+            if (Exists(formatId))
+            {
+                if (StyleClassBusinessLogic.Exists(styleClass.Id))
+                {
+                    Format format = FormatDataAccess.Get(formatId);
+                    format.AddStyleClass(styleClass);
+                    FormatDataAccess.Modify(format);
+                }
+                else
+                {
+                    throw new ArgumentException("StyleClass doesn't exist styleClass.Name");
+                }
+            }
+            else
+            {
+                throw new ArgumentException("StyleClass doesn't exist styleClass.Name");
+            }
         }
 
-        public void RemoveStyle(Guid id1, Guid id2)
+        public void RemoveStyle(Guid formatId, Guid styleClassId)
         {
-            throw new NotImplementedException();
+            if (Exists(formatId))
+            {
+                if (StyleClassBusinessLogic.Exists(styleClassId))
+                {
+                    Format format = FormatDataAccess.Get(formatId);
+                    StyleClass styleClass = StyleClassBusinessLogic.Get(styleClassId);
+                    format.RemoveStyleClass(styleClass);
+                    FormatDataAccess.Modify(format);
+                }
+                else
+                {
+                    throw new ArgumentException("StyleClass doesn't exist styleClass.Name");
+                }
+            }
+            else
+            {
+                throw new ArgumentException("StyleClass doesn't exist styleClass.Name");
+            }
+        }
+
+        private bool FormatIsNull(Format format)
+        {
+            return format == null || format.Name == null || format.StyleClasses == null;
+        }
+
+        private bool Exists(Guid id)
+        {
+            return this.FormatDataAccess.Exists(id);
         }
     }
 }

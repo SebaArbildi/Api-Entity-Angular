@@ -102,6 +102,7 @@
     <Compile Include="BusinessLogicTest\StyleStructureBusinessLogicTest\SpecificStyleBusinessLogicTest.cs" />
     <Compile Include="BusinessLogicTest\StyleStructureBusinessLogicTest\StyleBusinessLogicTest.cs" />
     <Compile Include="BusinessLogicTest\StyleStructureBusinessLogicTest\StyleClassBusinessLogicTest.cs" />
+    <Compile Include="BusinessLogicTest\StyleStructureBusinessLogicTest\FormatBusinessLogicTest.cs" />
     <Compile Include="BusinessLogicTest\UserBusinessLogicTest.cs" />
     <Compile Include="DataAccessTest\StyleStructureDataAccessTest\SpecificStyleDataAccessTest.cs" />
     <Compile Include="DataAccessTest\StyleStructureDataAccessTest\StyleClassDataAccessTest.cs" />

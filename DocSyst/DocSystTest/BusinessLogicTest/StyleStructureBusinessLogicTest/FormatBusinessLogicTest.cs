@@ -5,6 +5,7 @@ using Moq;
 using DocSystDataAccessInterface.StyleStructureDataAccessInterface;
 using DocSystEntities.StyleStructure;
 using System.Collections.Generic;
+using DocSystBusinessLogicImplementation.StyleStructureBusinessLogic;
 
 namespace DocSystTest.BusinessLogicTest.StyleStructureBusinessLogicTest
 {
@@ -34,25 +35,25 @@ namespace DocSystTest.BusinessLogicTest.StyleStructureBusinessLogicTest
         }
 
         [TestMethod]
-        public void AddStyleClass_ExpectedParameters_Ok()
+        public void AddFormat_ExpectedParameters_Ok()
         {
             mockFormatDataAccess.Setup(b1 => b1.Add(format));
-            mockFormatDataAccess.Setup(b1 => b1.Exists(format.Id)).Returns(true);
+            mockFormatDataAccess.Setup(b1 => b1.Exists(format.Id)).Returns(false);
             formatBusinessLogic.Add(format);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void AddStyleClass_StyleClassHasNullFields_ArgumentNullException()
+        public void AddFormat_FormatHasNullFields_ArgumentNullException()
         {
-            styleClass.Name = null;
+            format.Name = null;
 
             formatBusinessLogic.Add(format);
         }
 
         [TestMethod]
         [ExpectedException(typeof(DuplicateWaitObjectException))]
-        public void AddStyleClass_StyleClassAlreadyExists_DuplicateException()
+        public void AddFormat_FormatAlreadyExists_DuplicateException()
         {
             mockFormatDataAccess.Setup(b1 => b1.Exists(format.Id)).Returns(true);
 
@@ -60,7 +61,7 @@ namespace DocSystTest.BusinessLogicTest.StyleStructureBusinessLogicTest
         }
 
         [TestMethod]
-        public void DeleteStyleClass_ExpectedParameters_Ok()
+        public void DeleteFormat_ExpectedParameters_Ok()
         {
             mockFormatDataAccess.Setup(b1 => b1.Delete(format.Id));
             mockFormatDataAccess.Setup(b1 => b1.Exists(format.Id)).Returns(true);
@@ -69,14 +70,14 @@ namespace DocSystTest.BusinessLogicTest.StyleStructureBusinessLogicTest
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void DeleteStyleClasse_StyleClassDontExists_ArgumentNullException()
+        public void DeleteFormat_FormatDontExists_ArgumentNullException()
         {
             mockFormatDataAccess.Setup(b1 => b1.Exists(format.Id)).Returns(false);
             formatBusinessLogic.Delete(Guid.NewGuid());
         }
 
         [TestMethod]
-        public void ModifyStyleClass_ExpectedParameters_Ok()
+        public void ModifyFormat_ExpectedParameters_Ok()
         {
             mockFormatDataAccess.Setup(b1 => b1.Modify(format));
             mockFormatDataAccess.Setup(b1 => b1.Exists(format.Id)).Returns(true);
@@ -85,22 +86,22 @@ namespace DocSystTest.BusinessLogicTest.StyleStructureBusinessLogicTest
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void ModifyStyleClass_StyleClassHasNullFields_ArgumentNullException()
+        public void ModifyFormat_FormatHasNullFields_ArgumentNullException()
         {
-            styleClass.Name = null;
+            format.Name = null;
             formatBusinessLogic.Modify(format);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void ModifyStyleClasses_StyleClassNotExists_DuplicateException()
+        public void ModifyFormat_FormatNotExists_DuplicateException()
         {
             mockFormatDataAccess.Setup(b1 => b1.Exists(format.Id)).Returns(false);
             formatBusinessLogic.Modify(format);
         }
 
         [TestMethod]
-        public void GetStyleClasses_ExpectedParameters_Ok()
+        public void GetFormats_ExpectedParameters_Ok()
         {
 
             mockFormatDataAccess.Setup(b1 => b1.Get()).Returns(new List<Format>());
@@ -109,14 +110,14 @@ namespace DocSystTest.BusinessLogicTest.StyleStructureBusinessLogicTest
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void GetStyleClasses_PersistenceException_ArgumentException()
+        public void GetFormats_PersistenceException_ArgumentException()
         {
             mockFormatDataAccess.Setup(b1 => b1.Get()).Throws(new ArgumentException());
             IList<Format> formats = formatBusinessLogic.Get();
         }
 
         [TestMethod]
-        public void GetStyleClass_ExpectedParameters_Ok()
+        public void GetFormat_ExpectedParameters_Ok()
         {
             mockFormatDataAccess.Setup(b1 => b1.Exists(format.Id)).Returns(true);
             mockFormatDataAccess.Setup(b1 => b1.Get(format.Id)).Returns(format);
@@ -125,25 +126,25 @@ namespace DocSystTest.BusinessLogicTest.StyleStructureBusinessLogicTest
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void GetStyleClass_ExpectedParameters_ArgumentNullException()
+        public void GetFormat_ExpectedParameters_ArgumentNullException()
         {
             mockFormatDataAccess.Setup(b1 => b1.Exists(format.Id)).Throws(new ArgumentNullException());
             formatBusinessLogic.Get(format.Id);
         }
 
         [TestMethod]
-        public void AddStyleToStyleClass_ExpectedParameters_Ok()
+        public void AddStyleClassToFormat_ExpectedParameters_Ok()
         {
             mockFormatDataAccess.Setup(b1 => b1.Exists(format.Id)).Returns(true);
             mockStyleClassBusinessLogic.Setup(b1 => b1.Exists(styleClass.Id)).Returns(true);
-            mockFormatDataAccess.Setup(b1 => b1.Get(styleClass.Id)).Returns(format);
+            mockFormatDataAccess.Setup(b1 => b1.Get(format.Id)).Returns(format);
             mockFormatDataAccess.Setup(b1 => b1.Modify(format));
             formatBusinessLogic.AddStyle(format.Id, styleClass);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void AddStyleToStyleClass_StyleDontExists_ArgumentNullException()
+        public void AddSStyleClassToFormat_StyleClassDontExists_ArgumentNullException()
         {
             mockFormatDataAccess.Setup(b1 => b1.Exists(format.Id)).Returns(true);
             mockStyleClassBusinessLogic.Setup(b1 => b1.Exists(styleClass.Id)).Returns(false);
@@ -151,7 +152,7 @@ namespace DocSystTest.BusinessLogicTest.StyleStructureBusinessLogicTest
         }
 
         [ExpectedException(typeof(ArgumentException))]
-        public void AddStyleToStyleClass_StyleClassDontExists_ArgumentNullException()
+        public void AddStyleClassToFormat_FormatDontExists_ArgumentNullException()
         {
             mockFormatDataAccess.Setup(b1 => b1.Exists(format.Id)).Returns(false);
             mockStyleClassBusinessLogic.Setup(b1 => b1.Exists(styleClass.Id)).Returns(true);
@@ -159,7 +160,7 @@ namespace DocSystTest.BusinessLogicTest.StyleStructureBusinessLogicTest
         }
 
         [TestMethod]
-        public void RemoveStyleFromStyleClass_ExpectedParameters_Ok()
+        public void RemoveStyleClassFromFormat_ExpectedParameters_Ok()
         {
             mockFormatDataAccess.Setup(b1 => b1.Exists(format.Id)).Returns(true);
             mockStyleClassBusinessLogic.Setup(b1 => b1.Exists(styleClass.Id)).Returns(true);
@@ -171,7 +172,7 @@ namespace DocSystTest.BusinessLogicTest.StyleStructureBusinessLogicTest
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void RemoveStyleFromStyleClass_StyleDontExists_ArgumentNullException()
+        public void RemoveStyleClassFromFormat_StyleClassDontExists_ArgumentNullException()
         {
             mockFormatDataAccess.Setup(b1 => b1.Exists(format.Id)).Returns(true);
             mockStyleClassBusinessLogic.Setup(b1 => b1.Exists(styleClass.Id)).Returns(false);
@@ -179,11 +180,11 @@ namespace DocSystTest.BusinessLogicTest.StyleStructureBusinessLogicTest
         }
 
         [ExpectedException(typeof(ArgumentException))]
-        public void RemoveStyleFromStyleClass_StyleClassDontExists_ArgumentNullException()
+        public void RemoveStyleClassFromFormat_FormatDontExists_ArgumentNullException()
         {
             mockFormatDataAccess.Setup(b1 => b1.Exists(format.Id)).Returns(false);
-            mockFormatDataAccess.Setup(b1 => b1.Exists(styleClass.Id)).Returns(true);
-            formatBusinessLogic.RemoveStyle(format.Id, styleClass.Name);
+            mockStyleClassBusinessLogic.Setup(b1 => b1.Exists(styleClass.Id)).Returns(true);
+            formatBusinessLogic.RemoveStyle(format.Id, styleClass.Id);
         }
     }
 }

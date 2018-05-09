@@ -13,8 +13,8 @@ namespace DocSystBusinessLogicInterface.StyleStructureBusinessLogicInterface
         void Delete(Guid id);
         void Modify(Format format);
         IList<Format> Get();
-        void AddStyle(Guid id, StyleClass styleClass);
-        void RemoveStyle(Guid id1, Guid id2);
-        void Get(Guid id);
+        void AddStyle(Guid formatId, StyleClass styleClass);
+        void RemoveStyle(Guid formatId, Guid styleClassId);
+        Format Get(Guid id);
     }
 }
