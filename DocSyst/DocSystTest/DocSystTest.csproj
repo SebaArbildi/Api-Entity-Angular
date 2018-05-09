@@ -113,6 +113,7 @@
     <Compile Include="BusinessLogicTest\TextBusinessLogicTest.cs" />
     <Compile Include="BusinessLogicTest\BodyBusinessLogicTest.cs" />
     <Compile Include="BusinessLogicTest\DocumentBusinessLogicTest.cs" />
+    <Compile Include="BusinessLogicTest\AuditLogBussinesLogicTest.cs" />
     <Compile Include="DocumentStructureDataAccessTest\MarginDataAccessTest.cs" />
     <Compile Include="DocumentStructureDataAccessTest\TextDataAccessTest.cs" />
     <Compile Include="DocumentStructureDataAccessTest\ParagraphDataAccessTest.cs" />
