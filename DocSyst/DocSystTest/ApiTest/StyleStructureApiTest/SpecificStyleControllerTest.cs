@@ -60,7 +60,7 @@ namespace DocSystTest.ApiTest.StyleStructureApiTest
         }
 
         [TestMethod]
-        public void GetUser_BadRequest_Exception()
+        public void GetSpecificStyle_BadRequest_Exception()
         {
             mockSpecificStyleBusinessLogic.Setup(b1 => b1.Get(specificStyle.Id)).Throws(new Exception());
             IHttpActionResult statusObtained = specificStyleController.Get(specificStyle.Id);
@@ -68,7 +68,7 @@ namespace DocSystTest.ApiTest.StyleStructureApiTest
         }
 
         [TestMethod]
-        public void AddUser_ExpectedParameters_Ok()
+        public void AddSpecificStyle_ExpectedParameters_Ok()
         {
             mockSpecificStyleBusinessLogic.Setup(b1 => b1.Add(specificStyle));
             IHttpActionResult statusObtained = specificStyleController.Post(specificStyleModel);
@@ -76,7 +76,7 @@ namespace DocSystTest.ApiTest.StyleStructureApiTest
         }
 
         [TestMethod]
-        public void AddUser_BadRequest_Exception()
+        public void AddSpecificStyle_BadRequest_Exception()
         {
             mockSpecificStyleBusinessLogic.Setup(b1 => b1.Add(specificStyle)).Throws(new Exception());
             IHttpActionResult statusObtained = specificStyleController.Post(specificStyleModel);
@@ -84,7 +84,7 @@ namespace DocSystTest.ApiTest.StyleStructureApiTest
         }
 
         [TestMethod]
-        public void GetUsers_ExpectedParameters_Ok()
+        public void GetSpecificStyles_ExpectedParameters_Ok()
         {
             IList<SpecificStyle> specificStyles = new List<SpecificStyle>();
             specificStyles.Add(specificStyle);
@@ -94,7 +94,7 @@ namespace DocSystTest.ApiTest.StyleStructureApiTest
         }
 
         [TestMethod]
-        public void GetUsers_BadRequest_Exception()
+        public void GetSpecificStyles_BadRequest_Exception()
         {
             IList<SpecificStyle> specificStyles = new List<SpecificStyle>();
             specificStyles.Add(specificStyle);
@@ -104,7 +104,7 @@ namespace DocSystTest.ApiTest.StyleStructureApiTest
         }
 
         [TestMethod]
-        public void ModifyUser_ExpectedParameters_Ok()
+        public void ModifySpecificStyle_ExpectedParameters_Ok()
         {
             mockSpecificStyleBusinessLogic.Setup(b1 => b1.Modify(specificStyle));
             IHttpActionResult statusObtained = specificStyleController.Put(specificStyleModel.Id, specificStyleModel);
@@ -112,7 +112,7 @@ namespace DocSystTest.ApiTest.StyleStructureApiTest
         }
 
         [TestMethod]
-        public void ModifyUser_BadRequest_Exception()
+        public void ModifySpecificStyle_BadRequest_Exception()
         {
             IList<SpecificStyleModel> specificStylesModel = new List<SpecificStyleModel>();
             specificStylesModel.Add(specificStyleModel);
@@ -122,7 +122,7 @@ namespace DocSystTest.ApiTest.StyleStructureApiTest
         }
 
         [TestMethod]
-        public void DeleteUser_ExpectedParameters_Ok()
+        public void DeleteSpecificStyle_ExpectedParameters_Ok()
         {
             mockSpecificStyleBusinessLogic.Setup(b1 => b1.Delete(specificStyle.Id));
             IHttpActionResult statusObtained = specificStyleController.Delete(specificStyle.Id);
@@ -130,7 +130,7 @@ namespace DocSystTest.ApiTest.StyleStructureApiTest
         }
 
         [TestMethod]
-        public void DeleteUser_BadRequest_Exception()
+        public void DeleteSpecificStyle_BadRequest_Exception()
         {
             mockSpecificStyleBusinessLogic.Setup(b1 => b1.Delete(specificStyle.Id)).Throws(new Exception());
             IHttpActionResult statusObtained = specificStyleController.Delete(specificStyle.Id);
