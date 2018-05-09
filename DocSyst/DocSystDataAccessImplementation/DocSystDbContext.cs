@@ -1,4 +1,5 @@
-﻿using DocSystEntities.DocumentStructure;
+﻿using DocSystEntities.Audit;
+using DocSystEntities.DocumentStructure;
 using DocSystEntities.User;
 using System.Data.Entity;
 
@@ -13,6 +14,7 @@ namespace DocSystDataAccessImplementation
         public DbSet<Margin> Margins { get; set; }
         public DbSet<Paragraph> Paragraphs { get; set; }
         public DbSet<Text> Texts { get; set; }
+        public DbSet<AuditLog> AuditLogs { get; set; }
 
     }
 }

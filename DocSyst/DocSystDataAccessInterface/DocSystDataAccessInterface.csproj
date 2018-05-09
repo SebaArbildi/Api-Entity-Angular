@@ -56,6 +56,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuditDataAccessInterface\IAuditLogDataAccess.cs" />
     <Compile Include="DocumentStructureDataAccessInterface\IBodyDataAccess.cs" />
     <Compile Include="DocumentStructureDataAccessInterface\IDocumentDataAccess.cs" />
     <Compile Include="DocumentStructureDataAccessInterface\IMarginDataAccess.cs" />

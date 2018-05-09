@@ -1,4 +1,5 @@
 ﻿using DocSystDataAccessImplementation;
+using DocSystEntities.Audit;
 using DocSystEntities.DocumentStructure;
 using DocSystEntities.User;
 using System;
@@ -39,6 +40,11 @@ namespace DocSystTest
         internal static Document CreateDocumentForTest()
         {
             return new Document("a Title","a Style Class",CreateUserForTest());
+        }
+
+        internal static AuditLog CreateAuditLogForTest()
+        {
+            return new AuditLog();
         }
     }
 }

@@ -107,6 +107,7 @@
     <Compile Include="ApiTest\MarginControllerTest.cs" />
     <Compile Include="ApiTest\ParagraphControllerTest.cs" />
     <Compile Include="ApiTest\TextControllerTest.cs" />
+    <Compile Include="AuditDataAccessTest\AuditDataAccessTest.cs" />
     <Compile Include="BusinessLogicTest\ParagraphBusinessLogicTest.cs" />
     <Compile Include="BusinessLogicTest\MarginBusinessLogicTest.cs" />
     <Compile Include="BusinessLogicTest\TextBusinessLogicTest.cs" />

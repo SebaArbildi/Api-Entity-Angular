@@ -56,6 +56,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Audit\AuditLog.cs" />
     <Compile Include="DocumentStructure\Body.cs" />
     <Compile Include="DocumentStructure\Document.cs" />
     <Compile Include="DocumentStructure\Margin.cs" />
@@ -68,6 +69,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

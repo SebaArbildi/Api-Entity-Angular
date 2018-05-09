@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuditLogBussinesLogicInterface\IAuditLogBussinesLogic.cs" />
     <Compile Include="AuthorizationBusinessLogicInterface\IAuthorizationBusinessLogic.cs" />
     <Compile Include="AuthorizationBusinessLogicInterface\ILoginBusinessLogic.cs" />
     <Compile Include="DocumentStructureLogicInterface\IDocumentBusinessLogic.cs" />
