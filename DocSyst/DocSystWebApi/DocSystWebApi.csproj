@@ -163,6 +163,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\SpecificStyleController.cs" />
+    <Compile Include="Controllers\StyleClassController.cs" />
     <Compile Include="Controllers\StyleController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
@@ -170,6 +171,7 @@
     </Compile>
     <Compile Include="Models\Model.cs" />
     <Compile Include="Models\StyleStructureModels\SpecificStyleModel.cs" />
+    <Compile Include="Models\StyleStructureModels\StyleClassModel.cs" />
     <Compile Include="Models\StyleStructureModels\StyleModel.cs" />
     <Compile Include="Models\UserModel\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

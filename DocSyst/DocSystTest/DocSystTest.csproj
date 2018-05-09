@@ -98,6 +98,7 @@
     <Compile Include="ApiTest\LoginControllerTest.cs" />
     <Compile Include="ApiTest\StyleStructureApiTest\SpecificStyleControllerTest.cs" />
     <Compile Include="ApiTest\StyleStructureApiTest\StyleControllerTest.cs" />
+    <Compile Include="ApiTest\StyleStructureApiTest\StyleClassControllerTest.cs" />
     <Compile Include="ApiTest\UserApiTest.cs" />
     <Compile Include="BusinessLogicTest\AuthorizationBusinessLogicTest.cs" />
     <Compile Include="BusinessLogicTest\LoginBusinessLogicTest.cs" />
