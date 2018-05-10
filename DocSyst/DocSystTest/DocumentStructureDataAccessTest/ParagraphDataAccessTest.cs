@@ -66,6 +66,7 @@ namespace DocSystTest.DocumentStructureDataAccessTest
             Paragraph obtained = paragraphDataAccess.Get(paragraph.Id);
             Text textObtained = textDataAccess.Get(aText.Id);
             Assert.IsNull(obtained);
+            Assert.IsNull(textObtained);
         }
 
         [TestMethod]

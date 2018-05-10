@@ -31,10 +31,25 @@ namespace DocSystDataAccessImplementation.DocumentStructureDataAccessImplementat
 
             using (DocSystDbContext context = new DocSystDbContext())
             {
+                List<Text> textList = AttachTextList(context, paragraph.Texts);
+                paragraph.Texts = textList;
                 context.Paragraphs.Attach(paragraph);
+                context.Texts.RemoveRange(textList);
                 context.Paragraphs.Remove(paragraph);
                 context.SaveChanges();
             }
+        }
+
+        private List<Text> AttachTextList(DocSystDbContext context, IList<Text> textList)
+        {
+            List<Text> texts = new List<Text>();
+            foreach (Text text in textList)
+            {
+                Text txt = context.Texts.Where(textDb => textDb.Id == text.Id).FirstOrDefault();
+                context.Texts.Attach(txt);
+                texts.Add(txt);
+            }
+            return texts;
         }
 
         public bool Exists(Guid aParagraph)

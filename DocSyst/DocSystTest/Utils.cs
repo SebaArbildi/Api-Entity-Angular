@@ -1,8 +1,13 @@
 ﻿using DocSystDataAccessImplementation;
+using DocSystDataAccessImplementation.StyleStructureDataAccess;
+using DocSystDataAccessImplementation.StyleStructureDataAccessImplementation;
+using DocSystDataAccessInterface.StyleStructureDataAccessInterface;
 using DocSystEntities.Audit;
 using DocSystEntities.DocumentStructure;
+using DocSystEntities.StyleStructure;
 using DocSystEntities.User;
 using System;
+using System.Collections.Generic;
 
 namespace DocSystTest
 {
@@ -18,36 +23,36 @@ namespace DocSystTest
         }
 
         internal static User CreateUserForTest()
-        {          
+        {
             return new User("Name", "LastName", random.Next().ToString(), "Password", "Mail", true);
         }
 
         internal static Text CreateTextForTest()
         {
-            return new Text("a Text content","a Style Class");
+            return new Text("a Text content", "a Style Class");
         }
 
         internal static Paragraph CreateParagraphForTest()
         {
-            return new Paragraph(MarginAlign.PARAGRAPH,"a Style Class");
+            return new Paragraph(MarginAlign.PARAGRAPH, "a Style Class");
         }
 
         internal static Margin CreateMarginForTest()
         {
-            return new Margin(MarginAlign.FOOTER,"a Style Class");
+            return new Margin(MarginAlign.FOOTER, "a Style Class");
         }
 
         internal static Document CreateDocumentForTest()
         {
-            return new Document("a Title","a Style Class",CreateUserForTest());
+            return new Document("a Title", "a Style Class", CreateUserForTest());
         }
 
         internal static AuditLog CreateAuditLogForTest()
         {
             return new AuditLog();
         }
-		
-		internal static StyleClass CreateStyleClassForTest()
+
+        internal static StyleClass CreateStyleClassForTest()
         {
             Style style = CreateStyleInDataBaseForTest();
             IList<Style> styleList = new List<Style>();
@@ -98,3 +103,4 @@ namespace DocSystTest
             return new Format("FormatName", styleClasses);
         }
     }
+}

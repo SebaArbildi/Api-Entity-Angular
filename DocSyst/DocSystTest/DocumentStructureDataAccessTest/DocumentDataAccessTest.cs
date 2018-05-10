@@ -58,13 +58,27 @@ namespace DocSystTest.DocumentStructureDataAccessTest
         [TestMethod]
         public void DeleteDocumentFromDb_ExpectedParametersAndParagraphToDelete_Ok()
         {
+            Margin margin = new Margin(MarginAlign.HEADER,"aStyleClass");
+            margin.SetText(new Text());
+            aDocumentPart.PutTextAtLast(new Text());
             document.SetDocumentPart(aDocumentPart.Align,aDocumentPart);
+            document.SetDocumentPart(margin.Align, margin);
             documentDataAccess.Add(document);
 
             documentDataAccess.Delete(document.Id);
 
             Document obtained = documentDataAccess.Get(document.Id);
+            Paragraph paragraphObtained = paragraphDataAccess.Get(aDocumentPart.Id);
+
+            ITextDataAccess txtDA = new TextDataAccess();
+
+            Text text1 = txtDA.Get(margin.GetText().Id);
+            Text text2 = txtDA.Get(aDocumentPart.GetTextAt(0).Id);
+
             Assert.IsNull(obtained);
+            Assert.IsNull(paragraphObtained);
+            Assert.IsNull(text1);
+            Assert.IsNull(text2);
         }
 
         [TestMethod]

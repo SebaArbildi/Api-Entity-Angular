@@ -1,5 +1,7 @@
 ﻿using DocSystBusinessLogicInterface.AuthorizationBusinessLogicInterface;
 using DocSystBusinessLogicInterface.UserBusinessLogicInterface;
+using DocSystEntities.StyleStructure;
+using DocSystWebApi.Models.StyleStructureModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;

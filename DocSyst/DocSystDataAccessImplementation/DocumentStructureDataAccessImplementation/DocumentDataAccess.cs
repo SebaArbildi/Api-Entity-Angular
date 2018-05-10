@@ -24,31 +24,55 @@ namespace DocSystDataAccessImplementation.DocumentStructureDataAccessImplementat
 
             using (DocSystDbContext context = new DocSystDbContext())
             {
-                
+                List<Text> textList = new List<Text>();
+                List<Paragraph> paragraphList = new List<Paragraph>();
+                List<Margin> marginList = new List<Margin>();
+
                 foreach (Body aDocumentPart in document.DocumentParts)
                 {
-                    foreach (Text aText in aDocumentPart.Texts)
-                    {
-                        context.Texts.Attach(aText);
-                        //context.Texts.Remove(aText);
-                    }
-
                     if (aDocumentPart.Align == MarginAlign.PARAGRAPH)
                     {
                         context.Paragraphs.Attach((Paragraph)aDocumentPart);
-                        //context.Paragraphs.Remove((Paragraph)aDocumentPart);
+                        paragraphList.Add((Paragraph)aDocumentPart);
                     }
                     else if(aDocumentPart.Align == MarginAlign.HEADER || aDocumentPart.Align == MarginAlign.FOOTER)
                     {
                         context.Margins.Attach((Margin)aDocumentPart);
-                        context.Margins.Remove((Margin)aDocumentPart);
+                        marginList.Add((Margin)aDocumentPart);
                     }
+
+                    textList = textList.Concat(AttachTextList(context, aDocumentPart.Texts)).ToList();
                 }
                 context.Users.Attach(document.CreatorUser);
                 context.Documents.Attach(document);
+                if (textList.Any())
+                {
+                    context.Texts.RemoveRange(textList);
+                }
+                if (paragraphList.Any())
+                {
+                    context.Paragraphs.RemoveRange(paragraphList);
+                }
+                if (marginList.Any())
+                {
+                    context.Margins.RemoveRange(marginList);
+                }
+                context.Users.Remove(document.CreatorUser);
                 context.Documents.Remove(document);
                 context.SaveChanges();
             }
+        }
+
+        private List<Text> AttachTextList(DocSystDbContext context, IList<Text> textList)
+        {
+            List<Text> texts = new List<Text>();
+            foreach (Text text in textList)
+            {
+                Text txt = context.Texts.Where(textDb => textDb.Id == text.Id).FirstOrDefault();
+                context.Texts.Attach(txt);
+                texts.Add(txt);
+            }
+            return texts;
         }
 
         public bool Exists(Guid aDocument)
@@ -68,6 +92,7 @@ namespace DocSystDataAccessImplementation.DocumentStructureDataAccessImplementat
             {
                 document = context.Documents.Include("CreatorUser")
                                             .Include("DocumentParts").Where(documenthDb => documenthDb.Id == id)
+                                            .Include(documenthDb => documenthDb.DocumentParts.Select(bodyDb => bodyDb.Texts))
                                             .FirstOrDefault();
             }
             return document;
@@ -78,7 +103,9 @@ namespace DocSystDataAccessImplementation.DocumentStructureDataAccessImplementat
             IList<Document> document = null;
             using (DocSystDbContext context = new DocSystDbContext())
             {
-                document = (context.Documents.Include("DocumentsParts").Include("CreatorUser")).ToList<Document>();
+                document = (context.Documents.Include("DocumentParts")
+                                            .Include(documenthDb => documenthDb.DocumentParts.Select(bodyDb => bodyDb.Texts))
+                                            .Include("CreatorUser")).ToList<Document>();
             }
             return document;
         }
