@@ -23,6 +23,7 @@ namespace DocSystWebApi.Controllers
         }
 
         // GET: api/StyleClass
+        [Route("api/StyleClass", Name = "GetStyleClasses")]
         public IHttpActionResult Get()
         {
             try

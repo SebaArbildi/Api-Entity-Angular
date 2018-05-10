@@ -115,7 +115,8 @@ namespace DocSystDataAccessImplementation.DocumentStructureDataAccessImplementat
             IList<Document> document = null;
             using (DocSystDbContext context = new DocSystDbContext())
             {
-                document = (context.Documents.Where(documenthDb =>  Username == documenthDb.GetCreatorUsername())
+                document = (context.Documents.Include(documenthDb => documenthDb.CreatorUser)
+                                            .Where(documenthDb =>  documenthDb.CreatorUser.Username == Username)
                                             .Include(documenthDb => documenthDb.DocumentParts)
                                             .Include(documenthDb => documenthDb.DocumentParts.Select(bodyDb => bodyDb.Texts))).ToList<Document>();
             }

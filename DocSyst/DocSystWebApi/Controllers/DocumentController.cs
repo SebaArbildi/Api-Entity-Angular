@@ -31,7 +31,7 @@ namespace DocSystWebApi.Controllers
             try
             {
                 Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
-                var userToken = Request.Headers.GetValues("Token").FirstOrDefault();
+                var userToken = Request.Headers.GetValues("userToken").FirstOrDefault();
                 var documents = DocumentBusinessLogic.GetDocuments(userToken);
                 IList<DocumentModel> documentsModel = DocumentModel.ToModel(documents).ToList();
                 return Ok(documentsModel);

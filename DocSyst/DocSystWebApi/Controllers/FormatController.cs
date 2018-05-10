@@ -22,6 +22,7 @@ namespace DocSystWebApi.Controllers
             AuthorizationBusinessLogic = authorizationBusinessLogic;
         }
         // GET: api/Format
+        [Route("api/Format", Name = "GetFormats")]
         public IHttpActionResult Get()
         {
             try
