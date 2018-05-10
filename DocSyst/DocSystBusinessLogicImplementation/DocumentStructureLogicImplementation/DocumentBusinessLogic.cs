@@ -103,8 +103,7 @@ namespace DocSystBusinessLogicImplementation.DocumentStructureLogicImplementatio
                     , "userToken");
             }
 
-            Guid guid = Guid.Parse(userToken);
-            User user = userDataAccess.Get(guid);
+            User user = userDataAccess.Get(userToken);
 
             IList<Document> documents = documentDataAccess.Get(user.Username);
 
