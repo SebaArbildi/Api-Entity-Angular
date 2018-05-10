@@ -104,7 +104,7 @@ namespace DocSystWebApi.Controllers
             }
         }
 
-        [Route("api/Paragraph/{paragraphId:guid}/Text", Name = "ClearTexts")]
+        [Route("api/Paragraph/{paragraphId:guid}/Text", Name = "ClearTextsParagraph")]
         [HttpPut]
         public IHttpActionResult Put([FromUri] Guid id)
         {

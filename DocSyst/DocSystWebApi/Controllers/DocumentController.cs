@@ -105,7 +105,7 @@ namespace DocSystWebApi.Controllers
             }
         }
 
-        [Route("api/Document/{documentId:guid}/Part/{align:MarginAlign}", Name = "GetDocumentPart")]
+        [Route("api/Document/{documentId:guid}/Part/{align}", Name = "GetDocumentPart")]
         [HttpGet]
         public IHttpActionResult Get([FromUri] Guid documentId, [FromUri] MarginAlign align)
         {
@@ -121,7 +121,7 @@ namespace DocSystWebApi.Controllers
             }
         }
 
-        [Route("api/Document/{documentId:guid}/Part/{align:MarginAlign}", Name = "SetDocumentPart")]
+        [Route("api/Document/{documentId:guid}/Part/{align}", Name = "SetDocumentPart")]
         [HttpPost]
         public IHttpActionResult Post([FromUri] Guid documentId, [FromUri] MarginAlign align, [FromBody] BodyModel documentPart)
         {

@@ -126,7 +126,7 @@ namespace DocSystWebApi.Controllers
             }
         }
 
-        [Route("api/Margin/{marginId:guid}/Text", Name = "ClearTexts")]
+        [Route("api/Margin/{marginId:guid}/Text", Name = "ClearTextsMargin")]
         [HttpPut]
         public IHttpActionResult Put([FromUri] Guid id)
         {
