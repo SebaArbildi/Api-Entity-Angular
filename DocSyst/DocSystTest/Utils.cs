@@ -1,4 +1,9 @@
 ﻿using DocSystDataAccessImplementation;
+using DocSystDataAccessImplementation.StyleStructureDataAccess;
+using DocSystDataAccessImplementation.StyleStructureDataAccessImplementation;
+using DocSystDataAccessInterface.StyleStructureDataAccessInterface;
+using DocSystEntities.DocumentStructure;
+using DocSystEntities.StyleStructure;
 using DocSystEntities.User;
 using System;
 using System.Collections.Generic;

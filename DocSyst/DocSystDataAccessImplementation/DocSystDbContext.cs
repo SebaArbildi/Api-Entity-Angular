@@ -1,4 +1,6 @@
-﻿using DocSystEntities.User;
+﻿using DocSystEntities.DocumentStructure;
+using DocSystEntities.StyleStructure;
+using DocSystEntities.User;
 using System.Data.Entity;
 
 namespace DocSystDataAccessImplementation
