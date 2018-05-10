@@ -294,26 +294,3 @@ __pycache__/
 
 
 # End of https://www.gitignore.io/api/csharp
-DocSyst/DocSystWebApi/obj/Debug/
-
-DocSyst/DocSystEntities/bin/Debug/
-
-DocSyst/DocSystBusinessLogicImplementation/bin/Debug/
-
-DocSyst/DocSystTest/bin/Debug/
-
-DocSyst/DocSystDataAccessImplementation/bin/Debug/
-
-DocSyst/DocSystBusinessLogicInterface/bin/Debug/
-
-DocSyst/DocSystBusinessLogicImplementation/obj/Debug/
-
-DocSyst/DocSystBusinessLogicInterface/obj/Debug/
-
-DocSyst/DocSystDataAccessImplementation/obj/Debug/
-
-DocSyst/DocSystDataAccessInterface/bin/Debug/
-
-DocSyst/DocSystDataAccessInterface/obj/Debug/
-
-DocSyst/DocSystEntities/obj/Debug/
