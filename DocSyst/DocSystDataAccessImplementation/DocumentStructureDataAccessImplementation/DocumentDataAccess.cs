@@ -41,10 +41,10 @@ namespace DocSystDataAccessImplementation.DocumentStructureDataAccessImplementat
                     else if(aDocumentPart.Align == MarginAlign.HEADER || aDocumentPart.Align == MarginAlign.FOOTER)
                     {
                         context.Margins.Attach((Margin)aDocumentPart);
-                        //context.Margins.Remove((Margin)aDocumentPart);
+                        context.Margins.Remove((Margin)aDocumentPart);
                     }
                 }
-
+                context.Users.Attach(document.CreatorUser);
                 context.Documents.Attach(document);
                 context.Documents.Remove(document);
                 context.SaveChanges();
@@ -66,9 +66,9 @@ namespace DocSystDataAccessImplementation.DocumentStructureDataAccessImplementat
             Document document = null;
             using (DocSystDbContext context = new DocSystDbContext())
             {
-                document = context.Documents.Include(documenthDb => documenthDb.DocumentParts)
-                                            .Include(documenthDb => documenthDb.DocumentParts.Select(bodyDb => bodyDb.Texts))
-                                            .FirstOrDefault(documenthDb => documenthDb.Id == id);
+                document = context.Documents.Include("CreatorUser")
+                                            .Include("DocumentParts").Where(documenthDb => documenthDb.Id == id)
+                                            .FirstOrDefault();
             }
             return document;
         }

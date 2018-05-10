@@ -22,7 +22,9 @@ namespace DocSystDataAccessImplementation.StyleStructureDataAccessImplementation
             using (DocSystDbContext context = new DocSystDbContext())
             {
                 AttachInheritedStyleClass(context, styleClass.InheritedStyleClass);
-                AttachStyleList(context, styleClass.InheritedPlusProperStyles);
+                IList<Style> st = AttachStyleList(context, styleClass.InheritedPlusProperStyles);
+                styleClass.InheritedPlusProperStyles = st;
+                styleClass.ProperStyles = st;
                 AttachObserverList(context, styleClass.Observers);
                 context.StyleClasses.Add(styleClass);
                 context.SaveChanges();
@@ -35,7 +37,9 @@ namespace DocSystDataAccessImplementation.StyleStructureDataAccessImplementation
             using (DocSystDbContext context = new DocSystDbContext())
             {
                 AttachInheritedStyleClass(context, styleClass.InheritedStyleClass);
-                AttachStyleList(context, styleClass.ProperStyles);
+                IList<Style> st = AttachStyleList(context, styleClass.InheritedPlusProperStyles);
+                styleClass.InheritedPlusProperStyles = st;
+                styleClass.ProperStyles = st;
                 AttachObserverList(context, styleClass.Observers);
                 context.StyleClasses.Attach(styleClass);
                 context.StyleClasses.Remove(styleClass);
@@ -70,7 +74,9 @@ namespace DocSystDataAccessImplementation.StyleStructureDataAccessImplementation
             using (DocSystDbContext context = new DocSystDbContext())
             {
                 AttachInheritedStyleClass(context, styleClass.InheritedStyleClass);
-                AttachStyleList(context, styleClass.ProperStyles);
+                IList<Style> st = AttachStyleList(context, styleClass.InheritedPlusProperStyles);
+                styleClass.InheritedPlusProperStyles = st;
+                styleClass.ProperStyles = st;
                 AttachObserverList(context, styleClass.Observers);
                 StyleClass actualStyleClass = context.StyleClasses.Include("ProperStyles").Include("InheritedStyleClass")
                     .Include("InheritedPlusProperStyles").Include("Observers").Where(styleClassDb => styleClassDb.Id == styleClass.Id).FirstOrDefault();
@@ -94,13 +100,16 @@ namespace DocSystDataAccessImplementation.StyleStructureDataAccessImplementation
             return exists;
         }
 
-        private void AttachStyleList(DocSystDbContext context, IList<Style> styleList)
+        private IList<Style> AttachStyleList(DocSystDbContext context, IList<Style> styleList)
         {
+            IList<Style> styles = new List<Style>();
             foreach (Style style in styleList)
             {
-                context.Styles.Attach(style);
-                context.SpecificStyles.Attach(style.Implementation);
+                Style st = context.Styles.Include("Implementation").Where(styleDb => styleDb.Name == style.Name).FirstOrDefault();
+                context.Styles.Attach(st);
+                styles.Add(st);
             }
+            return styles;
         }
 
         private void AttachObserverList(DocSystDbContext context, IList<StyleClass> observerList)

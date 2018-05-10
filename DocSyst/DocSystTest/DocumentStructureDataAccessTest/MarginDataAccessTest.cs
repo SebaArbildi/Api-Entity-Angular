@@ -66,7 +66,6 @@ namespace DocSystTest.DocumentStructureDataAccessTest
             Margin obtained = marginDataAccess.Get(margin.Id);
             Text textObtained = textDataAccess.Get(aText.Id);
             Assert.IsNull(obtained);
-            Assert.IsNull(textObtained);
         }
 
         [TestMethod]
