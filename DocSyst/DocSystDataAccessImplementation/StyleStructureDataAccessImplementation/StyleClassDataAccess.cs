@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DocSystEntities.StyleStructure;
 using DocSystEntities.ObserverInterface;
+using System.Data.Entity;
 
 namespace DocSystDataAccessImplementation.StyleStructureDataAccessImplementation
 {
@@ -21,7 +22,7 @@ namespace DocSystDataAccessImplementation.StyleStructureDataAccessImplementation
             using (DocSystDbContext context = new DocSystDbContext())
             {
                 AttachInheritedStyleClass(context, styleClass.InheritedStyleClass);
-                AttachStyleList(context, styleClass.ProperStyles);
+                AttachStyleList(context, styleClass.InheritedPlusProperStyles);
                 AttachObserverList(context, styleClass.Observers);
                 context.StyleClasses.Add(styleClass);
                 context.SaveChanges();
@@ -98,6 +99,7 @@ namespace DocSystDataAccessImplementation.StyleStructureDataAccessImplementation
             foreach (Style style in styleList)
             {
                 context.Styles.Attach(style);
+                context.SpecificStyles.Attach(style.Implementation);
             }
         }
 

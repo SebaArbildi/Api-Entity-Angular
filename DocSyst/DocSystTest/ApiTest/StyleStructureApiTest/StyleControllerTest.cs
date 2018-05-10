@@ -10,6 +10,10 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Results;
 using System.Collections.Generic;
+using DocSystDataAccessInterface.StyleStructureDataAccessInterface;
+using DocSystDataAccessImplementation.StyleStructureDataAccess;
+using DocSystBusinessLogicImplementation.StyleStructureBusinessLogic;
+using DocSystDataAccessImplementation.StyleStructureDataAccessImplementation;
 
 namespace DocSystTest.ApiTest.StyleStructureApiTest
 {
@@ -134,6 +138,25 @@ namespace DocSystTest.ApiTest.StyleStructureApiTest
             mockStyleBusinessLogic.Setup(b1 => b1.Delete(style.Name)).Throws(new Exception());
             IHttpActionResult statusObtained = styleController.Delete(style.Name);
             Assert.IsNull(statusObtained as OkNegotiatedContentResult<string>);
+        }
+
+        [TestMethod]
+        public void IntegrationTest()
+        {
+            Guid token = Guid.NewGuid();
+            var requestMessage = new HttpRequestMessage();
+            requestMessage.Headers.Add("Token", token + "");
+            mockUserAuthorizationLogic.Setup(b1 => b1.IsAValidToken(token)).Returns(true);
+            mockUserAuthorizationLogic.Setup(b1 => b1.IsAdmin(token)).Returns(true);
+
+            IStyleDataAccess styleDA = new StyleDataAccess();
+            IStyleBusinessLogic styleBL = new StyleBusinessLogic(styleDA);
+            StyleController styleController = new StyleController(styleBL, mockUserAuthorizationLogic.Object);
+            styleController.Request = requestMessage;
+
+            Style style = Utils.CreateStyleForTest();
+
+            styleController.Post(StyleModel.ToModel(style));
         }
     }
 }

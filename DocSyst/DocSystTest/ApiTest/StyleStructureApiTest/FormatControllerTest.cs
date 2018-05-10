@@ -10,6 +10,15 @@ using System.Web.Http.Results;
 using System.Collections.Generic;
 using DocSystWebApi.Models.StyleStructureModels;
 using DocSystWebApi.Controllers;
+using DocSystDataAccessInterface.StyleStructureDataAccessInterface;
+using DocSystBusinessLogicImplementation.StyleStructureBusinessLogic;
+using DocSystDataAccessImplementation.StyleStructureDataAccess;
+using DocSystDataAccessImplementation.StyleStructureDataAccessImplementation;
+using DocSystDataAccessInterface.UserDataAccessInterface;
+using DocSystBusinessLogicInterface.UserBusinessLogicInterface;
+using DocSystDataAccessImplementation.UserDataAccessImplementation;
+using DocSystBusinessLogicImplementation.UserBusinessLogicImplementation;
+using DocSystBusinessLogicImplementation.AuthorizationBusinessLogicImplementation;
 
 namespace DocSystTest.ApiTest.StyleStructureApiTest
 {
@@ -142,7 +151,7 @@ namespace DocSystTest.ApiTest.StyleStructureApiTest
         public void AddStyleClassToFormat_ExpectedParameters_Ok()
         {
             mockFormatsBusinessLogic.Setup(b1 => b1.AddStyle(format.Id, styleClass));
-            IHttpActionResult statusObtained = formatController.AddStyleToStyleClass(format.Id, StyleClassModel.ToModel(styleClass));
+            IHttpActionResult statusObtained = formatController.AddStyleClassToFormat(format.Id, StyleClassModel.ToModel(styleClass));
             Assert.IsNotNull(statusObtained as OkNegotiatedContentResult<string>);
         }
 
@@ -150,7 +159,7 @@ namespace DocSystTest.ApiTest.StyleStructureApiTest
         public void AddStyleClassToFormat_BadRequest_Exception()
         {
             mockFormatsBusinessLogic.Setup(b1 => b1.AddStyle(format.Id, styleClass)).Throws(new Exception());
-            IHttpActionResult statusObtained = formatController.AddStyleToStyleClass(format.Id, StyleClassModel.ToModel(styleClass));
+            IHttpActionResult statusObtained = formatController.AddStyleClassToFormat(format.Id, StyleClassModel.ToModel(styleClass));
             Assert.IsNull(statusObtained as OkNegotiatedContentResult<string>);
         }
 
@@ -158,7 +167,7 @@ namespace DocSystTest.ApiTest.StyleStructureApiTest
         public void RemoveStyleClassFromFormat_ExpectedParameters_Ok()
         {
             mockFormatsBusinessLogic.Setup(b1 => b1.RemoveStyle(format.Id, styleClass.Id));
-            IHttpActionResult statusObtained = formatController.RemoveStyleFromStyleClass(format.Id, styleClass.Id);
+            IHttpActionResult statusObtained = formatController.RemoveStyleClassFromFormat(format.Id, styleClass.Id);
             Assert.IsNotNull(statusObtained as OkNegotiatedContentResult<string>);
         }
 
@@ -166,8 +175,34 @@ namespace DocSystTest.ApiTest.StyleStructureApiTest
         public void RemoveStyleClassFromFormat_BadRequest_Exception()
         {
             mockFormatsBusinessLogic.Setup(b1 => b1.RemoveStyle(format.Id, styleClass.Id)).Throws(new Exception());
-            IHttpActionResult statusObtained = formatController.RemoveStyleFromStyleClass(format.Id, styleClass.Id);
+            IHttpActionResult statusObtained = formatController.RemoveStyleClassFromFormat(format.Id, styleClass.Id);
             Assert.IsNull(statusObtained as OkNegotiatedContentResult<string>);
+        }
+
+        [TestMethod]
+        public void integration()
+        {
+            var requestMessage = new HttpRequestMessage();
+            IUserDataAccess da = new UserDataAccess();
+            IUserBusinessLogic userBL = new UserBusinessLogic(new UserDataAccess());
+            IAuthorizationBusinessLogic auth = new AuthorizationBusinessLogic(da);
+            ISpecificStyleDataAccess specificStyleDA = new SpecificStyleDataAccess();
+            ISpecificStyleBusinessLogic specificStyleBL = new SpecificStyleBusinessLogic(specificStyleDA);
+            IStyleDataAccess styleDA = new StyleDataAccess();
+            IStyleBusinessLogic styleBL = new StyleBusinessLogic(styleDA);
+            IStyleClassDataAccess styleClassDA = new StyleClassDataAccess();
+            IStyleClassBusinessLogic styleClassBL = new StyleClassBusinessLogic(styleClassDA, styleBL);
+            IFormatDataAccess formatDA = new FormatDataAccess();
+            IFormatBusinessLogic formatBL = new FormatBusinessLogic(formatDA, styleClassBL);
+            FormatController formatC = new FormatController(formatBL, auth);
+            formatC.Request = requestMessage;
+            StyleClass styleClassA = Utils.CreateStyleClassInDataBaseForTest();
+            Format formatA = Utils.CreateFormatForTest();
+            FormatModel formatModelA = FormatModel.ToModel(formatA);
+            formatC.Post(formatModelA);
+            formatC.AddStyleClassToFormat(formatA.Id, StyleClassModel.ToModel(styleClassA));
+            IHttpActionResult statusObtained = formatC.Get(formatA.Id);
+            int a = 2;
         }
     }
 }

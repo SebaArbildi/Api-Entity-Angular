@@ -23,7 +23,7 @@ namespace DocSystWebApi.Models.StyleStructureModels
         {
             Id = this.Id,
             Name = this.Name,
-            Implementation = this.Implementation,
+            Implementation = this.Implementation
         };
 
         protected override SpecificStyleModel SetModel(SpecificStyle specificStyle)

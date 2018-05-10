@@ -58,17 +58,17 @@ namespace DocSystWebApi.Controllers
         // POST: api/StyleClass
         public IHttpActionResult Post([FromBody]StyleClassModel styleClassModel)
         {
-            try
-            {
+//try
+//{
                 Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
                 Utils.HasAdminPermissions(Request, AuthorizationBusinessLogic);
                 StyleClassBusinessLogic.Add(styleClassModel.ToEntity());
                 return Ok("Style Class added");
-            }
-            catch (Exception e)
+           // }
+            /*catch (Exception e)
             {
                 return BadRequest(e.Message);
-            }
+            }*/
         }
 
         // PUT: api/StyleClass/5

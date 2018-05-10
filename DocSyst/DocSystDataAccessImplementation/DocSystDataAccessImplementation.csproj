@@ -68,6 +68,10 @@
     <Compile Include="Migrations\201805070134356_init4.Designer.cs">
       <DependentUpon>201805070134356_init4.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805092316543_init3435.cs" />
+    <Compile Include="Migrations\201805092316543_init3435.Designer.cs">
+      <DependentUpon>201805092316543_init3435.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StyleStructureDataAccessImplementation\FormatDataAccess.cs" />
@@ -106,6 +110,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805070134356_init4.resx">
       <DependentUpon>201805070134356_init4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805092316543_init3435.resx">
+      <DependentUpon>201805092316543_init3435.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

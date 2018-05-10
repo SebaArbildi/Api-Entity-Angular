@@ -11,6 +11,9 @@ using System.Web.Http;
 using System.Web.Http.Results;
 using System.Collections.Generic;
 using DocSystWebApi.Controllers;
+using DocSystBusinessLogicImplementation.StyleStructureBusinessLogic;
+using DocSystDataAccessInterface.StyleStructureDataAccessInterface;
+using DocSystDataAccessImplementation.StyleStructureDataAccess;
 
 namespace DocSystTest.ApiTest.StyleStructureApiTest
 {
@@ -135,6 +138,24 @@ namespace DocSystTest.ApiTest.StyleStructureApiTest
             mockSpecificStyleBusinessLogic.Setup(b1 => b1.Delete(specificStyle.Id)).Throws(new Exception());
             IHttpActionResult statusObtained = specificStyleController.Delete(specificStyle.Id);
             Assert.IsNull(statusObtained as OkNegotiatedContentResult<string>);
+        }
+
+        [TestMethod]
+        public void IntegrationTest()
+        {
+            Guid token = Guid.NewGuid();
+            var requestMessage = new HttpRequestMessage();
+            requestMessage.Headers.Add("Token", token + "");
+            mockUserAuthorizationLogic.Setup(b1 => b1.IsAValidToken(token)).Returns(true);
+            mockUserAuthorizationLogic.Setup(b1 => b1.IsAdmin(token)).Returns(true);
+
+            ISpecificStyleDataAccess specificStyleDA = new SpecificStyleDataAccess();
+            ISpecificStyleBusinessLogic specificStyleBL = new SpecificStyleBusinessLogic(specificStyleDA);
+            SpecificStyleController specificStyleController = new SpecificStyleController(specificStyleBL, mockUserAuthorizationLogic.Object);
+            specificStyleController.Request = requestMessage;
+
+            SpecificStyle specificStyle2 = Utils.CreateSpecificStyleForTest("specifi");
+            specificStyleController.Post(SpecificStyleModel.ToModel(specificStyle2));
         }
     }
 }

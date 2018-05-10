@@ -10,10 +10,10 @@ namespace DocSystWebApi.Models.StyleStructureModels
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-        private IList<StyleModel> ProperStyles { get; set; }
-        private StyleClassModel InheritedStyleClass { get; set; }
-        private IList<StyleModel> InheritedPlusProperStyles { get; set; }
-        private IList<StyleClassModel> Observers { get; set; }
+        public IList<StyleModel> ProperStyles { get; set; }
+        public StyleClassModel InheritedStyleClass { get; set; }
+        public IList<StyleModel> InheritedPlusProperStyles { get; set; }
+        public IList<StyleClassModel> Observers { get; set; }
 
         public StyleClassModel() { }
 

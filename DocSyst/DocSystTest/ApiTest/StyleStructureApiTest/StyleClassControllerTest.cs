@@ -10,6 +10,9 @@ using System.Web.Http;
 using System.Web.Http.Results;
 using System.Collections.Generic;
 using DocSystWebApi.Controllers;
+using DocSystDataAccessInterface.StyleStructureDataAccessInterface;
+using DocSystDataAccessImplementation.StyleStructureDataAccessImplementation;
+using DocSystBusinessLogicImplementation.StyleStructureBusinessLogic;
 
 namespace DocSystTest.ApiTest.StyleStructureApiTest
 {
@@ -168,6 +171,28 @@ namespace DocSystTest.ApiTest.StyleStructureApiTest
             mockStyleClassBusinessLogic.Setup(b1 => b1.RemoveStyle(styleClass.Id, style.Name)).Throws(new Exception());
             IHttpActionResult statusObtained = StyleClassController.RemoveStyleFromStyleClass(styleClass.Id, style.Name);
             Assert.IsNull(statusObtained as OkNegotiatedContentResult<string>);
+        }
+
+        [TestMethod]
+        public void IntegrationTest()
+        {
+            Guid token = Guid.NewGuid();
+            var requestMessage = new HttpRequestMessage();
+            requestMessage.Headers.Add("Token", token + "");
+            mockUserAuthorizationLogic.Setup(b1 => b1.IsAValidToken(token)).Returns(true);
+            mockUserAuthorizationLogic.Setup(b1 => b1.IsAdmin(token)).Returns(true);
+
+            IStyleDataAccess styleDA = new StyleDataAccess();
+            IStyleBusinessLogic styleBL = new StyleBusinessLogic(styleDA);
+            IStyleClassDataAccess styleClassDA = new StyleClassDataAccess();
+            IStyleClassBusinessLogic styleClassBL = new StyleClassBusinessLogic(styleClassDA, styleBL);
+            StyleClassController styleClassController = new StyleClassController(styleClassBL, mockUserAuthorizationLogic.Object);
+            styleClassController.Request = requestMessage;
+
+            StyleClass styleClassA = Utils.CreateStyleClassForTest();
+            StyleClassModel styleClassM = StyleClassModel.ToModel(styleClassA);
+            styleClassM.InheritedPlusProperStyles = new List<StyleModel>();
+            styleClassController.Post(styleClassM);
         }
     }
 
