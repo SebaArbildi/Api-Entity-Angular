@@ -14,6 +14,6 @@ namespace DocSystBusinessLogicInterface.DocumentStructureLogicInterface
         bool Exist(Guid aTextId);
         bool IsEmpty(Guid aTextId);
         bool AreEqual(Guid firstTextId, Guid secondTextId);
-        Guid GetDocumentId(Guid aTextId);
+        Guid? GetDocumentId(Guid aTextId);
     }
 }

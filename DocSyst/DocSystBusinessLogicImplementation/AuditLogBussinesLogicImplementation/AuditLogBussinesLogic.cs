@@ -20,7 +20,7 @@ namespace DocSystBusinessLogicImplementation.AuditLogBussinesLogicImplementation
             AuditLogDataAccess = auditLogDataAccess;
         }
 
-        public void CreateLog(string entityType, Guid entityId, string executingUserId, ActionPerformed action)
+        public void CreateLog(string entityType, Guid? entityId, string executingUserId, ActionPerformed action)
         {
             AuditLog logEvent = new AuditLog(entityType, entityId, executingUserId, action);
             AuditLogDataAccess.Add(logEvent);

@@ -68,7 +68,7 @@ namespace DocSystBusinessLogicImplementation.DocumentStructureLogicImplementatio
             return textDataAccess.Exists(aTextId);
         }
 
-        public Guid GetDocumentId(Guid aTextId)
+        public Guid? GetDocumentId(Guid aTextId)
         {
             if (!textDataAccess.Exists(aTextId))
             {

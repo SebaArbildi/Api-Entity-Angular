@@ -16,6 +16,6 @@ namespace DocSystDataAccessInterface.DocumentStructureDataAccessInterface
         void Modify(Text aText);
         IList<Text> Get();
         bool Exists(Guid aText);
-        Guid GetDocumentId(Guid aTextId);
+        Guid? GetDocumentId(Guid aTextId);
     }
 }

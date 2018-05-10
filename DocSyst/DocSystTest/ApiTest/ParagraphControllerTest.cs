@@ -1,5 +1,7 @@
-﻿using DocSystBusinessLogicImplementation.AuthorizationBusinessLogicImplementation;
+﻿using DocSystBusinessLogicImplementation.AuditLogBussinesLogicImplementation;
+using DocSystBusinessLogicImplementation.AuthorizationBusinessLogicImplementation;
 using DocSystBusinessLogicImplementation.DocumentStructureLogicImplementation;
+using DocSystBusinessLogicInterface.AuditLogBussinesLogicInterface;
 using DocSystBusinessLogicInterface.AuthorizationBusinessLogicInterface;
 using DocSystBusinessLogicInterface.DocumentStructureLogicInterface;
 using DocSystDataAccessImplementation.DocumentStructureDataAccessImplementation;
@@ -31,6 +33,7 @@ namespace DocSystTest.ApiTest
         private UserModel userModel;
         private Mock<IParagraphBusinessLogic> mockParagraphBusinessLogic;
         private Mock<IAuthorizationBusinessLogic> mockParagraphAuthorizationLogic;
+        private Mock<IAuditLogBussinesLogic> mockAuditLogBusinessLogic;
         private ParagraphController paragraphController;
 
         [TestCleanup]
@@ -50,7 +53,8 @@ namespace DocSystTest.ApiTest
             userModel = UserModel.ToModel(user);
             mockParagraphAuthorizationLogic = new Mock<IAuthorizationBusinessLogic>();
             mockParagraphBusinessLogic = new Mock<IParagraphBusinessLogic>();
-            paragraphController = new ParagraphController(mockParagraphBusinessLogic.Object, mockParagraphAuthorizationLogic.Object);
+            mockAuditLogBusinessLogic = new Mock<IAuditLogBussinesLogic>();
+            paragraphController = new ParagraphController(mockParagraphBusinessLogic.Object, mockParagraphAuthorizationLogic.Object, mockAuditLogBusinessLogic.Object);
             InitializeToken();
         }
 
@@ -58,6 +62,7 @@ namespace DocSystTest.ApiTest
         {
             var requestMessage = new HttpRequestMessage();
             requestMessage.Headers.Add("Token", user.Token + "");
+            requestMessage.Headers.Add("Username", "user1");
             mockParagraphAuthorizationLogic.Setup(b1 => b1.IsAValidToken(user.Token)).Returns(true);
             mockParagraphAuthorizationLogic.Setup(b1 => b1.IsAdmin(user.Token)).Returns(true);
             paragraphController.Request = requestMessage;
@@ -143,6 +148,10 @@ namespace DocSystTest.ApiTest
         public void DeleteParagraph_ExpectedParameters_Ok()
         {
             mockParagraphBusinessLogic.Setup(b1 => b1.DeleteParagraph((It.IsAny<Guid>())));
+            mockParagraphBusinessLogic.Setup(b1 => b1.GetParagraph(paragraph.Id)).Returns(new Paragraph()
+            {
+                DocumentId = Guid.NewGuid()
+            });
             IHttpActionResult statusObtained = paragraphController.Delete(paragraph.Id);
             Assert.IsNotNull(statusObtained as OkNegotiatedContentResult<string>);
         }
@@ -159,6 +168,10 @@ namespace DocSystTest.ApiTest
         public void ClearTextsParagraph_ExpectedParameters_Ok()
         {
             mockParagraphBusinessLogic.Setup(b1 => b1.ClearText(paragraph.Id));
+            mockParagraphBusinessLogic.Setup(b1 => b1.GetParagraph(paragraph.Id)).Returns(new Paragraph()
+            {
+                DocumentId = Guid.NewGuid()
+            });
             IHttpActionResult statusObtained = paragraphController.Put(paragraph.Id);
             Assert.IsNotNull(statusObtained as OkNegotiatedContentResult<string>);
         }
@@ -191,6 +204,10 @@ namespace DocSystTest.ApiTest
         public void PostTextAtLastParagraph_ExpectedParameters_Ok()
         {
             mockParagraphBusinessLogic.Setup(b1 => b1.PutTextAtLast(paragraph.Id, text));
+            mockParagraphBusinessLogic.Setup(b1 => b1.GetParagraph(paragraph.Id)).Returns(new Paragraph()
+            {
+                DocumentId = Guid.NewGuid()
+            });
             IHttpActionResult statusObtained = paragraphController.Post(paragraph.Id, textModel);
             Assert.IsNotNull(statusObtained as CreatedAtRouteNegotiatedContentResult<TextModel>);
         }
@@ -207,6 +224,10 @@ namespace DocSystTest.ApiTest
         public void PostTextAtParagraph_ExpectedParameters_Ok()
         {
             mockParagraphBusinessLogic.Setup(b1 => b1.PutTextAt(paragraph.Id, text, 0));
+            mockParagraphBusinessLogic.Setup(b1 => b1.GetParagraph(paragraph.Id)).Returns(new Paragraph()
+            {
+                DocumentId = Guid.NewGuid()
+            });
             IHttpActionResult statusObtained = paragraphController.Post(paragraph.Id, textModel, 0);
             Assert.IsNotNull(statusObtained as CreatedAtRouteNegotiatedContentResult<TextModel>);
         }
@@ -223,6 +244,10 @@ namespace DocSystTest.ApiTest
         public void MoveTextToParagraph_ExpectedParameters_Ok()
         {
             mockParagraphBusinessLogic.Setup(b1 => b1.MoveTextTo(paragraph.Id, text.Id, 0));
+            mockParagraphBusinessLogic.Setup(b1 => b1.GetParagraph(paragraph.Id)).Returns(new Paragraph()
+            {
+                DocumentId = Guid.NewGuid()
+            });
             IHttpActionResult statusObtained = paragraphController.Put(paragraph.Id, text.Id, 0);
             Assert.IsNotNull(statusObtained as OkNegotiatedContentResult<string>);
         }
@@ -242,7 +267,8 @@ namespace DocSystTest.ApiTest
             IParagraphBusinessLogic paragraphBL = new ParagraphBusinessLogic(new ParagraphDataAccess());
             IUserDataAccess userDa = new UserDataAccess();
             IAuthorizationBusinessLogic auth = new AuthorizationBusinessLogic(userDa);
-            ParagraphController paragraphC = new ParagraphController(paragraphBL, auth);
+            IAuditLogBussinesLogic audit = new AuditLogBussinesLogic();
+            ParagraphController paragraphC = new ParagraphController(paragraphBL, auth, audit);
             paragraphC.Request = requestMessage;
             ParagraphModel paragraph2 = ParagraphModel.ToModel(Utils.CreateParagraphForTest());
             paragraphC.Post(paragraphModel);

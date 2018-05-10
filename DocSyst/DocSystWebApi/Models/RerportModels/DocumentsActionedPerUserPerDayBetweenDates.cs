@@ -25,6 +25,5 @@ namespace DocSystWebApi.Models.RerportModels
     {
         throw new NotImplementedException();
     }
-    {
     }
 }

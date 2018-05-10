@@ -16,7 +16,7 @@ namespace DocSystEntities.Audit
         public Guid Id { get; set; }
         public DateTime OperationDate { get; set; }
         public string EntityType { get; set; }
-        public Guid EntityId { get; set; }
+        public Guid? EntityId { get; set; }
         public string ExecutingUserId { get; set; }
         public ActionPerformed Action { get; set; }
 
@@ -26,7 +26,7 @@ namespace DocSystEntities.Audit
             OperationDate = DateTime.Today.Date;
         }
 
-        public AuditLog(string entityType, Guid entityId, string executingUserId, ActionPerformed action)
+        public AuditLog(string entityType, Guid? entityId, string executingUserId, ActionPerformed action)
         {
             Id = Guid.NewGuid();
             OperationDate = DateTime.Today.Date;

@@ -26,7 +26,6 @@ namespace DocSystTest.DocumentStructureTest
             Margin aBodyParagraph = new Margin();
 
             Assert.IsNotNull(aBodyParagraph.Id);
-            Assert.IsNull(aBodyParagraph.Align);
             Assert.IsNull(aBodyParagraph.OwnStyleClass);
             Assert.IsTrue(aBodyParagraph.Texts.Count==0);
         }

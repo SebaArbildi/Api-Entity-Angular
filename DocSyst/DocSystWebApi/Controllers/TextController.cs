@@ -77,7 +77,7 @@ namespace DocSystWebApi.Controllers
             {
                 Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
                 TextBusinessLogic.ModifyText(textModel.ToEntity());
-                Guid documentId = TextBusinessLogic.GetDocumentId(textModel.Id);
+                Guid? documentId = TextBusinessLogic.GetDocumentId(textModel.Id);
                 AuditLogBussinesLogic.CreateLog("Document", documentId, Utils.GetUsername(Request), ActionPerformed.MODIFY);
                 return Ok("Text Modified");
             }
@@ -93,7 +93,7 @@ namespace DocSystWebApi.Controllers
             try
             {
                 Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
-                Guid documentId = TextBusinessLogic.GetDocumentId(id);
+                Guid? documentId = TextBusinessLogic.GetDocumentId(id);
                 TextBusinessLogic.DeleteText(id);
                 AuditLogBussinesLogic.CreateLog("Document", documentId, Utils.GetUsername(Request), ActionPerformed.MODIFY);
                 return Ok("Text deleted");

@@ -12,7 +12,7 @@ namespace DocSystEntities.DocumentStructure
         public string OwnStyleClass { get; set; }
         public List<Text> Texts { get; set; }
         public MarginAlign Align { get; set; }
-        public Guid DocumentId { get; set; }
+        public Guid? DocumentId { get; set; }
 
         protected Body()
         {

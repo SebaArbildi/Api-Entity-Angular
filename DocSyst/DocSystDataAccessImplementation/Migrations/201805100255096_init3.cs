@@ -3,17 +3,30 @@ namespace DocSystDataAccessImplementation.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class init2 : DbMigration
+    public partial class init3 : DbMigration
     {
         public override void Up()
         {
+            CreateTable(
+                "dbo.AuditLogs",
+                c => new
+                    {
+                        Id = c.Guid(nullable: false),
+                        OperationDate = c.DateTime(nullable: false),
+                        EntityType = c.String(),
+                        EntityId = c.Guid(nullable: false),
+                        ExecutingUserId = c.String(),
+                        Action = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id);
+            
             CreateTable(
                 "dbo.Bodies",
                 c => new
                     {
                         Id = c.Guid(nullable: false),
                         OwnStyleClass = c.String(),
-                        Align = c.Int(),
+                        Align = c.Int(nullable: false),
                         DocumentId = c.Guid(),
                         Discriminator = c.String(nullable: false, maxLength: 128),
                     })
@@ -77,6 +90,7 @@ namespace DocSystDataAccessImplementation.Migrations
             DropTable("dbo.Documents");
             DropTable("dbo.Texts");
             DropTable("dbo.Bodies");
+            DropTable("dbo.AuditLogs");
         }
     }
 }

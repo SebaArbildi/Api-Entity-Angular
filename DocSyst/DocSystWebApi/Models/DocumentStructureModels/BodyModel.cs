@@ -14,7 +14,7 @@ namespace DocSystWebApi.Models.DocumentStructureModels
         public List<TextModel> Texts { get; set; }
         [Required]
         public MarginAlign Align { get; set; }
-        public Guid DocumentId { get; set; }
+        public Guid? DocumentId { get; set; }
 
         public BodyModel() { }
 

@@ -93,7 +93,7 @@ namespace DocSystWebApi.Controllers
             try
             {
                 Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
-                Guid documentId = ParagraphBusinessLogic.GetParagraph(id).DocumentId;
+                Guid documentId = ParagraphBusinessLogic.GetParagraph(id).DocumentId.Value;
                 ParagraphBusinessLogic.DeleteParagraph(id);
                 AuditLogBussinesLogic.CreateLog("Document", documentId, Utils.GetUsername(Request), ActionPerformed.MODIFY);
                 return Ok("Paragraph deleted");
@@ -111,7 +111,7 @@ namespace DocSystWebApi.Controllers
             try
             {
                 Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
-                Guid documentId = ParagraphBusinessLogic.GetParagraph(id).DocumentId;
+                Guid documentId = ParagraphBusinessLogic.GetParagraph(id).DocumentId.Value;
                 ParagraphBusinessLogic.ClearText(id);
                 AuditLogBussinesLogic.CreateLog("Document", documentId, Utils.GetUsername(Request), ActionPerformed.MODIFY);
 
@@ -147,7 +147,7 @@ namespace DocSystWebApi.Controllers
             {
                 Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
                 var text = TextModel.ToEntity(textModel);
-                Guid documentId = ParagraphBusinessLogic.GetParagraph(paragraphId).DocumentId;
+                Guid documentId = ParagraphBusinessLogic.GetParagraph(paragraphId).DocumentId.Value;
                 ParagraphBusinessLogic.PutTextAtLast(paragraphId, text);
                 AuditLogBussinesLogic.CreateLog("Document", documentId, Utils.GetUsername(Request), ActionPerformed.MODIFY);
 
@@ -167,7 +167,7 @@ namespace DocSystWebApi.Controllers
             {
                 Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
                 var text = TextModel.ToEntity(textModel);
-                Guid documentId = ParagraphBusinessLogic.GetParagraph(paragraphId).DocumentId;
+                Guid documentId = ParagraphBusinessLogic.GetParagraph(paragraphId).DocumentId.Value;
                 ParagraphBusinessLogic.PutTextAt(paragraphId, text, position);
                 AuditLogBussinesLogic.CreateLog("Document", documentId, Utils.GetUsername(Request), ActionPerformed.MODIFY);
 
@@ -186,7 +186,7 @@ namespace DocSystWebApi.Controllers
             try
             {
                 Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
-                Guid documentId = ParagraphBusinessLogic.GetParagraph(paragraphId).DocumentId;
+                Guid documentId = ParagraphBusinessLogic.GetParagraph(paragraphId).DocumentId.Value;
                 ParagraphBusinessLogic.MoveTextTo(paragraphId, textId, newPosition);
                 AuditLogBussinesLogic.CreateLog("Document", documentId, Utils.GetUsername(Request), ActionPerformed.MODIFY);
 

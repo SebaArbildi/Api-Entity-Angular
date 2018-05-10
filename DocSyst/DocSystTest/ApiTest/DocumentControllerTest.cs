@@ -4,8 +4,15 @@ using System.Net.Http;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.Results;
+using DocSystBusinessLogicImplementation.AuditLogBussinesLogicImplementation;
+using DocSystBusinessLogicImplementation.AuthorizationBusinessLogicImplementation;
+using DocSystBusinessLogicImplementation.DocumentStructureLogicImplementation;
+using DocSystBusinessLogicInterface.AuditLogBussinesLogicInterface;
 using DocSystBusinessLogicInterface.AuthorizationBusinessLogicInterface;
 using DocSystBusinessLogicInterface.DocumentStructureLogicInterface;
+using DocSystDataAccessImplementation.DocumentStructureDataAccessImplementation;
+using DocSystDataAccessImplementation.UserDataAccessImplementation;
+using DocSystDataAccessInterface.UserDataAccessInterface;
 using DocSystEntities.DocumentStructure;
 using DocSystEntities.User;
 using DocSystWebApi.Controllers;
@@ -29,6 +36,7 @@ namespace DocSystTest.ApiTest
         private UserModel userModel;
         private Mock<IDocumentBusinessLogic> mockDocumentBusinessLogic;
         private Mock<IAuthorizationBusinessLogic> mockDocumentAuthorizationLogic;
+        private Mock<IAuditLogBussinesLogic> mockAuditLogBusinessLogic;
         private DocumentController documentController;
 
         [TestCleanup]
@@ -50,7 +58,8 @@ namespace DocSystTest.ApiTest
             userModel = UserModel.ToModel(user);
             mockDocumentAuthorizationLogic = new Mock<IAuthorizationBusinessLogic>();
             mockDocumentBusinessLogic = new Mock<IDocumentBusinessLogic>();
-            documentController = new DocumentController(mockDocumentBusinessLogic.Object, mockDocumentAuthorizationLogic.Object);
+            mockAuditLogBusinessLogic = new Mock<IAuditLogBussinesLogic>();
+            documentController = new DocumentController(mockDocumentBusinessLogic.Object, mockDocumentAuthorizationLogic.Object, mockAuditLogBusinessLogic.Object);
             InitializeToken();
         }
 
@@ -58,6 +67,7 @@ namespace DocSystTest.ApiTest
         {
             var requestMessage = new HttpRequestMessage();
             requestMessage.Headers.Add("Token", user.Token + "");
+            requestMessage.Headers.Add("Username", "user1");
             mockDocumentAuthorizationLogic.Setup(b1 => b1.IsAValidToken(user.Token)).Returns(true);
             mockDocumentAuthorizationLogic.Setup(b1 => b1.IsAdmin(user.Token)).Returns(true);
             documentController.Request = requestMessage;
@@ -104,8 +114,10 @@ namespace DocSystTest.ApiTest
         [TestMethod]
         public void GetDocuments_ExpectedParameters_Ok()
         {
-            IList<Document> documents = new List<Document>();
-            documents.Add(document);
+            IList<Document> documents = new List<Document>
+            {
+                document
+            };
             mockDocumentBusinessLogic.Setup(b1 => b1.GetDocuments(user.Token.ToString())).Returns(documents);
             IHttpActionResult statusObtained = documentController.Get();
             Assert.IsNotNull(statusObtained as OkNegotiatedContentResult<IList<DocumentModel>>);
@@ -114,8 +126,10 @@ namespace DocSystTest.ApiTest
         [TestMethod]
         public void GetDocuments_BadRequest_Exception()
         {
-            IList<DocumentModel> documentsModel = new List<DocumentModel>();
-            documentsModel.Add(documentModel);
+            IList<DocumentModel> documentsModel = new List<DocumentModel>
+            {
+                documentModel
+            };
             mockDocumentBusinessLogic.Setup(b1 => b1.GetDocuments()).Throws(new Exception());
             IHttpActionResult statusObtained = documentController.Get();
             Assert.IsNull(statusObtained as OkNegotiatedContentResult<IList<DocumentModel>>);
@@ -132,8 +146,10 @@ namespace DocSystTest.ApiTest
         [TestMethod]
         public void ModifyDocument_BadRequest_Exception()
         {
-            IList<DocumentModel> documentsModel = new List<DocumentModel>();
-            documentsModel.Add(documentModel);
+            IList<DocumentModel> documentsModel = new List<DocumentModel>
+            {
+                documentModel
+            };
             mockDocumentBusinessLogic.Setup(b1 => b1.ModifyDocument(document)).Throws(new Exception());
             IHttpActionResult statusObtained = documentController.Put(documentModel);
             Assert.IsNull(statusObtained as OkNegotiatedContentResult<DocumentModel>);
@@ -207,6 +223,28 @@ namespace DocSystTest.ApiTest
                 .Throws(new Exception());
             IHttpActionResult statusObtained = documentController.Get(document.Id, MarginAlign.HEADER);
             Assert.IsNull(statusObtained as OkNegotiatedContentResult<BodyModel>);
+        }
+
+        [TestMethod]
+        public void IntegrationTest_ExpectedParameters_Ok()
+        {
+            var requestMessage = new HttpRequestMessage();
+            IUserDataAccess userDa = new UserDataAccess();
+            IDocumentBusinessLogic documentBL = new DocumentBusinessLogic(new DocumentDataAccess(),userDa);
+            IAuthorizationBusinessLogic auth = new AuthorizationBusinessLogic(userDa);
+            IAuditLogBussinesLogic audit = new AuditLogBussinesLogic();
+            DocumentController documentC = new DocumentController(documentBL, auth, audit)
+            {
+                Request = requestMessage
+            };
+            DocumentModel document2 = DocumentModel.ToModel(Utils.CreateDocumentForTest());
+            documentC.Post(documentModel);
+            documentC.Post(document2);
+            documentC.Get(document.Id);
+            document2.OwnStyleClass = "modified";
+            documentC.Put(document2);
+            documentC.Delete(documentModel.Id);
+            IHttpActionResult statusObtained = documentC.Get();
         }
     }
 }

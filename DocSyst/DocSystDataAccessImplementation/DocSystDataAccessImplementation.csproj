@@ -58,29 +58,13 @@
     <Compile Include="DocumentStructureDataAccessImplementation\MarginDataAccess.cs" />
     <Compile Include="DocumentStructureDataAccessImplementation\ParagraphDataAccess.cs" />
     <Compile Include="DocumentStructureDataAccessImplementation\TextDataAccess.cs" />
-    <Compile Include="Migrations\201804292128076_init.cs" />
-    <Compile Include="Migrations\201804292128076_init.Designer.cs">
-      <DependentUpon>201804292128076_init.cs</DependentUpon>
+    <Compile Include="Migrations\201805100255096_init3.cs" />
+    <Compile Include="Migrations\201805100255096_init3.Designer.cs">
+      <DependentUpon>201805100255096_init3.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201805070323585_init2.cs" />
-    <Compile Include="Migrations\201805070323585_init2.Designer.cs">
-      <DependentUpon>201805070323585_init2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201805090228102_init3.cs" />
-    <Compile Include="Migrations\201805090228102_init3.Designer.cs">
-      <DependentUpon>201805090228102_init3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201805090231121_init4.cs" />
-    <Compile Include="Migrations\201805090231121_init4.Designer.cs">
-      <DependentUpon>201805090231121_init4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201805090231562_init31.cs" />
-    <Compile Include="Migrations\201805090231562_init31.Designer.cs">
-      <DependentUpon>201805090231562_init31.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201805090315475_init5.cs" />
-    <Compile Include="Migrations\201805090315475_init5.Designer.cs">
-      <DependentUpon>201805090315475_init5.cs</DependentUpon>
+    <Compile Include="Migrations\201805100312154_init4.cs" />
+    <Compile Include="Migrations\201805100312154_init4.Designer.cs">
+      <DependentUpon>201805100312154_init4.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -105,26 +89,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201804292128076_init.resx">
-      <DependentUpon>201804292128076_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201805100255096_init3.resx">
+      <DependentUpon>201805100255096_init3.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805070323585_init2.resx">
-      <DependentUpon>201805070323585_init2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805090228102_init3.resx">
-      <DependentUpon>201805090228102_init3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805090231121_init4.resx">
-      <DependentUpon>201805090231121_init4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805090231562_init31.resx">
-      <DependentUpon>201805090231562_init31.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805090315475_init5.resx">
-      <DependentUpon>201805090315475_init5.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201805100312154_init4.resx">
+      <DependentUpon>201805100312154_init4.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -29,7 +29,6 @@ namespace DocSystTest.DocumentStructureTest
             Assert.IsNotNull(aBodyMargin.Id);
             Assert.IsNull(aBodyMargin.OwnStyleClass);
             Assert.IsTrue(aBodyMargin.Texts.Count==0);
-            Assert.IsNull(aBodyMargin.Align);
         }
 
         [TestMethod]

@@ -95,7 +95,7 @@ namespace DocSystWebApi.Controllers
             try
             {
                 Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
-                Guid documentId = MarginBusinessLogic.GetMargin(id).DocumentId;
+                Guid documentId = MarginBusinessLogic.GetMargin(id).DocumentId.Value;
                 MarginBusinessLogic.DeleteMargin(id);
                 AuditLogBussinesLogic.CreateLog("Document", documentId, Utils.GetUsername(Request), ActionPerformed.MODIFY);
                 return Ok("Margin deleted");
@@ -114,7 +114,7 @@ namespace DocSystWebApi.Controllers
             {
                 Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
                 var text = TextModel.ToEntity(textModel);
-                Guid documentId = MarginBusinessLogic.GetMargin(marginId).DocumentId;
+                Guid documentId = MarginBusinessLogic.GetMargin(marginId).DocumentId.Value;
                 MarginBusinessLogic.SetText(marginId, text);
                 AuditLogBussinesLogic.CreateLog("Document", documentId, Utils.GetUsername(Request), ActionPerformed.MODIFY);
 
@@ -133,7 +133,7 @@ namespace DocSystWebApi.Controllers
             try
             {
                 Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
-                Guid documentId = MarginBusinessLogic.GetMargin(id).DocumentId;
+                Guid documentId = MarginBusinessLogic.GetMargin(id).DocumentId.Value;
                 MarginBusinessLogic.ClearText(id);
                 AuditLogBussinesLogic.CreateLog("Document", documentId, Utils.GetUsername(Request), ActionPerformed.MODIFY);
                 return Ok("Texts clear");

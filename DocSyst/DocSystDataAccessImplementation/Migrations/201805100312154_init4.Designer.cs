@@ -7,13 +7,13 @@ namespace DocSystDataAccessImplementation.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class init2 : IMigrationMetadata
+    public sealed partial class init4 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(init2));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(init4));
         
         string IMigrationMetadata.Id
         {
-            get { return "201805070323585_init2"; }
+            get { return "201805100312154_init4"; }
         }
         
         string IMigrationMetadata.Source

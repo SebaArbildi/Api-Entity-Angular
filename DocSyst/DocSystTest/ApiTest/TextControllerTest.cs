@@ -1,5 +1,7 @@
-﻿using DocSystBusinessLogicImplementation.AuthorizationBusinessLogicImplementation;
+﻿using DocSystBusinessLogicImplementation.AuditLogBussinesLogicImplementation;
+using DocSystBusinessLogicImplementation.AuthorizationBusinessLogicImplementation;
 using DocSystBusinessLogicImplementation.DocumentStructureLogicImplementation;
+using DocSystBusinessLogicInterface.AuditLogBussinesLogicInterface;
 using DocSystBusinessLogicInterface.AuthorizationBusinessLogicInterface;
 using DocSystBusinessLogicInterface.DocumentStructureLogicInterface;
 using DocSystDataAccessImplementation.DocumentStructureDataAccessImplementation;
@@ -29,6 +31,7 @@ namespace DocSystTest.ApiTest
         private UserModel userModel;
         private Mock<ITextBusinessLogic> mockTextBusinessLogic;
         private Mock<IAuthorizationBusinessLogic> mockTextAuthorizationLogic;
+        private Mock<IAuditLogBussinesLogic> mockAuditLogBusinessLogic;
         private TextController textController;
 
         [TestCleanup]
@@ -44,9 +47,10 @@ namespace DocSystTest.ApiTest
             textModel = TextModel.ToModel(text);
             mockTextAuthorizationLogic = new Mock<IAuthorizationBusinessLogic>();
             mockTextBusinessLogic = new Mock<ITextBusinessLogic>();
+            mockAuditLogBusinessLogic = new Mock<IAuditLogBussinesLogic>(); 
             user = Utils.CreateUserForTest();
             userModel = UserModel.ToModel(user);
-            textController = new TextController(mockTextBusinessLogic.Object, mockTextAuthorizationLogic.Object);
+            textController = new TextController(mockTextBusinessLogic.Object, mockTextAuthorizationLogic.Object, mockAuditLogBusinessLogic.Object);
             InitializeToken();
         }
 
@@ -54,6 +58,7 @@ namespace DocSystTest.ApiTest
         {
             var requestMessage = new HttpRequestMessage();
             requestMessage.Headers.Add("Token", user.Token + "");
+            requestMessage.Headers.Add("Username", "user1");
             mockTextAuthorizationLogic.Setup(b1 => b1.IsAValidToken(user.Token)).Returns(true);
             mockTextAuthorizationLogic.Setup(b1 => b1.IsAdmin(user.Token)).Returns(true);
             textController.Request = requestMessage;
@@ -158,7 +163,8 @@ namespace DocSystTest.ApiTest
             ITextBusinessLogic textBL = new TextBusinessLogic(new TextDataAccess());
             IUserDataAccess userDa = new UserDataAccess();
             IAuthorizationBusinessLogic auth = new AuthorizationBusinessLogic(userDa);
-            TextController textC = new TextController(textBL, auth);
+            IAuditLogBussinesLogic audit = new AuditLogBussinesLogic();
+            TextController textC = new TextController(textBL, auth, audit);
             textC.Request = requestMessage;
             TextModel text2 = TextModel.ToModel(Utils.CreateTextForTest());
             textC.Post(textModel);

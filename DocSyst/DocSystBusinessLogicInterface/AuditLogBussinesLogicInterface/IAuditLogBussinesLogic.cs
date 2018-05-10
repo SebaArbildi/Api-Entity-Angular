@@ -6,7 +6,7 @@ namespace DocSystBusinessLogicInterface.AuditLogBussinesLogicInterface
 {
     public interface IAuditLogBussinesLogic
     {
-        void CreateLog(string entityType, Guid entityId, string executingUserId, ActionPerformed action);
+        void CreateLog(string entityType, Guid? entityId, string executingUserId, ActionPerformed action);
         AuditLog GetAuditLog(Guid id);
         IList<AuditLog> GetAuditLogs();
         Dictionary<string, Dictionary<DateTime, int>> GetLogsPerUserPerDay(IList<string> usersId, DateTime fromDate, DateTime toDate, string entityType);

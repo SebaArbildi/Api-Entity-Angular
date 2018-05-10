@@ -58,9 +58,9 @@ namespace DocSystDataAccessImplementation.DocumentStructureDataAccessImplementat
             return texts;
         }
 
-        public Guid GetDocumentId(Guid aTextId)
+        public Guid? GetDocumentId(Guid aTextId)
         {
-            Guid documentId;
+            Guid? documentId;
 
             using (DocSystDbContext context = new DocSystDbContext())
             {
