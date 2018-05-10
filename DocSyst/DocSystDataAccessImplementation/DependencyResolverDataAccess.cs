@@ -21,6 +21,10 @@ namespace DocSystDataAccessImplementation
             registerComponent.RegisterType<IParagraphDataAccess, ParagraphDataAccess>();
             registerComponent.RegisterType<ITextDataAccess, TextDataAccess>();
             registerComponent.RegisterType<IAuditLogDataAccess, AuditLogDataAccess>();
+			registerComponent.RegisterType<ISpecificStyleDataAccess, SpecificStyleDataAccess>();
+            registerComponent.RegisterType<IStyleDataAccess, StyleDataAccess>();
+            registerComponent.RegisterType<IStyleClassDataAccess, StyleClassDataAccess>();
+            registerComponent.RegisterType<IFormatDataAccess, FormatDataAccess>();
         }
     }
 }

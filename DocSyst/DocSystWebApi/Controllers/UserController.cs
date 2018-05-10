@@ -1,7 +1,6 @@
 ﻿using DocSystBusinessLogicInterface.AuthorizationBusinessLogicInterface;
 using DocSystBusinessLogicInterface.UserBusinessLogicInterface;
 using DocSystEntities.User;
-using DocSystWebApi.Filters;
 using DocSystWebApi.Models.UserModel;
 using System;
 using System.Collections.Generic;
@@ -73,10 +72,11 @@ namespace DocSystWebApi.Controllers
         }
 
         // PUT: api/User/5
-        public IHttpActionResult Put([FromBody]UserModel userModel)
+        public IHttpActionResult Put([FromUri] string username, [FromBody]UserModel userModel)
         {
             try
             {
+                userModel.Username = username;
                 Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
                 Utils.HasAdminPermissions(Request, AuthorizationBusinessLogic);
                 UserBusinessLogic.ModifyUser(userModel.ToEntity());
@@ -106,8 +106,6 @@ namespace DocSystWebApi.Controllers
 
         private IList<UserModel> ConvertEntitiesToModels(IList<User> users)
         {
-            Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
-            Utils.HasAdminPermissions(Request, AuthorizationBusinessLogic);
             IList<UserModel> usersModels = new List<UserModel>();
             foreach(User user in users)
             {

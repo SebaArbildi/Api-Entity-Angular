@@ -161,14 +161,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\FormatController.cs" />
     <Compile Include="Controllers\DocumentController.cs" />
     <Compile Include="Controllers\MarginController.cs" />
     <Compile Include="Controllers\ParagraphController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\TextController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\SpecificStyleController.cs" />
+    <Compile Include="Controllers\StyleClassController.cs" />
+    <Compile Include="Controllers\StyleController.cs" />
     <Compile Include="Controllers\UserController.cs" />
-    <Compile Include="Filters\ValidateTokenAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -178,8 +181,15 @@
     <Compile Include="Models\DocumentStructureModels\ParagraphModel.cs" />
     <Compile Include="Models\DocumentStructureModels\TextModel.cs" />
     <Compile Include="Models\Model.cs" />
+<<<<<<< HEAD
     <Compile Include="Models\RerportModels\DocumentsActionedPerUserPerDayBetweenDates.cs" />
     <Compile Include="Models\RerportModels\DocumentsCreatedPerUserBetweenDates.cs" />
+=======
+    <Compile Include="Models\StyleStructureModels\FormatModel.cs" />
+    <Compile Include="Models\StyleStructureModels\SpecificStyleModel.cs" />
+    <Compile Include="Models\StyleStructureModels\StyleClassModel.cs" />
+    <Compile Include="Models\StyleStructureModels\StyleModel.cs" />
+>>>>>>> develop
     <Compile Include="Models\UserModel\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnityResolver.cs" />

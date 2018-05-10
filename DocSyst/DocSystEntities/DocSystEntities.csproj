@@ -62,7 +62,13 @@
     <Compile Include="DocumentStructure\Margin.cs" />
     <Compile Include="DocumentStructure\Paragraph.cs" />
     <Compile Include="DocumentStructure\Text.cs" />
+    <Compile Include="ObserverInterface\IObserver.cs" />
+    <Compile Include="ObserverInterface\ISubject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StyleStructure\Format.cs" />
+    <Compile Include="StyleStructure\SpecificStyle.cs" />
+    <Compile Include="StyleStructure\Style.cs" />
+    <Compile Include="StyleStructure\StyleClass.cs" />
     <Compile Include="User\User.cs" />
   </ItemGroup>
   <ItemGroup>

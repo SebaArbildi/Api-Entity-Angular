@@ -55,6 +55,10 @@
     <Compile Include="DocumentStructureLogicInterface\IParagraphBussinesLogic.cs" />
     <Compile Include="DocumentStructureLogicInterface\ITextBussinesLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+	<Compile Include="StyleStructureBusinessLogicInterface\IFormatBusinessLogic.cs" />
+    <Compile Include="StyleStructureBusinessLogicInterface\ISpecificStyleBusinessLogic.cs" />
+    <Compile Include="StyleStructureBusinessLogicInterface\IStyleBusinessLogic.cs" />
+    <Compile Include="StyleStructureBusinessLogicInterface\IStyleClassBusinessLogic.cs" />
     <Compile Include="UserBusinessLogicInterface\IUserBusinessLogic.cs" />
   </ItemGroup>
   <ItemGroup>
