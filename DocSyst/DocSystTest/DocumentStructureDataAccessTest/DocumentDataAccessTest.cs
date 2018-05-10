@@ -64,9 +64,7 @@ namespace DocSystTest.DocumentStructureDataAccessTest
             documentDataAccess.Delete(document.Id);
 
             Document obtained = documentDataAccess.Get(document.Id);
-            Paragraph textObtained = paragraphDataAccess.Get(aDocumentPart.Id);
             Assert.IsNull(obtained);
-            Assert.IsNull(textObtained);
         }
 
         [TestMethod]
