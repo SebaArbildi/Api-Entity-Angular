@@ -204,5 +204,28 @@ namespace DocSystTest.ApiTest.StyleStructureApiTest
             IHttpActionResult statusObtained = formatC.Get(formatA.Id);
             int a = 2;
         }
+
+        [TestMethod]
+        public void IntegrationTest()
+        {
+            Guid token = Guid.NewGuid();
+            var requestMessage = new HttpRequestMessage();
+            requestMessage.Headers.Add("Token", token + "");
+            mockUserAuthorizationLogic.Setup(b1 => b1.IsAValidToken(token)).Returns(true);
+            mockUserAuthorizationLogic.Setup(b1 => b1.IsAdmin(token)).Returns(true);
+
+            IStyleDataAccess styleDA = new StyleDataAccess();
+            IStyleBusinessLogic styleBL = new StyleBusinessLogic(styleDA);
+            IStyleClassDataAccess styleClassDA = new StyleClassDataAccess();
+            IStyleClassBusinessLogic styleClassBL = new StyleClassBusinessLogic(styleClassDA, styleBL);
+            IFormatDataAccess formatDA = new FormatDataAccess();
+            IFormatBusinessLogic formatBL = new FormatBusinessLogic(formatDA, styleClassBL);
+            FormatController formatC = new FormatController(formatBL, mockUserAuthorizationLogic.Object);
+            formatC.Request = requestMessage;
+
+            Format formatA = Utils.CreateFormatForTest();
+            FormatModel formatModelA = FormatModel.ToModel(formatA);
+            formatC.Post(formatModelA);
+        }
     }
 }

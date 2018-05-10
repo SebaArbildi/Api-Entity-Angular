@@ -15,7 +15,8 @@ namespace DocSystDataAccessImplementation.StyleStructureDataAccessImplementation
         {
             using (DocSystDbContext context = new DocSystDbContext())
             {
-                AttachStyleClassList(context, format.StyleClasses);
+                IList<StyleClass> stClass = AttachStyleClassList(context, format.StyleClasses);
+                format.StyleClasses = stClass;
                 context.Formats.Add(format);
                 context.SaveChanges();
             }
@@ -26,7 +27,8 @@ namespace DocSystDataAccessImplementation.StyleStructureDataAccessImplementation
             Format format = Get(id);
             using (DocSystDbContext context = new DocSystDbContext())
             {
-                AttachStyleClassList(context, format.StyleClasses);
+                IList<StyleClass> stClass = AttachStyleClassList(context, format.StyleClasses);
+                format.StyleClasses = stClass;
                 context.Formats.Attach(format);
                 context.Formats.Remove(format);
                 context.SaveChanges();
@@ -67,7 +69,8 @@ namespace DocSystDataAccessImplementation.StyleStructureDataAccessImplementation
         {
             using (DocSystDbContext context = new DocSystDbContext())
             {
-                AttachStyleClassList(context, format.StyleClasses);
+                IList<StyleClass> stClass = AttachStyleClassList(context, format.StyleClasses);
+                format.StyleClasses = stClass;
                 Format actualFormat = context.Formats.Include(STYLE_CLASSES).Where(formatDb => formatDb.Id == format.Id).FirstOrDefault();
                 context.Entry(actualFormat).Entity.StyleClasses = format.StyleClasses;
                 context.Entry(actualFormat).CurrentValues.SetValues(actualFormat);
@@ -75,12 +78,18 @@ namespace DocSystDataAccessImplementation.StyleStructureDataAccessImplementation
             }
         }
 
-        private void AttachStyleClassList(DocSystDbContext context, IList<StyleClass> styleClasses)
+        private IList<StyleClass> AttachStyleClassList(DocSystDbContext context, IList<StyleClass> styleClasses)
         {
-            foreach(StyleClass styleClass in styleClasses)
+            IList<StyleClass> styles = new List<StyleClass>();
+
+            foreach (StyleClass styleClass in styleClasses)
             {
-                context.StyleClasses.Attach(styleClass);
+                StyleClass stClass = context.StyleClasses.Include("ProperStyles").Include("InheritedStyleClass")
+                    .Include("InheritedPlusProperStyles").Include("Observers").Where(styleClassDb => styleClassDb.Id == styleClass.Id).FirstOrDefault();
+                context.StyleClasses.Attach(stClass);
+                styles.Add(stClass);
             }
+            return styles;
         }
     }
 }
