@@ -26,7 +26,6 @@ namespace DocSystTest.ApiTest
         private Mock<IAuthorizationBusinessLogic> mockUserAuthorizationLogic;
         private UserController userController;
 
-
         [TestCleanup]
         public void CleanDataBase()
         {

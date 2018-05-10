@@ -102,18 +102,6 @@
     <EmbeddedResource Include="Migrations\201805062025397_init23.resx">
       <DependentUpon>201805062025397_init23.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805070014325_init2.resx">
-      <DependentUpon>201805070014325_init2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805070045365_init3.resx">
-      <DependentUpon>201805070045365_init3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805070134356_init4.resx">
-      <DependentUpon>201805070134356_init4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805092316543_init3435.resx">
-      <DependentUpon>201805092316543_init3435.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
