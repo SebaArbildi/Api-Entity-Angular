@@ -90,7 +90,7 @@ namespace DocSystTest.AuditDataAccessTest
         {
             Guid document1 = Guid.NewGuid();
             Guid document2 = Guid.NewGuid();
-            Guid user = Guid.NewGuid();
+            string user = Guid.NewGuid().ToString();
 
             AuditLog auditLog1 = new AuditLog("Document", document1, user, ActionPerformed.CREATE);
             AuditLog auditLog2 = new AuditLog("Document", document1, user, ActionPerformed.MODIFY);
@@ -137,7 +137,7 @@ namespace DocSystTest.AuditDataAccessTest
         {
             Guid document1 = Guid.NewGuid();
             Guid document2 = Guid.NewGuid();
-            Guid user = Guid.NewGuid();
+            string user = Guid.NewGuid().ToString();
 
             AuditLog auditLog1 = new AuditLog("Document", document1, user, ActionPerformed.CREATE);
             AuditLog auditLog2 = new AuditLog("Document", document1, user, ActionPerformed.MODIFY);

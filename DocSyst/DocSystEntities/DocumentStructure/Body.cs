@@ -11,15 +11,14 @@ namespace DocSystEntities.DocumentStructure
         public Guid Id { get; set; }
         public string OwnStyleClass { get; set; }
         public List<Text> Texts { get; set; }
-        public MarginAlign? Align { get; set; }
-        public Guid? DocumentId { get; set; }
+        public MarginAlign Align { get; set; }
+        public Guid DocumentId { get; set; }
 
         protected Body()
         {
             Id = Guid.NewGuid();
             OwnStyleClass = null;
             Texts = new List<Text>();
-            Align = null;
         }
 
         protected Body(MarginAlign align)

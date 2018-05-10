@@ -1,5 +1,7 @@
-﻿using DocSystBusinessLogicInterface.AuthorizationBusinessLogicInterface;
+﻿using DocSystBusinessLogicInterface.AuditLogBussinesLogicInterface;
+using DocSystBusinessLogicInterface.AuthorizationBusinessLogicInterface;
 using DocSystBusinessLogicInterface.DocumentStructureLogicInterface;
+using DocSystEntities.Audit;
 using DocSystEntities.DocumentStructure;
 using DocSystWebApi.Models.DocumentStructureModels;
 using System;
@@ -13,11 +15,14 @@ namespace DocSystWebApi.Controllers
     {
         private IDocumentBusinessLogic DocumentBusinessLogic { get; set; }
         private IAuthorizationBusinessLogic AuthorizationBusinessLogic { get; set; }
+        private IAuditLogBussinesLogic AuditLogBussinesLogic { get; set; }
 
-        public DocumentController(IDocumentBusinessLogic documentBusinessLogic, IAuthorizationBusinessLogic authorizationBusinessLogic)
+        public DocumentController(IDocumentBusinessLogic documentBusinessLogic, IAuthorizationBusinessLogic authorizationBusinessLogic
+            , IAuditLogBussinesLogic auditLogBussinesLogic)
         {
             DocumentBusinessLogic = documentBusinessLogic;
             AuthorizationBusinessLogic = authorizationBusinessLogic;
+            AuditLogBussinesLogic = auditLogBussinesLogic;
         }
 
         // GET: api/Document
@@ -26,7 +31,6 @@ namespace DocSystWebApi.Controllers
             try
             {
                 Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
-                Utils.HasAdminPermissions(Request, AuthorizationBusinessLogic);
                 var userToken = Request.Headers.GetValues("UserToken").FirstOrDefault();
                 var documents = DocumentBusinessLogic.GetDocuments(userToken);
                 IList<DocumentModel> documentsModel = DocumentModel.ToModel(documents).ToList();
@@ -44,7 +48,6 @@ namespace DocSystWebApi.Controllers
             try
             {
                 Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
-                Utils.HasAdminPermissions(Request, AuthorizationBusinessLogic);
                 var document = DocumentBusinessLogic.GetDocument(id);
                 return Ok(DocumentModel.ToModel(document));
             }
@@ -60,8 +63,8 @@ namespace DocSystWebApi.Controllers
             try
             {
                 Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
-                Utils.HasAdminPermissions(Request, AuthorizationBusinessLogic);
                 DocumentBusinessLogic.AddDocument(documentModel.ToEntity());
+                AuditLogBussinesLogic.CreateLog("Document", documentModel.Id, Utils.GetUsername(Request), ActionPerformed.CREATE);
                 return CreatedAtRoute("DefaultApi", new { documentModel.Id }, documentModel);
             }
             catch (Exception e)
@@ -76,8 +79,8 @@ namespace DocSystWebApi.Controllers
             try
             {
                 Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
-                Utils.HasAdminPermissions(Request, AuthorizationBusinessLogic);
                 DocumentBusinessLogic.ModifyDocument(documentModel.ToEntity());
+                AuditLogBussinesLogic.CreateLog("Document", documentModel.Id, Utils.GetUsername(Request), ActionPerformed.MODIFY);
                 return Ok("Document Modified");
             }
             catch (Exception e)
@@ -92,8 +95,8 @@ namespace DocSystWebApi.Controllers
             try
             {
                 Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
-                Utils.HasAdminPermissions(Request, AuthorizationBusinessLogic);
                 DocumentBusinessLogic.DeleteDocument(id);
+                AuditLogBussinesLogic.CreateLog("Document", id, Utils.GetUsername(Request), ActionPerformed.DELETE);
                 return Ok("Document deleted");
             }
             catch (Exception e)
@@ -109,7 +112,6 @@ namespace DocSystWebApi.Controllers
             try
             {
                 Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
-                Utils.HasAdminPermissions(Request, AuthorizationBusinessLogic);
                 var documentPart = DocumentBusinessLogic.GetDocumentPart(documentId, align);
                 return Ok(BodyModel.ToModel(documentPart));
             }
@@ -126,11 +128,11 @@ namespace DocSystWebApi.Controllers
             try
             {
                 Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
-                Utils.HasAdminPermissions(Request, AuthorizationBusinessLogic);
 
                 var body = documentPart.ToEntity();
                 DocumentBusinessLogic.SetDocumentPart(documentId, align, body);
-                    
+
+                AuditLogBussinesLogic.CreateLog("Document", documentId, Utils.GetUsername(Request), ActionPerformed.MODIFY);
                 return Ok(documentPart);
             }
             catch (Exception e)

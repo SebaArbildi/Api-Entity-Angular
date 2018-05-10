@@ -1,5 +1,7 @@
-﻿using DocSystBusinessLogicInterface.AuthorizationBusinessLogicInterface;
+﻿using DocSystBusinessLogicInterface.AuditLogBussinesLogicInterface;
+using DocSystBusinessLogicInterface.AuthorizationBusinessLogicInterface;
 using DocSystBusinessLogicInterface.DocumentStructureLogicInterface;
+using DocSystEntities.Audit;
 using DocSystWebApi.Models.DocumentStructureModels;
 using System;
 using System.Collections.Generic;
@@ -12,11 +14,14 @@ namespace DocSystWebApi.Controllers
     {
         private IParagraphBusinessLogic ParagraphBusinessLogic { get; set; }
         private IAuthorizationBusinessLogic AuthorizationBusinessLogic { get; set; }
+        private IAuditLogBussinesLogic AuditLogBussinesLogic { get; set; }
 
-        public ParagraphController(IParagraphBusinessLogic paragraphBusinessLogic, IAuthorizationBusinessLogic authorizationBusinessLogic)
+        public ParagraphController(IParagraphBusinessLogic paragraphBusinessLogic, IAuthorizationBusinessLogic authorizationBusinessLogic
+                                    , IAuditLogBussinesLogic auditLogBussinesLogic)
         {
             ParagraphBusinessLogic = paragraphBusinessLogic;
             AuthorizationBusinessLogic = authorizationBusinessLogic;
+            AuditLogBussinesLogic = auditLogBussinesLogic;
         }
 
         // GET: api/Paragraph
@@ -25,7 +30,6 @@ namespace DocSystWebApi.Controllers
             try
             {
                 Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
-                Utils.HasAdminPermissions(Request, AuthorizationBusinessLogic);
                 var paragraphs = ParagraphBusinessLogic.GetParagraphs();
                 IList<ParagraphModel> paragraphsModel = ParagraphModel.ToModel(paragraphs).ToList();
                 return Ok(paragraphsModel);
@@ -42,7 +46,6 @@ namespace DocSystWebApi.Controllers
             try
             {
                 Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
-                Utils.HasAdminPermissions(Request, AuthorizationBusinessLogic);
                 var paragraph = ParagraphBusinessLogic.GetParagraph(id);
                 return Ok(ParagraphModel.ToModel(paragraph));
             }
@@ -58,7 +61,6 @@ namespace DocSystWebApi.Controllers
             try
             {
                 Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
-                Utils.HasAdminPermissions(Request, AuthorizationBusinessLogic);
                 ParagraphBusinessLogic.AddParagraph(paragraphModel.ToEntity());
                 return CreatedAtRoute("DefaultApi", new { paragraphModel.Id }, paragraphModel);
             }
@@ -74,8 +76,9 @@ namespace DocSystWebApi.Controllers
             try
             {
                 Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
-                Utils.HasAdminPermissions(Request, AuthorizationBusinessLogic);
                 ParagraphBusinessLogic.ModifyParagraph(paragraphModel.ToEntity());
+
+                AuditLogBussinesLogic.CreateLog("Document", paragraphModel.DocumentId, Utils.GetUsername(Request), ActionPerformed.MODIFY);
                 return Ok("Paragraph Modified");
             }
             catch (Exception e)
@@ -90,8 +93,9 @@ namespace DocSystWebApi.Controllers
             try
             {
                 Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
-                Utils.HasAdminPermissions(Request, AuthorizationBusinessLogic);
+                Guid documentId = ParagraphBusinessLogic.GetParagraph(id).DocumentId;
                 ParagraphBusinessLogic.DeleteParagraph(id);
+                AuditLogBussinesLogic.CreateLog("Document", documentId, Utils.GetUsername(Request), ActionPerformed.MODIFY);
                 return Ok("Paragraph deleted");
             }
             catch (Exception e)
@@ -107,8 +111,10 @@ namespace DocSystWebApi.Controllers
             try
             {
                 Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
-                Utils.HasAdminPermissions(Request, AuthorizationBusinessLogic);
+                Guid documentId = ParagraphBusinessLogic.GetParagraph(id).DocumentId;
                 ParagraphBusinessLogic.ClearText(id);
+                AuditLogBussinesLogic.CreateLog("Document", documentId, Utils.GetUsername(Request), ActionPerformed.MODIFY);
+
                 return Ok("Texts clear");
             }
             catch (Exception e)
@@ -124,7 +130,6 @@ namespace DocSystWebApi.Controllers
             try
             {
                 Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
-                Utils.HasAdminPermissions(Request, AuthorizationBusinessLogic);
                 var texts = ParagraphBusinessLogic.GetTextAt(paragraphId, position);
                 return Ok(TextModel.ToModel(texts));
             }
@@ -141,9 +146,11 @@ namespace DocSystWebApi.Controllers
             try
             {
                 Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
-                Utils.HasAdminPermissions(Request, AuthorizationBusinessLogic);
                 var text = TextModel.ToEntity(textModel);
+                Guid documentId = ParagraphBusinessLogic.GetParagraph(paragraphId).DocumentId;
                 ParagraphBusinessLogic.PutTextAtLast(paragraphId, text);
+                AuditLogBussinesLogic.CreateLog("Document", documentId, Utils.GetUsername(Request), ActionPerformed.MODIFY);
+
                 return CreatedAtRoute("DefaultApi", new { textModel.Id }, textModel);
             }
             catch (Exception e)
@@ -159,9 +166,11 @@ namespace DocSystWebApi.Controllers
             try
             {
                 Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
-                Utils.HasAdminPermissions(Request, AuthorizationBusinessLogic);
                 var text = TextModel.ToEntity(textModel);
+                Guid documentId = ParagraphBusinessLogic.GetParagraph(paragraphId).DocumentId;
                 ParagraphBusinessLogic.PutTextAt(paragraphId, text, position);
+                AuditLogBussinesLogic.CreateLog("Document", documentId, Utils.GetUsername(Request), ActionPerformed.MODIFY);
+
                 return CreatedAtRoute("DefaultApi", new { textModel.Id }, textModel);
             }
             catch (Exception e)
@@ -177,8 +186,10 @@ namespace DocSystWebApi.Controllers
             try
             {
                 Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
-                Utils.HasAdminPermissions(Request, AuthorizationBusinessLogic);
+                Guid documentId = ParagraphBusinessLogic.GetParagraph(paragraphId).DocumentId;
                 ParagraphBusinessLogic.MoveTextTo(paragraphId, textId, newPosition);
+                AuditLogBussinesLogic.CreateLog("Document", documentId, Utils.GetUsername(Request), ActionPerformed.MODIFY);
+
                 return Ok("Text moved to " + newPosition);
             }
             catch (Exception e)

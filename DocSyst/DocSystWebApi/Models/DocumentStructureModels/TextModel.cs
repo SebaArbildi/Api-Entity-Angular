@@ -9,7 +9,7 @@ namespace DocSystWebApi.Models.DocumentStructureModels
         public Guid Id { get; set; }
         public string TextContent { get; set; }
         public string OwnStyleClass { get; set; }
-        public Guid? BodyId { get; set; }
+        public Guid BodyId { get; set; }
 
         public TextModel() { }
 
@@ -18,12 +18,18 @@ namespace DocSystWebApi.Models.DocumentStructureModels
             SetModel(text);
         }
 
-        public override Text ToEntity() => new Text()
+        public override Text ToEntity()
         {
-            TextContent = this.TextContent,
-            OwnStyleClass = this.OwnStyleClass,
-            BodyId = this.BodyId
-        };
+            Text aText = new Text()
+            {
+                TextContent = this.TextContent,
+                OwnStyleClass = this.OwnStyleClass,
+                BodyId = this.BodyId
+            };
+
+            this.Id = aText.Id;
+            return aText;
+        }
 
         protected override TextModel SetModel(Text entity)
         {

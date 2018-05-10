@@ -1,6 +1,8 @@
-﻿using DocSystBusinessLogicImplementation.AuthorizationBusinessLogicImplementation;
+﻿using DocSystBusinessLogicImplementation.AuditLogBussinesLogicImplementation;
+using DocSystBusinessLogicImplementation.AuthorizationBusinessLogicImplementation;
 using DocSystBusinessLogicImplementation.DocumentStructureLogicImplementation;
 using DocSystBusinessLogicImplementation.UserBusinessLogicImplementation;
+using DocSystBusinessLogicInterface.AuditLogBussinesLogicInterface;
 using DocSystBusinessLogicInterface.AuthorizationBusinessLogicInterface;
 using DocSystBusinessLogicInterface.DocumentStructureLogicInterface;
 using DocSystBusinessLogicInterface.UserBusinessLogicInterface;
@@ -21,6 +23,7 @@ namespace DocSystBusinessLogicImplementation
             registerComponent.RegisterType<IDocumentBusinessLogic, DocumentBusinessLogic>();
 			registerComponent.RegisterType<IAuthorizationBusinessLogic, AuthorizationBusinessLogic>();
             registerComponent.RegisterType<ILoginBusinessLogic, LoginBusinessLogic>();
+            registerComponent.RegisterType<IAuditLogBussinesLogic, AuditLogBussinesLogic>();
         }
     }
 }

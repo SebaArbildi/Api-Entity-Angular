@@ -1,5 +1,7 @@
-﻿using DocSystBusinessLogicInterface.AuthorizationBusinessLogicInterface;
+﻿using DocSystBusinessLogicInterface.AuditLogBussinesLogicInterface;
+using DocSystBusinessLogicInterface.AuthorizationBusinessLogicInterface;
 using DocSystBusinessLogicInterface.DocumentStructureLogicInterface;
+using DocSystEntities.Audit;
 using DocSystWebApi.Models.DocumentStructureModels;
 using System;
 using System.Collections.Generic;
@@ -14,11 +16,14 @@ namespace DocSystWebApi.Controllers
     {
         private IMarginBusinessLogic MarginBusinessLogic { get; set; }
         private IAuthorizationBusinessLogic AuthorizationBusinessLogic { get; set; }
+        private IAuditLogBussinesLogic AuditLogBussinesLogic { get; set; }
 
-        public MarginController(IMarginBusinessLogic marginBusinessLogic, IAuthorizationBusinessLogic authorizationBusinessLogic)
+        public MarginController(IMarginBusinessLogic marginBusinessLogic, IAuthorizationBusinessLogic authorizationBusinessLogic
+                                , IAuditLogBussinesLogic auditLogBussinesLogic)
         {
             MarginBusinessLogic = marginBusinessLogic;
             AuthorizationBusinessLogic = authorizationBusinessLogic;
+            AuditLogBussinesLogic = auditLogBussinesLogic;
         }
 
         // GET: api/Margin
@@ -27,7 +32,6 @@ namespace DocSystWebApi.Controllers
             try
             {
                 Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
-                Utils.HasAdminPermissions(Request, AuthorizationBusinessLogic);
                 var margins = MarginBusinessLogic.GetMargins();
                 IList<MarginModel> marginsModel = MarginModel.ToModel(margins).ToList();
                 return Ok(marginsModel);
@@ -44,7 +48,6 @@ namespace DocSystWebApi.Controllers
             try
             {
                 Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
-                Utils.HasAdminPermissions(Request, AuthorizationBusinessLogic);
                 var margin = MarginBusinessLogic.GetMargin(id);
                 return Ok(MarginModel.ToModel(margin));
             }
@@ -60,7 +63,6 @@ namespace DocSystWebApi.Controllers
             try
             {
                 Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
-                Utils.HasAdminPermissions(Request, AuthorizationBusinessLogic);
                 MarginBusinessLogic.AddMargin(marginModel.ToEntity());
                 return CreatedAtRoute("DefaultApi", new { marginModel.Id }, marginModel);
             }
@@ -76,8 +78,9 @@ namespace DocSystWebApi.Controllers
             try
             {
                 Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
-                Utils.HasAdminPermissions(Request, AuthorizationBusinessLogic);
                 MarginBusinessLogic.ModifyMargin(marginModel.ToEntity());
+                AuditLogBussinesLogic.CreateLog("Document", marginModel.DocumentId, Utils.GetUsername(Request), ActionPerformed.MODIFY);
+
                 return Ok("Margin Modified");
             }
             catch (Exception e)
@@ -92,8 +95,9 @@ namespace DocSystWebApi.Controllers
             try
             {
                 Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
-                Utils.HasAdminPermissions(Request, AuthorizationBusinessLogic);
+                Guid documentId = MarginBusinessLogic.GetMargin(id).DocumentId;
                 MarginBusinessLogic.DeleteMargin(id);
+                AuditLogBussinesLogic.CreateLog("Document", documentId, Utils.GetUsername(Request), ActionPerformed.MODIFY);
                 return Ok("Margin deleted");
             }
             catch (Exception e)
@@ -109,9 +113,11 @@ namespace DocSystWebApi.Controllers
             try
             {
                 Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
-                Utils.HasAdminPermissions(Request, AuthorizationBusinessLogic);
                 var text = TextModel.ToEntity(textModel);
+                Guid documentId = MarginBusinessLogic.GetMargin(marginId).DocumentId;
                 MarginBusinessLogic.SetText(marginId, text);
+                AuditLogBussinesLogic.CreateLog("Document", documentId, Utils.GetUsername(Request), ActionPerformed.MODIFY);
+
                 return CreatedAtRoute("DefaultApi", new { textModel.Id }, textModel);
             }
             catch (Exception e)
@@ -127,8 +133,9 @@ namespace DocSystWebApi.Controllers
             try
             {
                 Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
-                Utils.HasAdminPermissions(Request, AuthorizationBusinessLogic);
+                Guid documentId = MarginBusinessLogic.GetMargin(id).DocumentId;
                 MarginBusinessLogic.ClearText(id);
+                AuditLogBussinesLogic.CreateLog("Document", documentId, Utils.GetUsername(Request), ActionPerformed.MODIFY);
                 return Ok("Texts clear");
             }
             catch (Exception e)

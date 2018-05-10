@@ -1,4 +1,5 @@
 ﻿using DocSystBusinessLogicInterface.AuthorizationBusinessLogicInterface;
+using DocSystBusinessLogicInterface.UserBusinessLogicInterface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,6 +50,18 @@ namespace DocSystWebApi
             else
             {
                 throw new UnauthorizedAccessException("User has not admin permissions");
+            }
+        }
+
+        internal static string GetUsername(HttpRequestMessage request)
+        {
+            if (request.Headers.Contains("Username"))
+            {
+                return request.Headers.GetValues("Username").First();
+            }
+            else
+            {
+                throw new ArgumentNullException("request.Headers", "Doen't contains the username");
             }
         }
     }

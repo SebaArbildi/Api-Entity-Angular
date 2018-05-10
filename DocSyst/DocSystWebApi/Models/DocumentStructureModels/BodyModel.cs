@@ -13,8 +13,8 @@ namespace DocSystWebApi.Models.DocumentStructureModels
         public string OwnStyleClass { get; set; }
         public List<TextModel> Texts { get; set; }
         [Required]
-        public MarginAlign? Align { get; set; }
-        public Guid? DocumentId { get; set; }
+        public MarginAlign Align { get; set; }
+        public Guid DocumentId { get; set; }
 
         public BodyModel() { }
 
@@ -37,6 +37,7 @@ namespace DocSystWebApi.Models.DocumentStructureModels
                 thisBody = CreateParagraph(texts);
             }
 
+            this.Id = thisBody.Id;
             return thisBody;
         }
 

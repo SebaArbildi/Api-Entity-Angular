@@ -12,8 +12,8 @@ namespace DocSystWebApi.Models.DocumentStructureModels
         public string OwnStyleClass { get; set; }
         public List<TextModel> Texts { get; set; }
         [Required]
-        public MarginAlign? Align { get; set; }
-        public Guid? DocumentId { get; set; }
+        public MarginAlign Align { get; set; }
+        public Guid DocumentId { get; set; }
 
         public MarginModel() { }
 
@@ -34,6 +34,7 @@ namespace DocSystWebApi.Models.DocumentStructureModels
                 DocumentId = this.DocumentId
             };
 
+            this.Id = thisMargin.Id;
             return thisMargin;
         }
 

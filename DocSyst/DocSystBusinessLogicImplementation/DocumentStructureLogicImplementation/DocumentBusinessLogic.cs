@@ -1,13 +1,12 @@
-﻿using DocSystBusinessLogicInterface.DocumentStructureLogicInterface;
+﻿using DocSystBusinessLogicInterface.AuditLogBussinesLogicInterface;
+using DocSystBusinessLogicInterface.DocumentStructureLogicInterface;
+using DocSystDataAccessInterface.AuditDataAccessInterface;
 using DocSystDataAccessInterface.DocumentStructureDataAccessInterface;
 using DocSystDataAccessInterface.UserDataAccessInterface;
 using DocSystEntities.DocumentStructure;
 using DocSystEntities.User;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DocSystBusinessLogicImplementation.DocumentStructureLogicImplementation
 {

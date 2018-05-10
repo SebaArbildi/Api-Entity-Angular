@@ -61,7 +61,7 @@ namespace DocSystDataAccessImplementation.AuditDataAccessImplementation
             return auditLogs;
         }
 
-        public IList<IGrouping<DateTime,Guid>> GetLogsPerUserPerDay(Guid userId, DateTime fromDate, DateTime toDate, string entityType)
+        public IList<IGrouping<DateTime,Guid>> GetLogsPerUserPerDay(string userId, DateTime fromDate, DateTime toDate, string entityType)
         {
             List<IGrouping<DateTime, Guid>> auditLogs;
 
@@ -78,7 +78,7 @@ namespace DocSystDataAccessImplementation.AuditDataAccessImplementation
             return auditLogs;
         }
 
-        public IList<AuditLog> GetLogsPerUserForAnAction(Guid userId, DateTime fromDate, DateTime toDate, string entityType, ActionPerformed action)
+        public IList<AuditLog> GetLogsPerUserForAnAction(string userId, DateTime fromDate, DateTime toDate, string entityType, ActionPerformed action)
         {
             IList<AuditLog> auditLogs;
 

@@ -72,12 +72,12 @@ namespace DocSystTest.BusinessLogicTest
         [TestMethod]
         public void GetLogsPerUserForAnAction_ExpectedParameters_Ok()
         {
-            Guid user1 = Guid.NewGuid();
-            Guid user2 = Guid.NewGuid();
-            Guid user3 = Guid.NewGuid();
-            Guid user4 = Guid.NewGuid();
+            string user1 = Guid.NewGuid().ToString();
+            string user2 = Guid.NewGuid().ToString();
+            string user3 = Guid.NewGuid().ToString();
+            string user4 = Guid.NewGuid().ToString();
 
-            List<Guid> userList = new List<Guid>();
+            List<string> userList = new List<string>();
             userList.Add(user1);
             userList.Add(user2);
             userList.Add(user3);
@@ -161,11 +161,11 @@ namespace DocSystTest.BusinessLogicTest
                     auditLog8
                 });
 
-            Dictionary<Guid, int> creates = auditLogBussinesLogic.
+            Dictionary<string, int> creates = auditLogBussinesLogic.
                 GetLogsPerUserForAnAction(userList, dateFrom, dateTo, "Document", ActionPerformed.CREATE);
-            Dictionary<Guid, int> modifys = auditLogBussinesLogic.
+            Dictionary<string, int> modifys = auditLogBussinesLogic.
                 GetLogsPerUserForAnAction(userList, dateFrom, dateTo, "Document", ActionPerformed.MODIFY);
-            Dictionary<Guid, int> deletes = auditLogBussinesLogic.
+            Dictionary<string, int> deletes = auditLogBussinesLogic.
                 GetLogsPerUserForAnAction(userList, dateFrom, dateTo, "Document", ActionPerformed.DELETE);
 
             int countUser1Creates;
@@ -213,12 +213,12 @@ namespace DocSystTest.BusinessLogicTest
         [TestMethod]
         public void GetLogsPerUserPerDay_ExpectedParameters_Ok()
         {
-            Guid user1 = Guid.NewGuid();
-            Guid user2 = Guid.NewGuid();
-            Guid user3 = Guid.NewGuid();
-            Guid user4 = Guid.NewGuid();
+            string user1 = Guid.NewGuid().ToString();
+            string user2 = Guid.NewGuid().ToString();
+            string user3 = Guid.NewGuid().ToString();
+            string user4 = Guid.NewGuid().ToString();
 
-            List<Guid> userList = new List<Guid>();
+            List<string> userList = new List<string>();
             userList.Add(user1);
             userList.Add(user2);
             userList.Add(user3);
@@ -280,7 +280,7 @@ namespace DocSystTest.BusinessLogicTest
                 }
                 .GroupBy(auditLogDb => auditLogDb.OperationDate, auditLogDb => auditLogDb.Id).ToList());
 
-            Dictionary<Guid, Dictionary<DateTime, int>> actionesPerDay = auditLogBussinesLogic.
+            Dictionary<string, Dictionary<DateTime, int>> actionesPerDay = auditLogBussinesLogic.
                 GetLogsPerUserPerDay(userList, dateFrom, dateTo, "Document");
 
             Dictionary<DateTime, int> user1ActionesPerDay;

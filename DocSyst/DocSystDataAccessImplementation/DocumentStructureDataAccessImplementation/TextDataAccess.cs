@@ -58,6 +58,20 @@ namespace DocSystDataAccessImplementation.DocumentStructureDataAccessImplementat
             return texts;
         }
 
+        public Guid GetDocumentId(Guid aTextId)
+        {
+            Guid documentId;
+
+            using (DocSystDbContext context = new DocSystDbContext())
+            {
+                var text = context.Texts.Where(textDb => textDb.Id == aTextId).FirstOrDefault();
+                var body = context.Bodys.Where(bodyDb => bodyDb.Id == text.BodyId).FirstOrDefault();
+                documentId = body.DocumentId;
+            }
+
+            return documentId;
+        }
+
         public List<Text> GetTextsInBody(Guid BodyId)
         {
             List<Text> text = null;

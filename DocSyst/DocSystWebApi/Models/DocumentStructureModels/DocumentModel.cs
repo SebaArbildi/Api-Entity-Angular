@@ -41,6 +41,8 @@ namespace DocSystWebApi.Models.DocumentStructureModels
                 DocumentParts = bodys
             };
 
+            this.Id = doc.Id;
+
             return doc;
         }
 

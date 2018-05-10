@@ -15,8 +15,8 @@ namespace DocSystDataAccessInterface.AuditDataAccessInterface
         void Delete(Guid id);
         void Modify(AuditLog aAuditLog);
         IList<AuditLog> Get();
-        IList<IGrouping<DateTime, Guid>> GetLogsPerUserPerDay(Guid userId, DateTime fromDate, DateTime toDate, string entityType);
-        IList<AuditLog> GetLogsPerUserForAnAction(Guid userId, DateTime fromDate, DateTime toDate, string entityType, ActionPerformed action);
+        IList<IGrouping<DateTime, Guid>> GetLogsPerUserPerDay(string userId, DateTime fromDate, DateTime toDate, string entityType);
+        IList<AuditLog> GetLogsPerUserForAnAction(string userId, DateTime fromDate, DateTime toDate, string entityType, ActionPerformed action);
         bool Exists(Guid id);
     }
 }

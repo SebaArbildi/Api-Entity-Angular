@@ -68,6 +68,17 @@ namespace DocSystBusinessLogicImplementation.DocumentStructureLogicImplementatio
             return textDataAccess.Exists(aTextId);
         }
 
+        public Guid GetDocumentId(Guid aTextId)
+        {
+            if (!textDataAccess.Exists(aTextId))
+            {
+                throw new ArgumentException("The text argument not exist in database."
+                    , "aTextId");
+            }
+
+            return textDataAccess.GetDocumentId(aTextId);
+        }
+
         public Text GetText(Guid aTextId)
         {
             if (!textDataAccess.Exists(aTextId))

@@ -20,7 +20,7 @@ namespace DocSystBusinessLogicImplementation.AuditLogBussinesLogicImplementation
             AuditLogDataAccess = auditLogDataAccess;
         }
 
-        public void CreateLog(string entityType, Guid entityId, Guid executingUserId, ActionPerformed action)
+        public void CreateLog(string entityType, Guid entityId, string executingUserId, ActionPerformed action)
         {
             AuditLog logEvent = new AuditLog(entityType, entityId, executingUserId, action);
             AuditLogDataAccess.Add(logEvent);
@@ -41,11 +41,11 @@ namespace DocSystBusinessLogicImplementation.AuditLogBussinesLogicImplementation
             return AuditLogDataAccess.Get();
         }
 
-        public Dictionary<Guid, int> GetLogsPerUserForAnAction(IList<Guid> usersId, DateTime fromDate, DateTime toDate, string entityType, ActionPerformed action)
+        public Dictionary<string, int> GetLogsPerUserForAnAction(IList<string> usersId, DateTime fromDate, DateTime toDate, string entityType, ActionPerformed action)
         {
-            Dictionary<Guid, int> entitiesActionedByUser = new Dictionary<Guid, int>();
+            Dictionary<string, int> entitiesActionedByUser = new Dictionary<string, int>();
 
-            foreach (Guid id in usersId)
+            foreach (string id in usersId)
             {
                 IList<AuditLog> logsByOneUser = AuditLogDataAccess.GetLogsPerUserForAnAction(id, fromDate, toDate, entityType, action);
                 entitiesActionedByUser.Add(id, logsByOneUser.Count);
@@ -54,12 +54,12 @@ namespace DocSystBusinessLogicImplementation.AuditLogBussinesLogicImplementation
             return entitiesActionedByUser;
         }
 
-        public Dictionary<Guid, Dictionary<DateTime, int>> GetLogsPerUserPerDay(IList<Guid> usersId, DateTime fromDate, DateTime toDate, string entityType)
+        public Dictionary<string, Dictionary<DateTime, int>> GetLogsPerUserPerDay(IList<string> usersId, DateTime fromDate, DateTime toDate, string entityType)
         {
 
-            Dictionary<Guid,Dictionary<DateTime, int>> entitiesActionedPerDayByUser = new Dictionary<Guid, Dictionary<DateTime, int>>();
+            Dictionary<string, Dictionary<DateTime, int>> entitiesActionedPerDayByUser = new Dictionary<string, Dictionary<DateTime, int>>();
 
-            foreach(Guid id in usersId)
+            foreach(string id in usersId)
             {
                 IList<IGrouping<DateTime, Guid>> logsByOneUserPerDay = AuditLogDataAccess.GetLogsPerUserPerDay(id, fromDate, toDate, entityType);
 

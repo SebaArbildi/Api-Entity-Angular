@@ -164,6 +164,7 @@
     <Compile Include="Controllers\DocumentController.cs" />
     <Compile Include="Controllers\MarginController.cs" />
     <Compile Include="Controllers\ParagraphController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\TextController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -177,6 +178,8 @@
     <Compile Include="Models\DocumentStructureModels\ParagraphModel.cs" />
     <Compile Include="Models\DocumentStructureModels\TextModel.cs" />
     <Compile Include="Models\Model.cs" />
+    <Compile Include="Models\RerportModels\DocumentsActionedPerUserPerDayBetweenDates.cs" />
+    <Compile Include="Models\RerportModels\DocumentsCreatedPerUserBetweenDates.cs" />
     <Compile Include="Models\UserModel\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnityResolver.cs" />

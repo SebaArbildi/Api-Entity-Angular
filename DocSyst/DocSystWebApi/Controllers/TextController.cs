@@ -1,5 +1,7 @@
-﻿using DocSystBusinessLogicInterface.AuthorizationBusinessLogicInterface;
+﻿using DocSystBusinessLogicInterface.AuditLogBussinesLogicInterface;
+using DocSystBusinessLogicInterface.AuthorizationBusinessLogicInterface;
 using DocSystBusinessLogicInterface.DocumentStructureLogicInterface;
+using DocSystEntities.Audit;
 using DocSystWebApi.Models.DocumentStructureModels;
 using System;
 using System.Collections.Generic;
@@ -12,11 +14,14 @@ namespace DocSystWebApi.Controllers
     {
         private ITextBusinessLogic TextBusinessLogic { get; set; }
         private IAuthorizationBusinessLogic AuthorizationBusinessLogic { get; set; }
+        private IAuditLogBussinesLogic AuditLogBussinesLogic { get; set; }
 
-        public TextController(ITextBusinessLogic textBusinessLogic, IAuthorizationBusinessLogic authorizationBusinessLogic)
+        public TextController(ITextBusinessLogic textBusinessLogic, IAuthorizationBusinessLogic authorizationBusinessLogic
+                                , IAuditLogBussinesLogic auditLogBussinesLogic)
         {
             TextBusinessLogic = textBusinessLogic;
             AuthorizationBusinessLogic = authorizationBusinessLogic;
+            AuditLogBussinesLogic = auditLogBussinesLogic;
         }
 
         // GET: api/Text
@@ -25,7 +30,6 @@ namespace DocSystWebApi.Controllers
             try
             {
                 Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
-                Utils.HasAdminPermissions(Request, AuthorizationBusinessLogic);
                 var texts = TextBusinessLogic.GetTexts();
                 IList<TextModel> textsModel = TextModel.ToModel(texts).ToList();
                 return Ok(textsModel);
@@ -42,7 +46,6 @@ namespace DocSystWebApi.Controllers
             try
             {
                 Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
-                Utils.HasAdminPermissions(Request, AuthorizationBusinessLogic);
                 var text = TextBusinessLogic.GetText(id);
                 return Ok(TextModel.ToModel(text));
             }
@@ -58,7 +61,6 @@ namespace DocSystWebApi.Controllers
             try
             {
                 Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
-                Utils.HasAdminPermissions(Request, AuthorizationBusinessLogic);
                 TextBusinessLogic.AddText(textModel.ToEntity());
                 return CreatedAtRoute("DefaultApi", new { textModel.Id }, textModel);
             }
@@ -74,8 +76,9 @@ namespace DocSystWebApi.Controllers
             try
             {
                 Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
-                Utils.HasAdminPermissions(Request, AuthorizationBusinessLogic);
                 TextBusinessLogic.ModifyText(textModel.ToEntity());
+                Guid documentId = TextBusinessLogic.GetDocumentId(textModel.Id);
+                AuditLogBussinesLogic.CreateLog("Document", documentId, Utils.GetUsername(Request), ActionPerformed.MODIFY);
                 return Ok("Text Modified");
             }
             catch (Exception e)
@@ -90,8 +93,9 @@ namespace DocSystWebApi.Controllers
             try
             {
                 Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
-                Utils.HasAdminPermissions(Request, AuthorizationBusinessLogic);
+                Guid documentId = TextBusinessLogic.GetDocumentId(id);
                 TextBusinessLogic.DeleteText(id);
+                AuditLogBussinesLogic.CreateLog("Document", documentId, Utils.GetUsername(Request), ActionPerformed.MODIFY);
                 return Ok("Text deleted");
             }
             catch (Exception e)
