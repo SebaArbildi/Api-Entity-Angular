@@ -174,25 +174,25 @@ namespace DocSystTest.ApiTest
         [TestMethod]
         public void GetDocumentPartParagraph_ExpectedParameters_Ok()
         {
-            mockDocumentBusinessLogic.Setup(b1 => b1.GetDocumentPart(document.Id,MarginAlign.PARAGRAPH))
+            mockDocumentBusinessLogic.Setup(b1 => b1.GetDocumentParagraph(document.Id,0))
                 .Returns(paragraph);
-            IHttpActionResult statusObtained = documentController.Get(document.Id,MarginAlign.PARAGRAPH);
-            Assert.IsNotNull(statusObtained as OkNegotiatedContentResult<BodyModel>);
+            IHttpActionResult statusObtained = documentController.Get(document.Id,0);
+            Assert.IsNotNull(statusObtained as OkNegotiatedContentResult<ParagraphModel>);
         }
 
         [TestMethod]
         public void GetDocumentPartParagraph_BadRequest_Exception()
         {
-            mockDocumentBusinessLogic.Setup(b1 => b1.GetDocumentPart(document.Id, MarginAlign.PARAGRAPH))
+            mockDocumentBusinessLogic.Setup(b1 => b1.GetDocumentParagraph(document.Id, 0))
                 .Throws(new Exception());
-            IHttpActionResult statusObtained = documentController.Get(document.Id, MarginAlign.PARAGRAPH);
-            Assert.IsNull(statusObtained as OkNegotiatedContentResult<BodyModel>);
+            IHttpActionResult statusObtained = documentController.Get(document.Id, 0);
+            Assert.IsNull(statusObtained as OkNegotiatedContentResult<ParagraphModel>);
         }
 
         [TestMethod]
         public void GetDocumentPartFooter_ExpectedParameters_Ok()
         {
-            mockDocumentBusinessLogic.Setup(b1 => b1.GetDocumentPart(document.Id, MarginAlign.FOOTER))
+            mockDocumentBusinessLogic.Setup(b1 => b1.GetDocumentMargin(document.Id, MarginAlign.FOOTER))
                 .Returns(margin);
             IHttpActionResult statusObtained = documentController.Get(document.Id, MarginAlign.FOOTER);
             Assert.IsNotNull(statusObtained as OkNegotiatedContentResult<BodyModel>);
@@ -201,7 +201,7 @@ namespace DocSystTest.ApiTest
         [TestMethod]
         public void GetDocumentPartFooter_BadRequest_Exception()
         {
-            mockDocumentBusinessLogic.Setup(b1 => b1.GetDocumentPart(document.Id, MarginAlign.FOOTER))
+            mockDocumentBusinessLogic.Setup(b1 => b1.GetDocumentMargin(document.Id, MarginAlign.FOOTER))
                 .Throws(new Exception());
             IHttpActionResult statusObtained = documentController.Get(document.Id, MarginAlign.FOOTER);
             Assert.IsNull(statusObtained as OkNegotiatedContentResult<BodyModel>);
@@ -210,7 +210,7 @@ namespace DocSystTest.ApiTest
         [TestMethod]
         public void GetDocumentPartHeader_ExpectedParameters_Ok()
         {
-            mockDocumentBusinessLogic.Setup(b1 => b1.GetDocumentPart(document.Id, MarginAlign.HEADER))
+            mockDocumentBusinessLogic.Setup(b1 => b1.GetDocumentMargin(document.Id, MarginAlign.HEADER))
                 .Returns(margin);
             IHttpActionResult statusObtained = documentController.Get(document.Id, MarginAlign.HEADER);
             Assert.IsNotNull(statusObtained as OkNegotiatedContentResult<BodyModel>);
@@ -219,7 +219,7 @@ namespace DocSystTest.ApiTest
         [TestMethod]
         public void GetDocumentPartHeader_BadRequest_Exception()
         {
-            mockDocumentBusinessLogic.Setup(b1 => b1.GetDocumentPart(document.Id, MarginAlign.HEADER))
+            mockDocumentBusinessLogic.Setup(b1 => b1.GetDocumentMargin(document.Id, MarginAlign.HEADER))
                 .Throws(new Exception());
             IHttpActionResult statusObtained = documentController.Get(document.Id, MarginAlign.HEADER);
             Assert.IsNull(statusObtained as OkNegotiatedContentResult<BodyModel>);

@@ -105,14 +105,14 @@ namespace DocSystWebApi.Controllers
             }
         }
 
-        [Route("api/Document/{documentId:guid}/Part/{align}", Name = "GetDocumentPart")]
+        [Route("api/Document/{documentId:guid}/Margin/{align}", Name = "GetDocumentMargin")]
         [HttpGet]
         public IHttpActionResult Get([FromUri] Guid documentId, [FromUri] MarginAlign align)
         {
             try
             {
                 Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
-                var documentPart = DocumentBusinessLogic.GetDocumentPart(documentId, align);
+                var documentPart = DocumentBusinessLogic.GetDocumentMargin(documentId, align);
                 return Ok(BodyModel.ToModel(documentPart));
             }
             catch (Exception e)
@@ -121,7 +121,7 @@ namespace DocSystWebApi.Controllers
             }
         }
 
-        [Route("api/Document/{documentId:guid}/Part/{align}", Name = "SetDocumentPart")]
+        [Route("api/Document/{documentId:guid}/Margin/{align}", Name = "SetDocumentMargin")]
         [HttpPost]
         public IHttpActionResult Post([FromUri] Guid documentId, [FromUri] MarginAlign align, [FromBody] BodyModel documentPart)
         {
@@ -130,7 +130,63 @@ namespace DocSystWebApi.Controllers
                 Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
 
                 var body = documentPart.ToEntity();
-                DocumentBusinessLogic.SetDocumentPart(documentId, align, body);
+                DocumentBusinessLogic.SetDocumentMargin(documentId, align, body);
+
+                AuditLogBussinesLogic.CreateLog("Document", documentId, Utils.GetUsername(Request), ActionPerformed.MODIFY);
+                return Ok(documentPart);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [Route("api/Document/{documentId:guid}/Paragraph/{index}", Name = "GetDocumentParagraph")]
+        [HttpGet]
+        public IHttpActionResult Get([FromUri] Guid documentId, [FromUri] int index)
+        {
+            try
+            {
+                Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
+                var documentPart = DocumentBusinessLogic.GetDocumentParagraph(documentId, index);
+                return Ok(ParagraphModel.ToModel(documentPart));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [Route("api/Document/{documentId:guid}/Paragraph", Name = "AddDocumentParagraphAtLast")]
+        [HttpPost]
+        public IHttpActionResult Post([FromUri] Guid documentId, [FromBody] ParagraphModel documentPart)
+        {
+            try
+            {
+                Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
+
+                var paragraph = documentPart.ToEntity();
+                DocumentBusinessLogic.AddDocumentParagraphAtLast(documentId, paragraph);
+
+                AuditLogBussinesLogic.CreateLog("Document", documentId, Utils.GetUsername(Request), ActionPerformed.MODIFY);
+                return Ok(documentPart);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [Route("api/Document/{documentId:guid}/Paragraph/{index}", Name = "AddDocumentParagraphAt")]
+        [HttpPost]
+        public IHttpActionResult Post([FromUri] Guid documentId, [FromUri] int index, [FromBody] ParagraphModel documentPart)
+        {
+            try
+            {
+                Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
+
+                var paragraph = documentPart.ToEntity();
+                DocumentBusinessLogic.AddDocumentParagraphAt(documentId, index, paragraph);
 
                 AuditLogBussinesLogic.CreateLog("Document", documentId, Utils.GetUsername(Request), ActionPerformed.MODIFY);
                 return Ok(documentPart);

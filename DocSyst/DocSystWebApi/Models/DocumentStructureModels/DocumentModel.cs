@@ -17,7 +17,8 @@ namespace DocSystWebApi.Models.DocumentStructureModels
         public DateTime CreationDate { get; set; }
         public DateTime LastModifyDate { get; set; }
         public string OwnStyleClass { get; set; }
-        public List<BodyModel> DocumentParts { get; set; }
+        public List<BodyModel> DocumentMargins { get; set; }
+        public List<ParagraphModel> DocumentParagraphs { get; set; }
 
         public DocumentModel() { }
 
@@ -28,7 +29,8 @@ namespace DocSystWebApi.Models.DocumentStructureModels
 
         public override Document ToEntity()
         {
-            List<Body> bodys = ConvertModelsToBodys(this.DocumentParts);
+            List<Body> margins = ConvertModelsToBodys(this.DocumentMargins);
+            List<Paragraph> paragraphs = ConvertModelsToParagraphs(this.DocumentParagraphs);
             User user = ConvertModelToUser(this.CreatorUser);
 
             Document doc = new Document()
@@ -38,7 +40,8 @@ namespace DocSystWebApi.Models.DocumentStructureModels
                 CreationDate = this.CreationDate,
                 LastModifyDate = this.LastModifyDate,
                 OwnStyleClass = this.OwnStyleClass,
-                DocumentParts = bodys
+                DocumentMargins = margins,
+                DocumentParagraphs = paragraphs
             };
 
             this.Id = doc.Id;
@@ -48,7 +51,8 @@ namespace DocSystWebApi.Models.DocumentStructureModels
 
         protected override DocumentModel SetModel(Document entity)
         {
-            List<BodyModel> documentParts = ConvertBodysToModels(entity.DocumentParts);
+            List<BodyModel> documentMargins = ConvertBodysToModels(entity.DocumentMargins);
+            List<ParagraphModel> documentParagraphs = ConvertParagraphsToModels(entity.DocumentParagraphs);
             UserModel.UserModel userModel = ConvertUserToModel(entity.CreatorUser);
 
             Id = entity.Id;
@@ -57,7 +61,8 @@ namespace DocSystWebApi.Models.DocumentStructureModels
             CreationDate = entity.CreationDate;
             LastModifyDate = entity.LastModifyDate;
             OwnStyleClass = entity.OwnStyleClass;
-            DocumentParts = documentParts;
+            DocumentMargins = documentMargins;
+            DocumentParagraphs = documentParagraphs;
             return this;
         }
 
@@ -76,9 +81,19 @@ namespace DocSystWebApi.Models.DocumentStructureModels
             return BodyModel.ToModel(bodys).ToList();
         }
 
+        private List<ParagraphModel> ConvertParagraphsToModels(List<Paragraph> paragraphs)
+        {
+            return ParagraphModel.ToModel(paragraphs).ToList();
+        }
+
         private List<Body> ConvertModelsToBodys(List<BodyModel> bodyModels)
         {
             return BodyModel.ToEntity(bodyModels).ToList();
+        }
+
+        private List<Paragraph> ConvertModelsToParagraphs(List<ParagraphModel> paragraphModels)
+        {
+            return ParagraphModel.ToEntity(paragraphModels).ToList();
         }
 
         public override bool Equals(object obj)

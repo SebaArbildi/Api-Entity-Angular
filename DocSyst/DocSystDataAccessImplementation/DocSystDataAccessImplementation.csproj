@@ -58,13 +58,13 @@
     <Compile Include="DocumentStructureDataAccessImplementation\MarginDataAccess.cs" />
     <Compile Include="DocumentStructureDataAccessImplementation\ParagraphDataAccess.cs" />
     <Compile Include="DocumentStructureDataAccessImplementation\TextDataAccess.cs" />
-    <Compile Include="Migrations\201805100517389_init.cs" />
-    <Compile Include="Migrations\201805100517389_init.Designer.cs">
-      <DependentUpon>201805100517389_init.cs</DependentUpon>
+    <Compile Include="Migrations\201805211833392_initial.cs" />
+    <Compile Include="Migrations\201805211833392_initial.Designer.cs">
+      <DependentUpon>201805211833392_initial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201805100630189_init2.cs" />
-    <Compile Include="Migrations\201805100630189_init2.Designer.cs">
-      <DependentUpon>201805100630189_init2.cs</DependentUpon>
+    <Compile Include="Migrations\201805211856330_initial2.cs" />
+    <Compile Include="Migrations\201805211856330_initial2.Designer.cs">
+      <DependentUpon>201805211856330_initial2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -93,11 +93,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201805100517389_init.resx">
-      <DependentUpon>201805100517389_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201805211833392_initial.resx">
+      <DependentUpon>201805211833392_initial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805100630189_init2.resx">
-      <DependentUpon>201805100630189_init2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201805211856330_initial2.resx">
+      <DependentUpon>201805211856330_initial2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

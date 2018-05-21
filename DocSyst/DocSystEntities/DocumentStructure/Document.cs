@@ -20,7 +20,8 @@ namespace DocSystEntities.DocumentStructure
         public DateTime CreationDate { get; set; }
         public DateTime LastModifyDate { get; set; }
         public string OwnStyleClass { get; set; }
-        public List<Body> DocumentParts { get; set; }
+        public List<Body> DocumentMargins { get; set; }
+        public List<Paragraph> DocumentParagraphs { get; set; }
 
         public Document()
         {
@@ -30,7 +31,8 @@ namespace DocSystEntities.DocumentStructure
             CreationDate = DateTime.Today;
             LastModifyDate = DateTime.Today;
             OwnStyleClass = null;
-            DocumentParts = new List<Body>();
+            DocumentMargins = new List<Body>();
+            DocumentParagraphs = new List<Paragraph>();
         }
 
         public Document(string aTitle, User.User aCreatorUser)
@@ -41,7 +43,8 @@ namespace DocSystEntities.DocumentStructure
             CreationDate = DateTime.Today;
             LastModifyDate = DateTime.Today;
             OwnStyleClass = null;
-            DocumentParts = new List<Body>();
+            DocumentMargins = new List<Body>();
+            DocumentParagraphs = new List<Paragraph>();
         }
 
         public Document(string aTitle, string aStyleClass, User.User aCreatorUser)
@@ -52,10 +55,11 @@ namespace DocSystEntities.DocumentStructure
             CreationDate = DateTime.Today;
             LastModifyDate = DateTime.Today;
             OwnStyleClass = aStyleClass;
-            DocumentParts = new List<Body>();
+            DocumentMargins = new List<Body>();
+            DocumentParagraphs = new List<Paragraph>();
         }
 
-        public Document(string aTitle, List<Body> someDocumentParts, User.User aCreatorUser)
+        public Document(string aTitle, List<Body> someDocumentMargins, User.User aCreatorUser)
         {
             Id = Guid.NewGuid();
             CreatorUser = aCreatorUser;
@@ -63,7 +67,32 @@ namespace DocSystEntities.DocumentStructure
             CreationDate = DateTime.Today;
             LastModifyDate = DateTime.Today;
             OwnStyleClass = null;
-            DocumentParts = someDocumentParts;
+            DocumentMargins = someDocumentMargins;
+            DocumentParagraphs = new List<Paragraph>();
+        }
+
+        public Document(string aTitle, List<Paragraph> someDocumentParagraphs, User.User aCreatorUser)
+        {
+            Id = Guid.NewGuid();
+            CreatorUser = aCreatorUser;
+            Title = aTitle;
+            CreationDate = DateTime.Today;
+            LastModifyDate = DateTime.Today;
+            OwnStyleClass = null;
+            DocumentParagraphs = someDocumentParagraphs;
+            DocumentMargins = new List<Body>();
+        }
+
+        public Document(string aTitle, List<Body> someDocumentMargins, List<Paragraph> someDocumentParagraphs, User.User aCreatorUser)
+        {
+            Id = Guid.NewGuid();
+            CreatorUser = aCreatorUser;
+            Title = aTitle;
+            CreationDate = DateTime.Today;
+            LastModifyDate = DateTime.Today;
+            OwnStyleClass = null;
+            DocumentMargins = someDocumentMargins;
+            DocumentParagraphs = someDocumentParagraphs;
         }
 
         public Document(string aTitle, List<Body> someDocumentParts, string aStyleClass, User.User aCreatorUser)
@@ -74,33 +103,115 @@ namespace DocSystEntities.DocumentStructure
             CreationDate = DateTime.Today;
             LastModifyDate = DateTime.Today;
             OwnStyleClass = aStyleClass;
-            DocumentParts = someDocumentParts;
+            DocumentMargins = someDocumentParts;
+            DocumentParagraphs = new List<Paragraph>();
         }
 
-        public Body GetDocumentPart(MarginAlign align)
+        public Document(string aTitle, List<Paragraph> someDocumentParagraphs, string aStyleClass, User.User aCreatorUser)
         {
-            if (!ExistDocumentPart(align))
+            Id = Guid.NewGuid();
+            CreatorUser = aCreatorUser;
+            Title = aTitle;
+            CreationDate = DateTime.Today;
+            LastModifyDate = DateTime.Today;
+            OwnStyleClass = aStyleClass;
+            DocumentParagraphs = someDocumentParagraphs;
+            DocumentMargins = new List<Body>();
+        }
+
+        public Document(string aTitle, List<Body> someDocumentParts, List<Paragraph> someDocumentParagraphs, string aStyleClass, User.User aCreatorUser)
+        {
+            Id = Guid.NewGuid();
+            CreatorUser = aCreatorUser;
+            Title = aTitle;
+            CreationDate = DateTime.Today;
+            LastModifyDate = DateTime.Today;
+            OwnStyleClass = aStyleClass;
+            DocumentMargins = someDocumentParts;
+            DocumentParagraphs = someDocumentParagraphs;
+        }
+
+        public Body GetDocumentMargin(MarginAlign align)
+        {
+            if (!ExistDocumentMargin(align))
             {
                 throw new KeyNotFoundException();
             }
 
-            return DocumentParts.Find(x => x.Align == align);
+            return DocumentMargins.Find(x => x.Align == align);
         }
 
-        public void SetDocumentPart(MarginAlign? align, Body aDocumentPart)
+        public Paragraph GetDocumentParagraphAt(int paragraphIndex)
         {
-            if (ExistDocumentPart(align))
+            if (!ExistDocumentParagraphIndex(paragraphIndex))
             {
-                DocumentParts.Remove(DocumentParts.Find(x => x.Align == align));
+                throw new KeyNotFoundException();
+            }
+
+            return DocumentParagraphs[paragraphIndex];
+        }
+
+        public void MoveParagraphTo(int newPosition, Guid paragraphId)
+        {
+            Paragraph aParagraph = DocumentParagraphs.Find(x => x.Id == paragraphId);
+
+            DocumentParagraphs.Remove(aParagraph);
+            DocumentParagraphs.Insert(newPosition, aParagraph);
+        }
+
+        public void SetDocumentMargin(MarginAlign? align, Body aDocumentMargin)
+        {
+            if (ExistDocumentMargin(align))
+            {
+                DocumentMargins.Remove(DocumentMargins.Find(x => x.Align == align));
             }
             
-            aDocumentPart.DocumentId = this.Id;
-            DocumentParts.Add(aDocumentPart);
+            aDocumentMargin.DocumentId = this.Id;
+            DocumentMargins.Add(aDocumentMargin);
         }
 
-        public bool ExistDocumentPart(MarginAlign? align)
+        public void AddDocumentParagraphAt(Paragraph aParagraph, int index)
         {
-            return DocumentParts.Exists(x => x.Align == align);
+            if (ExistDocumentParagraph(aParagraph))
+            {
+                throw new Exception("Paragraph already exist in document");
+            }
+            if (IsIndexParagraphInRange(index))
+            {
+                throw new IndexOutOfRangeException();
+            }
+
+            DocumentParagraphs.Insert(index, aParagraph);
+        }
+
+        public void AddDocumentParagraphAtLast(Paragraph aParagraph)
+        {
+            if (ExistDocumentParagraph(aParagraph))
+            {
+                throw new Exception("Paragraph already exist in document");
+            }
+
+            DocumentParagraphs.Add(aParagraph);
+        }
+
+        public bool ExistDocumentMargin(MarginAlign? align)
+        {
+            return DocumentMargins.Exists(x => x.Align == align);
+        }
+
+        private bool IsIndexParagraphInRange(int index)
+        {
+            return index <= DocumentParagraphs.Count;
+        }
+
+        public bool ExistDocumentParagraphIndex(int paragraphIndex)
+        {
+            return DocumentParagraphs.Count > paragraphIndex;
+        }
+
+        public bool ExistDocumentParagraph(Paragraph aParagraph)
+        {
+            return DocumentParagraphs.Exists(x => x.Id == aParagraph.Id);
         }
 
         public string GetCreatorUsername()

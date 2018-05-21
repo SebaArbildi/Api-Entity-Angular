@@ -28,21 +28,22 @@ namespace DocSystDataAccessImplementation.DocumentStructureDataAccessImplementat
                 List<Paragraph> paragraphList = new List<Paragraph>();
                 List<Margin> marginList = new List<Margin>();
 
-                foreach (Body aDocumentPart in document.DocumentParts)
+                foreach (Body aDocumentPart in document.DocumentMargins)
                 {
-                    if (aDocumentPart.Align == MarginAlign.PARAGRAPH)
-                    {
-                        context.Paragraphs.Attach((Paragraph)aDocumentPart);
-                        paragraphList.Add((Paragraph)aDocumentPart);
-                    }
-                    else if(aDocumentPart.Align == MarginAlign.HEADER || aDocumentPart.Align == MarginAlign.FOOTER)
-                    {
-                        context.Margins.Attach((Margin)aDocumentPart);
-                        marginList.Add((Margin)aDocumentPart);
-                    }
+                    context.Margins.Attach((Margin)aDocumentPart);
+                    marginList.Add((Margin)aDocumentPart);
 
                     textList = textList.Concat(AttachTextList(context, aDocumentPart.Texts)).ToList();
                 }
+
+                foreach (Paragraph aDocumentParagraph in document.DocumentParagraphs)
+                {
+                    context.Paragraphs.Attach(aDocumentParagraph);
+                    paragraphList.Add(aDocumentParagraph);
+
+                    textList = textList.Concat(AttachTextList(context, aDocumentParagraph.Texts)).ToList();
+                }
+
                 context.Users.Attach(document.CreatorUser);
                 context.Documents.Attach(document);
                 if (textList.Any())
@@ -91,8 +92,10 @@ namespace DocSystDataAccessImplementation.DocumentStructureDataAccessImplementat
             using (DocSystDbContext context = new DocSystDbContext())
             {
                 document = context.Documents.Include("CreatorUser")
-                                            .Include("DocumentParts").Where(documenthDb => documenthDb.Id == id)
-                                            .Include(documenthDb => documenthDb.DocumentParts.Select(bodyDb => bodyDb.Texts))
+                                            .Include("DocumentMargins").Where(documenthDb => documenthDb.Id == id)
+                                            .Include(documenthDb => documenthDb.DocumentMargins.Select(bodyDb => bodyDb.Texts))
+                                            .Include("DocumentParagraphs").Where(documenthDb => documenthDb.Id == id)
+                                            .Include(documenthDb => documenthDb.DocumentParagraphs.Select(bodyDb => bodyDb.Texts))
                                             .FirstOrDefault();
             }
             return document;
@@ -103,8 +106,10 @@ namespace DocSystDataAccessImplementation.DocumentStructureDataAccessImplementat
             IList<Document> document = null;
             using (DocSystDbContext context = new DocSystDbContext())
             {
-                document = (context.Documents.Include("DocumentParts")
-                                            .Include(documenthDb => documenthDb.DocumentParts.Select(bodyDb => bodyDb.Texts))
+                document = (context.Documents.Include("DocumentMargins")
+                                            .Include(documenthDb => documenthDb.DocumentMargins.Select(bodyDb => bodyDb.Texts))
+                                            .Include("DocumentParagraphs")
+                                            .Include(documenthDb => documenthDb.DocumentParagraphs.Select(bodyDb => bodyDb.Texts))
                                             .Include("CreatorUser")).ToList<Document>();
             }
             return document;
@@ -117,8 +122,10 @@ namespace DocSystDataAccessImplementation.DocumentStructureDataAccessImplementat
             {
                 document = (context.Documents.Include(documenthDb => documenthDb.CreatorUser)
                                             .Where(documenthDb =>  documenthDb.CreatorUser.Username == Username)
-                                            .Include(documenthDb => documenthDb.DocumentParts)
-                                            .Include(documenthDb => documenthDb.DocumentParts.Select(bodyDb => bodyDb.Texts))).ToList<Document>();
+                                            .Include(documenthDb => documenthDb.DocumentMargins)
+                                            .Include(documenthDb => documenthDb.DocumentMargins.Select(bodyDb => bodyDb.Texts))
+                                            .Include("DocumentParagraphs").Where(documenthDb => documenthDb.CreatorUser.Username == Username)
+                                            .Include(documenthDb => documenthDb.DocumentParagraphs.Select(bodyDb => bodyDb.Texts))).ToList<Document>();
             }
             return document;
         }
@@ -127,12 +134,15 @@ namespace DocSystDataAccessImplementation.DocumentStructureDataAccessImplementat
         {
             using (DocSystDbContext context = new DocSystDbContext())
             {
-                Document actualDocument = context.Documents.Include(documenthDb => documenthDb.DocumentParts)
-                                            .Include(documenthDb => documenthDb.DocumentParts.Select(bodyDb => bodyDb.Texts))
+                Document actualDocument = context.Documents.Include(documenthDb => documenthDb.DocumentMargins)
+                                            .Include(documenthDb => documenthDb.DocumentMargins.Select(bodyDb => bodyDb.Texts))
+                                            .Include("DocumentParagraphs")
+                                            .Include(documenthDb => documenthDb.DocumentParagraphs.Select(bodyDb => bodyDb.Texts))
+                                            .Include(documenthDb => documenthDb.CreatorUser)
                                             .FirstOrDefault(documenthDb => documenthDb.Id == aDocument.Id);
 
                 context.Entry(actualDocument).CurrentValues.SetValues(aDocument);
-                actualDocument.DocumentParts = aDocument.DocumentParts;
+                actualDocument.DocumentMargins = aDocument.DocumentMargins;
 
                 context.SaveChanges();
             }
