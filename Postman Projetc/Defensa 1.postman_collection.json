@@ -1,0 +1,1630 @@
+{
+	"info": {
+		"_postman_id": "27ea9959-b511-4822-a6ed-8a49036bcfa4",
+		"name": "Defensa 1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User",
+			"description": null,
+			"item": [
+				{
+					"name": "Get",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{Token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/api/User",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"User"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get user",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{Token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/api/User/admin",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"User",
+								"admin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{Token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{  \n  \"Username\":\"editor\",\n  \"Name\":\"editor\",\n  \"Lastname\":\"editor\",\n  \"Password\":\"editor\",\n  \"Mail\":\"editor\",\n  \"IsAdmin\":\"false\",\n  \"token\":{{editorToken}}\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/User/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"User",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{Token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/api/User/editor/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"User",
+								"editor",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Login",
+			"description": null,
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\":\"admin\",\n\t\"password\":\"admin\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/Login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"Login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SpecificStyle",
+			"description": null,
+			"item": [
+				{
+					"name": "Get",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{Token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/api/SpecificStyle",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"SpecificStyle"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Copy",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{Token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/api/SpecificStyle/{{SpecificStyleId}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"SpecificStyle",
+								"{{SpecificStyleId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{Token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Id\":\"00000000-0000-0000-0000-000000000001\",\n\t\"Name\":\"SpecificStyle\",\n\t\"Implementation\":\"<p style='asd'> {0}<p/>\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/SpecificStyle",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"SpecificStyle"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get SpecificStyle",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{Token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/api/SpecificStyle/{{SpecificStyleId}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"SpecificStyle",
+								"{{SpecificStyleId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Style",
+			"description": null,
+			"item": [
+				{
+					"name": "Get",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{Token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/api/Style",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"Style"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Style",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{Token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/api/Style/{{StyleId}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"Style",
+								"{{StyleId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Style Copy",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{Token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/api/Style/{{StyleId}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"Style",
+								"{{StyleId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{Token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Name\":\"Style\",\n\t\"Implementation\":{\"Id\":\"{{SpecificStyleId}}\"}\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/Style",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"Style"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "StyleClass",
+			"description": null,
+			"item": [
+				{
+					"name": "Get",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{Token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/api/StyleClass",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"StyleClass"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{Token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\n    \t\"Id\":\"00000000-0000-0000-0000-000000000001\",   \n        \"Name\": \"styleClasss\",\n        \"ProperStyles\": [],\n        \"InheritedStyleClass\": null,\n        \"InheritedPlusProperStyles\": [],\n        \"Observers\": []\n    }"
+						},
+						"url": {
+							"raw": "{{url}}/api/StyleClass",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"StyleClass"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post Copy",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{Token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"Id\":\"00000000-0000-0000-0000-00000000000\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/StyleClass/a/00000000-0000-0000-0000-00000000000",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"StyleClass",
+								"a",
+								"00000000-0000-0000-0000-00000000000"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Format",
+			"description": null,
+			"item": [
+				{
+					"name": "Post",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{Token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Name\":\"name\",\n\t\"StyleClasses\":{\"Id\":\"{{SpecificStyleId}}\"}\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/Format",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"Format"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Usuarios (Nuñez)",
+			"description": "",
+			"item": [
+				{
+					"name": "Crear usuario administrador",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Name\" : \"user\",\n\t\"LastName\" : \"user\",\n\t\"Username\" : \"user\",\n\t\"Password\" : \"1234\",\n\t\"Mail\" : \"user@user.com\",\n\t\"IsAdmin\" : true\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/User",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"User"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener usuarios",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{url}}/api/User",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"User"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Alta documento",
+			"description": null,
+			"item": [
+				{
+					"name": "Altas para maniuplar",
+					"description": "",
+					"item": [
+						{
+							"name": "Alta documento 1",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "98d37848-673a-45f9-b183-6304e45334ea",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Token",
+										"value": "{{Token}}"
+									},
+									{
+										"key": "Username",
+										"value": "{{Username}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"CreatorUser\" : {\n\t\t\"Name\" : \"user\",\n\t\t\"LastName\" : \"user\",\n\t\t\"Username\" : \"user1\",\n\t\t\"Password\" : \"user\",\n\t\t\"Mail\" : \"user@user.com\",\n\t\t\"IsAdmin\" : false\n\t},\n\t\"Title\" : \"Document One\",\n\t\"CreationDate\" : \"2018-05-21T22:00:00.000Z\",\n\t\"LastModifyDate\" : \"2018-05-21T22:00:00.000Z\",\n\t\"OwnStyleClass\" : \"aStyleClass\",\n\t\"DocumentParts\" : []\n}"
+								},
+								"url": {
+									"raw": "{{url}}/api/Document",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"Document"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Alta documento 2",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Token",
+										"value": "{{Token}}"
+									},
+									{
+										"key": "Username",
+										"value": "{{Username}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"CreatorUser\" : {\n\t\t\"Name\" : \"user\",\n\t\t\"LastName\" : \"user\",\n\t\t\"Username\" : \"user2\",\n\t\t\"Password\" : \"user\",\n\t\t\"Mail\" : \"user@user.com\",\n\t\t\"IsAdmin\" : false\n\t},\n\t\"Title\" : \"Document Two\",\n\t\"CreationDate\" : \"2018-05-22T22:00:00.000Z\",\n\t\"LastModifyDate\" : \"2018-05-22T22:00:00.000Z\",\n\t\"OwnStyleClass\" : \"aStyleClass2\",\n\t\"DocumentParts\" : []\n}"
+								},
+								"url": {
+									"raw": "{{url}}/api/Document",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"Document"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Alta documento 3",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Token",
+										"value": "{{Token}}"
+									},
+									{
+										"key": "Username",
+										"value": "{{Username}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"CreatorUser\" : {\n\t\t\"Name\" : \"user\",\n\t\t\"LastName\" : \"user\",\n\t\t\"Username\" : \"user3\",\n\t\t\"Password\" : \"user\",\n\t\t\"Mail\" : \"user@user.com\",\n\t\t\"IsAdmin\" : false\n\t},\n\t\"Title\" : \"Document Three\",\n\t\"CreationDate\" : \"2018-05-23T22:00:00.000Z\",\n\t\"LastModifyDate\" : \"2018-05-23T22:00:00.000Z\",\n\t\"OwnStyleClass\" : \"aStyleClass2\",\n\t\"DocumentParts\" : []\n}"
+								},
+								"url": {
+									"raw": "{{url}}/api/Document",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"Document"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Alta documento 4",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Token",
+										"value": "{{Token}}"
+									},
+									{
+										"key": "Username",
+										"value": "{{Username}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"CreatorUser\" : {\n\t\t\"Name\" : \"user\",\n\t\t\"LastName\" : \"user\",\n\t\t\"Username\" : \"user4\",\n\t\t\"Password\" : \"user\",\n\t\t\"Mail\" : \"user@user.com\",\n\t\t\"IsAdmin\" : false\n\t},\n\t\"Title\" : \"Document Four\",\n\t\"CreationDate\" : \"2018-05-23T22:00:00.000Z\",\n\t\"LastModifyDate\" : \"2018-05-23T22:00:00.000Z\",\n\t\"OwnStyleClass\" : \"aStyleClass4\",\n\t\"DocumentParts\" : []\n}"
+								},
+								"url": {
+									"raw": "{{url}}/api/Document",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"Document"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Altas para reportes",
+					"description": "",
+					"item": [
+						{
+							"name": "Alta documento 5",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "98d37848-673a-45f9-b183-6304e45334ea",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Token",
+										"value": "{{Token2}}"
+									},
+									{
+										"key": "Username",
+										"value": "{{Username2}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"CreatorUser\" : {\n\t\t\"Name\" : \"user\",\n\t\t\"LastName\" : \"user\",\n\t\t\"Username\" : \"user5\",\n\t\t\"Password\" : \"user\",\n\t\t\"Mail\" : \"user@user.com\",\n\t\t\"IsAdmin\" : false\n\t},\n\t\"Title\" : \"Document Five\",\n\t\"CreationDate\" : \"2018-05-21T22:00:00.000Z\",\n\t\"LastModifyDate\" : \"2018-05-21T22:00:00.000Z\",\n\t\"OwnStyleClass\" : \"aStyleClass\",\n\t\"DocumentParts\" : []\n}"
+								},
+								"url": {
+									"raw": "{{url}}/api/Document",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"Document"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Alta documento 6",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Token",
+										"value": "{{Token2}}"
+									},
+									{
+										"key": "Username",
+										"value": "{{Username2}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"CreatorUser\" : {\n\t\t\"Name\" : \"user\",\n\t\t\"LastName\" : \"user\",\n\t\t\"Username\" : \"user6\",\n\t\t\"Password\" : \"user\",\n\t\t\"Mail\" : \"user@user.com\",\n\t\t\"IsAdmin\" : false\n\t},\n\t\"Title\" : \"Document Six\",\n\t\"CreationDate\" : \"2018-05-22T22:00:00.000Z\",\n\t\"LastModifyDate\" : \"2018-05-22T22:00:00.000Z\",\n\t\"OwnStyleClass\" : \"aStyleClass2\",\n\t\"DocumentParts\" : []\n}"
+								},
+								"url": {
+									"raw": "{{url}}/api/Document",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"Document"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Alta documento 7",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Token",
+										"value": "{{Token2}}"
+									},
+									{
+										"key": "Username",
+										"value": "{{Username2}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"CreatorUser\" : {\n\t\t\"Name\" : \"user\",\n\t\t\"LastName\" : \"user\",\n\t\t\"Username\" : \"user7\",\n\t\t\"Password\" : \"user\",\n\t\t\"Mail\" : \"user@user.com\",\n\t\t\"IsAdmin\" : false\n\t},\n\t\"Title\" : \"Document Seven\",\n\t\"CreationDate\" : \"2018-05-22T22:00:00.000Z\",\n\t\"LastModifyDate\" : \"2018-05-22T22:00:00.000Z\",\n\t\"OwnStyleClass\" : \"aStyleClass2\",\n\t\"DocumentParts\" : []\n}"
+								},
+								"url": {
+									"raw": "{{url}}/api/Document",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"Document"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Alta documento 8",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Token",
+										"value": "{{Token2}}"
+									},
+									{
+										"key": "Username",
+										"value": "{{Username2}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"CreatorUser\" : {\n\t\t\"Name\" : \"user\",\n\t\t\"LastName\" : \"user\",\n\t\t\"Username\" : \"user8\",\n\t\t\"Password\" : \"user\",\n\t\t\"Mail\" : \"user@user.com\",\n\t\t\"IsAdmin\" : false\n\t},\n\t\"Title\" : \"Document Eight\",\n\t\"CreationDate\" : \"2018-05-22T22:00:00.000Z\",\n\t\"LastModifyDate\" : \"2018-05-22T22:00:00.000Z\",\n\t\"OwnStyleClass\" : \"aStyleClass4\",\n\t\"DocumentParts\" : []\n}"
+								},
+								"url": {
+									"raw": "{{url}}/api/Document",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"Document"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				}
+			]
+		},
+		{
+			"name": "Obtener documentos de un usuario",
+			"description": "",
+			"item": [
+				{
+					"name": "Obtener documento1",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Token",
+								"value": "{{Token}}"
+							},
+							{
+								"key": "Username",
+								"value": "{{Username}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{url}}/api/Document/{{Documento1}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"Document",
+								"{{Documento1}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener documento2",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Token",
+								"value": "{{Token}}"
+							},
+							{
+								"key": "Username",
+								"value": "{{Username}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{url}}/api/Document/{{Documento2}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"Document",
+								"{{Documento2}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener documento3",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Token",
+								"value": "{{Token}}"
+							},
+							{
+								"key": "Username",
+								"value": "{{Username}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{url}}/api/Document/{{Documento3}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"Document",
+								"{{Documento3}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener documento4",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Token",
+								"value": "{{Token}}"
+							},
+							{
+								"key": "Username",
+								"value": "{{Username}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{url}}/api/Document/{{Documento4}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"Document",
+								"{{Documento4}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Eliminar documento",
+			"description": null,
+			"item": [
+				{
+					"name": "Borrar documento 1",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Token",
+								"value": "{{Token}}"
+							},
+							{
+								"key": "Username",
+								"value": "{{Username}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{url}}/api/Document/{{Documento1}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"Document",
+								"{{Documento1}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Agregar parte a un documento",
+			"description": null,
+			"item": [
+				{
+					"name": "Para borrar",
+					"description": "",
+					"item": [
+						{
+							"name": "Agregar parrafo1 a documento 2",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Token",
+										"value": "{{Token}}"
+									},
+									{
+										"key": "Username",
+										"value": "{{Username}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"OwnStyleClass\" : \"aStyleClassForBody\",\n\t\"Texts\" : [],\n\t\"Align\" : \"PARAGRAPH\",\n\t\"DocumentId\" : \"{{Documento2}}\"\n}"
+								},
+								"url": {
+									"raw": "{{url}}/api/Document/{{Documento2}}/Part/PARAGRAPH",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"Document",
+										"{{Documento2}}",
+										"Part",
+										"PARAGRAPH"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Para agregar textos",
+					"description": "",
+					"item": [
+						{
+							"name": "Agregar parrafo2 a documento 3",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Token",
+										"value": "{{Token}}"
+									},
+									{
+										"key": "Username",
+										"value": "{{Username}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"OwnStyleClass\" : \"aStyleClassForBody\",\n\t\"Texts\" : [],\n\t\"Align\" : \"PARAGRAPH\",\n\t\"DocumentId\" : \"{{Documento3}}\"\n}"
+								},
+								"url": {
+									"raw": "{{url}}/api/Document/{{Documento3}}/Part/PARAGRAPH",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"Document",
+										"{{Documento3}}",
+										"Part",
+										"PARAGRAPH"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Agregar header1 a documento 4",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Token",
+										"value": "{{Token}}"
+									},
+									{
+										"key": "Username",
+										"value": "{{Username}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"OwnStyleClass\" : \"aStyleClassForBody\",\n\t\"Texts\" : [],\n\t\"Align\" : \"HEADER\",\n\t\"DocumentId\" : \"{{Documento4}}\"\n}"
+								},
+								"url": {
+									"raw": "{{url}}/api/Document/{{Documento4}}/Part/HEADER",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"Document",
+										"{{Documento4}}",
+										"Part",
+										"HEADER"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				}
+			]
+		},
+		{
+			"name": "Obtener parte de un documento",
+			"description": null,
+			"item": [
+				{
+					"name": "Obtener parrafo1",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Token",
+								"value": "{{Token}}"
+							},
+							{
+								"key": "Username",
+								"value": "{{Username}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{url}}/api/Paragraph/{{Parrafo1}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"Paragraph",
+								"{{Parrafo1}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener parrafo2",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Token",
+								"value": "{{Token}}"
+							},
+							{
+								"key": "Username",
+								"value": "{{Username}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{url}}/api/Paragraph/{{Parrafo2}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"Paragraph",
+								"{{Parrafo2}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener header1",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Token",
+								"value": "{{Token}}"
+							},
+							{
+								"key": "Username",
+								"value": "{{Username}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{url}}/api/Margin/{{Encabezado1}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"Margin",
+								"{{Encabezado1}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Eliminar partes de un documento",
+			"description": null,
+			"item": [
+				{
+					"name": "Borrar parrafo1",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Token",
+								"value": "{{Token}}"
+							},
+							{
+								"key": "Username",
+								"value": "{{Username}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{url}}/api/Paragraph/{{Parrafo2}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"Paragraph",
+								"{{Parrafo2}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Borrar encabezado1",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Token",
+								"value": "{{Token}}"
+							},
+							{
+								"key": "Username",
+								"value": "{{Username}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{url}}/api/Margin/{{Encabezado1}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"Margin",
+								"{{Encabezado1}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Agregar textos a una parte",
+			"description": null,
+			"item": [
+				{
+					"name": "Agregar texto1 al final de  parrafo 2",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Token",
+								"value": "{{Token}}"
+							},
+							{
+								"key": "Username",
+								"value": "{{Username}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"TextContent\" : \"Hello, im the text one\",\n\t\"OwnStyleClass\" : \"aStyleClass for text\",\n\t\"BodyId\" : \"{{Parrafo2}}\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/Paragraph/{{Parrafo2}}/Text",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"Paragraph",
+								"{{Parrafo2}}",
+								"Text"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Agregar texto2 a encabezado1",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Token",
+								"value": "{{Token}}"
+							},
+							{
+								"key": "Username",
+								"value": "{{Username}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"TextContent\" : \"Hello, im the text in header\",\n\t\"OwnStyleClass\" : \"aStyleClass for text\",\n\t\"BodyId\" : \"{{Encabezado1}}\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/Margin/{{Encabezado1}}/Text",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"Margin",
+								"{{Encabezado1}}",
+								"Text"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Obtener texto de una parte",
+			"description": null,
+			"item": [
+				{
+					"name": "Obtener texto1",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Token",
+								"value": "{{Token}}"
+							},
+							{
+								"key": "Username",
+								"value": "{{Username}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{url}}/api/Text/{{Texto1}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"Text",
+								"{{Texto1}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener texto2",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Token",
+								"value": "{{Token}}"
+							},
+							{
+								"key": "Username",
+								"value": "{{Username}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{url}}/api/Text/{{Texto2}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"Text",
+								"{{Texto2}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Eliminar textos de una parte",
+			"description": null,
+			"item": [
+				{
+					"name": "Eliminar Texto1",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Token",
+								"value": "{{Token}}"
+							},
+							{
+								"key": "Username",
+								"value": "{{Username}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{url}}/api/Text/{{Texto1}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"Text",
+								"{{Texto1}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Obtener reporte cantidad de documentos creados",
+			"description": null,
+			"item": [
+				{
+					"name": "Reporte cantidad de documentos creados por usuarios entre fechas",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Token",
+								"value": "{{Token}}"
+							},
+							{
+								"key": "Username",
+								"value": "{{Username}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"UsersId\" : [\n\t\t\"user\",\n\t\t\"user1\",\n\t\t\"user2\"\n\t],\n\t\"FromDate\": \"2018-05-1T22:00:00Z\",\n    \"ToDate\": \"2018-08-21T22:00:00Z\",\n    \"EntityType\" : \"Document\",\n    \"Action\" : \"CREATE\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/Reports/EntitiesForAnActionByUserBetweenDates",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"Reports",
+								"EntitiesForAnActionByUserBetweenDates"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Obtener reporte cantidad de documentos creados/modificados/eliminados",
+			"description": null,
+			"item": [
+				{
+					"name": "Reporte cantidad de documentos creados por usuarios por dia entre fechas",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Token",
+								"value": "{{Token}}"
+							},
+							{
+								"key": "Username",
+								"value": "{{Username}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"UsersId\" : [\n\t\t\"user\",\n\t\t\"user1\",\n\t\t\"user2\"\n\t],\n\t\"FromDate\": \"2018-05-1T22:00:00Z\",\n    \"ToDate\": \"2018-08-21T22:00:00Z\",\n    \"EntityType\" : \"Document\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/Reports/EntitiesByUserPerDayBetweenDates",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"Reports",
+								"EntitiesByUserPerDayBetweenDates"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
