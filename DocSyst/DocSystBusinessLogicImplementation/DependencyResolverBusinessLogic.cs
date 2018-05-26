@@ -25,7 +25,6 @@ namespace DocSystBusinessLogicImplementation
             registerComponent.RegisterType<IDocumentBusinessLogic, DocumentBusinessLogic>();
 			registerComponent.RegisterType<IAuthorizationBusinessLogic, AuthorizationBusinessLogic>();
             registerComponent.RegisterType<ILoginBusinessLogic, LoginBusinessLogic>();
-            registerComponent.RegisterType<ISpecificStyleBusinessLogic, SpecificStyleBusinessLogic>();
             registerComponent.RegisterType<IStyleBusinessLogic, StyleBusinessLogic>();
             registerComponent.RegisterType<IStyleClassBusinessLogic, StyleClassBusinessLogic>();
             registerComponent.RegisterType<IFormatBusinessLogic, FormatBusinessLogic>();

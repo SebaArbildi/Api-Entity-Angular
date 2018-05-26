@@ -14,7 +14,6 @@ namespace DocSystDataAccessImplementation.StyleStructureDataAccessImplementation
         {
             using (DocSystDbContext context = new DocSystDbContext())
             {
-                context.SpecificStyles.Attach(style.Implementation);
                 context.Styles.Add(style);
                 context.SaveChanges();
             }
@@ -65,7 +64,6 @@ namespace DocSystDataAccessImplementation.StyleStructureDataAccessImplementation
         {
             using (DocSystDbContext context = new DocSystDbContext())
             {
-                context.SpecificStyles.Attach(style.Implementation);
                 Style actualStyle = context.Styles.Include("Implementation").Where(styleDb => styleDb.Name == style.Name).FirstOrDefault();
                 context.Entry(actualStyle).Entity.Implementation = style.Implementation;
                 context.Entry(actualStyle).CurrentValues.SetValues(style);

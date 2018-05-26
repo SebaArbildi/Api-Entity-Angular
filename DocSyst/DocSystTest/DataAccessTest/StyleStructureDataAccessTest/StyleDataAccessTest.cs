@@ -4,7 +4,6 @@ using DocSystEntities.StyleStructure;
 using System.Collections.Generic;
 using DocSystDataAccessInterface.StyleStructureDataAccessInterface;
 using DocSystDataAccessImplementation.StyleStructureDataAccessImplementation;
-using DocSystDataAccessImplementation.StyleStructureDataAccess;
 
 namespace DocSystTest.DataAccessTest.StyleStructureDataAccessTest
 {
@@ -52,15 +51,5 @@ namespace DocSystTest.DataAccessTest.StyleStructureDataAccessTest
             Assert.IsTrue(specificStyleList.Contains(style));
         }
 
-        [TestMethod]
-        public void ModifyStyle_ExpectedParameters_Ok()
-        {
-            styleDataAccess.Add(style);
-            SpecificStyle specificStyle = Utils.CreateSpecificStyleInDataBaseForTest("otherName");
-            style.Implementation = specificStyle;
-            styleDataAccess.Modify(style);
-            Style obtained = styleDataAccess.Get(style.Name);
-            Assert.AreEqual(specificStyle, obtained.Implementation);
-        }
     }
 }

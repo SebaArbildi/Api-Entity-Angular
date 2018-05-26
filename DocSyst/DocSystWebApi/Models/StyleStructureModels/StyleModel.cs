@@ -10,7 +10,6 @@ namespace DocSystWebApi.Models.StyleStructureModels
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public SpecificStyleModel Implementation { get; set; }
 
         public StyleModel() { }
 
@@ -19,18 +18,16 @@ namespace DocSystWebApi.Models.StyleStructureModels
             SetModel(style);
         }
 
-        public override Style ToEntity() => new Style()
+        public override Style ToEntity() => new StyleHtml()
         {
             Id = this.Id,
             Name = this.Name,
-            Implementation = this.Implementation.ToEntity(),
         };
 
         protected override StyleModel SetModel(Style style)
         {
             Id = style.Id;
             Name = style.Name;
-            Implementation = SpecificStyleModel.ToModel(style.Implementation);
             return this;
         }
 

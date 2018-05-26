@@ -12,7 +12,6 @@ using DocSystWebApi.Models.StyleStructureModels;
 using DocSystWebApi.Controllers;
 using DocSystDataAccessInterface.StyleStructureDataAccessInterface;
 using DocSystBusinessLogicImplementation.StyleStructureBusinessLogic;
-using DocSystDataAccessImplementation.StyleStructureDataAccess;
 using DocSystDataAccessImplementation.StyleStructureDataAccessImplementation;
 using DocSystDataAccessInterface.UserDataAccessInterface;
 using DocSystBusinessLogicInterface.UserBusinessLogicInterface;
@@ -186,8 +185,6 @@ namespace DocSystTest.ApiTest.StyleStructureApiTest
             IUserDataAccess da = new UserDataAccess();
             IUserBusinessLogic userBL = new UserBusinessLogic(new UserDataAccess());
             IAuthorizationBusinessLogic auth = new AuthorizationBusinessLogic(da);
-            ISpecificStyleDataAccess specificStyleDA = new SpecificStyleDataAccess();
-            ISpecificStyleBusinessLogic specificStyleBL = new SpecificStyleBusinessLogic(specificStyleDA);
             IStyleDataAccess styleDA = new StyleDataAccess();
             IStyleBusinessLogic styleBL = new StyleBusinessLogic(styleDA);
             IStyleClassDataAccess styleClassDA = new StyleClassDataAccess();

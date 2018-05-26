@@ -168,7 +168,6 @@
     <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\TextController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
-    <Compile Include="Controllers\SpecificStyleController.cs" />
     <Compile Include="Controllers\StyleClassController.cs" />
     <Compile Include="Controllers\StyleController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -184,7 +183,6 @@
     <Compile Include="Models\RerportModels\DocumentsActionedPerUserPerDayBetweenDates.cs" />
     <Compile Include="Models\RerportModels\DocumentsCreatedPerUserBetweenDates.cs" />
     <Compile Include="Models\StyleStructureModels\FormatModel.cs" />
-    <Compile Include="Models\StyleStructureModels\SpecificStyleModel.cs" />
     <Compile Include="Models\StyleStructureModels\StyleClassModel.cs" />
     <Compile Include="Models\StyleStructureModels\StyleModel.cs" />
     <Compile Include="Models\UserModel\UserModel.cs" />

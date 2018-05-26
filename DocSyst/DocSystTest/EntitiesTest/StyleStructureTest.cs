@@ -14,47 +14,6 @@ namespace DocSystTest.EntitiesTest.StyleStructure
         }
 
         [TestMethod]
-        public void CreateSpecificStyle_WithoutParameters_Ok()
-        {
-            SpecificStyle specificStyle = new SpecificStyle();
-        }
-
-        [TestMethod]
-        public void CreateSpecificStyle_WithParameters_Ok()
-        {
-            SpecificStyle specificStyle = new SpecificStyle("name", "<html><body>{0}</body></html>");
-        }
-
-        [TestMethod]
-        public void CreateStyle_WithoutParameters_Ok()
-        {
-            Style style = new Style();
-        }
-
-        [TestMethod]
-        public void CreateStyle_WithParameters_Ok()
-        {
-            SpecificStyle specificStyle = new SpecificStyle("name", "<html><body>{0}</body></html>");
-            Style style = new Style("name", specificStyle);
-        }
-
-        [TestMethod]
-        public void CreateStyleClass_WithoutParameters_Ok()
-        {
-            StyleClass styleClass = new StyleClass();
-        }
-
-        [TestMethod]
-        public void CreateStyleClass_WithParameters_Ok()
-        {
-            SpecificStyle specificStyle = new SpecificStyle("name", "<html><body>{0}</body></html>");
-            Style style = new Style("name", specificStyle);
-            IList<Style> styleList = new List<Style>();
-            styleList.Add(style);
-            StyleClass styleClass = new StyleClass("name", styleList, null);
-        }
-
-        [TestMethod]
         public void AddStyleToStyleClass_ExpectedParameters_Ok()
         {
             StyleClass styleClass = Utils.CreateStyleClassForTest();
@@ -174,14 +133,13 @@ namespace DocSystTest.EntitiesTest.StyleStructure
         public void TryObserver_ExpectedParam_Ok()
         {
             StyleClass inheritStyleClass = Utils.CreateStyleClassForTest();
-            SpecificStyle specificStyle = new SpecificStyle("name", "<html><body>{0}</body></html>");
-            Style style = new Style("name2", specificStyle);
+            Style style = new StyleHtml();
             IList<Style> styleList = new List<Style>();
             styleList.Add(style);
             StyleClass newStyleClass = new StyleClass("name", styleList, inheritStyleClass);
 
 
-            Style style2 = new Style("name3", specificStyle);
+            Style style2 = new StyleHtml();
             inheritStyleClass.AddStyle(style2);
             Assert.IsTrue(newStyleClass.InheritedPlusProperStyles.Count == 3);
         }

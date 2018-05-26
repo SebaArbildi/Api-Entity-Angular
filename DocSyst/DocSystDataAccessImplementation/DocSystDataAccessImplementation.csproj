@@ -69,7 +69,6 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StyleStructureDataAccessImplementation\FormatDataAccess.cs" />
-    <Compile Include="StyleStructureDataAccessImplementation\SpecificStyleDataAccess.cs" />
     <Compile Include="StyleStructureDataAccessImplementation\StyleClassDataAccess.cs" />
     <Compile Include="StyleStructureDataAccessImplementation\StyleDataAccess.cs" />
     <Compile Include="UserDataAccessImplementation\UserDataAccess.cs" />
