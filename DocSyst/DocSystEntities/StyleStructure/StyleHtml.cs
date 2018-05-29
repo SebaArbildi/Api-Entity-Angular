@@ -12,16 +12,35 @@ namespace DocSystEntities.StyleStructure
         {
         }
 
-        public StyleHtml(string name, StyleType type, string implementation)
+        public StyleHtml(string name, StyleType type, string value)
         {
+            this.Id = Guid.NewGuid();
             this.Name = name;
             this.Type = type;
-            this.Implementation = implementation;
+            this.Value = value;
         }
 
         public override string GetImplementation()
         {
-            throw new NotImplementedException();
+            string implementation = "";
+            if (this.Type.Equals(StyleType.ALIGN))
+            {
+                implementation = "text-align: " + Value;
+            }
+            else if (this.Type.Equals(StyleType.COLOR))
+            {
+                implementation = "color: " + Value;
+            }
+            else if (this.Type.Equals(StyleType.DECORATION))
+            {
+                implementation = "text-decoration: " + Value;
+            }
+            else if (this.Type.Equals(StyleType.FONT))
+            {
+                implementation = "font-family: " + Value;
+            }
+
+            return implementation;
         }
     }
 }

@@ -8,9 +8,9 @@ namespace DocSystEntities.StyleStructure
 {
     public class Format
     {
-        private Guid id;
-        private string name;
-        private IList<StyleClass> styleClasses;
+        public Guid Id { get; set; }
+        public string Name { get; set; }
+        public IList<StyleClass> StyleClasses { get; set; }
 
         public Format()
         {
@@ -32,45 +32,6 @@ namespace DocSystEntities.StyleStructure
             this.StyleClasses = new List<StyleClass>();
         }
 
-        public Guid Id
-        {
-            get
-            {
-                return id;
-            }
-
-            set
-            {
-                id = value;
-            }
-        }
-
-        public string Name
-        {
-            get
-            {
-                return name;
-            }
-
-            set
-            {
-                name = value;
-            }
-        }
-
-        public IList<StyleClass> StyleClasses
-        {
-            get
-            {
-                return styleClasses;
-            }
-
-            set
-            {
-                styleClasses = value;
-            }
-        }
-
         public void AddStyleClass(StyleClass styleClass)
         {
             if (!StyleClasses.Contains(styleClass))
@@ -85,6 +46,20 @@ namespace DocSystEntities.StyleStructure
             {
                 StyleClasses.Remove(styleClass);
             }
+        }
+
+        public StyleClass GetStyleClass(string name)
+        {
+            StyleClass styleClass = null;
+            foreach(StyleClass styleC in this.StyleClasses)
+            {
+                if (styleC.Name.Equals(name))
+                {
+                    styleClass = styleC;
+                    break;
+                }
+            }
+            return styleClass;
         }
 
         public override bool Equals(object obj)

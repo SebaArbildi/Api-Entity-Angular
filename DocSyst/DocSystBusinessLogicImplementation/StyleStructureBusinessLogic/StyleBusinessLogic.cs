@@ -124,7 +124,7 @@ namespace DocSystBusinessLogicImplementation.StyleStructureBusinessLogic
 
         private bool StyleIsNull(Style style)
         {
-            return style == null || style.Name == null || style.Implementation == null;
+            return style == null || style.Name == null || style.Value == null;
         }
     }
 }

@@ -62,6 +62,8 @@
     <Compile Include="DocumentStructure\Margin.cs" />
     <Compile Include="DocumentStructure\Paragraph.cs" />
     <Compile Include="DocumentStructure\Text.cs" />
+    <Compile Include="Generator\Generator.cs" />
+    <Compile Include="Generator\HTMLGenerator.cs" />
     <Compile Include="ObserverInterface\IObserver.cs" />
     <Compile Include="ObserverInterface\ISubject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -69,7 +71,6 @@
     <Compile Include="StyleStructure\Style.cs" />
     <Compile Include="StyleStructure\StyleClass.cs" />
     <Compile Include="StyleStructure\StyleHtml.cs" />
-    <Compile Include="StyleStructure\StyleType.cs" />
     <Compile Include="User\User.cs" />
   </ItemGroup>
   <ItemGroup>

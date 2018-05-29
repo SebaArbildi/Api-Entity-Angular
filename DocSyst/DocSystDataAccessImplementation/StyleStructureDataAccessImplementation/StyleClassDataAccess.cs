@@ -105,7 +105,7 @@ namespace DocSystDataAccessImplementation.StyleStructureDataAccessImplementation
             IList<Style> styles = new List<Style>();
             foreach (Style style in styleList)
             {
-                Style st = context.Styles.Include("Implementation").Where(styleDb => styleDb.Name == style.Name).FirstOrDefault();
+                Style st = context.Styles.Where(styleDb => styleDb.Name == style.Name).FirstOrDefault();
                 context.Styles.Attach(st);
                 styles.Add(st);
             }

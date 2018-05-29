@@ -65,7 +65,7 @@ namespace DocSystDataAccessImplementation.StyleStructureDataAccessImplementation
             using (DocSystDbContext context = new DocSystDbContext())
             {
                 Style actualStyle = context.Styles.Include("Implementation").Where(styleDb => styleDb.Name == style.Name).FirstOrDefault();
-                context.Entry(actualStyle).Entity.Implementation = style.Implementation;
+                context.Entry(actualStyle).Entity.Value = style.Value;
                 context.Entry(actualStyle).CurrentValues.SetValues(style);
                 context.SaveChanges();
             }

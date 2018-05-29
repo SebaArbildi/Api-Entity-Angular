@@ -112,6 +112,12 @@ namespace DocSystEntities.StyleStructure
             set
             {
                 inheritedStyleClass = value;
+                if (inheritedStyleClass != null)
+                {
+                    this.InheritedStyleClass.AddObserver(this);
+                    MergeInheritedAndProperStyles();
+                }
+                
             }
         }
 

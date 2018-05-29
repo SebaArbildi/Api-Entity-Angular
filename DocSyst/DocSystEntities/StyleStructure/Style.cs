@@ -9,10 +9,15 @@ namespace DocSystEntities.StyleStructure
 {
     public abstract class Style
     {
+        public enum StyleType
+        {
+            ALIGN, FONT, COLOR, DECORATION, BOOL
+        }
+
         public Guid Id { get; set; }
         public string Name { get; set; }
         public StyleType Type { get; set; }
-        public string Implementation { get; set; }
+        public string Value { get; set; }
 
         public abstract string GetImplementation();
 

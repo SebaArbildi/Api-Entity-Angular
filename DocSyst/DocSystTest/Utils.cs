@@ -56,7 +56,7 @@ namespace DocSystTest
             Style style = CreateStyleInDataBaseForTest();
             IList<Style> styleList = new List<Style>();
             styleList.Add(style);
-            return new StyleClass("name", styleList, null);
+            return new StyleClass("Normal", styleList, null);
         }
 
         internal static StyleClass CreateStyleClassInDataBaseForTest()
@@ -69,7 +69,7 @@ namespace DocSystTest
 
         internal static Style CreateStyleForTest()
         {
-            return new StyleHtml();
+            return new StyleHtml("color-red", Style.StyleType.COLOR, "red");
         }
 
         internal static Style CreateStyleInDataBaseForTest()
