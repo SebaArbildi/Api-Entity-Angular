@@ -133,15 +133,15 @@ namespace DocSystTest.EntitiesTest.StyleStructure
         public void TryObserver_ExpectedParam_Ok()
         {
             StyleClass inheritStyleClass = Utils.CreateStyleClassForTest();
-            Style style = new StyleHtml();
+            Style colorRed = Utils.CreateStyleForTest("color red", Style.StyleType.COLOR, "red");
             IList<Style> styleList = new List<Style>();
-            styleList.Add(style);
+            styleList.Add(colorRed);
             StyleClass newStyleClass = new StyleClass("name", styleList, inheritStyleClass);
 
 
-            Style style2 = new StyleHtml();
-            inheritStyleClass.AddStyle(style2);
-            Assert.IsTrue(newStyleClass.InheritedPlusProperStyles.Count == 3);
+            Style alignRight = Utils.CreateStyleForTest("align right", Style.StyleType.ALIGN, "right");
+            inheritStyleClass.AddStyle(alignRight);
+            Assert.IsTrue(newStyleClass.InheritedPlusProperStyles.Count == 2);
         }
     }
 }

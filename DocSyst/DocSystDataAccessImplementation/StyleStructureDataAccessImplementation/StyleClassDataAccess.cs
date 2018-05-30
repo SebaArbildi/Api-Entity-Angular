@@ -82,7 +82,7 @@ namespace DocSystDataAccessImplementation.StyleStructureDataAccessImplementation
                     .Include("InheritedPlusProperStyles").Include("Observers").Where(styleClassDb => styleClassDb.Id == styleClass.Id).FirstOrDefault();
 
                 context.Entry(actualStyleClass).Entity.InheritedPlusProperStyles = styleClass.InheritedPlusProperStyles;
-                context.Entry(actualStyleClass).Entity.InheritedStyleClass = styleClass.InheritedStyleClass;
+                context.Entry(actualStyleClass).Entity.SetInheritedStyleClass(styleClass.InheritedStyleClass);
                 context.Entry(actualStyleClass).Entity.Observers = styleClass.Observers;
                 context.Entry(actualStyleClass).Entity.ProperStyles = styleClass.ProperStyles;
                 context.Entry(actualStyleClass).CurrentValues.SetValues(styleClass);

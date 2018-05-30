@@ -36,7 +36,7 @@ namespace DocSystWebApi.Models.StyleStructureModels
             /*TODO: Another solution, so there is not need to handle if InheritedStyleClass is null*/
             if (this.InheritedStyleClass != null)
             {
-                styleClass.InheritedStyleClass = this.InheritedStyleClass.ToEntity();
+                styleClass.SetInheritedStyleClass(this.InheritedStyleClass.ToEntity());
             }
 
             return styleClass;

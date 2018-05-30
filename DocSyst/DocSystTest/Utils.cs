@@ -72,6 +72,11 @@ namespace DocSystTest
             return new StyleHtml("color-red", Style.StyleType.COLOR, "red");
         }
 
+        internal static Style CreateStyleForTest(string name, Style.StyleType type, string value)
+        {
+            return new StyleHtml(name, type, value);
+        }
+
         internal static Style CreateStyleInDataBaseForTest()
         {
             IStyleDataAccess styleDataAccess = new StyleDataAccess();

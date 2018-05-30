@@ -35,7 +35,7 @@ namespace DocSystEntities.Generator
             StyleClass ownStyleClass = format.GetStyleClass(ownStyleClassName);
             if (ownStyleClass != null)
             {
-                ownStyleClass.InheritedStyleClass = styleClassInherited;
+                ownStyleClass.SetInheritedStyleClass(styleClassInherited);
                 styleClassForDocumentPart = ownStyleClass;
             }
             return styleClassForDocumentPart;
@@ -43,28 +43,42 @@ namespace DocSystEntities.Generator
 
         private string ApplyStyleClassToText(string textContent, StyleClass styleClassText)
         {
-            string boolean = "";
-            StringBuilder textWithStyleClass = new StringBuilder("");
+            bool hasBold = false;
+            bool hasItalic = false;
+            string textWithStyleClass = "";
             if (styleClassText != null)
             {
-                textWithStyleClass.Append("<p style= \"");
+                textWithStyleClass += "<p style= \"";
                 foreach (Style style in styleClassText.InheritedPlusProperStyles)
                 {
-                    if (style.Type.Equals(Style.StyleType.BOOL))
+                    if (style.Type.Equals(Style.StyleType.BOLD))
                     {
-
+                        hasBold = true;
+                    }else if (style.Type.Equals(Style.StyleType.ITALIC))
+                    {
+                        hasItalic = true;
                     }
                     else
                     {
-                        textWithStyleClass.Append(style.GetImplementation() + "; ");
+                        textWithStyleClass += style.GetImplementation() + "; ";
                     }
                 }
-                textWithStyleClass.Append("\"> ");
-                textWithStyleClass.Append(textContent);
-                textWithStyleClass.Append("</p>");
+                textWithStyleClass += ("\"> ");
+                textWithStyleClass += (textContent);
+                textWithStyleClass += ("</p>");
             }
-            
-            return textWithStyleClass.ToString();
+
+            if (hasBold)
+            {
+                textWithStyleClass = "<strong>" + textWithStyleClass + "</strong>";
+            }
+
+            if (hasItalic)
+            {
+                textWithStyleClass = "<em>" + textWithStyleClass + "</em>";
+            }
+
+            return textWithStyleClass;
         }
 
         

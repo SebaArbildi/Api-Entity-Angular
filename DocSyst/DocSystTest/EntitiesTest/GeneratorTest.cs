@@ -10,10 +10,6 @@ namespace DocSystTest.EntitiesTest
     [TestClass]
     public class GeneratorTest
     {
-        private Style CreateStyleForTest(string name, Style.StyleType type, string value)
-        {
-            return new StyleHtml(name, type, value);
-        }
 
         private StyleClass CreateStyleClassForTest(String name, Style style)
         {
@@ -33,11 +29,18 @@ namespace DocSystTest.EntitiesTest
         public void GenerateHTML_StyleClasInFormatOnlyOneText_Ok()
         {
             IGenerator htmlGenerator = new HtmlGenerator();
-            Style colorRed = CreateStyleForTest("color red", Style.StyleType.COLOR, "red");
-            Style colorBlue = CreateStyleForTest("color blue", Style.StyleType.COLOR, "blue");
-            Style alignLeft = CreateStyleForTest("align left", Style.StyleType.ALIGN, "left");
-            StyleClass styleClassParagraph = CreateStyleClassForTest("Normal", colorRed);
-            StyleClass styleClassDocument = CreateStyleClassForTest("Normal2", colorBlue);
+            Style colorRed = Utils.CreateStyleForTest("color red", Style.StyleType.COLOR, "red");
+            Style colorBlue = Utils.CreateStyleForTest("color blue", Style.StyleType.COLOR, "blue");
+            Style alignRight = Utils.CreateStyleForTest("align right", Style.StyleType.ALIGN, "right");
+            Style bold = Utils.CreateStyleForTest("bold", Style.StyleType.BOLD, "bold");
+            Style italic = Utils.CreateStyleForTest("italic", Style.StyleType.ITALIC, "italic");
+            StyleClass styleClassInheritedParagraph = CreateStyleClassForTest("Normal0", alignRight);
+            StyleClass styleClassParagraph = CreateStyleClassForTest("Normal", colorBlue);
+            StyleClass styleClassDocument = CreateStyleClassForTest("Normal2", bold);
+
+            styleClassParagraph.SetInheritedStyleClass(styleClassInheritedParagraph);
+            styleClassInheritedParagraph.AddStyle(italic);
+
             Format format = CreateFormatForTest(styleClassParagraph);
             format.AddStyleClass(styleClassDocument);
 

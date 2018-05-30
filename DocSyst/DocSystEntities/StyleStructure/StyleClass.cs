@@ -3,16 +3,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DocSystEntities.StyleStructure 
+namespace DocSystEntities.StyleStructure
 {
     public class StyleClass : IObserver, ISubject
     {
-        private Guid id;
-        private string name;
-        private IList<Style> properStyles;
-        private StyleClass inheritedStyleClass;
-        private IList<Style> inheritedPlusProperStyles;
-        private IList<StyleClass> observers;
+        public Guid Id { get; set; }
+        public string Name { get; set; }
+        public IList<Style> ProperStyles { get; set;}
+        public StyleClass InheritedStyleClass { get; private set; }
+        public IList<Style> InheritedPlusProperStyles { get; set; }
+        public IList<StyleClass> Observers { get; set; }
 
         ~StyleClass()
         {
@@ -58,92 +58,22 @@ namespace DocSystEntities.StyleStructure
             {
                 this.InheritedStyleClass.AddObserver(this);
             }
-            
+
             this.InheritedPlusProperStyles = new List<Style>();
             MergeInheritedAndProperStyles();
         }
 
-        public Guid Id
-        {
-            get
+        public void SetInheritedStyleClass(StyleClass newInheritedStyleClass)
+        {     
+            if (newInheritedStyleClass != null)
             {
-                return id;
-            }
-
-            set
-            {
-                id = value;
-            }
-        }
-
-        public string Name
-        {
-            get
-            {
-                return name;
-            }
-
-            set
-            {
-                name = value;
-            }
-        }
-
-        public IList<Style> ProperStyles
-        {
-            get
-            {
-                return properStyles;
-            }
-
-            set
-            {
-                properStyles = value;
-            }
-        }
-
-        public StyleClass InheritedStyleClass
-        {
-            get
-            {
-                return inheritedStyleClass;
-            }
-
-            set
-            {
-                inheritedStyleClass = value;
-                if (inheritedStyleClass != null)
+                if (this.InheritedStyleClass != null)
                 {
-                    this.InheritedStyleClass.AddObserver(this);
-                    MergeInheritedAndProperStyles();
+                    this.InheritedStyleClass.DeleteObserver(this);
                 }
-                
-            }
-        }
-
-        public IList<Style> InheritedPlusProperStyles
-        {
-            get
-            {
-                return inheritedPlusProperStyles;
-            }
-
-            set
-            {
-                inheritedPlusProperStyles = value;
-            }
-        }
-
-        public IList<StyleClass> Observers
-        {
-            get
-            {
-                return observers;
-            }
-
-            set
-            {
-                observers = value;
+                this.InheritedStyleClass = newInheritedStyleClass;
+                this.InheritedStyleClass.AddObserver(this);
+                MergeInheritedAndProperStyles();
             }
         }
 
@@ -170,26 +100,24 @@ namespace DocSystEntities.StyleStructure
 
         private void MergeInheritedAndProperStyles()
         {
+            IList<Style> newInheritedPlusProperStyles = new List<Style>();
             if (this.InheritedStyleClass != null)
             {
-                foreach(Style inheritStyle in InheritedStyleClass.InheritedPlusProperStyles)
+                foreach (Style inheritStyle in InheritedStyleClass.InheritedPlusProperStyles)
                 {
-                    if (InheritedPlusProperStyles.Contains(inheritStyle))
-                    {
-                        InheritedPlusProperStyles.Remove(inheritStyle);
-                    }
-                    InheritedPlusProperStyles.Add(inheritStyle);
+                    newInheritedPlusProperStyles.Add(inheritStyle);
                 }
             }
 
             foreach (Style properStyle in this.ProperStyles)
             {
-                if (InheritedPlusProperStyles.Contains(properStyle))
+                if (newInheritedPlusProperStyles.Contains(properStyle))
                 {
-                    InheritedPlusProperStyles.Remove(properStyle);
+                    newInheritedPlusProperStyles.Remove(properStyle);
                 }
-                InheritedPlusProperStyles.Add(properStyle);
+                newInheritedPlusProperStyles.Add(properStyle);
             }
+            this.InheritedPlusProperStyles = newInheritedPlusProperStyles;
         }
 
         public void UpdateSubject()
@@ -209,7 +137,7 @@ namespace DocSystEntities.StyleStructure
 
         public void NotifyObservers()
         {
-            foreach(StyleClass observer in this.Observers)
+            foreach (StyleClass observer in this.Observers)
             {
                 observer.UpdateSubject();
             }
@@ -225,5 +153,6 @@ namespace DocSystEntities.StyleStructure
             }
             return equals;
         }
+
     }
 }

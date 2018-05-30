@@ -56,7 +56,7 @@ namespace DocSystTest.DataAccessTest.StyleStructureDataAccessTest
         {
             styleClassDataAccess.Add(styleClass);
             StyleClass inheritedStyleClass = Utils.CreateStyleClassInDataBaseForTest();
-            styleClass.InheritedStyleClass = inheritedStyleClass;
+            styleClass.SetInheritedStyleClass(inheritedStyleClass);
             styleClassDataAccess.Modify(styleClass);
             StyleClass obtained = styleClassDataAccess.Get(styleClass.Id);
             Assert.AreEqual(inheritedStyleClass, obtained.InheritedStyleClass);
