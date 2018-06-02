@@ -10,9 +10,7 @@ namespace DocSystWebApi.Models.DocumentStructureModels
     public class DocumentModel : Model<Document, DocumentModel>
     {
         public Guid Id { get; set; }
-        [Required]
         public UserModel.UserModel CreatorUser { get; set; }
-        [Required]
         public string Title { get; set; }
         public DateTime CreationDate { get; set; }
         public DateTime LastModifyDate { get; set; }
@@ -28,9 +26,19 @@ namespace DocSystWebApi.Models.DocumentStructureModels
 
         public override Document ToEntity()
         {
-            List<Body> bodys = ConvertModelsToBodys(this.DocumentParts);
-            User user = ConvertModelToUser(this.CreatorUser);
+            List<Body> bodys = null;
 
+            if (this.DocumentParts != null)
+            {
+                bodys = ConvertModelsToBodys(this.DocumentParts);
+            }
+
+            User user = null;
+            if (this.CreatorUser != null)
+            {
+                user = ConvertModelToUser(this.CreatorUser);
+            }
+            
             Document doc = new Document()
             {
                 CreatorUser = user,
@@ -41,7 +49,14 @@ namespace DocSystWebApi.Models.DocumentStructureModels
                 DocumentParts = bodys
             };
 
-            this.Id = doc.Id;
+            if(!this.Id.Equals(Guid.Empty))
+            {
+                doc.Id = this.Id;
+            }
+            else
+            {
+                this.Id = doc.Id;
+            }
 
             return doc;
         }

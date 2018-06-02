@@ -28,6 +28,7 @@ namespace DocSystEntities.DocumentStructure
         public void SetText(Text aText)
         {
             aText.BodyId = this.Id;
+            this.Texts.Clear();
             Texts.Add(aText);
         }
 

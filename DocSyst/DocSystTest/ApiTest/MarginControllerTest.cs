@@ -130,7 +130,7 @@ namespace DocSystTest.ApiTest
         public void ModifyMargin_ExpectedParameters_Ok()
         {
             mockMarginBusinessLogic.Setup(b1 => b1.ModifyMargin(It.IsAny<Margin>()));
-            IHttpActionResult statusObtained = marginController.Put(marginModel);
+            IHttpActionResult statusObtained = marginController.Put(Guid.NewGuid(),marginModel);
             Assert.IsNotNull(statusObtained as OkNegotiatedContentResult<string>);
         }
 
@@ -140,7 +140,7 @@ namespace DocSystTest.ApiTest
             IList<MarginModel> marginsModel = new List<MarginModel>();
             marginsModel.Add(marginModel);
             mockMarginBusinessLogic.Setup(b1 => b1.ModifyMargin(It.IsAny<Margin>())).Throws(new Exception());
-            IHttpActionResult statusObtained = marginController.Put(marginModel);
+            IHttpActionResult statusObtained = marginController.Put(Guid.NewGuid(),marginModel);
             Assert.IsNull(statusObtained as OkNegotiatedContentResult<string>);
         }
 
@@ -172,7 +172,7 @@ namespace DocSystTest.ApiTest
             {
                 DocumentId = Guid.NewGuid()
             });
-            IHttpActionResult statusObtained = marginController.Post(margin.Id,TextModel.ToModel(text));
+            IHttpActionResult statusObtained = marginController.Put(margin.Id,TextModel.ToModel(text));
             Assert.IsNotNull(statusObtained as CreatedAtRouteNegotiatedContentResult<TextModel>);
         }
 
@@ -180,7 +180,7 @@ namespace DocSystTest.ApiTest
         public void PostTextMargin_BadRequest_Exception()
         {
             mockMarginBusinessLogic.Setup(b1 => b1.SetText(margin.Id, text)).Throws(new Exception());
-            IHttpActionResult statusObtained = marginController.Post(margin.Id, TextModel.ToModel(text));
+            IHttpActionResult statusObtained = marginController.Put(margin.Id, TextModel.ToModel(text));
             Assert.IsNull(statusObtained as OkNegotiatedContentResult<TextModel>);
         }
 
@@ -219,7 +219,7 @@ namespace DocSystTest.ApiTest
             marginC.Post(margin2);
             marginC.Get(margin.Id);
             margin2.OwnStyleClass = "modified";
-            marginC.Put(margin2);
+            marginC.Put(margin2.Id,margin2);
             marginC.Delete(marginModel.Id);
             IHttpActionResult statusObtained = marginC.Get();
         }

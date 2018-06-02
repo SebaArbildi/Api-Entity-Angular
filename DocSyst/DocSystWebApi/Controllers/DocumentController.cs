@@ -26,12 +26,14 @@ namespace DocSystWebApi.Controllers
         }
 
         // GET: api/Document
+        [Route("api/Document", Name = "GetDocuments")]
+        [HttpGet]
         public IHttpActionResult Get()
         {
             try
             {
                 Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
-                var userToken = Request.Headers.GetValues("userToken").FirstOrDefault();
+                var userToken = Request.Headers.GetValues("Username").FirstOrDefault();
                 var documents = DocumentBusinessLogic.GetDocuments(userToken);
                 IList<DocumentModel> documentsModel = DocumentModel.ToModel(documents).ToList();
                 return Ok(documentsModel);
@@ -43,6 +45,8 @@ namespace DocSystWebApi.Controllers
         }
 
         // GET: api/Document/5
+        [Route("api/Document/{id:guid}", Name = "GetDocument")]
+        [HttpGet]
         public IHttpActionResult Get([FromUri] Guid id)
         {
             try
@@ -58,6 +62,8 @@ namespace DocSystWebApi.Controllers
         }
 
         // POST: api/Document
+        [Route("api/Document", Name = "PostDocuments")]
+        [HttpPost]
         public IHttpActionResult Post([FromBody]DocumentModel documentModel)
         {
             try
@@ -65,7 +71,7 @@ namespace DocSystWebApi.Controllers
                 Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
                 DocumentBusinessLogic.AddDocument(documentModel.ToEntity());
                 AuditLogBussinesLogic.CreateLog("Document", documentModel.Id, Utils.GetUsername(Request), ActionPerformed.CREATE);
-                return CreatedAtRoute("DefaultApi", new { documentModel.Id }, documentModel);
+                return Ok(documentModel);
             }
             catch (Exception e)
             {
@@ -74,11 +80,16 @@ namespace DocSystWebApi.Controllers
         }
 
         // PUT: api/Document
-        public IHttpActionResult Put([FromBody]DocumentModel documentModel)
+        [Route("api/Document/{id:guid}", Name = "PutDocument")]
+        [HttpPut]
+        public IHttpActionResult Put([FromUri] Guid id, [FromBody]DocumentModel documentModel)
         {
             try
             {
                 Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
+
+                documentModel.Id = id;
+
                 DocumentBusinessLogic.ModifyDocument(documentModel.ToEntity());
                 AuditLogBussinesLogic.CreateLog("Document", documentModel.Id, Utils.GetUsername(Request), ActionPerformed.MODIFY);
                 return Ok("Document Modified");
@@ -90,6 +101,8 @@ namespace DocSystWebApi.Controllers
         }
 
         // DELETE: api/Document/5
+        [Route("api/Document/{id:guid}", Name = "DeleteDocument")]
+        [HttpDelete]
         public IHttpActionResult Delete([FromUri] Guid id)
         {
             try
@@ -105,7 +118,7 @@ namespace DocSystWebApi.Controllers
             }
         }
 
-        [Route("api/Document/{documentId:guid}/Part/{align}", Name = "GetDocumentPart")]
+        /*[Route("api/Document/{documentId:guid}/Part/{align}", Name = "GetDocumentPart")]
         [HttpGet]
         public IHttpActionResult Get([FromUri] Guid documentId, [FromUri] MarginAlign align)
         {
@@ -119,7 +132,7 @@ namespace DocSystWebApi.Controllers
             {
                 return BadRequest(e.Message);
             }
-        }
+        }*/
 
         [Route("api/Document/{documentId:guid}/Part/{align}", Name = "SetDocumentPart")]
         [HttpPost]
