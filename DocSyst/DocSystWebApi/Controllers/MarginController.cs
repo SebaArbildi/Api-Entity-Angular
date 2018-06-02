@@ -27,6 +27,8 @@ namespace DocSystWebApi.Controllers
         }
 
         // GET: api/Margin
+        [Route("api/Margin", Name = "GetMargins")]
+        [HttpGet]
         public IHttpActionResult Get()
         {
             try
@@ -43,6 +45,8 @@ namespace DocSystWebApi.Controllers
         }
 
         // GET: api/Margin/5
+        [Route("api/Margin/{id:guid}", Name = "GetMargin")]
+        [HttpGet]
         public IHttpActionResult Get([FromUri] Guid id)
         {
             try
@@ -58,13 +62,15 @@ namespace DocSystWebApi.Controllers
         }
 
         // POST: api/Margin
+        [Route("api/Margin", Name = "PostMargin")]
+        [HttpPost]
         public IHttpActionResult Post([FromBody]MarginModel marginModel)
         {
             try
             {
                 Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
                 MarginBusinessLogic.AddMargin(marginModel.ToEntity());
-                return CreatedAtRoute("DefaultApi", new { marginModel.Id }, marginModel);
+                return Ok(marginModel);
             }
             catch (Exception e)
             {
@@ -73,15 +79,20 @@ namespace DocSystWebApi.Controllers
         }
 
         // PUT: api/Margin
-        public IHttpActionResult Put([FromBody]MarginModel marginModel)
+        [Route("api/Margin/{id:guid}", Name = "PutMargin")]
+        [HttpPut]
+        public IHttpActionResult Put([FromUri] Guid id, [FromBody]MarginModel marginModel)
         {
             try
             {
                 Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
+
+                marginModel.Id = id;
+
                 MarginBusinessLogic.ModifyMargin(marginModel.ToEntity());
                 AuditLogBussinesLogic.CreateLog("Document", marginModel.DocumentId, Utils.GetUsername(Request), ActionPerformed.MODIFY);
 
-                return Ok("Margin Modified");
+                return Ok(marginModel);
             }
             catch (Exception e)
             {
@@ -90,6 +101,8 @@ namespace DocSystWebApi.Controllers
         }
 
         // DELETE: api/Margin/5
+        [Route("api/Margin/{id:guid}", Name = "DeleteMargin")]
+        [HttpDelete]
         public IHttpActionResult Delete([FromUri] Guid id)
         {
             try
@@ -106,9 +119,9 @@ namespace DocSystWebApi.Controllers
             }
         }
 
-        [Route("api/Margin/{marginId:guid}/Text", Name = "PostText")]
-        [HttpPost]
-        public IHttpActionResult Post([FromUri] Guid marginId, [FromBody] TextModel textModel)
+        [Route("api/Margin/{marginId:guid}/SetText", Name = "PostTextInMargin")]
+        [HttpPut]
+        public IHttpActionResult Put([FromUri] Guid marginId, [FromBody] TextModel textModel)
         {
             try
             {
@@ -118,7 +131,7 @@ namespace DocSystWebApi.Controllers
                 MarginBusinessLogic.SetText(marginId, text);
                 AuditLogBussinesLogic.CreateLog("Document", documentId, Utils.GetUsername(Request), ActionPerformed.MODIFY);
 
-                return CreatedAtRoute("DefaultApi", new { textModel.Id }, textModel);
+                return Ok(textModel);
             }
             catch (Exception e)
             {
@@ -126,7 +139,7 @@ namespace DocSystWebApi.Controllers
             }
         }
 
-        [Route("api/Margin/{marginId:guid}/Text", Name = "ClearTextsMargin")]
+        [Route("api/Margin/{marginId:guid}/ClearText", Name = "ClearTextsMargin")]
         [HttpPut]
         public IHttpActionResult Put([FromUri] Guid id)
         {

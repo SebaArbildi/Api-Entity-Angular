@@ -10,14 +10,13 @@ namespace DocSystWebApi.Models.DocumentStructureModels
     public class DocumentModel : Model<Document, DocumentModel>
     {
         public Guid Id { get; set; }
-        [Required]
         public UserModel.UserModel CreatorUser { get; set; }
-        [Required]
         public string Title { get; set; }
         public DateTime CreationDate { get; set; }
         public DateTime LastModifyDate { get; set; }
         public string OwnStyleClass { get; set; }
-        public List<BodyModel> DocumentParts { get; set; }
+        public List<MarginModel> DocumentMargins { get; set; }
+        public List<ParagraphModel> DocumentParagraphs { get; set; }
 
         public DocumentModel() { }
 
@@ -28,8 +27,15 @@ namespace DocSystWebApi.Models.DocumentStructureModels
 
         public override Document ToEntity()
         {
-            List<Body> bodys = ConvertModelsToBodys(this.DocumentParts);
-            User user = ConvertModelToUser(this.CreatorUser);
+            
+            List<Margin> margins = ConvertModelsToBodys(this.DocumentMargins);
+            List<Paragraph> paragraphs = ConvertModelsToParagraphs(this.DocumentParagraphs);
+
+            User user = null;
+            if (this.CreatorUser != null)
+            {
+                user = ConvertModelToUser(this.CreatorUser);
+            }
 
             Document doc = new Document()
             {
@@ -38,17 +44,26 @@ namespace DocSystWebApi.Models.DocumentStructureModels
                 CreationDate = this.CreationDate,
                 LastModifyDate = this.LastModifyDate,
                 OwnStyleClass = this.OwnStyleClass,
-                DocumentParts = bodys
+                DocumentMargins = margins,
+                DocumentParagraphs = paragraphs
             };
 
-            this.Id = doc.Id;
+            if(!this.Id.Equals(Guid.Empty))
+            {
+                doc.Id = this.Id;
+            }
+            else
+            {
+                this.Id = doc.Id;
+            }
 
             return doc;
         }
 
         protected override DocumentModel SetModel(Document entity)
         {
-            List<BodyModel> documentParts = ConvertBodysToModels(entity.DocumentParts);
+            List<MarginModel> documentMargins = ConvertBodysToModels(entity.DocumentMargins);
+            List<ParagraphModel> documentParagraphs = ConvertParagraphsToModels(entity.DocumentParagraphs);
             UserModel.UserModel userModel = ConvertUserToModel(entity.CreatorUser);
 
             Id = entity.Id;
@@ -57,7 +72,8 @@ namespace DocSystWebApi.Models.DocumentStructureModels
             CreationDate = entity.CreationDate;
             LastModifyDate = entity.LastModifyDate;
             OwnStyleClass = entity.OwnStyleClass;
-            DocumentParts = documentParts;
+            DocumentMargins = documentMargins;
+            DocumentParagraphs = documentParagraphs;
             return this;
         }
 
@@ -71,14 +87,24 @@ namespace DocSystWebApi.Models.DocumentStructureModels
             return new UserModel.UserModel(user);
         }
 
-        private List<BodyModel> ConvertBodysToModels(List<Body> bodys)
+        private List<MarginModel> ConvertBodysToModels(List<Margin> bodys)
         {
-            return BodyModel.ToModel(bodys).ToList();
+            return MarginModel.ToModel(bodys).ToList();
         }
 
-        private List<Body> ConvertModelsToBodys(List<BodyModel> bodyModels)
+        private List<ParagraphModel> ConvertParagraphsToModels(List<Paragraph> paragraphs)
         {
-            return BodyModel.ToEntity(bodyModels).ToList();
+            return ParagraphModel.ToModel(paragraphs).ToList();
+        }
+
+        private List<Margin> ConvertModelsToBodys(List<MarginModel> bodyModels)
+        {
+            return MarginModel.ToEntity(bodyModels).ToList();
+        }
+
+        private List<Paragraph> ConvertModelsToParagraphs(List<ParagraphModel> paragraphModels)
+        {
+            return ParagraphModel.ToEntity(paragraphModels).ToList();
         }
 
         public override bool Equals(object obj)

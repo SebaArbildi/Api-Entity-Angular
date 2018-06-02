@@ -10,7 +10,7 @@ namespace DocSystWebApi.Models.StyleStructureModels
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-        private IList<StyleClassModel> StyleClasses { get; set; }
+        public IList<StyleClassModel> StyleClasses { get; set; }
 
         public FormatModel() { }
 
@@ -19,12 +19,31 @@ namespace DocSystWebApi.Models.StyleStructureModels
             SetModel(format);
         }
 
-        public override Format ToEntity() => new Format()
+        public override Format ToEntity()
         {
-            Id = this.Id,
-            Name = this.Name,
-            StyleClasses = Utils.ConvertModelsToEntities(this.StyleClasses),
-        };
+            IList<StyleClass> styleClasses = new List<StyleClass>();
+            if(this.StyleClasses != null)
+            {
+                styleClasses = Utils.ConvertModelsToEntities(this.StyleClasses);
+            }
+
+            Format format = new Format()
+            {
+                Name = this.Name,
+                StyleClasses = styleClasses
+            };
+
+            if (!this.Id.Equals(Guid.Empty))
+            {
+                format.Id = this.Id;
+            }
+            else
+            {
+                this.Id = format.Id;
+            }
+
+            return format;
+        }
 
         protected override FormatModel SetModel(Format format)
         {

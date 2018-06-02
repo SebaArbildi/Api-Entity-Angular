@@ -25,6 +25,8 @@ namespace DocSystWebApi.Controllers
         }
 
         // GET: api/Text
+        [Route("api/Text", Name = "GetTexts")]
+        [HttpGet]
         public IHttpActionResult Get()
         {
             try
@@ -41,6 +43,8 @@ namespace DocSystWebApi.Controllers
         }
 
         // GET: api/Text/5
+        [Route("api/Text/{id:guid}", Name = "GetText")]
+        [HttpGet]
         public IHttpActionResult Get([FromUri] Guid id)
         {
             try
@@ -56,13 +60,15 @@ namespace DocSystWebApi.Controllers
         }
 
         // POST: api/Text
+        [Route("api/Text", Name = "PostText")]
+        [HttpPost]
         public IHttpActionResult Post([FromBody]TextModel textModel)
         {
             try
             {
                 Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
                 TextBusinessLogic.AddText(textModel.ToEntity());
-                return CreatedAtRoute("DefaultApi", new { textModel.Id }, textModel);
+                return Ok(textModel);
             }
             catch (Exception e)
             {
@@ -71,13 +77,18 @@ namespace DocSystWebApi.Controllers
         }
 
         // PUT: api/Text
-        public IHttpActionResult Put([FromBody]TextModel textModel)
+        [Route("api/Text/{id:guid}", Name = "PutText")]
+        [HttpPut]
+        public IHttpActionResult Put([FromUri] Guid id, [FromBody]TextModel textModel)
         {
             try
             {
                 Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
+
+                textModel.Id = id;
+
                 TextBusinessLogic.ModifyText(textModel.ToEntity());
-                Guid? documentId = TextBusinessLogic.GetDocumentId(textModel.Id);
+                Guid? documentId = TextBusinessLogic.GetDocumentId(id);
                 AuditLogBussinesLogic.CreateLog("Document", documentId, Utils.GetUsername(Request), ActionPerformed.MODIFY);
                 return Ok("Text Modified");
             }
@@ -88,6 +99,8 @@ namespace DocSystWebApi.Controllers
         }
 
         // DELETE: api/Text/5
+        [Route("api/Text/{id:guid}", Name = "DeleteText")]
+        [HttpDelete]
         public IHttpActionResult Delete([FromUri] Guid id)
         {
             try

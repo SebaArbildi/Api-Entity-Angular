@@ -48,7 +48,7 @@ namespace DocSystTest.EntitiesTest
             Paragraph paragraph = Utils.CreateParagraphForTest();
             Text text = Utils.CreateTextForTest();
             paragraph.PutTextAtLast(text);
-            document.DocumentParts.Add(paragraph);
+            document.DocumentParagraphs.Add(paragraph);
 
             document.OwnStyleClass = "Normal";
             paragraph.OwnStyleClass = "Normal2";

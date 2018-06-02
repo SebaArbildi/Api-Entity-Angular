@@ -20,6 +20,7 @@ namespace DocSystTest.BusinessLogicTest
         IDocumentBusinessLogic documentBusinessLogic;
         Document document;
         Paragraph paragraph;
+        Margin margin;
 
         [TestCleanup]
         public void CleanDataBase()
@@ -32,9 +33,10 @@ namespace DocSystTest.BusinessLogicTest
         {
             mockDocumentDataAccess = new Mock<IDocumentDataAccess>();
             mockUserDataAccess = new Mock<IUserDataAccess>();
-            documentBusinessLogic = new DocumentBusinessLogic(mockDocumentDataAccess.Object,mockUserDataAccess.Object);
+            documentBusinessLogic = new DocumentBusinessLogic(mockDocumentDataAccess.Object, mockUserDataAccess.Object);
             document = Utils.CreateDocumentForTest();
             paragraph = Utils.CreateParagraphForTest();
+            margin = Utils.CreateMarginForTest();
         }
 
         [TestMethod]
@@ -51,7 +53,7 @@ namespace DocSystTest.BusinessLogicTest
             IDocumentDataAccess documentDataAccess = new DocumentDataAccess();
             IUserDataAccess userDataAccess = new UserDataAccess();
 
-            IDocumentBusinessLogic documentBL = new DocumentBusinessLogic(documentDataAccess,userDataAccess);
+            IDocumentBusinessLogic documentBL = new DocumentBusinessLogic(documentDataAccess, userDataAccess);
 
             Assert.IsNotNull(documentBL);
         }
@@ -109,25 +111,6 @@ namespace DocSystTest.BusinessLogicTest
         }
 
         [TestMethod]
-        public void ModifyDocument_ExpectedParameters_Ok()
-        {
-            mockDocumentDataAccess.Setup(b1 => b1.Exists(document.Id)).Returns(true);
-            mockDocumentDataAccess.Setup(b1 => b1.Modify(document)).Verifiable();
-            mockDocumentDataAccess.Setup(b1 => b1.Get(document.Id)).Returns(
-                new Document()
-                {
-                    Id = document.Id,
-                    DocumentParts = new List<Body>() { paragraph }
-                });
-
-            document.SetDocumentPart(MarginAlign.PARAGRAPH, paragraph);
-            documentBusinessLogic.ModifyDocument(document);
-
-            Assert.AreEqual(document, documentBusinessLogic.GetDocument(document.Id));
-
-        }
-
-        [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void ModifyDocument_DocumentNotExists_DuplicateException()
         {
@@ -166,13 +149,13 @@ namespace DocSystTest.BusinessLogicTest
                 new Document()
                 {
                     Id = document.Id,
-                    DocumentParts = new List<Body>() { paragraph }
+                    DocumentParagraphs = new List<Paragraph>() { paragraph }
                 });
 
-            document.SetDocumentPart(MarginAlign.PARAGRAPH, paragraph);
+            document.AddDocumentParagraphAtLast(paragraph);
 
-            Assert.AreEqual(paragraph, 
-                documentBusinessLogic.GetDocumentPart(document.Id,MarginAlign.PARAGRAPH));
+            Assert.AreEqual(paragraph,
+                documentBusinessLogic.GetDocumentParagraph(document.Id, 0));
         }
 
         [TestMethod]
@@ -181,7 +164,7 @@ namespace DocSystTest.BusinessLogicTest
         {
             mockDocumentDataAccess.Setup(b1 => b1.Exists(document.Id)).Returns(false);
 
-            documentBusinessLogic.GetDocumentPart(document.Id, MarginAlign.PARAGRAPH);
+            documentBusinessLogic.GetDocumentParagraph(document.Id, 0);
         }
 
         [TestMethod]
@@ -191,7 +174,7 @@ namespace DocSystTest.BusinessLogicTest
             mockDocumentDataAccess.Setup(b1 => b1.Exists(document.Id)).Returns(true);
             mockDocumentDataAccess.Setup(b1 => b1.Get(document.Id)).Throws(new Exception());
 
-            documentBusinessLogic.GetDocumentPart(document.Id, MarginAlign.PARAGRAPH);
+            documentBusinessLogic.GetDocumentParagraph(document.Id, 0);
         }
 
         [TestMethod]
@@ -200,7 +183,7 @@ namespace DocSystTest.BusinessLogicTest
         {
             mockDocumentDataAccess.Setup(b1 => b1.Exists(document.Id)).Returns(false);
 
-            documentBusinessLogic.SetDocumentPart(document.Id, MarginAlign.PARAGRAPH, paragraph);
+            documentBusinessLogic.AddDocumentParagraphAtLast(document.Id, paragraph);
         }
 
         [TestMethod]
@@ -210,7 +193,7 @@ namespace DocSystTest.BusinessLogicTest
             mockDocumentDataAccess.Setup(b1 => b1.Exists(document.Id)).Returns(true);
             mockDocumentDataAccess.Setup(b1 => b1.Get(document.Id)).Throws(new Exception());
 
-            documentBusinessLogic.SetDocumentPart(document.Id, MarginAlign.PARAGRAPH, paragraph);
+            documentBusinessLogic.AddDocumentParagraphAtLast(document.Id, paragraph);
         }
 
         [TestMethod]
@@ -221,11 +204,11 @@ namespace DocSystTest.BusinessLogicTest
                 new Document()
                 {
                     Id = document.Id,
-                    DocumentParts = new List<Body>() { paragraph }
+                    DocumentMargins = new List<Margin>() { margin }
                 });
 
 
-            Assert.IsTrue(documentBusinessLogic.ExistDocumentPart(document.Id, MarginAlign.PARAGRAPH));
+            Assert.IsTrue(documentBusinessLogic.ExistDocumentMargin(document.Id, MarginAlign.FOOTER));
         }
 
         [TestMethod]
@@ -236,10 +219,10 @@ namespace DocSystTest.BusinessLogicTest
                 new Document()
                 {
                     Id = document.Id,
-                    DocumentParts = new List<Body>()
+                    DocumentMargins = new List<Margin>()
                 });
 
-            Assert.IsFalse(documentBusinessLogic.ExistDocumentPart(document.Id, MarginAlign.PARAGRAPH));
+            Assert.IsFalse(documentBusinessLogic.ExistDocumentMargin(document.Id, MarginAlign.FOOTER));
         }
 
         [TestMethod]
@@ -248,7 +231,7 @@ namespace DocSystTest.BusinessLogicTest
         {
             mockDocumentDataAccess.Setup(b1 => b1.Exists(document.Id)).Returns(false);
 
-            documentBusinessLogic.ExistDocumentPart(document.Id, MarginAlign.PARAGRAPH);
+            documentBusinessLogic.ExistDocumentMargin(document.Id, MarginAlign.FOOTER);
         }
 
         [TestMethod]
@@ -258,7 +241,7 @@ namespace DocSystTest.BusinessLogicTest
             mockDocumentDataAccess.Setup(b1 => b1.Exists(document.Id)).Returns(true);
             mockDocumentDataAccess.Setup(b1 => b1.Get(document.Id)).Throws(new Exception());
 
-            documentBusinessLogic.ExistDocumentPart(document.Id, MarginAlign.PARAGRAPH);
+            documentBusinessLogic.ExistDocumentMargin(document.Id, MarginAlign.FOOTER);
         }
 
         [TestMethod]
@@ -266,13 +249,13 @@ namespace DocSystTest.BusinessLogicTest
         {
             DocumentDataAccess documentDA = new DocumentDataAccess();
             UserDataAccess userDA = new UserDataAccess();
-            DocumentBusinessLogic documentBL = new DocumentBusinessLogic(documentDA,userDA);
+            DocumentBusinessLogic documentBL = new DocumentBusinessLogic(documentDA, userDA);
             Document document1 = Utils.CreateDocumentForTest();
             Document document2 = Utils.CreateDocumentForTest();
             documentBL.AddDocument(document1);
             documentBL.AddDocument(document2);
 
-            document2.SetDocumentPart(MarginAlign.PARAGRAPH, paragraph);
+            document2.AddDocumentParagraphAtLast(paragraph);
             documentBL.ModifyDocument(document2);
 
             documentBL.DeleteDocument(document1.Id);

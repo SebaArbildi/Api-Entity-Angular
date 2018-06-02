@@ -71,7 +71,7 @@ namespace DocSystBusinessLogicImplementation.DocumentStructureLogicImplementatio
             return documentDataAccess.Exists(aDocumentId);
         }
 
-        public bool ExistDocumentPart(Guid aDocumentId, MarginAlign? align)
+        public bool ExistDocumentMargin(Guid aDocumentId, MarginAlign? align)
         {
             if (!documentDataAccess.Exists(aDocumentId))
             {
@@ -81,7 +81,7 @@ namespace DocSystBusinessLogicImplementation.DocumentStructureLogicImplementatio
 
             Document document = documentDataAccess.Get(aDocumentId);
 
-            return document.ExistDocumentPart(align);
+            return document.ExistDocumentMargin(align);
         }
 
         public Document GetDocument(Guid aDocumentId)
@@ -97,7 +97,7 @@ namespace DocSystBusinessLogicImplementation.DocumentStructureLogicImplementatio
 
         public IList<Document> GetDocuments(string userToken)
         {
-            if (userDataAccess.Get(userToken)==null)
+            if (userDataAccess.Get(userToken) == null)
             {
                 throw new ArgumentException("The User argument not exist in database."
                     , "userToken");
@@ -110,7 +110,7 @@ namespace DocSystBusinessLogicImplementation.DocumentStructureLogicImplementatio
             return documents;
         }
 
-        public Body GetDocumentPart(Guid aDocumentId, MarginAlign align)
+        public Margin GetDocumentMargin(Guid aDocumentId, MarginAlign align)
         {
             if (!documentDataAccess.Exists(aDocumentId))
             {
@@ -120,12 +120,12 @@ namespace DocSystBusinessLogicImplementation.DocumentStructureLogicImplementatio
 
             Document document = documentDataAccess.Get(aDocumentId);
 
-            if (!document.ExistDocumentPart(align))
+            if (!document.ExistDocumentMargin(align))
             {
                 throw new ArgumentException("The current document does not have the specified part.");
             }
 
-            return document.GetDocumentPart(align);
+            return document.GetDocumentMargin(align);
         }
 
         public IList<Document> GetDocuments()
@@ -144,7 +144,7 @@ namespace DocSystBusinessLogicImplementation.DocumentStructureLogicImplementatio
             documentDataAccess.Modify(newDocument);
         }
 
-        public void SetDocumentPart(Guid aDocumentId, MarginAlign? align, Body aDocumentPart)
+        public void SetDocumentMargin(Guid aDocumentId, MarginAlign? align, Margin aDocumentPart)
         {
             if (!documentDataAccess.Exists(aDocumentId))
             {
@@ -154,7 +154,65 @@ namespace DocSystBusinessLogicImplementation.DocumentStructureLogicImplementatio
 
             Document document = documentDataAccess.Get(aDocumentId);
 
-            document.SetDocumentPart(align, aDocumentPart);
+            document.SetDocumentMargin(align, aDocumentPart);
+
+            documentDataAccess.Modify(document);
+        }
+
+        public Paragraph GetDocumentParagraph(Guid aDocumentId, int index)
+        {
+            if (!documentDataAccess.Exists(aDocumentId))
+            {
+                throw new ArgumentException("The document argument not exist in database."
+                    , "aDocumentId");
+            }
+
+            Document document = documentDataAccess.Get(aDocumentId);
+
+            return document.GetDocumentParagraphAt(index);
+        }
+
+        public void AddDocumentParagraphAtLast(Guid aDocumentId, Paragraph aParagraph)
+        {
+            if (!documentDataAccess.Exists(aDocumentId))
+            {
+                throw new ArgumentException("The document argument not exist in database."
+                    , "aDocumentId");
+            }
+
+            Document document = documentDataAccess.Get(aDocumentId);
+
+            document.AddDocumentParagraphAtLast(aParagraph);
+
+            documentDataAccess.Modify(document);
+        }
+
+        public void AddDocumentParagraphAt(Guid aDocumentId, int index, Paragraph aParagraph)
+        {
+            if (!documentDataAccess.Exists(aDocumentId))
+            {
+                throw new ArgumentException("The document argument not exist in database."
+                    , "aDocumentId");
+            }
+
+            Document document = documentDataAccess.Get(aDocumentId);
+
+            document.AddDocumentParagraphAt(aParagraph, index);
+
+            documentDataAccess.Modify(document);
+        }
+
+        public void MoveDocumentParagraphTo(Guid aDocumentId, int index, Guid aParagraphId)
+        {
+            if (!documentDataAccess.Exists(aDocumentId))
+            {
+                throw new ArgumentException("The document argument not exist in database."
+                    , "aDocumentId");
+            }
+
+            Document document = documentDataAccess.Get(aDocumentId);
+
+            document.MoveParagraphTo(index, aParagraphId);
 
             documentDataAccess.Modify(document);
         }

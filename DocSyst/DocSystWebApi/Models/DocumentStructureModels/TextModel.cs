@@ -27,7 +27,15 @@ namespace DocSystWebApi.Models.DocumentStructureModels
                 BodyId = this.BodyId
             };
 
-            this.Id = aText.Id;
+            if (!this.Id.Equals(Guid.Empty))
+            {
+                aText.Id = this.Id;
+            }
+            else
+            {
+                this.Id = aText.Id;
+            }
+
             return aText;
         }
 

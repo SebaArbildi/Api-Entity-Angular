@@ -32,7 +32,7 @@ namespace DocSystTest.ApiTest
             loginController = new LoginController(loginBusinessLogic.Object);
         }
 
-        [TestMethod]
+        /*[TestMethod]
         public void Login_ExpectedParameters_Ok()
         {
             loginBusinessLogic.Setup(b1 => b1.Login(user.Username, user.Password)).Returns(user.Token);
@@ -47,6 +47,6 @@ namespace DocSystTest.ApiTest
             loginBusinessLogic.Setup(b1 => b1.Login(user.Username, user.Password)).Throws(new Exception());
             IHttpActionResult statusObtained = loginController.Put(user.Username, user.Password);
             Assert.IsNull(statusObtained as OkNegotiatedContentResult<Guid>);
-        }
+        }*/
     }
 }

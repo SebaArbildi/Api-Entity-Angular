@@ -26,14 +26,21 @@ namespace DocSystWebApi.Models.StyleStructureModels
         {
             StyleClass styleClass = new StyleClass()
             {
-                Id = this.Id,
                 Name = this.Name,
                 ProperStyles = Utils.ConvertModelsToEntities(this.ProperStyles),
                 InheritedPlusProperStyles = Utils.ConvertModelsToEntities(this.InheritedPlusProperStyles),
                 Observers = Utils.ConvertModelsToEntities(this.Observers)
             };
 
-            /*TODO: Another solution, so there is not need to handle if InheritedStyleClass is null*/
+            if (!this.Id.Equals(Guid.Empty))
+            {
+                styleClass.Id = this.Id;
+            }
+            else
+            {
+                this.Id = styleClass.Id;
+            }
+
             if (this.InheritedStyleClass != null)
             {
                 styleClass.SetInheritedStyleClass(this.InheritedStyleClass.ToEntity());

@@ -14,17 +14,37 @@ namespace DocSystEntities.Generator
         {
             StringBuilder htmlGenerated = new StringBuilder("<html>");
             StyleClass styleClassDocument = format.GetStyleClass(document.OwnStyleClass);
-            List<Body> documentBody = document.DocumentParts;
-            foreach(Body body in documentBody)
-            {
-                StyleClass styleClassBody = GetStyleClassForDocumentPart(body.OwnStyleClass, format, styleClassDocument);
+            Margin header = document.GetDocumentMargin(MarginAlign.HEADER);
+            Margin footer = document.GetDocumentMargin(MarginAlign.FOOTER);
+            List<Paragraph> paragraphs = document.DocumentParagraphs;
 
-                foreach(Text text in body.Texts)
+            if(header != null && header.HasText())
+            {
+                Text headerText = header.GetText();
+                StyleClass styleClassHeader = GetStyleClassForDocumentPart(header.OwnStyleClass, format, styleClassDocument);
+                StyleClass styleClassText = GetStyleClassForDocumentPart(headerText.OwnStyleClass, format, styleClassHeader);
+                htmlGenerated.Append(ApplyStyleClassToText(headerText.TextContent, styleClassText));
+            }
+
+            foreach (Paragraph paragraph in paragraphs)
+            {
+                StyleClass styleClassBody = GetStyleClassForDocumentPart(paragraph.OwnStyleClass, format, styleClassDocument);
+
+                foreach(Text text in paragraph.Texts)
                 {
                     StyleClass styleClassText = GetStyleClassForDocumentPart(text.OwnStyleClass, format, styleClassBody);
                     htmlGenerated.Append(ApplyStyleClassToText(text.TextContent, styleClassText));
                 }
             }
+
+            if (footer != null && footer.HasText())
+            {
+                Text footerText = footer.GetText();
+                StyleClass styleClassFooter = GetStyleClassForDocumentPart(footer.OwnStyleClass, format, styleClassDocument);
+                StyleClass styleClassText = GetStyleClassForDocumentPart(footerText.OwnStyleClass, format, styleClassFooter);
+                htmlGenerated.Append(ApplyStyleClassToText(footerText.TextContent, styleClassText));
+            }
+
             htmlGenerated.Append("</html>");
             return htmlGenerated.ToString();
         }
@@ -77,6 +97,8 @@ namespace DocSystEntities.Generator
             {
                 textWithStyleClass = "<em>" + textWithStyleClass + "</em>";
             }
+
+            textWithStyleClass += "<br>";
 
             return textWithStyleClass;
         }

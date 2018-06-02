@@ -58,21 +58,9 @@
     <Compile Include="DocumentStructureDataAccessImplementation\MarginDataAccess.cs" />
     <Compile Include="DocumentStructureDataAccessImplementation\ParagraphDataAccess.cs" />
     <Compile Include="DocumentStructureDataAccessImplementation\TextDataAccess.cs" />
-    <Compile Include="Migrations\201805100517389_init.cs" />
-    <Compile Include="Migrations\201805100517389_init.Designer.cs">
-      <DependentUpon>201805100517389_init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201805100630189_init2.cs" />
-    <Compile Include="Migrations\201805100630189_init2.Designer.cs">
-      <DependentUpon>201805100630189_init2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201805292201548_init345.cs" />
-    <Compile Include="Migrations\201805292201548_init345.Designer.cs">
-      <DependentUpon>201805292201548_init345.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201805292214169_init346.cs" />
-    <Compile Include="Migrations\201805292214169_init346.Designer.cs">
-      <DependentUpon>201805292214169_init346.cs</DependentUpon>
+    <Compile Include="Migrations\201806022155066_init.cs" />
+    <Compile Include="Migrations\201806022155066_init.Designer.cs">
+      <DependentUpon>201806022155066_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -100,17 +88,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201805100517389_init.resx">
-      <DependentUpon>201805100517389_init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805100630189_init2.resx">
-      <DependentUpon>201805100630189_init2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805292201548_init345.resx">
-      <DependentUpon>201805292201548_init345.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805292214169_init346.resx">
-      <DependentUpon>201805292214169_init346.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201806022155066_init.resx">
+      <DependentUpon>201806022155066_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
