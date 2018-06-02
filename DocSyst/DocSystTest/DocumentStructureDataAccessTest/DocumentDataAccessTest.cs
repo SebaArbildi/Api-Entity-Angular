@@ -58,11 +58,11 @@ namespace DocSystTest.DocumentStructureDataAccessTest
         [TestMethod]
         public void DeleteDocumentFromDb_ExpectedParametersAndParagraphToDelete_Ok()
         {
-            Margin margin = new Margin(MarginAlign.HEADER,"aStyleClass");
+            Margin margin = new Margin(MarginAlign.HEADER, "aStyleClass");
             margin.SetText(new Text());
             aDocumentPart.PutTextAtLast(new Text());
-            document.SetDocumentPart(aDocumentPart.Align,aDocumentPart);
-            document.SetDocumentPart(margin.Align, margin);
+            document.AddDocumentParagraphAtLast(aDocumentPart);
+            document.SetDocumentMargin(margin.Align, margin);
             documentDataAccess.Add(document);
 
             documentDataAccess.Delete(document.Id);
@@ -100,15 +100,15 @@ namespace DocSystTest.DocumentStructureDataAccessTest
             Text aText = new Text();
             aDocumentPart.PutTextAtLast(aText);
 
-            document.SetDocumentPart(MarginAlign.PARAGRAPH, aDocumentPart);
+            document.AddDocumentParagraphAtLast(aDocumentPart);
 
             documentDataAccess.Modify(document);
 
             Document obtained = documentDataAccess.Get(document.Id);
 
-            Assert.AreEqual(aDocumentPart, obtained.GetDocumentPart(MarginAlign.PARAGRAPH));
+            Assert.AreEqual(aDocumentPart, obtained.GetDocumentParagraphAt(0));
             Assert.AreEqual(aDocumentPart.GetText(aText.Id)
-                ,((Paragraph)(obtained.GetDocumentPart(MarginAlign.PARAGRAPH))).GetText(aText.Id));
+                , (obtained.GetDocumentParagraphAt(0)).GetText(aText.Id));
         }
 
         [TestMethod]

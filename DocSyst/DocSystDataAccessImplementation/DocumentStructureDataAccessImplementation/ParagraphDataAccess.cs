@@ -11,10 +11,20 @@ namespace DocSystDataAccessImplementation.DocumentStructureDataAccessImplementat
     {
         public void Add(Paragraph aParagraph)
         {
-            using (DocSystDbContext context = new DocSystDbContext())
+            if (!Exists(aParagraph.Id))
             {
-                context.Paragraphs.Add(aParagraph);
-                context.SaveChanges();
+                ITextDataAccess textDataAccess = new TextDataAccess();
+                foreach (Text text in aParagraph.Texts)
+                {
+                    textDataAccess.Add(text);
+                }
+
+                using (DocSystDbContext context = new DocSystDbContext())
+                {
+                    aParagraph.Texts = AttachTextList(context, aParagraph.Texts).ToList();
+                    context.Paragraphs.Add(aParagraph);
+                    context.SaveChanges();
+                }
             }
         }
 
@@ -34,7 +44,6 @@ namespace DocSystDataAccessImplementation.DocumentStructureDataAccessImplementat
                 List<Text> textList = AttachTextList(context, paragraph.Texts);
                 paragraph.Texts = textList;
                 context.Paragraphs.Attach(paragraph);
-                context.Texts.RemoveRange(textList);
                 context.Paragraphs.Remove(paragraph);
                 context.SaveChanges();
             }
@@ -85,11 +94,21 @@ namespace DocSystDataAccessImplementation.DocumentStructureDataAccessImplementat
 
         public void Modify(Paragraph aParagraph)
         {
+            ITextDataAccess textDataAccess = new TextDataAccess();
+            foreach (Text text in aParagraph.Texts)
+            {
+                textDataAccess.Add(text);
+            }
+
             using (DocSystDbContext context = new DocSystDbContext())
             {
+                List<Text> textList = AttachTextList(context, aParagraph.Texts);
+                aParagraph.Texts = textList;
+
                 Paragraph actualParagraph = context.Paragraphs.Include(paragraphDb => paragraphDb.Texts)
                                               .FirstOrDefault(paragraphDb => paragraphDb.Id == aParagraph.Id);
 
+                context.Entry(actualParagraph).Entity.Texts = aParagraph.Texts;
                 context.Entry(actualParagraph).CurrentValues.SetValues(aParagraph);
                 actualParagraph.Texts = aParagraph.Texts;
 
