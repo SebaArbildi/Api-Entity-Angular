@@ -13,15 +13,22 @@ namespace DocSystDataAccessImplementation.DocumentStructureDataAccessImplementat
         public void Add(Document aDocument)
         {
             IBodyDataAccess bodyDataAccess = new BodyDataAccess();
-            foreach (Body body in aDocument.DocumentParts)
+            foreach (Body body in aDocument.DocumentMargins)
             {
                 bodyDataAccess.Add(body);
+            }
+
+            IParagraphDataAccess paragraphDataAccess = new ParagraphDataAccess();
+            foreach (Paragraph paragraph in aDocument.DocumentParagraphs)
+            {
+                paragraphDataAccess.Add(paragraph);
             }
 
             using (DocSystDbContext context = new DocSystDbContext())
             {
                 aDocument.CreatorUser = AttachCreatorUser(context, aDocument.CreatorUser);
-                aDocument.DocumentParts = AttachDocumentPartList(context, aDocument.DocumentParts).ToList();
+                aDocument.DocumentMargins = AttachDocumentMarginList(context, aDocument.DocumentMargins).ToList();
+                aDocument.DocumentParagraphs = AttachDocumentParagraphsList(context, aDocument.DocumentParagraphs).ToList();
                 context.Documents.Add(aDocument);
                 context.SaveChanges();
             }
@@ -33,8 +40,11 @@ namespace DocSystDataAccessImplementation.DocumentStructureDataAccessImplementat
 
             using (DocSystDbContext context = new DocSystDbContext())
             {
-                IList<Body> bodyList = AttachDocumentPartList(context, document.DocumentParts);
-                document.DocumentParts = bodyList.ToList();
+                IList<Body> bodyList = AttachDocumentMarginList(context, document.DocumentMargins);
+                document.DocumentMargins = bodyList.ToList();
+                IList<Paragraph> paragraphList = AttachDocumentParagraphsList(context, document.DocumentParagraphs);
+                document.DocumentParagraphs = paragraphList.ToList();
+
                 context.Documents.Attach(document);
                 /* List<Paragraph> paragraphList = new List<Paragraph>();
                  List<Margin> marginList = new List<Margin>();
@@ -97,8 +107,10 @@ namespace DocSystDataAccessImplementation.DocumentStructureDataAccessImplementat
             using (DocSystDbContext context = new DocSystDbContext())
             {
                 document = context.Documents.Include("CreatorUser")
-                                            .Include("DocumentParts").Where(documenthDb => documenthDb.Id == id)
-                                            .Include(documenthDb => documenthDb.DocumentParts.Select(bodyDb => bodyDb.Texts))
+                                            .Include("DocumentMargins").Where(documenthDb => documenthDb.Id == id)
+                                            .Include(documenthDb => documenthDb.DocumentMargins.Select(bodyDb => bodyDb.Texts))
+                                            .Include("DocumentParagraphs").Where(documenthDb => documenthDb.Id == id)
+                                            .Include(documenthDb => documenthDb.DocumentParagraphs.Select(bodyDb => bodyDb.Texts))
                                             .FirstOrDefault();
             }
             return document;
@@ -109,8 +121,10 @@ namespace DocSystDataAccessImplementation.DocumentStructureDataAccessImplementat
             IList<Document> document = null;
             using (DocSystDbContext context = new DocSystDbContext())
             {
-                document = (context.Documents.Include("DocumentParts")
-                                            .Include(documenthDb => documenthDb.DocumentParts.Select(bodyDb => bodyDb.Texts))
+                document = (context.Documents.Include("DocumentMargins")
+                                            .Include(documenthDb => documenthDb.DocumentMargins.Select(bodyDb => bodyDb.Texts))
+                                            .Include("DocumentParagraphs")
+                                            .Include(documenthDb => documenthDb.DocumentParagraphs.Select(bodyDb => bodyDb.Texts))
                                             .Include("CreatorUser")).ToList<Document>();
             }
             return document;
@@ -123,8 +137,10 @@ namespace DocSystDataAccessImplementation.DocumentStructureDataAccessImplementat
             {
                 document = (context.Documents.Include(documenthDb => documenthDb.CreatorUser)
                                             .Where(documenthDb =>  documenthDb.CreatorUser.Username == Username)
-                                            .Include(documenthDb => documenthDb.DocumentParts)
-                                            .Include(documenthDb => documenthDb.DocumentParts.Select(bodyDb => bodyDb.Texts))).ToList<Document>();
+                                            .Include(documenthDb => documenthDb.DocumentParagraphs)
+                                            .Include(documenthDb => documenthDb.DocumentMargins.Select(bodyDb => bodyDb.Texts))
+                                            .Include(DocumenthDb => DocumenthDb.DocumentMargins)
+                                            .Include(documenthDb => documenthDb.DocumentMargins.Select(bodyDb => bodyDb.Texts))).ToList<Document>();
             }
             return document;
         }
@@ -132,36 +148,59 @@ namespace DocSystDataAccessImplementation.DocumentStructureDataAccessImplementat
         public void Modify(Document aDocument)
         {
             IBodyDataAccess bodyDataAccess = new BodyDataAccess();
-            foreach (Body body in aDocument.DocumentParts)
+            foreach (Body body in aDocument.DocumentMargins)
             {
                 bodyDataAccess.Add(body);
             }
 
+            IParagraphDataAccess paragraphDataAccess = new ParagraphDataAccess();
+            foreach (Paragraph paragraph in aDocument.DocumentParagraphs)
+            {
+                paragraphDataAccess.Add(paragraph);
+            }
+
             using (DocSystDbContext context = new DocSystDbContext())
             {
-                IList<Body> bodyList = AttachDocumentPartList(context, aDocument.DocumentParts);
-                aDocument.DocumentParts = bodyList.ToList();
+                IList<Body> bodyList = AttachDocumentMarginList(context, aDocument.DocumentMargins);
+                IList<Paragraph> paragraphList = AttachDocumentParagraphsList(context, aDocument.DocumentParagraphs);
+                aDocument.DocumentMargins = bodyList.ToList();
+                aDocument.DocumentParagraphs = paragraphList.ToList();
 
                 /*Document actualDocument = context.Documents.Include(documenthDb => documenthDb.DocumentParts)
                                             .Include(documenthDb => documenthDb.DocumentParts.Select(bodyDb => bodyDb.Texts))
                                             .FirstOrDefault(documenthDb => documenthDb.Id == aDocument.Id);*/
 
-                Document actualDocument = context.Documents.Include("DocumentParts").FirstOrDefault(documenthDb => documenthDb.Id == aDocument.Id);
+                Document actualDocument = context.Documents.Include("DocumentMargins").Include("DocumentParagraphs")
+                                        .FirstOrDefault(documenthDb => documenthDb.Id == aDocument.Id);
 
-                context.Entry(actualDocument).Entity.DocumentParts = aDocument.DocumentParts;
+                context.Entry(actualDocument).Entity.DocumentMargins = aDocument.DocumentMargins;
+                context.Entry(actualDocument).Entity.DocumentParagraphs = aDocument.DocumentParagraphs;
                 context.Entry(actualDocument).CurrentValues.SetValues(aDocument);
 
                 context.SaveChanges();
             }
         }
 
-        private IList<Body> AttachDocumentPartList(DocSystDbContext context, IList<Body> documentParts)
+        private IList<Body> AttachDocumentMarginList(DocSystDbContext context, IList<Body> documentMargins)
         {
             IList<Body> bodys = new List<Body>();
 
-            foreach (Body body in documentParts)
+            foreach (Body body in documentMargins)
             {
                 Body bdy = context.Bodys.Include("Texts").Where(bdyDb => bdyDb.Id == body.Id).FirstOrDefault();
+                context.Bodys.Attach(bdy);
+                bodys.Add(bdy);
+            }
+            return bodys;
+        }
+
+        private IList<Paragraph> AttachDocumentParagraphsList(DocSystDbContext context, IList<Paragraph> documentParagraphs)
+        {
+            IList<Paragraph> bodys = new List<Paragraph>();
+
+            foreach (Paragraph body in documentParagraphs)
+            {
+                Paragraph bdy = context.Paragraphs.Include("Texts").Where(bdyDb => bdyDb.Id == body.Id).FirstOrDefault();
                 context.Bodys.Attach(bdy);
                 bodys.Add(bdy);
             }

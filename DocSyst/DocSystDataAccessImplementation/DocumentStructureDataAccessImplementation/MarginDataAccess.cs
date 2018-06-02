@@ -11,17 +11,20 @@ namespace DocSystDataAccessImplementation.DocumentStructureDataAccessImplementat
     {
         public void Add(Margin aMargin)
         {
-            ITextDataAccess textDataAccess = new TextDataAccess();
-            foreach(Text text in aMargin.Texts)
+            if (!Exists(aMargin.Id))
             {
-                textDataAccess.Add(text);
-            }
+                ITextDataAccess textDataAccess = new TextDataAccess();
+                foreach (Text text in aMargin.Texts)
+                {
+                    textDataAccess.Add(text);
+                }
 
-            using (DocSystDbContext context = new DocSystDbContext())
-            {
-                aMargin.Texts = AttachTextList(context, aMargin.Texts).ToList();
-                context.Margins.Add(aMargin);
-                context.SaveChanges();
+                using (DocSystDbContext context = new DocSystDbContext())
+                {
+                    aMargin.Texts = AttachTextList(context, aMargin.Texts).ToList();
+                    context.Margins.Add(aMargin);
+                    context.SaveChanges();
+                }
             }
         }
 

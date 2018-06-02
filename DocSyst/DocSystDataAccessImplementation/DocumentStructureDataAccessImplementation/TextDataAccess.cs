@@ -10,10 +10,13 @@ namespace DocSystDataAccessImplementation.DocumentStructureDataAccessImplementat
     {
         public void Add(Text aText)
         {
-            using (DocSystDbContext context = new DocSystDbContext())
+            if (!Exists(aText.Id))
             {
-                context.Texts.Add(aText);
-                context.SaveChanges();
+                using (DocSystDbContext context = new DocSystDbContext())
+                {
+                    context.Texts.Add(aText);
+                    context.SaveChanges();
+                }
             }
         }
 
