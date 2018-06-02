@@ -126,7 +126,7 @@ namespace DocSystTest.ApiTest
         public void ModifyText_ExpectedParameters_Ok()
         {
             mockTextBusinessLogic.Setup(b1 => b1.ModifyText(It.IsAny<Text>()));
-            IHttpActionResult statusObtained = textController.Put(textModel);
+            IHttpActionResult statusObtained = textController.Put(Guid.NewGuid(),textModel);
             Assert.IsNotNull(statusObtained as OkNegotiatedContentResult<string>);
         }
 
@@ -136,7 +136,7 @@ namespace DocSystTest.ApiTest
             IList<TextModel> textsModel = new List<TextModel>();
             textsModel.Add(textModel);
             mockTextBusinessLogic.Setup(b1 => b1.ModifyText(It.IsAny<Text>())).Throws(new Exception());
-            IHttpActionResult statusObtained = textController.Put(textModel);
+            IHttpActionResult statusObtained = textController.Put(Guid.NewGuid(),textModel);
             Assert.IsNull(statusObtained as OkNegotiatedContentResult<string>);
         }
 
@@ -170,7 +170,7 @@ namespace DocSystTest.ApiTest
             textC.Post(textModel);
             textC.Post(text2);
             text2.TextContent = "modified";
-            textC.Put(text2);
+            textC.Put(text2.Id,text2);
             textC.Delete(textModel.Id);
             IHttpActionResult statusObtained = textC.Get();
         }

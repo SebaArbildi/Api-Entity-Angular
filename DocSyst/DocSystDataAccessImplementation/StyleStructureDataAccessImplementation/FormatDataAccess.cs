@@ -73,7 +73,7 @@ namespace DocSystDataAccessImplementation.StyleStructureDataAccessImplementation
                 format.StyleClasses = stClass;
                 Format actualFormat = context.Formats.Include(STYLE_CLASSES).Where(formatDb => formatDb.Id == format.Id).FirstOrDefault();
                 context.Entry(actualFormat).Entity.StyleClasses = format.StyleClasses;
-                context.Entry(actualFormat).CurrentValues.SetValues(actualFormat);
+                context.Entry(actualFormat).CurrentValues.SetValues(format);
                 context.SaveChanges();
             }
         }

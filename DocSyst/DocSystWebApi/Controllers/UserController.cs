@@ -23,6 +23,8 @@ namespace DocSystWebApi.Controllers
         }
 
         // GET: api/User
+        [Route("api/User", Name = "GetUsers")]
+        [HttpGet]
         public IHttpActionResult Get()
         {
            try
@@ -40,6 +42,8 @@ namespace DocSystWebApi.Controllers
         }
 
         // GET: api/User/5
+        [Route("api/User/{username}", Name = "GetUser")]
+        [HttpGet]
         public IHttpActionResult Get([FromUri] string username)
         {
             try
@@ -56,6 +60,8 @@ namespace DocSystWebApi.Controllers
         }
 
         // POST: api/User
+        [Route("api/User", Name = "PostUser")]
+        [HttpPost]
         public IHttpActionResult Post([FromBody]UserModel userModel)
         {
             try
@@ -72,6 +78,8 @@ namespace DocSystWebApi.Controllers
         }
 
         // PUT: api/User/5
+        [Route("api/User/{username}", Name = "PutUser")]
+        [HttpPut]
         public IHttpActionResult Put([FromUri] string username, [FromBody]UserModel userModel)
         {
             try
@@ -89,6 +97,8 @@ namespace DocSystWebApi.Controllers
         }
 
         // DELETE: api/User/5
+        [Route("api/User/{username}", Name = "DeleteUser")]
+        [HttpDelete]
         public IHttpActionResult Delete([FromUri] string username)
         {
             try

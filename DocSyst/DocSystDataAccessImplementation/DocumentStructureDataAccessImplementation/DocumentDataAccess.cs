@@ -1,5 +1,6 @@
 ﻿using DocSystDataAccessInterface.DocumentStructureDataAccessInterface;
 using DocSystEntities.DocumentStructure;
+using DocSystEntities.User;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -11,8 +12,16 @@ namespace DocSystDataAccessImplementation.DocumentStructureDataAccessImplementat
     {
         public void Add(Document aDocument)
         {
+            IBodyDataAccess bodyDataAccess = new BodyDataAccess();
+            foreach (Body body in aDocument.DocumentParts)
+            {
+                bodyDataAccess.Add(body);
+            }
+
             using (DocSystDbContext context = new DocSystDbContext())
             {
+                aDocument.CreatorUser = AttachCreatorUser(context, aDocument.CreatorUser);
+                aDocument.DocumentParts = AttachDocumentPartList(context, aDocument.DocumentParts).ToList();
                 context.Documents.Add(aDocument);
                 context.SaveChanges();
             }
@@ -24,55 +33,52 @@ namespace DocSystDataAccessImplementation.DocumentStructureDataAccessImplementat
 
             using (DocSystDbContext context = new DocSystDbContext())
             {
-                List<Text> textList = new List<Text>();
-                List<Paragraph> paragraphList = new List<Paragraph>();
-                List<Margin> marginList = new List<Margin>();
-
-                foreach (Body aDocumentPart in document.DocumentParts)
-                {
-                    if (aDocumentPart.Align == MarginAlign.PARAGRAPH)
-                    {
-                        context.Paragraphs.Attach((Paragraph)aDocumentPart);
-                        paragraphList.Add((Paragraph)aDocumentPart);
-                    }
-                    else if(aDocumentPart.Align == MarginAlign.HEADER || aDocumentPart.Align == MarginAlign.FOOTER)
-                    {
-                        context.Margins.Attach((Margin)aDocumentPart);
-                        marginList.Add((Margin)aDocumentPart);
-                    }
-
-                    textList = textList.Concat(AttachTextList(context, aDocumentPart.Texts)).ToList();
-                }
-                context.Users.Attach(document.CreatorUser);
+                IList<Body> bodyList = AttachDocumentPartList(context, document.DocumentParts);
+                document.DocumentParts = bodyList.ToList();
                 context.Documents.Attach(document);
-                if (textList.Any())
-                {
-                    context.Texts.RemoveRange(textList);
-                }
-                if (paragraphList.Any())
-                {
-                    context.Paragraphs.RemoveRange(paragraphList);
-                }
-                if (marginList.Any())
-                {
-                    context.Margins.RemoveRange(marginList);
-                }
-                context.Users.Remove(document.CreatorUser);
+                /* List<Paragraph> paragraphList = new List<Paragraph>();
+                 List<Margin> marginList = new List<Margin>();
+
+                 foreach (Body aDocumentPart in document.DocumentParts)
+                 {
+                     if (aDocumentPart.Align == MarginAlign.PARAGRAPH)
+                     {
+                         context.Paragraphs.Attach((Paragraph)aDocumentPart);
+                         paragraphList.Add((Paragraph)aDocumentPart);
+                     }
+                     else if(aDocumentPart.Align == MarginAlign.HEADER || aDocumentPart.Align == MarginAlign.FOOTER)
+                     {
+                         context.Margins.Attach((Margin)aDocumentPart);
+                         marginList.Add((Margin)aDocumentPart);
+                     }
+
+                     textList = textList.Concat(AttachTextList(context, aDocumentPart.Texts)).ToList();
+                 }
+                 context.Users.Attach(document.CreatorUser);
+                 context.Documents.Attach(document);
+                 if (textList.Any())
+                 {
+                     context.Texts.RemoveRange(textList);
+                 }
+                 if (paragraphList.Any())
+                 {
+                     context.Paragraphs.RemoveRange(paragraphList);
+                 }
+                 if (marginList.Any())
+                 {
+                     context.Margins.RemoveRange(marginList);
+                 }
+                 context.Users.Remove(document.CreatorUser);*/
                 context.Documents.Remove(document);
                 context.SaveChanges();
             }
         }
 
-        private List<Text> AttachTextList(DocSystDbContext context, IList<Text> textList)
+        private User AttachCreatorUser(DocSystDbContext context, User creatorUser)
         {
-            List<Text> texts = new List<Text>();
-            foreach (Text text in textList)
-            {
-                Text txt = context.Texts.Where(textDb => textDb.Id == text.Id).FirstOrDefault();
-                context.Texts.Attach(txt);
-                texts.Add(txt);
-            }
-            return texts;
+            User user = context.Users.Where(userDb => userDb.Username == creatorUser.Username).FirstOrDefault();
+            context.Users.Attach(user);
+            return user;
         }
 
         public bool Exists(Guid aDocument)
@@ -125,17 +131,41 @@ namespace DocSystDataAccessImplementation.DocumentStructureDataAccessImplementat
 
         public void Modify(Document aDocument)
         {
+            IBodyDataAccess bodyDataAccess = new BodyDataAccess();
+            foreach (Body body in aDocument.DocumentParts)
+            {
+                bodyDataAccess.Add(body);
+            }
+
             using (DocSystDbContext context = new DocSystDbContext())
             {
-                Document actualDocument = context.Documents.Include(documenthDb => documenthDb.DocumentParts)
-                                            .Include(documenthDb => documenthDb.DocumentParts.Select(bodyDb => bodyDb.Texts))
-                                            .FirstOrDefault(documenthDb => documenthDb.Id == aDocument.Id);
+                IList<Body> bodyList = AttachDocumentPartList(context, aDocument.DocumentParts);
+                aDocument.DocumentParts = bodyList.ToList();
 
+                /*Document actualDocument = context.Documents.Include(documenthDb => documenthDb.DocumentParts)
+                                            .Include(documenthDb => documenthDb.DocumentParts.Select(bodyDb => bodyDb.Texts))
+                                            .FirstOrDefault(documenthDb => documenthDb.Id == aDocument.Id);*/
+
+                Document actualDocument = context.Documents.Include("DocumentParts").FirstOrDefault(documenthDb => documenthDb.Id == aDocument.Id);
+
+                context.Entry(actualDocument).Entity.DocumentParts = aDocument.DocumentParts;
                 context.Entry(actualDocument).CurrentValues.SetValues(aDocument);
-                actualDocument.DocumentParts = aDocument.DocumentParts;
 
                 context.SaveChanges();
             }
+        }
+
+        private IList<Body> AttachDocumentPartList(DocSystDbContext context, IList<Body> documentParts)
+        {
+            IList<Body> bodys = new List<Body>();
+
+            foreach (Body body in documentParts)
+            {
+                Body bdy = context.Bodys.Include("Texts").Where(bdyDb => bdyDb.Id == body.Id).FirstOrDefault();
+                context.Bodys.Attach(bdy);
+                bodys.Add(bdy);
+            }
+            return bodys;
         }
     }
 }

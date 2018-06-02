@@ -11,7 +11,6 @@ namespace DocSystWebApi.Models.DocumentStructureModels
         public Guid Id { get; set; }
         public string OwnStyleClass { get; set; }
         public List<TextModel> Texts { get; set; }
-        [Required]
         public MarginAlign Align { get; set; }
         public Guid? DocumentId { get; set; }
 
@@ -24,7 +23,12 @@ namespace DocSystWebApi.Models.DocumentStructureModels
 
         public override Margin ToEntity()
         {
-            List<Text> texts = ConvertModelsToTexts(this.Texts);
+            List<Text> texts = null;
+
+            if(this.Texts != null)
+            {
+                texts = ConvertModelsToTexts(this.Texts);
+            }
 
             Margin thisMargin = new Margin()
             {
@@ -34,7 +38,15 @@ namespace DocSystWebApi.Models.DocumentStructureModels
                 DocumentId = this.DocumentId
             };
 
-            this.Id = thisMargin.Id;
+            if (!this.Id.Equals(Guid.Empty))
+            {
+                thisMargin.Id = this.Id;
+            }
+            else
+            {
+                this.Id = thisMargin.Id;
+            }
+
             return thisMargin;
         }
 
