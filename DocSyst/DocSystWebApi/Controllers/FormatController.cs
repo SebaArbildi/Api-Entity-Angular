@@ -113,8 +113,8 @@ namespace DocSystWebApi.Controllers
             }
         }
 
-        [Route("api/Format", Name = "AddStyleClassToFormat")]
-        [HttpPut]
+        [Route("api/Format/{formatId:guid}/AddStyleClass", Name = "AddStyleClassToFormat")]
+        [HttpPost]
         public IHttpActionResult AddStyleClassToFormat([FromUri] Guid formatId, [FromBody]StyleClassModel styleClassModel)
         {
             try
@@ -130,8 +130,8 @@ namespace DocSystWebApi.Controllers
             }
         }
 
-        [Route("api/Format", Name = "RemoveStyleClassFromFormat")]
-        [HttpPut]
+        [Route("api/Format/{formatId:guid}/RemoveStyleClass", Name = "RemoveStyleClassFromFormat")]
+        [HttpPost]
         public IHttpActionResult RemoveStyleClassFromFormat([FromUri] Guid formatId, [FromBody] Guid styleClassId
             )
         {

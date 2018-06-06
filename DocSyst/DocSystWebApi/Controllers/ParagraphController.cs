@@ -62,7 +62,7 @@ namespace DocSystWebApi.Controllers
             {
                 Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
                 ParagraphBusinessLogic.AddParagraph(paragraphModel.ToEntity());
-                return CreatedAtRoute("DefaultApi", new { paragraphModel.Id }, paragraphModel);
+                return Ok(paragraphModel);
             }
             catch (Exception e)
             {
@@ -151,7 +151,7 @@ namespace DocSystWebApi.Controllers
                 ParagraphBusinessLogic.PutTextAtLast(paragraphId, text);
                 AuditLogBussinesLogic.CreateLog("Document", documentId, Utils.GetUsername(Request), ActionPerformed.MODIFY);
 
-                return CreatedAtRoute("DefaultApi", new { textModel.Id }, textModel);
+                return Ok(textModel);
             }
             catch (Exception e)
             {
@@ -171,7 +171,7 @@ namespace DocSystWebApi.Controllers
                 ParagraphBusinessLogic.PutTextAt(paragraphId, text, position);
                 AuditLogBussinesLogic.CreateLog("Document", documentId, Utils.GetUsername(Request), ActionPerformed.MODIFY);
 
-                return CreatedAtRoute("DefaultApi", new { textModel.Id }, textModel);
+                return Ok("Text deleted");
             }
             catch (Exception e)
             {

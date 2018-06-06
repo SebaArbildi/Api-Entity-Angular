@@ -56,6 +56,7 @@
     <Compile Include="DocumentStructureLogicImplementation\MarginBussinesLogic.cs" />
     <Compile Include="DocumentStructureLogicImplementation\ParagraphBusinessLogic.cs" />
     <Compile Include="DocumentStructureLogicImplementation\TextBusinessLogic.cs" />
+    <Compile Include="PrintDocumentLogicImplementation\DocumentPrinterBusinessLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StyleStructureBusinessLogic\FormatBusinessLogic.cs" />
     <Compile Include="StyleStructureBusinessLogic\StyleBusinessLogic.cs" />

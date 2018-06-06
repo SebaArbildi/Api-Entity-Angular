@@ -100,7 +100,7 @@ namespace DocSystTest.ApiTest
         {
             mockDocumentBusinessLogic.Setup(b1 => b1.AddDocument(document));
             IHttpActionResult statusObtained = documentController.Post(documentModel);
-            Assert.IsNotNull(statusObtained as CreatedAtRouteNegotiatedContentResult<DocumentModel>);
+            Assert.IsNotNull(statusObtained as OkNegotiatedContentResult<DocumentModel>);
         }
 
         [TestMethod]

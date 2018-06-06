@@ -161,6 +161,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\DocumentPrinterController.cs" />
     <Compile Include="Controllers\FormatController.cs" />
     <Compile Include="Controllers\DocumentController.cs" />
     <Compile Include="Controllers\MarginController.cs" />
@@ -180,6 +181,7 @@
     <Compile Include="Models\DocumentStructureModels\ParagraphModel.cs" />
     <Compile Include="Models\DocumentStructureModels\TextModel.cs" />
     <Compile Include="Models\Model.cs" />
+    <Compile Include="Models\PrinterModel\PrinterModel.cs" />
     <Compile Include="Models\RerportModels\DocumentsActionedPerUserPerDayBetweenDates.cs" />
     <Compile Include="Models\RerportModels\DocumentsCreatedPerUserBetweenDates.cs" />
     <Compile Include="Models\StyleStructureModels\FormatModel.cs" />

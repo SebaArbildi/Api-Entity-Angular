@@ -88,6 +88,13 @@ namespace DocSystEntities.Generator
                 textWithStyleClass += ("</p>");
             }
 
+            if(!textWithStyleClass.Any())
+            {
+                textWithStyleClass += ("\"> ");
+                textWithStyleClass += (textContent);
+                textWithStyleClass += ("</p>");
+            }
+
             if (hasBold)
             {
                 textWithStyleClass = "<strong>" + textWithStyleClass + "</strong>";

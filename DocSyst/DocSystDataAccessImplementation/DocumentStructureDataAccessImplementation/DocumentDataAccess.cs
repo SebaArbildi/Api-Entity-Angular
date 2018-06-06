@@ -46,39 +46,6 @@ namespace DocSystDataAccessImplementation.DocumentStructureDataAccessImplementat
                 document.DocumentParagraphs = paragraphList.ToList();
 
                 context.Documents.Attach(document);
-                /* List<Paragraph> paragraphList = new List<Paragraph>();
-                 List<Margin> marginList = new List<Margin>();
-
-                 foreach (Body aDocumentPart in document.DocumentParts)
-                 {
-                     if (aDocumentPart.Align == MarginAlign.PARAGRAPH)
-                     {
-                         context.Paragraphs.Attach((Paragraph)aDocumentPart);
-                         paragraphList.Add((Paragraph)aDocumentPart);
-                     }
-                     else if(aDocumentPart.Align == MarginAlign.HEADER || aDocumentPart.Align == MarginAlign.FOOTER)
-                     {
-                         context.Margins.Attach((Margin)aDocumentPart);
-                         marginList.Add((Margin)aDocumentPart);
-                     }
-
-                     textList = textList.Concat(AttachTextList(context, aDocumentPart.Texts)).ToList();
-                 }
-                 context.Users.Attach(document.CreatorUser);
-                 context.Documents.Attach(document);
-                 if (textList.Any())
-                 {
-                     context.Texts.RemoveRange(textList);
-                 }
-                 if (paragraphList.Any())
-                 {
-                     context.Paragraphs.RemoveRange(paragraphList);
-                 }
-                 if (marginList.Any())
-                 {
-                     context.Margins.RemoveRange(marginList);
-                 }
-                 context.Users.Remove(document.CreatorUser);*/
                 context.Documents.Remove(document);
                 context.SaveChanges();
             }
@@ -135,12 +102,12 @@ namespace DocSystDataAccessImplementation.DocumentStructureDataAccessImplementat
             IList<Document> document = null;
             using (DocSystDbContext context = new DocSystDbContext())
             {
-                document = (context.Documents.Include(documenthDb => documenthDb.CreatorUser)
+                document = (context.Documents.Include("CreatorUser")
                                             .Where(documenthDb =>  documenthDb.CreatorUser.Username == Username)
-                                            .Include(documenthDb => documenthDb.DocumentParagraphs)
+                                            .Include("DocumentMargins")
                                             .Include(documenthDb => documenthDb.DocumentMargins.Select(bodyDb => bodyDb.Texts))
-                                            .Include(DocumenthDb => DocumenthDb.DocumentMargins)
-                                            .Include(documenthDb => documenthDb.DocumentMargins.Select(bodyDb => bodyDb.Texts))).ToList<Document>();
+                                            .Include("DocumentParagraphs")
+                                            .Include(documenthDb => documenthDb.DocumentParagraphs.Select(bodyDb => bodyDb.Texts))).ToList<Document>();
             }
             return document;
         }
@@ -165,10 +132,6 @@ namespace DocSystDataAccessImplementation.DocumentStructureDataAccessImplementat
                 IList<Paragraph> paragraphList = AttachDocumentParagraphsList(context, aDocument.DocumentParagraphs);
                 aDocument.DocumentMargins = bodyList.ToList();
                 aDocument.DocumentParagraphs = paragraphList.ToList();
-
-                /*Document actualDocument = context.Documents.Include(documenthDb => documenthDb.DocumentParts)
-                                            .Include(documenthDb => documenthDb.DocumentParts.Select(bodyDb => bodyDb.Texts))
-                                            .FirstOrDefault(documenthDb => documenthDb.Id == aDocument.Id);*/
 
                 Document actualDocument = context.Documents.Include("DocumentMargins").Include("DocumentParagraphs")
                                         .FirstOrDefault(documenthDb => documenthDb.Id == aDocument.Id);
