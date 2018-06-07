@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.UI;
 using DocSystEntities.DocumentStructure;
 using DocSystEntities.StyleStructure;
 
@@ -46,6 +47,7 @@ namespace DocSystEntities.Generator
             }
 
             htmlGenerated.Append("</html>");
+
             return htmlGenerated.ToString();
         }
 
@@ -68,7 +70,7 @@ namespace DocSystEntities.Generator
             string textWithStyleClass = "";
             if (styleClassText != null)
             {
-                textWithStyleClass += "<p style= \"";
+                textWithStyleClass += "<p style= " + '\u0022';
                 foreach (Style style in styleClassText.InheritedPlusProperStyles)
                 {
                     if (style.Type.Equals(Style.StyleType.BOLD))
@@ -83,14 +85,14 @@ namespace DocSystEntities.Generator
                         textWithStyleClass += style.GetImplementation() + "; ";
                     }
                 }
-                textWithStyleClass += ("\"> ");
+                textWithStyleClass += ('\u0022' + "> ");
                 textWithStyleClass += (textContent);
                 textWithStyleClass += ("</p>");
             }
 
             if(!textWithStyleClass.Any())
             {
-                textWithStyleClass += ("\"> ");
+                textWithStyleClass += ('\u0022'+"> ");
                 textWithStyleClass += (textContent);
                 textWithStyleClass += ("</p>");
             }

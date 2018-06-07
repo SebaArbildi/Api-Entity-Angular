@@ -34,7 +34,15 @@ namespace DocSystWebApi.Models.DocumentStructureModels
                 DocumentId = this.DocumentId
             };
 
-            this.Id = thisParagraph.Id;
+            if (!this.Id.Equals(Guid.Empty))
+            {
+                thisParagraph.Id = this.Id;
+            }
+            else
+            {
+                this.Id = thisParagraph.Id;
+            }
+
             return thisParagraph;
         }
 

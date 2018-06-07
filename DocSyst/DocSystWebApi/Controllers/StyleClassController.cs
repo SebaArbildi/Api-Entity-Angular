@@ -114,7 +114,7 @@ namespace DocSystWebApi.Controllers
             }
         }
 
-        [Route("api/StyleClass", Name = "AddStyleToStyleClass")]
+        [Route("api/StyleClass/{styleClassId:guid}/AddStyle", Name = "AddStyleToStyleClass")]
         [HttpPut]
         public IHttpActionResult AddStyleToStyleClass([FromUri] Guid styleClassId, [FromBody]StyleModel styleModel)
         {
@@ -131,7 +131,7 @@ namespace DocSystWebApi.Controllers
             }
         }
 
-        [Route("api/StyleClass", Name = "RemoveStyleFromStyleClass")]
+        [Route("api/StyleClass/{styleClassId:guid}/RemoveStyle", Name = "RemoveStyleFromStyleClass")]
         [HttpPut]
         public IHttpActionResult RemoveStyleFromStyleClass([FromUri] Guid styleClassId, [FromBody]string styleName)
         {

@@ -10,6 +10,7 @@ namespace DocSystEntities.StyleStructure
     {
         public StyleHtml()
         {
+            this.Id = Guid.NewGuid();
         }
 
         public StyleHtml(string name, StyleType type, string value)
