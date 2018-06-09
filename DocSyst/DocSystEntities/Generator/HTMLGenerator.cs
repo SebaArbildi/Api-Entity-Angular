@@ -70,7 +70,7 @@ namespace DocSystEntities.Generator
             string textWithStyleClass = "";
             if (styleClassText != null)
             {
-                textWithStyleClass += "<p style= " + '\u0022';
+                textWithStyleClass += "<p style= '";
                 foreach (Style style in styleClassText.InheritedPlusProperStyles)
                 {
                     if (style.Type.Equals(Style.StyleType.BOLD))
@@ -85,14 +85,14 @@ namespace DocSystEntities.Generator
                         textWithStyleClass += style.GetImplementation() + "; ";
                     }
                 }
-                textWithStyleClass += ('\u0022' + "> ");
+                textWithStyleClass += ("'> ");
                 textWithStyleClass += (textContent);
                 textWithStyleClass += ("</p>");
             }
 
             if(!textWithStyleClass.Any())
             {
-                textWithStyleClass += ('\u0022'+"> ");
+                textWithStyleClass += ("'> ");
                 textWithStyleClass += (textContent);
                 textWithStyleClass += ("</p>");
             }
