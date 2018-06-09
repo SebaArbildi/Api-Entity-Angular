@@ -3,6 +3,7 @@ using DocSystDependencyResolver;
 using System;
 using System.Configuration;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using Unity;
 
 
@@ -27,6 +28,10 @@ namespace DocSystWebApi
 
             // Web API routes
             config.MapHttpAttributeRoutes();
+
+            //Enable CORS
+            var cors = new EnableCorsAttribute(origins: "*", headers: "*", methods: "*");
+            config.EnableCors(cors);
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
