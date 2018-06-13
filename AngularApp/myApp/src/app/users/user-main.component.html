@@ -24,6 +24,7 @@
                         <td>{{aUser.Username}}</td>
                         <td>{{aUser.Mail}}</td>
                         <td>{{aUser.IsAdmin}}</td>
+                        <td><button type="button" class='btn btn-primary' (click)="deleteUser([(aUser.Username)])"> Eliminar </button></td>
                     </tr>
                 </tbody>
             </table>

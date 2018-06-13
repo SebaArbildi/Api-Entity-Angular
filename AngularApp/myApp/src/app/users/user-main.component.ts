@@ -18,11 +18,12 @@ export class UserMainComponent implements OnInit {
     this._userService.getUsers().subscribe(
       ((obtainedUsers: Array<User>) => this.users = obtainedUsers),
       ((error: any) => console.log(error))
-      /*((obtainedUsers: Array<User>) => console.log(obtainedUsers)),
-      ((error: any) => console.log(error))*/
     )
+  }
 
-    
+  deleteUser(username:string): void{
+    this.title = username;
+   // this._userService.deleteUser(username);
   }
 }
 
