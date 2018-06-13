@@ -8,6 +8,8 @@ import { AppComponent } from './app.component';
 import { UserMainComponent } from './users/user-main.component';
 import { UserFormComponent } from './users/form/user-form.component';
 import { WelcomeComponent } from './home/welcome.component';
+import { DocumentMainComponent } from './documents/document-main.component';
+import { DocumentDetailComponent } from './documents/document-detail/document-detail.component';
 
 
 @NgModule({
@@ -15,6 +17,8 @@ import { WelcomeComponent } from './home/welcome.component';
     AppComponent,
     UserMainComponent,
     UserFormComponent,
+    DocumentMainComponent,
+    DocumentDetailComponent,
     WelcomeComponent
   ],
   imports: [
@@ -23,6 +27,8 @@ import { WelcomeComponent } from './home/welcome.component';
     HttpModule,
     RouterModule.forRoot([
       { path: 'user-main', component: UserMainComponent},
+      { path: 'document-main', component: DocumentMainComponent},
+      { path: 'document-detail/:id', component: DocumentDetailComponent},
       { path: 'welcome', component:  WelcomeComponent}, 
       { path: 'user-form', component: UserFormComponent},
       { path: '', redirectTo: 'welcome', pathMatch: 'full' }, 

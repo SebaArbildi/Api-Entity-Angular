@@ -1,0 +1,16 @@
+<div class='panel panel-primary'>
+    <div class='panel-heading'>
+        <h1>{{title}} </h1>
+    </div>
+
+    <div class='panel-body' *ngIf='document'>
+        <h1 *ngFor='let aHeader of document.DocumentMargins'>
+            <p>Soy un encabezado</p>
+        </h1>
+        <h2 *ngFor='let aParagraph of document.DocumentParagraphs'>
+            <p>Soy un parrafo</p>
+        </h2>
+        <h1 *ngFor='let aFooter of document.DocumentMargins'>
+            <p>Soy un pie de pagina</p>
+        </h1>
+</div>
