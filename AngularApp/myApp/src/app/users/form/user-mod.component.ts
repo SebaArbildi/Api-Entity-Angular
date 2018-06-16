@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { User } from '../user';
-import { UserService } from '../user.service';
+import { User } from '../../models/user';
+import { UserService } from '../../services/user.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -9,12 +9,14 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class UserModComponent {
     pageTitle: string = "Mod User";
+    username: string;
     user: User;
 
     constructor(private _userService: UserService, route: ActivatedRoute) {
         this.user = new User("", "", "", "", "", false);
         console.log(this.user);
-        this.user.Username = route.snapshot.params['username'];
+        this.username = route.snapshot.params['username'];
+        this.user.Username = this.username;
     }
 
     ngOnInit(): void {
@@ -25,7 +27,7 @@ export class UserModComponent {
     }
 
     modUser(): void{
-        this._userService.modUser(this.user).subscribe(
+        this._userService.modUser(this.username, this.user).subscribe(
             ((error: any) => console.log(error))
         )
     }

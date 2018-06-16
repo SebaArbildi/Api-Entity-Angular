@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { User } from '../user';
-import { UserService } from '../user.service';
+import { User } from '../../models/user';
+import { UserService } from '../../services/user.service';
 
 @Component({
     selector: 'user-form',
@@ -15,7 +15,6 @@ export class UserFormComponent {
     mail: string;
     isAdmin: boolean;
     user: User;
-    resp: any;
 
     constructor(private _userService: UserService) {
     }
