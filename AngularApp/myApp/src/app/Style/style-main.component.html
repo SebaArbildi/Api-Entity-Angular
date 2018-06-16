@@ -1,0 +1,34 @@
+<div class='panel panel-primary'>
+    <div class='panel-heading'>
+        <h1>{{title}} </h1>
+    </div>
+
+    <div class='panel-body'>
+        <div class='table-responsive'>
+            <table class='table' *ngIf='styles && styles.length'>
+                <!--Cabezal de la tabla -->
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Tipo</th>
+                        <th>Valor</th>
+                        <th>Accion</th>
+                    </tr>
+                </thead>
+                <!--Cuerpo de la tabla-->
+                <tbody>
+                    <tr *ngFor='let style of styles'>
+                        <td>{{style.Name}}</td>
+                        <td>{{style.Type}}</td>
+                        <td>{{style.Value}}</td>
+                        <td>
+                            <button type="button" class="btn btn-danger" (click)="deleteStyle([(style.Name)])"> Eliminar </button>
+                            <button type="button" class="btn btn-warning" [routerLink]="['/style-mod', (style.Name)]"> Modificar </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+           <button class='btn btn-success' [routerLink]="['/style-add']"> Agregar </button>
+        </div>
+    </div>
+</div>
