@@ -15,6 +15,7 @@ export class UserFormComponent {
     mail: string;
     isAdmin: boolean;
     user: User;
+    resp: any;
 
     constructor(private _userService: UserService) {
     }
@@ -22,7 +23,7 @@ export class UserFormComponent {
     addUser(): void {
         this.user = new User(this.name, this.lastName, this.username, this.password, this.mail, 
             this.isAdmin);
-        this._userService.addUser(this.user);
+        this._userService.addUser(this.user).subscribe();
       }
   
 }

@@ -13,7 +13,8 @@
                         <th>Apellido</th>
                         <th>Username</th>
                         <th>Mail</th>
-                        <th>Es Admin</th>
+                        <th>EsAdmin</th>
+                        <th>Accion</th>
                     </tr>
                 </thead>
                 <!--Cuerpo de la tabla-->
@@ -24,11 +25,12 @@
                         <td>{{aUser.Username}}</td>
                         <td>{{aUser.Mail}}</td>
                         <td>{{aUser.IsAdmin}}</td>
-                        <td><button type="button" class='btn btn-primary' (click)="deleteUser([(aUser.Username)])"> Eliminar </button></td>
+                        <td><button type="button" class="btn btn-danger" (click)="deleteUser([(aUser.Username)])"> Eliminar </button>
+                        <button type="button" class="btn btn-warning" [routerLink]="['/user-mod', (aUser.Username)]"> Modificar </button></td>
                     </tr>
                 </tbody>
             </table>
-            <button class='btn btn-primary' [routerLink]="['/user-form']"> Agregar </button>
+            <button class='btn btn-success' [routerLink]="['/user-form']"> Agregar </button>
         </div>
     </div>
 </div>

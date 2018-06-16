@@ -22,8 +22,7 @@ export class UserMainComponent implements OnInit {
   }
 
   deleteUser(username:string): void{
-    this.title = username;
-   // this._userService.deleteUser(username);
+    this._userService.deleteUser(username).subscribe();
   }
 }
 

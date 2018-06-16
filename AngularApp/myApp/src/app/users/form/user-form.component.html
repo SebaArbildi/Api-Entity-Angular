@@ -2,7 +2,7 @@
     <div class='panel-heading'>
         <h1>{{pageTitle}}</h1>
     </div>
-    <form name="addUser">
+    <form name="addUser" >
         <div class="form-group">
             <label name="name">Name</label>
             <input class="form-control" type="text" name="name" requried [(ngModel)]="name">
@@ -29,10 +29,11 @@
             <input class="form-check-input" type="radio" name="isAdmin" value="false" checked [(ngModel)]="isAdmin"> False
             <br>
             <input class="form-check-input" type="radio" name="isAdmin" value="true" [(ngModel)]="isAdmin"> True
+            <br>
         </div>
         <div>
-            <button type="button" (click)="addUser()"> Accept </button>
-            <button type="button"> Cancel </button>
+            <button class="btn btn-success" type="button" (click)="addUser()" [routerLink]="['/user-main']"> Accept </button>
+            <button class="btn"type="button" [routerLink]="['/user-main']"> Cancel </button>
         </div>
     </form>
 </div>
