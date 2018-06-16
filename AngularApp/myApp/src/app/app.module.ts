@@ -7,6 +7,7 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { UserMainComponent } from './users/user-main.component';
 import { UserFormComponent } from './users/form/user-form.component';
+import { UserModComponent } from './users/form/user-mod.component';
 import { WelcomeComponent } from './home/welcome.component';
 
 
@@ -15,6 +16,7 @@ import { WelcomeComponent } from './home/welcome.component';
     AppComponent,
     UserMainComponent,
     UserFormComponent,
+    UserModComponent,
     WelcomeComponent
   ],
   imports: [
@@ -25,6 +27,8 @@ import { WelcomeComponent } from './home/welcome.component';
       { path: 'user-main', component: UserMainComponent},
       { path: 'welcome', component:  WelcomeComponent}, 
       { path: 'user-form', component: UserFormComponent},
+      { path: 'user-mod', component: UserModComponent},
+      { path: 'user-mod/:username', component: UserModComponent},
       { path: '', redirectTo: 'welcome', pathMatch: 'full' }, 
       { path: '**', redirectTo: 'welcome', pathMatch: 'full'} 
       ])
