@@ -14,7 +14,6 @@
                         <th>Fecha ultima modificacion</th>
                         <th>Usuario creador</th>
                         <th></th>
-                        <th></th>
                     </tr>
                 </thead>
                 <!--Cuerpo de la tabla-->
@@ -24,11 +23,15 @@
                         <td>{{aDocument.CreationDate}}</td>
                         <td>{{aDocument.LastModifyDate}}</td>
                         <td>{{aDocument.CreatorUser.Username}}</td>
-                        <th>{{aDocument.DocumentParagraphs}}</th>
-                        <th><button class='btn btn-primary' [routerLink]="['/document-detail', (aDocument.Id) ]"> Ver documento </button></th>
+                        <td>
+                            <button class='btn btn-primary' [routerLink]="['/document-detail', (aDocument.Id) ]">Ver</button>
+                            <button class='btn btn-warning' [routerLink]="['/document-mod', (aDocument.Id) ]">Modificar</button>
+                            <button class='btn btn-danger' (click)="deleteDocument([(aDocument.Id)])">Eliminar</button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
+            <button class='btn btn-success' [routerLink]="['/document-form']"> Agregar </button>
         </div>
     </div>
 </div>

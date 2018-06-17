@@ -1,16 +1,76 @@
-<div class='panel panel-primary'>
-    <div class='panel-heading'>
-        <h1>{{title}} </h1>
-    </div>
+<div class="container-fluid">
 
-    <div class='panel-body' *ngIf='document'>
-        <h1 *ngFor='let aHeader of document.DocumentMargins'>
-            <p>Soy un encabezado</p>
-        </h1>
-        <h2 *ngFor='let aParagraph of document.DocumentParagraphs'>
-            <p>Soy un parrafo</p>
-        </h2>
-        <h1 *ngFor='let aFooter of document.DocumentMargins'>
-            <p>Soy un pie de pagina</p>
-        </h1>
+    <body>
+        <div>
+            <div class="sidenav col-xs-3">
+                <h2>{{userDocument.Title}}</h2>
+                <hr>
+                <a (click)="toggleHeaders()">Encabezados</a>
+                <div *ngIf='showHeaders'>
+                    <ul style="list-style-type:none" *ngFor='let aHeader of userDocument.DocumentMargins'>
+                        <li>
+                            <p>Soy un encabezado</p>
+                        </li>
+                    </ul>
+                </div>
+
+                <a (click)="toggleParagraphs()">Parrafos</a>
+                <div *ngIf='showParagraphs'>
+                    <ul style="list-style-type:none" *ngFor='let aParagraph of userDocument.DocumentParagraphs'>
+                        <li>
+                            <p>Soy un parrafo</p>
+                        </li>
+                    </ul>
+                </div>
+
+                <a (click)="toggleFooters()">Pie de pagina</a>
+                <div *ngIf='showFooters'>
+                    <ul style="list-style-type:none" *ngFor='let aFooter of userDocument.DocumentMargins'>
+                        <li>
+                            <p>Soy un pie de pagina</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid">
+            <div *ngIf="formats && formats.length">
+                <div class="col-xs-1">
+                    <label>Formato: </label>
+                </div>
+                <div class="col-xs-3">
+                    <select [(ngModel)]="selectedOption" class="form-control" (change)="capture()" *ngFor='let aFormat of formats'>
+                        <option value="0">Selecciona un formato</option>
+                        <option value="{{aFormat.Id}}">{{aFormat.Name}}</option>
+                    </select>
+                </div>
+                <div class="col-xs-2" *ngIf="selectedOption != 0">
+                    <button (click)="printDocument(documentId,formatId)" class='btn btn-primary'>
+                        Imprimir documento
+                    </button>
+                </div>
+            </div>
+
+            <div *ngIf="documentPrinted">
+                <div class="col-xs-9">
+                    <h1>{{userDocument.Title}}</h1>
+                    <hr>
+                    <hr>
+
+                    <div class="main-body">
+                        <div *ngIf="documentPrinted" [innerHtml]="documentPrinted | safe: 'html'">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="!documentPrinted">
+                <div class="col-xs-9">
+                    <h1>Esperando que se elija formato...</h1>
+                </div>
+            </div>
+
+        </div>
+    </body>
 </div>

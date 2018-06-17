@@ -1,1 +1,85 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+    font-family: "Lato", sans-serif;
+    height: 500px;
+}
+
+.col-md-1 label{
+    padding: 6px 8px 6px 16px;
+    font-size: 16px;
+}
+
+.sidenav {
+    width: 200px;
+    position: fixed;
+    z-index: 1;
+    top: 0px;
+    left: 10px;
+    background: #337ab7;
+    overflow-x: hidden;
+    padding: 8px 0;
+    border-bottom: 1px solid transparent;
+    border-color: #2e6da4;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.sidenav a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 22px;
+    color: rgb(255, 255, 255);
+    display: flex;
+}
+
+.drop-down-sidenav li{
+    display: flex;
+    padding: 3px 20px;
+    font-size: 12px;
+    line-height: 1.42857143;
+    color: rgb(255, 255, 255);
+    white-space: nowrap;
+}
+
+.sidenav p {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 18px;
+    color: rgb(255, 255, 255);
+    display: flex;
+}
+
+.sidenav h2 {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    color: rgb(255, 255, 255);
+    display: block;
+}
+
+.sidenav a:hover {
+    color: #064579;
+}
+
+.main-body {
+    margin-left: 100px; /* Same as the width of the sidenav */
+    background: rgb(255, 255, 255);
+}
+
+.main-body hr{
+    background: #000203;
+}
+
+.main {
+    margin-left: 100px; /* Same as the width of the sidenav */
+}
+
+.main h2{
+    background: #eee;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}

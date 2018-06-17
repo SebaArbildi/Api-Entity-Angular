@@ -1,7 +1,6 @@
 import { User } from "../users/user";
 import { Paragraph } from "./paragraphs/paragraph"
 import { Margin } from "./margins/margin";
-import { formatDate, DatePipe } from "@angular/common";
 
 export class Document{
     Id: string;
@@ -25,4 +24,5 @@ export class Document{
             this.DocumentMargins = documentMargins;
             this.DocumentParagraphs = documentParagraphs;
     }
+    
   }

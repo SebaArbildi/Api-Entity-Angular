@@ -18,10 +18,11 @@ export class DocumentMainComponent implements OnInit {
     this._documentService.getDocuments().subscribe(
       ((obtainedDocuments: Array<Document>) => this.documents = obtainedDocuments),
       ((error: any) => console.log(error))
-      /*((obtainedUsers: Array<User>) => console.log(obtainedUsers)),
-      ((error: any) => console.log(error))*/
     )
-
-    
   }
+
+  deleteDocument(documentId : string) {
+    this._documentService.deleteDocument(documentId).subscribe();
+  }
+
 }
