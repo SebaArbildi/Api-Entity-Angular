@@ -5,9 +5,11 @@
             <div class='container-fluid'>
                 <a class='navbar-brand'>{{pageTitle}}</a>
                 <ul class='nav navbar-nav'>
+                    <li><a [routerLink]="['/login']">Log in</a></li>
                     <li><a [routerLink]="['/welcome']">Home</a></li>
                     <li><a [routerLink]="['/user-main']">User List</a></li>
                     <li><a [routerLink]="['/document-main']">Document List</a></li>
+                    <li><a [routerLink]="['/style-main']">Style List</a></li>
                 </ul>
             </div>
         </nav>

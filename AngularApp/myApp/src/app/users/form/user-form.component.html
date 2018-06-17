@@ -1,38 +1,39 @@
 <div class='panel panel-primary'>
     <div class='panel-heading'>
-        <h1>{{title}} </h1>
+        <h1>{{pageTitle}}</h1>
     </div>
-    <form name="addUser">
+    <form name="addUser" >
         <div class="form-group">
             <label name="name">Name</label>
-            <input class="form-control" type="text" name="name" requried>
+            <input class="form-control" type="text" name="name" requried [(ngModel)]="name">
         </div>
         <div class="form-group">
             <label name="lastName">LastName</label>
-            <input class="form-control" type="text" name="lastName" requried>
+            <input class="form-control" type="text" name="lastName" requried [(ngModel)]="lastName">
         </div>
         <div class="form-group">
             <label name="username">Username</label>
-            <input class="form-control" type="text" name="username" requried>
+            <input class="form-control" type="text" name="username" requried [(ngModel)]="username">
         </div>
         <div class="form-group">
             <label name="password">Password</label>
-            <input class="form-control" type="text" name="password" requried>
+            <input class="form-control" type="text" name="password" requried [(ngModel)]="password">
         </div>
         <div class="form-group">
             <label name="mail">Mail</label>
-            <input class="form-control" type="text" name="mail" requried>
+            <input class="form-control" type="text" name="mail" requried [(ngModel)]="mail">
         </div>
         <div class="form-check">
             <label name="isAdmin">Is Admin</label>
             <br>
-            <input class="form-check-input" type="radio" name="isAdmin" value="false" checked> False
+            <input class="form-check-input" type="radio" name="isAdmin" value="false" checked [(ngModel)]="isAdmin"> False
             <br>
-            <input class="form-check-input" type="radio" name="isAdmin" value="true"> True
+            <input class="form-check-input" type="radio" name="isAdmin" value="true" [(ngModel)]="isAdmin"> True
+            <br>
         </div>
         <div>
-            <button type="button"> Accept </button>
-            <button type="button"> Cancel </button>
+            <button class="btn btn-success" type="button" (click)="addUser()" [routerLink]="['/user-main']"> Accept </button>
+            <button class="btn"type="button" [routerLink]="['/user-main']"> Cancel </button>
         </div>
     </form>
 </div>

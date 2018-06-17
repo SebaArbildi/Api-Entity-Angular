@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from './user';
-import { UserService } from './user.service';
+import { User } from '../models/user';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'user-main',
@@ -18,11 +18,11 @@ export class UserMainComponent implements OnInit {
     this._userService.getUsers().subscribe(
       ((obtainedUsers: Array<User>) => this.users = obtainedUsers),
       ((error: any) => console.log(error))
-      /*((obtainedUsers: Array<User>) => console.log(obtainedUsers)),
-      ((error: any) => console.log(error))*/
     )
+  }
 
-    
+  deleteUser(username:string): void{
+    this._userService.deleteUser(username).subscribe();
   }
 }
 
