@@ -80,6 +80,10 @@ namespace DocSystWebApi
 
         internal static IList<Style> ConvertModelsToEntities(IList<StyleModel> stylesModel)
         {
+            if (stylesModel == null)
+            {
+                stylesModel = new List<StyleModel>();
+            }
             IList<Style> styles = new List<Style>();
             foreach (StyleModel styleModel in stylesModel)
             {
@@ -100,6 +104,11 @@ namespace DocSystWebApi
 
         internal static IList<StyleClass> ConvertModelsToEntities(IList<StyleClassModel> styleClassModels)
         {
+            if (styleClassModels == null)
+            {
+                styleClassModels = new List<StyleClassModel>();
+            }
+
             IList<StyleClass> styleClass = new List<StyleClass>();
             foreach (StyleClassModel styleClassModel in styleClassModels)
             {

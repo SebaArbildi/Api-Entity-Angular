@@ -16,7 +16,7 @@ export class LoginService {
     login(myUser: User): Observable<any> {
         const myHeaders = new Headers();
         myHeaders.append('Content-Type', 'application/json');
-        myHeaders.append('Token', '994d501f-0944-4da9-95d9-0e2f43ec88e3');
+        myHeaders.append('Token', '3B427A22-F268-431E-804F-D30D2B53A6C6');
         myHeaders.append('Username', 'admin');
 
         const requestOptions = new RequestOptions({ headers: myHeaders });

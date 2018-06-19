@@ -21,7 +21,7 @@ export class StyleMainComponent implements OnInit {
     )
   }
 
-  deleteStyle(name:string): void{
+  deleteStyle(name: string): void {
     this._styleService.deleteStyle(name).subscribe();
   }
 }
