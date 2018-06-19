@@ -55,7 +55,7 @@ namespace DocSystWebApi.Models.StyleStructureModels
             Name = styleClass.Name;
             ProperStyles = Utils.ConvertEntitiesToModels(styleClass.ProperStyles);
             InheritedPlusProperStyles = Utils.ConvertEntitiesToModels(styleClass.InheritedPlusProperStyles);
-            Observers = Utils.ConvertEntitiesToModels(styleClass.Observers);
+          //  Observers = Utils.ConvertEntitiesToModels(styleClass.Observers);
             if (styleClass.InheritedStyleClass != null)
             {
                 InheritedStyleClass = StyleClassModel.ToModel(styleClass.InheritedStyleClass);

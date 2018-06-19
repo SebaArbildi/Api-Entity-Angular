@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { StyleClass } from '../models/styleClass';
 import { Style } from '../models/style';
 import { Http, Response, RequestOptions, Headers } from '@angular/http';
 import { Observable, throwError } from 'rxjs';
@@ -7,9 +8,9 @@ import { map, tap, catchError } from 'rxjs/operators';
 
 
 @Injectable()
-export class StyleService {
+export class StyleClassService {
 
-    private WEB_API_URL: string = 'http://localhost:4162/api/Style';
+    private WEB_API_URL: string = 'http://localhost:4162/api/StyleClass';
     private static token: string = '3B427A22-F268-431E-804F-D30D2B53A6C6';
 
     constructor(private _httpService: Http) { }
@@ -19,67 +20,81 @@ export class StyleService {
         return Observable.throw(error.json().error || 'Server error');
     }
 
-    getStyles(): Observable<Array<Style>> {
+    getStyleClasses(): Observable<Array<StyleClass>> {
         const myHeaders = new Headers();
         myHeaders.append('Content-Type', 'application/json');
-        myHeaders.append('Token', StyleService.token);
+        myHeaders.append('Token', StyleClassService.token);
         myHeaders.append('Username', 'admin');
 
         const requestOptions = new RequestOptions({ headers: myHeaders });
 
         return this._httpService.get(this.WEB_API_URL, requestOptions).pipe(
-            map((response: Response) => <Array<Style>>response.json()),
+            map((response: Response) => <Array<StyleClass>>response.json()),
             tap(data => console.log('Los datos que obtuvimos fueron: ' + JSON.stringify(data))),
             catchError(this.handleError));
     }
 
-    getStyle(name: string): Observable<Style> {
+    deleteStyleClass(id:string):Observable<any>{
         const myHeaders = new Headers();
         myHeaders.append('Content-Type', 'application/json');
-        myHeaders.append('Token', StyleService.token);
-        myHeaders.append('Username', 'admin');
-
-        const requestOptions = new RequestOptions({ headers: myHeaders });
-
-        return this._httpService.get(this.WEB_API_URL+"/"+name, requestOptions).pipe(
-            map((response: Response) =><Style>response.json()),
-            tap(data => console.log('Los datos que obtuvimos fueron: ' + JSON.stringify(data))),
-            catchError(this.handleError));
-    }
-
-    deleteStyle(name:string):Observable<any>{
-        const myHeaders = new Headers();
-        myHeaders.append('Content-Type', 'application/json');
-        myHeaders.append('Token', StyleService.token);
+        myHeaders.append('Token', StyleClassService.token);
 
         const requestOptions = new RequestOptions({ headers: myHeaders});
-        return this._httpService.delete(this.WEB_API_URL+"/"+name, requestOptions);
+        return this._httpService.delete(this.WEB_API_URL+"/"+id, requestOptions);
     }
 
-    modStyle(name:string, myStyle: Style): Observable<Style>{
+    addStyleClass(myStyleClass: StyleClass): Observable<any>{
         const myHeaders = new Headers();
         myHeaders.append('Content-Type', 'application/json');
-        myHeaders.append('Token', StyleService.token);
+        myHeaders.append('Token', StyleClassService.token);
         myHeaders.append('Username', 'admin');
 
         const requestOptions = new RequestOptions({ headers: myHeaders });
+        console.log(JSON.stringify(myStyleClass));
 
-        return this._httpService.put(this.WEB_API_URL+"/"+name, JSON.stringify(myStyle), requestOptions).pipe(
-            map((response: Response) =><Style>response.json()),
+        return this._httpService.post(this.WEB_API_URL, JSON.stringify(myStyleClass), requestOptions).pipe(
             tap(data => console.log('Los datos que obtuvimos fueron: ' + JSON.stringify(data))),
             catchError(this.handleError));
     }
 
-    addStyle(myStyle: Style): Observable<any>{
+    addStylesToStyleClass(myStyleClassId: String, style: Style): Observable<any>{
         const myHeaders = new Headers();
         myHeaders.append('Content-Type', 'application/json');
-        myHeaders.append('Token', StyleService.token);
+        myHeaders.append('Token', StyleClassService.token);
         myHeaders.append('Username', 'admin');
+        console.log(myStyleClassId);
 
         const requestOptions = new RequestOptions({ headers: myHeaders });
-        return this._httpService.post(this.WEB_API_URL, JSON.stringify(myStyle), requestOptions).pipe(
+
+        return this._httpService.put(this.WEB_API_URL + "/" + myStyleClassId + "/AddStyle", JSON.stringify(style), requestOptions).pipe(
             tap(data => console.log('Los datos que obtuvimos fueron: ' + JSON.stringify(data))),
             catchError(this.handleError));
     }
 
+    deleteStyleFromStyleClass(myStyleClassId: String, styleName: String): Observable<any>{
+        const myHeaders = new Headers();
+        myHeaders.append('Content-Type', 'application/json');
+        myHeaders.append('Token', StyleClassService.token);
+        myHeaders.append('Username', 'admin');
+        console.log(myStyleClassId);
+
+        const requestOptions = new RequestOptions({ headers: myHeaders });
+
+        return this._httpService.put(this.WEB_API_URL + "/" + myStyleClassId + "/RemoveStyle", JSON.stringify(styleName), requestOptions).pipe(
+            tap(data => console.log('Los datos que obtuvimos fueron: ' + JSON.stringify(data))),
+            catchError(this.handleError));
+    }
+
+    getStyleClass(id: string): Observable<StyleClass> {
+        const myHeaders = new Headers();
+        myHeaders.append('Content-Type', 'application/json');
+        myHeaders.append('Token', StyleClassService.token);
+        myHeaders.append('Username', 'admin');
+
+        const requestOptions = new RequestOptions({ headers: myHeaders });
+        return this._httpService.get(this.WEB_API_URL+"/"+id, requestOptions).pipe(
+            map((response: Response) =><StyleClass>response.json()),
+            tap(data => console.log('Los datos que obtuvimos fueron: ' + JSON.stringify(data))),
+            catchError(this.handleError));
+    }
 }

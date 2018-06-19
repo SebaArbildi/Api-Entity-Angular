@@ -1,0 +1,32 @@
+<div class='panel panel-primary'>
+    <div class='panel-heading'>
+        <h1>{{title}} </h1>
+    </div>
+
+    <div class='panel-body'>
+        <div class='table-responsive'>
+            <table class='table' *ngIf='styleClasses && styleClasses.length'>
+                <!--Cabezal de la tabla -->
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nombre</th>
+                    </tr>
+                </thead>
+                <!--Cuerpo de la tabla-->
+                <tbody>
+                    <tr *ngFor='let styleClass of styleClasses'>
+                        <td>{{styleClass.Id}}</td>
+                        <td>{{styleClass.Name}}</td>
+                        <td>
+                            <button type="button" class="btn btn-danger" (click)="deleteStyleClass([(styleClass.Id)])"> Eliminar </button>
+                            <button type="button" class="btn btn-warning" [routerLink]="['/styleClass-mod', (styleClass.Id)]"> Modificar </button>
+                            <button type="button" class="btn btn-success" [routerLink]="['/styleClass-view', (styleClass.Id)]"> Ver </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <button class='btn btn-success' [routerLink]="['/styleClass-add']"> Agregar </button>
+        </div>
+    </div>
+</div>
