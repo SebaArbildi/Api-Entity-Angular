@@ -77,7 +77,6 @@ export class StyleService {
         myHeaders.append('Username', 'admin');
 
         const requestOptions = new RequestOptions({ headers: myHeaders });
-
         return this._httpService.post(this.WEB_API_URL, JSON.stringify(myStyle), requestOptions).pipe(
             tap(data => console.log('Los datos que obtuvimos fueron: ' + JSON.stringify(data))),
             catchError(this.handleError));
