@@ -22,14 +22,14 @@ export class ParagraphModComponent implements OnInit, OnChanges {
     ngOnInit(): void {
         this._documentService.getParagraph(this.id).subscribe(
             ((obtainedParagraph: Paragraph) => this.paragraph = obtainedParagraph),
-            ((error: any) => console.log(error)),
+            ((error: any) => console.log(error))
         )
     }
 
     ngOnChanges(): void {
         this._documentService.getParagraph(this.id).subscribe(
             ((obtainedParagraph: Paragraph) => this.paragraph = obtainedParagraph),
-            ((error: any) => console.log(error)),
+            ((error: any) => console.log(error))
         )
     }
 

@@ -11,6 +11,7 @@ import { Paragraph } from './paragraphs/paragraph';
 import { MarginTemp } from './margins/margin-temp';
 import { TextTempClass } from './texts/text-temp';
 import { ParagraphTemp } from './paragraphs/paragraph-temp';
+import { TextClass } from './texts/text';
 
 @Injectable()
 export class DocumentService {
@@ -94,6 +95,20 @@ export class DocumentService {
 
         return this._httpService.get(this.WEB_API_URL+"Paragraph/"+id,requestOptions).pipe(
             map((response : Response) => <Paragraph> response.json()),
+            tap(data => console.log('Los datos que obtuvimos fueron: ' + JSON.stringify(data))),
+            catchError(this.handleError));
+    }
+
+    getText(id : string): Observable<TextClass>{
+        const myHeaders = new Headers();
+        myHeaders.append('Accept','application/json');
+        myHeaders.append('Token',DocumentService.token);
+        myHeaders.append('Username',DocumentService.username);
+
+        const requestOptions = new RequestOptions({headers : myHeaders});
+
+        return this._httpService.get(this.WEB_API_URL+"Text/"+id,requestOptions).pipe(
+            map((response : Response) => <TextClass> response.json()),
             tap(data => console.log('Los datos que obtuvimos fueron: ' + JSON.stringify(data))),
             catchError(this.handleError));
 

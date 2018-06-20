@@ -41,12 +41,14 @@ namespace DocSystWebApi.Controllers
         }
 
         // GET: api/Paragraph/5
-        public IHttpActionResult Get([FromUri] Guid id)
+        [Route("api/Paragraph/{paragraphId:guid}", Name = "GetParagraph")]
+        [HttpGet]
+        public IHttpActionResult Get([FromUri] Guid paragraphId)
         {
             try
             {
                 Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
-                var paragraph = ParagraphBusinessLogic.GetParagraph(id);
+                var paragraph = ParagraphBusinessLogic.GetParagraph(paragraphId);
                 return Ok(ParagraphModel.ToModel(paragraph));
             }
             catch (Exception e)

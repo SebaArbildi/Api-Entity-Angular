@@ -34,13 +34,8 @@ export class HeaderModComponent implements OnInit, OnChanges {
         )
     }
 
-    log(){
-        console.log(this.margin);
-    }
-
     modHeader(): void {
-        var headerTemp = new MarginTemp(this.styleClass, 0, this.documentId);
-        this._documentService.modMargin(this.id, headerTemp).subscribe();
+        this._documentService.modMargin(this.id, this.margin).subscribe();
     }
 
 }

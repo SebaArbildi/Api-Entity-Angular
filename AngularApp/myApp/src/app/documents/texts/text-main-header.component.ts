@@ -26,7 +26,14 @@ export class TextHeadernMainComponent implements OnInit {
     )
   }
 
-  deleteText(textId : string) {
+  ngOnChanges(): void {
+    this._documentService.getMargin(this.marginId).subscribe(
+      ((obtainedMargin: Margin) => this.userMargin = obtainedMargin),
+      ((error: any) => console.log(error))
+    )
+  }
+
+  deleteText(textId: string) {
     this._documentService.deleteText(textId).subscribe();
   }
 

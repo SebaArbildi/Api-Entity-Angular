@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { DocumentService } from '../../document.service';
-import { MarginTemp } from '../margin-temp';
 import { ActivatedRoute } from '@angular/router';
+import { DocumentService } from '../../document.service';
 import { Margin } from '../margin';
 
 @Component({

@@ -5,11 +5,11 @@
     <form name="modText">
         <div class="form-group">
             <label name="title">Clase de estilo</label>
-            <input class="form-control" type="text" name="styleClass" requried [(ngModel)]="StyleClass">
+            <input class="form-control" type="text" name="styleClass" requried [(ngModel)]="text.OwnStyleClass">
         </div>
         <div class="form-group">
             <label name="title">Texto</label>
-            <input class="form-control" type="text" name="textContent" requried [(ngModel)]="TextContent">
+            <input class="form-control" type="text" name="textContent" requried [(ngModel)]="text.TextContent">
         </div>
         <div>
             <button class="btn btn-success" type="button" (click)="modText()" [routerLink]="['/text-main-paragraph', (documentId), (paragraphId) ]">

@@ -1,7 +1,7 @@
 export class TextClass{
     Id: string;
-    OwnStyleClass: string;
     TextContent: string;
+    OwnStyleClass: string;
     BodyId: string;
   
     constructor(id : string, ownStyleClass : string, textContent : string, bodyId : string){

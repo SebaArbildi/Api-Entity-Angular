@@ -43,7 +43,7 @@ export class HeaderMainComponent implements OnInit {
     return null;
   }
 
-  deleteHeader(headerId : string) {
+  deleteHeader(headerId: string) {
     this._documentService.deleteMargin(headerId).subscribe();
   }
 
