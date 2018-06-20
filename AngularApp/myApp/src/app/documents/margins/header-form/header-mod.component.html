@@ -1,0 +1,16 @@
+<div class='panel panel-primary'>
+    <div class='panel-heading'>
+        <h1>{{pageTitle}}</h1>
+    </div>
+    <form name="modHeader">
+        <div class="form-group">
+            <label name="title">Clase de estilo</label>
+            <input class="form-control" type="text" name="styleClass" requried [(ngModel)]="margin.OwnStyleClass">
+        </div>
+        <div>
+            <button class="btn btn-success" type="button" (click)="modHeader()" [routerLink]="['/header-main', (documentId) ]"> Aceptar </button>
+            <button class="btn" type="button" [routerLink]="['/header-main', (documentId) ]"> Cancelar </button>
+            <button class="btn" type="button" (click)="log()"> log </button>
+        </div>
+    </form>
+</div>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DocumentService } from './document.service';
-import { Document } from './document';
+import { UserDocument } from '../models/userDocument';
 
 @Component({
   selector: 'document-main',
@@ -9,14 +9,21 @@ import { Document } from './document';
 
 export class DocumentMainComponent implements OnInit {
   title = 'Documentos';
-  documents: Array<Document>;
+  documents: Array<UserDocument>;
 
   constructor(private _documentService: DocumentService) {
   }
 
   ngOnInit(): void {
     this._documentService.getDocuments().subscribe(
-      ((obtainedDocuments: Array<Document>) => this.documents = obtainedDocuments),
+      ((obtainedDocuments: Array<UserDocument>) => this.documents = obtainedDocuments),
+      ((error: any) => console.log(error))
+    )
+  }
+
+  ngOnChanges(): void {
+    this._documentService.getDocuments().subscribe(
+      ((obtainedDocuments: Array<UserDocument>) => this.documents = obtainedDocuments),
       ((error: any) => console.log(error))
     )
   }

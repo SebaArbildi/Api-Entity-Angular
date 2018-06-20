@@ -1,8 +1,8 @@
-import { User } from "../users/user";
-import { Paragraph } from "./paragraphs/paragraph"
-import { Margin } from "./margins/margin";
+import { User } from "../models/user";
+import { Paragraph } from "../documents/paragraphs/paragraph"
+import { Margin } from "../documents/margins/margin";
 
-export class Document{
+export class UserDocument{
     Id: string;
     CreatorUser: User;
     Title: string;

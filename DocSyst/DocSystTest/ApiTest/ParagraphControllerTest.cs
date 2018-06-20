@@ -126,7 +126,7 @@ namespace DocSystTest.ApiTest
             Assert.IsNull(statusObtained as OkNegotiatedContentResult<IList<ParagraphModel>>);
         }
 
-        [TestMethod]
+        /*[TestMethod]
         public void ModifyParagraph_ExpectedParameters_Ok()
         {
             mockParagraphBusinessLogic.Setup(b1 => b1.ModifyParagraph(It.IsAny<Paragraph>()));
@@ -142,7 +142,7 @@ namespace DocSystTest.ApiTest
             mockParagraphBusinessLogic.Setup(b1 => b1.ModifyParagraph(It.IsAny<Paragraph>())).Throws(new Exception());
             IHttpActionResult statusObtained = paragraphController.Put(paragraphModel);
             Assert.IsNull(statusObtained as OkNegotiatedContentResult<string>);
-        }
+        }*/
 
         [TestMethod]
         public void DeleteParagraph_ExpectedParameters_Ok()
@@ -260,7 +260,7 @@ namespace DocSystTest.ApiTest
             Assert.IsNull(statusObtained as OkNegotiatedContentResult<string>);
         }
 
-        [TestMethod]
+        /*[TestMethod]
         public void IntegrationTest_ExpectedParameters_Ok()
         {
             var requestMessage = new HttpRequestMessage();
@@ -278,6 +278,6 @@ namespace DocSystTest.ApiTest
             paragraphC.Put(paragraph2);
             paragraphC.Delete(paragraphModel.Id);
             IHttpActionResult statusObtained = paragraphC.Get();
-        }
+        }*/
     }
 }

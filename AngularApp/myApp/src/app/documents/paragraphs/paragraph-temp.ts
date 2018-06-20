@@ -1,18 +1,16 @@
 import { TextClass } from "../texts/text";
 
-export class Margin{
-    Id: string;
+export class ParagraphTemp{
     OwnStyleClass: string;
     Texts: Array<TextClass>;
     Align: number;
     DocumentId: string;
   
-    constructor(id : string, ownStyleClass : string, marginAlign : number, texts : Array<TextClass>, documentId : string){
-
-            this.Id = id;
+    constructor(ownStyleClass : string, marginAlign : number, documentId : string){
+            
             this.OwnStyleClass = ownStyleClass;
             this.Align = marginAlign;
-            this.Texts = texts;
             this.DocumentId = documentId;
+            this.Texts = new Array<TextClass>();
     }
   }

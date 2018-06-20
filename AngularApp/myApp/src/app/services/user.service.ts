@@ -10,7 +10,7 @@ import { map, tap, catchError } from 'rxjs/operators';
 export class UserService {
 
     private WEB_API_URL: string = 'http://localhost:4162/api/User';
-    private static token: string = '3B427A22-F268-431E-804F-D30D2B53A6C6';
+    private static token: string = '994d501f-0944-4da9-95d9-0e2f43ec88e3';
 
     constructor(private _httpService: Http) { }
 

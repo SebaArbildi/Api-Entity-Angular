@@ -70,12 +70,16 @@ namespace DocSystWebApi.Controllers
             }
         }
 
-        // PUT: api/Paragraph
-        public IHttpActionResult Put([FromBody]ParagraphModel paragraphModel)
+        [Route("api/Paragraph/{paragraphId:guid}", Name = "PutParagraph")]
+        [HttpPut]
+        public IHttpActionResult Put([FromUri] Guid paragraphId, [FromBody]ParagraphModel paragraphModel)
         {
             try
             {
                 Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
+
+                paragraphModel.Id = paragraphId;
+
                 ParagraphBusinessLogic.ModifyParagraph(paragraphModel.ToEntity());
 
                 AuditLogBussinesLogic.CreateLog("Document", paragraphModel.DocumentId, Utils.GetUsername(Request), ActionPerformed.MODIFY);

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DocumentService } from '../document.service';
-import { Document } from '../document';
+import { UserDocument } from '../../models/userDocument';
 import { ActivatedRoute } from '@angular/router';
 import { Format } from '../format';
 import { Printer } from '../printer';
@@ -13,7 +13,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 
 export class DocumentDetailComponent implements OnInit {
   title = 'Detalle del documento';
-  userDocument: Document;
+  userDocument: UserDocument;
   documentId: string;
   formatId: string;
   documentPrinted: string; 
@@ -37,7 +37,7 @@ export class DocumentDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this._documentService.getDocument(this.documentId).subscribe(
-      ((obtainedDocument: Document) => this.userDocument = obtainedDocument),
+      ((obtainedDocument: UserDocument) => this.userDocument = obtainedDocument),
       ((error: any) => console.log(error))
     )
 

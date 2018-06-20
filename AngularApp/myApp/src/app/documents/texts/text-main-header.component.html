@@ -1,0 +1,38 @@
+<div class='panel panel-primary'>
+    <div class='panel-heading'>
+        <h1>{{title}} </h1>
+    </div>
+
+    <div class='panel-body'>
+        <div class='table-responsive'>
+            <table class='table' *ngIf='userMargin'>
+                <!--Cabezal de la tabla -->
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Clase de estilo</th>
+                        <th>Contenido</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <!--Cuerpo de la tabla-->
+                <tbody>
+                    <tr *ngFor='let aText of userMargin.Texts'>
+                        <td>{{aText.Id}}</td>
+                        <td>{{aText.OwnStyleClass}}</td>
+                        <td>{{aText.TextContent}}</td>
+                        <td>
+                            <button class='btn btn-warning' [routerLink]="['/text-header-mod', (documentId), (marginId), (aText.Id)]">Modificar</button>
+                            <button class='btn btn-danger' (click)="deleteText([(aText.Id)])">Eliminar</button>
+                        </td>
+                    </tr>
+                    <tr *ngIf='!userMargin.Texts || userMargin.Texts.length == 0'>
+                        <h1>No hay textos...</h1>
+                    </tr>
+                </tbody>
+            </table>
+            <button class="btn btn-success" type="button" [routerLink]="['/text-header-form', (documentId), (marginId) ]"> Agregar </button>
+            <button class="btn" type="button" [routerLink]="['/header-main', (documentId) ]"> Cancelar </button>
+        </div>
+    </div>
+</div>
