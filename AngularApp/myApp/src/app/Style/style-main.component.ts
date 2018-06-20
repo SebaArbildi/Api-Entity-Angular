@@ -21,6 +21,13 @@ export class StyleMainComponent implements OnInit {
     )
   }
 
+  ngOnChanges(): void {
+    this._styleService.getStyles().subscribe(
+      ((obtainedStyles: Array<Style>) => this.styles = obtainedStyles),
+      ((error: any) => console.log(error))
+    )
+  }
+
   deleteStyle(name: string): void {
     this._styleService.deleteStyle(name).subscribe();
   }

@@ -1,5 +1,5 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
-import { DocumentService } from '../../document.service';
+import { DocumentService } from '../../../services/document.service';
 import { ActivatedRoute } from '@angular/router';
 import { Paragraph } from '../paragraph';
 

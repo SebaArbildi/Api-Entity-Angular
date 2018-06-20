@@ -34,6 +34,18 @@ export class StyleClassModComponent {
         )
     }
 
+    ngOnChanges(): void {
+        this._styleService.getStyles().subscribe(
+            ((obtainedStyles: Array<Style>) => this.styles = obtainedStyles),
+            ((error: any) => console.log(error))
+        )
+
+        this._styleClassService.getStyleClass(this.styleClass.Id).subscribe(
+            ((obtainedStyleClass: StyleClass) => this.styleClass = obtainedStyleClass),
+            ((error: any) => console.log(error))
+        )
+    }
+
     addStyle(style: Style): void {
         this._styleClassService.addStylesToStyleClass(this.styleClass.Id, style).subscribe()
     }

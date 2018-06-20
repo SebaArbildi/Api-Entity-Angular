@@ -10,19 +10,26 @@ import { MockNgModuleResolver } from '@angular/compiler/testing';
 export class LoginComponent {
     pageTitle: string = "Login";
     user: User;
-    resp: any;
+    resp: string;
     auth: boolean;
 
     constructor(private _loginService: LoginService) {
         this.user = new User("", "", "", "", "", false);
     }
 
+    log(){
+        console.log(localStorage.getItem('userToken'));
+        console.log(localStorage.getItem('username'));
+    }
+
     login(): void {
         this._loginService.login(this.user).subscribe(
-            ((response: any) => this.resp = response),
+            ((response: string) => localStorage.setItem('userToken',response)),
             ((error: any) => console.log(error))
         );
-      }
 
-  
+        localStorage.setItem('username',this.user.Username);
+    }
+
+
 }

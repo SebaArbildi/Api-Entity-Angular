@@ -10,9 +10,13 @@ import { map, tap, catchError } from 'rxjs/operators';
 export class StyleService {
 
     private WEB_API_URL: string = 'http://localhost:4162/api/Style';
-    private static token: string = '994d501f-0944-4da9-95d9-0e2f43ec88e3';
+    private static token: string;
+    private static username: string;
 
-    constructor(private _httpService: Http) { }
+    constructor(private _httpService: Http) { 
+        StyleService.token = localStorage.getItem('userToken');
+        StyleService.username = localStorage.getItem('username');
+    }
 
     private handleError(error: Response) {
         console.error(error);
@@ -23,7 +27,7 @@ export class StyleService {
         const myHeaders = new Headers();
         myHeaders.append('Content-Type', 'application/json');
         myHeaders.append('Token', StyleService.token);
-        myHeaders.append('Username', 'admin');
+        myHeaders.append('Username', StyleService.username);
 
         const requestOptions = new RequestOptions({ headers: myHeaders });
 
@@ -37,7 +41,7 @@ export class StyleService {
         const myHeaders = new Headers();
         myHeaders.append('Content-Type', 'application/json');
         myHeaders.append('Token', StyleService.token);
-        myHeaders.append('Username', 'admin');
+        myHeaders.append('Username', StyleService.username);
 
         const requestOptions = new RequestOptions({ headers: myHeaders });
 
@@ -51,6 +55,7 @@ export class StyleService {
         const myHeaders = new Headers();
         myHeaders.append('Content-Type', 'application/json');
         myHeaders.append('Token', StyleService.token);
+        myHeaders.append('Username', StyleService.username);
 
         const requestOptions = new RequestOptions({ headers: myHeaders});
         return this._httpService.delete(this.WEB_API_URL+"/"+name, requestOptions);
@@ -60,7 +65,7 @@ export class StyleService {
         const myHeaders = new Headers();
         myHeaders.append('Content-Type', 'application/json');
         myHeaders.append('Token', StyleService.token);
-        myHeaders.append('Username', 'admin');
+        myHeaders.append('Username', StyleService.username);
 
         const requestOptions = new RequestOptions({ headers: myHeaders });
 
@@ -74,7 +79,7 @@ export class StyleService {
         const myHeaders = new Headers();
         myHeaders.append('Content-Type', 'application/json');
         myHeaders.append('Token', StyleService.token);
-        myHeaders.append('Username', 'admin');
+        myHeaders.append('Username', StyleService.username);
 
         const requestOptions = new RequestOptions({ headers: myHeaders });
         return this._httpService.post(this.WEB_API_URL, JSON.stringify(myStyle), requestOptions).pipe(

@@ -1,5 +1,5 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
-import { DocumentService } from '../../document.service';
+import { DocumentService } from '../../../services/document.service';
 import { MarginTemp } from '../margin-temp';
 import { ActivatedRoute } from '@angular/router';
 import { Margin } from '../margin';

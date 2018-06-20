@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import  { UserService } from './services/user.service'; 
-import { DocumentService } from './documents/document.service';
+import { DocumentService } from './services/document.service';
 import  { LoginService } from './services/login.service'; 
 import  { StyleService } from './services/style.service'; 
 import  { StyleClassService } from './services/styleClass.service'; 

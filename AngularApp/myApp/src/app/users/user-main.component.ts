@@ -21,6 +21,13 @@ export class UserMainComponent implements OnInit {
     )
   }
 
+  ngOnChanges(): void {
+    this._userService.getUsers().subscribe(
+      ((obtainedUsers: Array<User>) => this.users = obtainedUsers),
+      ((error: any) => console.log(error))
+    )
+  }
+
   deleteUser(username:string): void{
     this._userService.deleteUser(username).subscribe();
   }

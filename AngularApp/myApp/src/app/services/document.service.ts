@@ -1,26 +1,29 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, RequestOptions, Headers} from '@angular/http';
-import { Observable, throwError } from 'rxjs';
+import { Observable } from 'rxjs';
 import{map, tap, catchError} from 'rxjs/operators';
 import { UserDocument } from '../models/userDocument';
-import { Printer } from './printer';
-import { Format } from './format';
-import { DocumentTemp } from './document-temp';
-import { Margin } from './margins/margin';
-import { Paragraph } from './paragraphs/paragraph';
-import { MarginTemp } from './margins/margin-temp';
-import { TextTempClass } from './texts/text-temp';
-import { ParagraphTemp } from './paragraphs/paragraph-temp';
-import { TextClass } from './texts/text';
+import { Printer } from '../documents/printer';
+import { Format } from '../documents/format';
+import { DocumentTemp } from '../documents/document-temp';
+import { Margin } from '../documents/margins/margin';
+import { Paragraph } from '../documents/paragraphs/paragraph';
+import { MarginTemp } from '../documents/margins/margin-temp';
+import { TextTempClass } from '../documents/texts/text-temp';
+import { ParagraphTemp } from '../documents/paragraphs/paragraph-temp';
+import { TextClass } from '../documents/texts/text';
 
 @Injectable()
 export class DocumentService {
     
     private WEB_API_URL : string = 'http://localhost:4162/api/';
-    private static token: string = '994d501f-0944-4da9-95d9-0e2f43ec88e3';
-    private static username: string = "admin";
+    private static token: string;
+    private static username: string;
 
-    constructor(private _httpService: Http) {  }
+    constructor(private _httpService: Http) { 
+        DocumentService.token = localStorage.getItem('userToken');
+        DocumentService.username = localStorage.getItem('username');
+     }
 
     getDocuments(): Observable<Array<UserDocument>> {
         const myHeaders = new Headers();

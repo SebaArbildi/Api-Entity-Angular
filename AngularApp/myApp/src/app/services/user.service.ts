@@ -10,15 +10,19 @@ import { map, tap, catchError } from 'rxjs/operators';
 export class UserService {
 
     private WEB_API_URL: string = 'http://localhost:4162/api/User';
-    private static token: string = '994d501f-0944-4da9-95d9-0e2f43ec88e3';
+    private static token: string;
+    private static username: string;
 
-    constructor(private _httpService: Http) { }
+    constructor(private _httpService: Http) {
+        UserService.token = localStorage.getItem('userToken');
+        UserService.username = localStorage.getItem('username');
+     }
 
     getUsers(): Observable<Array<User>> {
         const myHeaders = new Headers();
         myHeaders.append('Content-Type', 'application/json');
         myHeaders.append('Token', UserService.token);
-        myHeaders.append('Username', 'admin');
+        myHeaders.append('Username', UserService.username);
 
         const requestOptions = new RequestOptions({ headers: myHeaders });
 
@@ -32,7 +36,7 @@ export class UserService {
         const myHeaders = new Headers();
         myHeaders.append('Content-Type', 'application/json');
         myHeaders.append('Token', UserService.token);
-        myHeaders.append('Username', 'admin');
+        myHeaders.append('Username', UserService.username);
 
         const requestOptions = new RequestOptions({ headers: myHeaders });
 
@@ -46,7 +50,7 @@ export class UserService {
         const myHeaders = new Headers();
         myHeaders.append('Content-Type', 'application/json');
         myHeaders.append('Token', UserService.token);
-        myHeaders.append('Username', 'admin');
+        myHeaders.append('Username', UserService.username);
 
         const requestOptions = new RequestOptions({ headers: myHeaders });
         return this._httpService.post(this.WEB_API_URL, JSON.stringify(myUser), requestOptions);
@@ -56,6 +60,7 @@ export class UserService {
         const myHeaders = new Headers();
         myHeaders.append('Content-Type', 'application/json');
         myHeaders.append('Token', UserService.token);
+        myHeaders.append('Username', UserService.username);
 
         const requestOptions = new RequestOptions({ headers: myHeaders});
         return this._httpService.delete(this.WEB_API_URL+"/"+username, requestOptions);
@@ -65,7 +70,7 @@ export class UserService {
         const myHeaders = new Headers();
         myHeaders.append('Content-Type', 'application/json');
         myHeaders.append('Token', UserService.token);
-        myHeaders.append('Username', 'admin');
+        myHeaders.append('Username', UserService.username);
 
         const requestOptions = new RequestOptions({ headers: myHeaders });
 

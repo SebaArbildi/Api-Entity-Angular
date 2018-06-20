@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DocumentService } from '../document.service';
+import { DocumentService } from '../../services/document.service';
 import { DocumentTemp } from '../document-temp';
 
 @Component({

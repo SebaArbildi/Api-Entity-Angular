@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DocumentService } from '../../document.service';
+import { DocumentService } from '../../../services/document.service';
 import { MarginTemp } from '../margin-temp';
 import { ActivatedRoute } from '@angular/router';
 
@@ -15,7 +15,7 @@ export class FooterFormComponent {
     constructor(private _documentService: DocumentService, route: ActivatedRoute) {
         this.documentId = route.snapshot.params['id'];
     }
-    
+
     addFooter(): void {
         var footerTemp = new MarginTemp(this.styleClass, 1, this.documentId);
         this._documentService.addMargin(this.documentId,"FOOTER",footerTemp).subscribe();

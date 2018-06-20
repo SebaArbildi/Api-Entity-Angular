@@ -1,7 +1,7 @@
 import { Component, OnChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UserDocument } from '../../models/userDocument';
-import { DocumentService } from '../document.service';
+import { DocumentService } from '../../services/document.service';
 
 @Component({
     selector: 'document-mod',
