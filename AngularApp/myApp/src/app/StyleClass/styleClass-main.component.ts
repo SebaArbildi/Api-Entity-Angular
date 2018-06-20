@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { StyleClass } from '../models/styleClass';
-import { Style } from '../models/style';
 import { StyleClassService } from '../services/styleClass.service';
 
 @Component({
