@@ -54,6 +54,7 @@ namespace DocSystWindowsApp
             LoadListStyleClass();
         }
 
+
         private void Clear()
         {
             this.textBox1.Clear();
@@ -117,6 +118,11 @@ namespace DocSystWindowsApp
             {
                 MessageBox.Show(ex.ToString());
             }
+        }
+
+        private void FormatForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

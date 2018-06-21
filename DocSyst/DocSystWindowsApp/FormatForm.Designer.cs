@@ -44,7 +44,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(508, 23);
+            this.label1.Location = new System.Drawing.Point(525, 31);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(212, 51);
             this.label1.TabIndex = 0;
@@ -148,7 +148,8 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "FormatForm";
-            this.Size = new System.Drawing.Size(1264, 818);
+            this.Size = new System.Drawing.Size(1260, 820);
+            this.Load += new System.EventHandler(this.FormatForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
