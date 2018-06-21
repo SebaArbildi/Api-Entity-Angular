@@ -36,10 +36,22 @@ namespace DocSystWindowsApp
 
         }
 
-        private void toolStripButton2_Click(object sender, EventArgs e)
+        private void toolStripButton2_Click_1(object sender, EventArgs e)
         {
             UserControl formatForm = new FormatForm();
             DisplayForm(formatForm);
+        }
+
+        private void toolStripButton1_Click_1(object sender, EventArgs e)
+        {
+            UserControl reportForm = new ReportForm();
+            DisplayForm(reportForm);
+        }
+
+        private void toolStripButton3_Click(object sender, EventArgs e)
+        {
+            UserControl report2Form = new Report2();
+            DisplayForm(report2Form);
         }
     }
 }
