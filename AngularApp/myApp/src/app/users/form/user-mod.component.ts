@@ -26,10 +26,20 @@ export class UserModComponent {
         )
     }
 
+    ngOnChanges(): void {
+        this._userService.getUser(this.user.Username).subscribe(
+            ((obtainedUser: User) => this.user = obtainedUser),
+            ((error: any) => console.log(error))
+        )
+        window.location.reload();
+    }
+
     modUser(): void{
         this._userService.modUser(this.username, this.user).subscribe(
             ((error: any) => console.log(error))
         )
+        alert("Usuario modificado");
+        window.location.reload();
     }
 
 }

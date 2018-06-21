@@ -1,6 +1,7 @@
 ﻿using DocSystBusinessLogicInterface.AuditLogBussinesLogicInterface;
 using DocSystBusinessLogicInterface.AuthorizationBusinessLogicInterface;
 using DocSystBusinessLogicInterface.DocumentStructureLogicInterface;
+using DocSystBusinessLogicInterface.UserBusinessLogicInterface;
 using DocSystEntities.Audit;
 using DocSystEntities.DocumentStructure;
 using DocSystWebApi.Models.DocumentStructureModels;
@@ -16,13 +17,15 @@ namespace DocSystWebApi.Controllers
         private IDocumentBusinessLogic DocumentBusinessLogic { get; set; }
         private IAuthorizationBusinessLogic AuthorizationBusinessLogic { get; set; }
         private IAuditLogBussinesLogic AuditLogBussinesLogic { get; set; }
+        private IUserBusinessLogic UserBusinessLogic { get; set; }
 
         public DocumentController(IDocumentBusinessLogic documentBusinessLogic, IAuthorizationBusinessLogic authorizationBusinessLogic
-            , IAuditLogBussinesLogic auditLogBussinesLogic)
+            , IAuditLogBussinesLogic auditLogBussinesLogic, IUserBusinessLogic userBusinessLogic)
         {
             DocumentBusinessLogic = documentBusinessLogic;
             AuthorizationBusinessLogic = authorizationBusinessLogic;
             AuditLogBussinesLogic = auditLogBussinesLogic;
+            UserBusinessLogic = userBusinessLogic;
         }
 
         // GET: api/Document
@@ -69,6 +72,8 @@ namespace DocSystWebApi.Controllers
             try
             {
                 Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
+                documentModel.CreatorUser = Utils.GetCreatorUser(Request, UserBusinessLogic);
+
                 DocumentBusinessLogic.AddDocument(documentModel.ToEntity());
                 AuditLogBussinesLogic.CreateLog("Document", documentModel.Id, Utils.GetUsername(Request), ActionPerformed.CREATE);
                 return Ok(documentModel);

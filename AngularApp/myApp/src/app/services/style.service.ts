@@ -10,9 +10,9 @@ import { map, tap, catchError } from 'rxjs/operators';
 export class StyleService {
 
     private WEB_API_URL: string = 'http://localhost:4162/api/Style';
-    private static token: string = '3B427A22-F268-431E-804F-D30D2B53A6C6';
 
-    constructor(private _httpService: Http) { }
+    constructor(private _httpService: Http) { 
+    }
 
     private handleError(error: Response) {
         console.error(error);
@@ -22,8 +22,8 @@ export class StyleService {
     getStyles(): Observable<Array<Style>> {
         const myHeaders = new Headers();
         myHeaders.append('Content-Type', 'application/json');
-        myHeaders.append('Token', StyleService.token);
-        myHeaders.append('Username', 'admin');
+        myHeaders.append('Token', localStorage.getItem('userToken'));
+        myHeaders.append('Username', localStorage.getItem('username'));
 
         const requestOptions = new RequestOptions({ headers: myHeaders });
 
@@ -36,8 +36,8 @@ export class StyleService {
     getStyle(name: string): Observable<Style> {
         const myHeaders = new Headers();
         myHeaders.append('Content-Type', 'application/json');
-        myHeaders.append('Token', StyleService.token);
-        myHeaders.append('Username', 'admin');
+        myHeaders.append('Token', localStorage.getItem('userToken'));
+        myHeaders.append('Username', localStorage.getItem('username'));
 
         const requestOptions = new RequestOptions({ headers: myHeaders });
 
@@ -50,7 +50,8 @@ export class StyleService {
     deleteStyle(name:string):Observable<any>{
         const myHeaders = new Headers();
         myHeaders.append('Content-Type', 'application/json');
-        myHeaders.append('Token', StyleService.token);
+        myHeaders.append('Token', localStorage.getItem('userToken'));
+        myHeaders.append('Username', localStorage.getItem('username'));
 
         const requestOptions = new RequestOptions({ headers: myHeaders});
         return this._httpService.delete(this.WEB_API_URL+"/"+name, requestOptions);
@@ -59,8 +60,8 @@ export class StyleService {
     modStyle(name:string, myStyle: Style): Observable<Style>{
         const myHeaders = new Headers();
         myHeaders.append('Content-Type', 'application/json');
-        myHeaders.append('Token', StyleService.token);
-        myHeaders.append('Username', 'admin');
+        myHeaders.append('Token', localStorage.getItem('userToken'));
+        myHeaders.append('Username', localStorage.getItem('username'));
 
         const requestOptions = new RequestOptions({ headers: myHeaders });
 
@@ -73,8 +74,8 @@ export class StyleService {
     addStyle(myStyle: Style): Observable<any>{
         const myHeaders = new Headers();
         myHeaders.append('Content-Type', 'application/json');
-        myHeaders.append('Token', StyleService.token);
-        myHeaders.append('Username', 'admin');
+        myHeaders.append('Token', localStorage.getItem('userToken'));
+        myHeaders.append('Username', localStorage.getItem('username'));
 
         const requestOptions = new RequestOptions({ headers: myHeaders });
         return this._httpService.post(this.WEB_API_URL, JSON.stringify(myStyle), requestOptions).pipe(

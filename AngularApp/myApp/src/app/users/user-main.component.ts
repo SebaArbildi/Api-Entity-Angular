@@ -21,8 +21,19 @@ export class UserMainComponent implements OnInit {
     )
   }
 
-  deleteUser(username:string): void{
-    this._userService.deleteUser(username).subscribe();
+  ngOnChanges(): void {
+    this._userService.getUsers().subscribe(
+      ((obtainedUsers: Array<User>) => this.users = obtainedUsers),
+      ((error: any) => console.log(error))
+    )
+    window.location.reload();
+  }
+
+  deleteUser(username: string): void {
+    if (window.confirm('¿Esta seguro que desea eliminar el estilo?')) {
+      this._userService.deleteUser(username).subscribe();
+      window.location.reload();
+    }
   }
 }
 

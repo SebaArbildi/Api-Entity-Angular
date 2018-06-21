@@ -11,6 +11,7 @@
                     <tr>
                         <th>Id</th>
                         <th>Nombre</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <!--Cuerpo de la tabla-->
@@ -19,9 +20,9 @@
                         <td>{{styleClass.Id}}</td>
                         <td>{{styleClass.Name}}</td>
                         <td>
-                            <button type="button" class="btn btn-danger" (click)="deleteStyleClass([(styleClass.Id)])"> Eliminar </button>
+                            <button type="button" class="btn btn-primary" [routerLink]="['/styleClass-view', (styleClass.Id)]"> Ver </button>
                             <button type="button" class="btn btn-warning" [routerLink]="['/styleClass-mod', (styleClass.Id)]"> Modificar </button>
-                            <button type="button" class="btn btn-success" [routerLink]="['/styleClass-view', (styleClass.Id)]"> Ver </button>
+                            <button type="button" class="btn btn-danger" (click)="deleteStyleClass([(styleClass.Id)])"> Eliminar </button>
                         </td>
                     </tr>
                 </tbody>

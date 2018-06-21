@@ -27,4 +27,12 @@ export class StyleClassViewComponent {
             ((error: any) => console.log(error))
         )
     }
+
+    ngOnChanges(): void {
+        this._styleClassService.getStyleClass(this.styleClass.Id).subscribe(
+            ((obtainedStyleClass: StyleClass) => this.styleClass = obtainedStyleClass),
+            ((error: any) => console.log(error))
+        )
+        window.location.reload();
+    }
 }

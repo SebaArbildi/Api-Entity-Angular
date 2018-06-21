@@ -30,10 +30,19 @@ export class StyleModComponent {
         )
     }
 
+    ngOnChanges(): void {
+        this._styleService.getStyle(this.style.Name).subscribe(
+            ((obtainedStyle: Style) => this.style = obtainedStyle),
+            ((error: any) => console.log(error))
+        )
+    }
+
     modStyle(): void{
         this._styleService.modStyle(this.name, this.style).subscribe(
             ((error: any) => console.log(error))
         )
+        alert("Estilo modificado");
+        window.location.reload();
     }
 
 }

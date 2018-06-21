@@ -24,13 +24,13 @@ namespace DocSystTest.ApiTest
             Utils.DeleteBd();
         }
 
-        [TestInitialize]
+        /*[TestInitialize]
         public void TestInitialize()
         {
             user = Utils.CreateUserForTest();
             loginBusinessLogic = new Mock<ILoginBusinessLogic>();
             loginController = new LoginController(loginBusinessLogic.Object);
-        }
+        }*/
 
         /*[TestMethod]
         public void Login_ExpectedParameters_Ok()

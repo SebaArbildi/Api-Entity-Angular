@@ -1,0 +1,34 @@
+<div class='panel panel-primary'>
+    <div class='panel-heading'>
+        <h1>{{title}} </h1>
+    </div>
+
+    <div class='panel-body'>
+        <div class='table-responsive'>
+            <table class='table' *ngIf='userDocument'>
+                <!--Cabezal de la tabla -->
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Clase de estilo</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <!--Cuerpo de la tabla-->
+                <tbody>
+                    <tr *ngFor='let aParagraph of userDocument.DocumentParagraphs'>
+                        <td>{{aParagraph.Id}}</td>
+                        <td>{{aParagraph.OwnStyleClass}}</td>
+                        <td>
+                            <button class='btn btn-primary' [routerLink]="['/text-main-paragraph', (documentId), (aParagraph.Id) ]">Ver textos</button>
+                            <button class='btn btn-warning' [routerLink]="['/paragraph-mod', (documentId), (aParagraph.Id)]">Modificar</button>
+                            <button class='btn btn-danger' (click)="deleteParagraph([(aParagraph.Id)])">Eliminar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <button class='btn btn-success' [routerLink]="['/paragraph-form', (documentId)]"> Agregar </button>
+            <button class="btn"type="button" [routerLink]="['/document-detail', (documentId) ]"> Cancel </button>
+        </div>
+    </div>
+</div>

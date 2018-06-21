@@ -11,9 +11,9 @@ import { map, tap, catchError } from 'rxjs/operators';
 export class StyleClassService {
 
     private WEB_API_URL: string = 'http://localhost:4162/api/StyleClass';
-    private static token: string = '3B427A22-F268-431E-804F-D30D2B53A6C6';
 
-    constructor(private _httpService: Http) { }
+    constructor(private _httpService: Http) {
+     }
 
     private handleError(error: Response) {
         console.error(error);
@@ -23,8 +23,8 @@ export class StyleClassService {
     getStyleClasses(): Observable<Array<StyleClass>> {
         const myHeaders = new Headers();
         myHeaders.append('Content-Type', 'application/json');
-        myHeaders.append('Token', StyleClassService.token);
-        myHeaders.append('Username', 'admin');
+        myHeaders.append('Token', localStorage.getItem('userToken'));
+        myHeaders.append('Username', localStorage.getItem('username'));
 
         const requestOptions = new RequestOptions({ headers: myHeaders });
 
@@ -37,7 +37,8 @@ export class StyleClassService {
     deleteStyleClass(id:string):Observable<any>{
         const myHeaders = new Headers();
         myHeaders.append('Content-Type', 'application/json');
-        myHeaders.append('Token', StyleClassService.token);
+        myHeaders.append('Token', localStorage.getItem('userToken'));
+        myHeaders.append('Username', localStorage.getItem('username'));
 
         const requestOptions = new RequestOptions({ headers: myHeaders});
         return this._httpService.delete(this.WEB_API_URL+"/"+id, requestOptions);
@@ -46,11 +47,10 @@ export class StyleClassService {
     addStyleClass(myStyleClass: StyleClass): Observable<any>{
         const myHeaders = new Headers();
         myHeaders.append('Content-Type', 'application/json');
-        myHeaders.append('Token', StyleClassService.token);
-        myHeaders.append('Username', 'admin');
+        myHeaders.append('Token', localStorage.getItem('userToken'));
+        myHeaders.append('Username', localStorage.getItem('username'));
 
         const requestOptions = new RequestOptions({ headers: myHeaders });
-        console.log(JSON.stringify(myStyleClass));
 
         return this._httpService.post(this.WEB_API_URL, JSON.stringify(myStyleClass), requestOptions).pipe(
             tap(data => console.log('Los datos que obtuvimos fueron: ' + JSON.stringify(data))),
@@ -60,9 +60,8 @@ export class StyleClassService {
     addStylesToStyleClass(myStyleClassId: String, style: Style): Observable<any>{
         const myHeaders = new Headers();
         myHeaders.append('Content-Type', 'application/json');
-        myHeaders.append('Token', StyleClassService.token);
-        myHeaders.append('Username', 'admin');
-        console.log(myStyleClassId);
+        myHeaders.append('Token', localStorage.getItem('userToken'));
+        myHeaders.append('Username', localStorage.getItem('username'));
 
         const requestOptions = new RequestOptions({ headers: myHeaders });
 
@@ -74,9 +73,8 @@ export class StyleClassService {
     deleteStyleFromStyleClass(myStyleClassId: String, styleName: String): Observable<any>{
         const myHeaders = new Headers();
         myHeaders.append('Content-Type', 'application/json');
-        myHeaders.append('Token', StyleClassService.token);
-        myHeaders.append('Username', 'admin');
-        console.log(myStyleClassId);
+        myHeaders.append('Token', localStorage.getItem('userToken'));
+        myHeaders.append('Username', localStorage.getItem('username'));
 
         const requestOptions = new RequestOptions({ headers: myHeaders });
 
@@ -88,8 +86,8 @@ export class StyleClassService {
     getStyleClass(id: string): Observable<StyleClass> {
         const myHeaders = new Headers();
         myHeaders.append('Content-Type', 'application/json');
-        myHeaders.append('Token', StyleClassService.token);
-        myHeaders.append('Username', 'admin');
+        myHeaders.append('Token', localStorage.getItem('userToken'));
+        myHeaders.append('Username', localStorage.getItem('username'));
 
         const requestOptions = new RequestOptions({ headers: myHeaders });
         return this._httpService.get(this.WEB_API_URL+"/"+id, requestOptions).pipe(

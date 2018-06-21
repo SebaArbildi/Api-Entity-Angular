@@ -1,0 +1,36 @@
+<div class='panel panel-primary'>
+    <div class='panel-heading'>
+        <h1>{{title}} </h1>
+    </div>
+
+    <div class='panel-body'>
+        <div class='table-responsive'>
+            <table class='table' *ngIf='userDocument'>
+                <!--Cabezal de la tabla -->
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Clase de estilo</th>
+                        <th>Tipo</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <!--Cuerpo de la tabla-->
+                <tbody>
+                    <tr *ngIf='userDocument.DocumentMargins'>
+                        <td>{{getHeader.Id}}</td>
+                        <td>{{getHeader.OwnStyleClass}}</td>
+                        <td>{{getHeader.Align}}</td>
+                        <td>
+                            <button class='btn btn-primary' [routerLink]="['/text-main-header', (documentId), (getHeader.Id) ]">Ver textos</button>
+                            <button class='btn btn-warning' [routerLink]="['/header-mod', (documentId), (getHeader.Id) ]">Modificar</button>
+                            <button class='btn btn-danger' (click)="deleteHeader([(getHeader.Id)])">Eliminar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <button class='btn btn-success' [routerLink]="['/header-form', (documentId)]"> Agregar </button>
+            <button class="btn"type="button" [routerLink]="['/document-detail', (documentId) ]"> Cancel </button>
+        </div>
+    </div>
+</div>

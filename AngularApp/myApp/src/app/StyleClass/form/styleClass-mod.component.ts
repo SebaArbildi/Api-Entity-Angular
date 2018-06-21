@@ -34,12 +34,29 @@ export class StyleClassModComponent {
         )
     }
 
+    ngOnChanges(): void {
+        this._styleService.getStyles().subscribe(
+            ((obtainedStyles: Array<Style>) => this.styles = obtainedStyles),
+            ((error: any) => console.log(error))
+        )
+
+        this._styleClassService.getStyleClass(this.styleClass.Id).subscribe(
+            ((obtainedStyleClass: StyleClass) => this.styleClass = obtainedStyleClass),
+            ((error: any) => console.log(error))
+        )
+        window.location.reload();
+    }
+
     addStyle(style: Style): void {
         this._styleClassService.addStylesToStyleClass(this.styleClass.Id, style).subscribe()
+        alert("Estilo añadido a la clase de estilo");
+        window.location.reload();
     }
 
     deleteStyle(style: Style): void {
         this._styleClassService.deleteStyleFromStyleClass(this.styleClass.Id, style.Name).subscribe()
+        alert("Estilo eliminado de la clase de estilo");
+        window.location.reload();
     }
 
 

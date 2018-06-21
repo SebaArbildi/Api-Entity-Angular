@@ -41,8 +41,6 @@ namespace DocSystWebApi.Models.DocumentStructureModels
             {
                 CreatorUser = user,
                 Title = this.Title,
-                CreationDate = this.CreationDate,
-                LastModifyDate = this.LastModifyDate,
                 OwnStyleClass = this.OwnStyleClass,
                 DocumentMargins = margins,
                 DocumentParagraphs = paragraphs
