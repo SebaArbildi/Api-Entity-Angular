@@ -33,5 +33,6 @@ export class StyleClassViewComponent {
             ((obtainedStyleClass: StyleClass) => this.styleClass = obtainedStyleClass),
             ((error: any) => console.log(error))
         )
+        window.location.reload();
     }
 }

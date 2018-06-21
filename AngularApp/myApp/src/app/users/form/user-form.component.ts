@@ -23,6 +23,8 @@ export class UserFormComponent {
         this.user = new User(this.name, this.lastName, this.username, this.password, this.mail, 
             this.isAdmin);
         this._userService.addUser(this.user).subscribe();
+        alert("Usuario añadido");
+        window.location.reload();
       }
   
 }

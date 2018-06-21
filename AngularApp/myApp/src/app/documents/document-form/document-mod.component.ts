@@ -35,6 +35,8 @@ export class DocumentModComponent {
 
     modDocument(): void {
         this._documentService.modDocument(this.Id, this.document).subscribe();
+        alert("Documento modificado");
+        window.location.reload();
     }
 
 }

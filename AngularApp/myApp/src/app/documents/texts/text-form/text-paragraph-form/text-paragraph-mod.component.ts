@@ -39,6 +39,8 @@ export class TextParagraphModComponent {
 
     modText(): void {
         this._documentService.modText(this.id, this.text).subscribe();
+        alert("Texto modificado");
+        window.location.reload();
     }
 
 }

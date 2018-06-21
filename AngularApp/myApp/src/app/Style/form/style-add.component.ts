@@ -25,6 +25,8 @@ export class StyleAddComponent {
         this._styleService.addStyle(this.style).subscribe(
             ((error: any) => console.log(error))
         )
+        alert("Estilo añadido");
+        window.location.reload();
     }
 
 }

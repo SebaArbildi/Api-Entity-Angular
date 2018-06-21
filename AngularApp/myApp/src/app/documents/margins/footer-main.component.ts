@@ -32,6 +32,7 @@ export class FooterMainComponent implements OnInit {
       ((obtainedDocument: UserDocument) => this.userDocument = obtainedDocument),
       ((error: any) => console.log(error))
     )
+    window.location.reload();
   }
 
   get getFooter(): Margin {
@@ -43,8 +44,12 @@ export class FooterMainComponent implements OnInit {
     return null;
   }
 
-  deleteFooter(footerId : string) {
-    this._documentService.deleteMargin(footerId).subscribe();
+  deleteFooter(footerId: string) {
+    if (window.confirm('¿Esta seguro que desea eliminar el pie de pagina?')) {
+      this._documentService.deleteMargin(footerId).subscribe();
+      alert("Pie de pagina eliminado");
+      window.location.reload();
+    }
   }
 
 }

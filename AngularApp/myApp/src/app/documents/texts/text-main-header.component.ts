@@ -31,10 +31,15 @@ export class TextHeadernMainComponent implements OnInit {
       ((obtainedMargin: Margin) => this.userMargin = obtainedMargin),
       ((error: any) => console.log(error))
     )
+    window.location.reload();
   }
 
   deleteText(textId: string) {
-    this._documentService.deleteText(textId).subscribe();
+    if (window.confirm('¿Esta seguro que desea eliminar el texto?')) {
+      this._documentService.deleteText(textId).subscribe();
+      alert("Texto eliminado");
+      window.location.reload();
+    }
   }
 
 }

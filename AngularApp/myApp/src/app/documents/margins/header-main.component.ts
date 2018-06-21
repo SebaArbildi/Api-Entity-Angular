@@ -32,6 +32,7 @@ export class HeaderMainComponent implements OnInit {
       ((obtainedDocument: UserDocument) => this.userDocument = obtainedDocument),
       ((error: any) => console.log(error))
     )
+    window.location.reload();
   }
 
   get getHeader(): Margin {
@@ -44,7 +45,11 @@ export class HeaderMainComponent implements OnInit {
   }
 
   deleteHeader(headerId: string) {
-    this._documentService.deleteMargin(headerId).subscribe();
+    if (window.confirm('¿Esta seguro que desea eliminar el encabezado?')) {
+      this._documentService.deleteMargin(headerId).subscribe();
+      alert("Encabezado eliminado");
+      window.location.reload();
+    }
   }
 
 }

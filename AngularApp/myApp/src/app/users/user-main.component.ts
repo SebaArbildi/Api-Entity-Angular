@@ -26,10 +26,14 @@ export class UserMainComponent implements OnInit {
       ((obtainedUsers: Array<User>) => this.users = obtainedUsers),
       ((error: any) => console.log(error))
     )
+    window.location.reload();
   }
 
-  deleteUser(username:string): void{
-    this._userService.deleteUser(username).subscribe();
+  deleteUser(username: string): void {
+    if (window.confirm('¿Esta seguro que desea eliminar el estilo?')) {
+      this._userService.deleteUser(username).subscribe();
+      window.location.reload();
+    }
   }
 }
 

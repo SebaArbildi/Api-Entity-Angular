@@ -19,6 +19,8 @@ export class ParagraphFormComponent {
     addParagraph(): void {
         var paragraphTemp = new ParagraphTemp(this.styleClass, 2, this.documentId);
         this._documentService.addParagraph(this.documentId,paragraphTemp).subscribe();
+        alert("Parrafo añadido");
+        window.location.reload();
     }
 
 }

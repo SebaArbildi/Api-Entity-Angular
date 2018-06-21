@@ -12,7 +12,7 @@
                         <th>Nombre</th>
                         <th>Tipo</th>
                         <th>Valor</th>
-                        <th>Accion</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <!--Cuerpo de la tabla-->
@@ -22,13 +22,13 @@
                         <td>{{style.Type}}</td>
                         <td>{{style.Value}}</td>
                         <td>
-                            <button type="button" class="btn btn-danger" (click)="deleteStyle([(style.Name)])"> Eliminar </button>
                             <button type="button" class="btn btn-warning" [routerLink]="['/style-mod', (style.Name)]"> Modificar </button>
+                            <button type="button" class="btn btn-danger" (click)="deleteStyle([(style.Name)])"> Eliminar </button>
                         </td>
                     </tr>
                 </tbody>
             </table>
-           <button class='btn btn-success' [routerLink]="['/style-add']"> Agregar </button>
+            <button class='btn btn-success' [routerLink]="['/style-add']"> Agregar </button>
         </div>
     </div>
 </div>

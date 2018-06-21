@@ -36,6 +36,8 @@ export class HeaderModComponent implements OnInit, OnChanges {
 
     modHeader(): void {
         this._documentService.modMargin(this.id, this.margin).subscribe();
+        alert("Encabezado modificado");
+        window.location.reload();
     }
 
 }

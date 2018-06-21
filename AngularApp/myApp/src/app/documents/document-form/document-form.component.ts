@@ -17,6 +17,8 @@ export class DocumentFormComponent {
     addDocument(): void {
         var documentTemp = new DocumentTemp(this.Title, this.StyleClass);
         this._documentService.addDocument(documentTemp).subscribe();
+        alert("Documento añadido");
+        window.location.reload();
       }
   
 }

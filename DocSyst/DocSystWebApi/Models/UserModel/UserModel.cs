@@ -11,6 +11,7 @@ namespace DocSystWebApi.Models.UserModel
         public string Password { get; set; }
         public string Mail { get; set; }
         public bool IsAdmin { get; set; }
+        public Guid Token { get; set; }
 
         public UserModel() { }
 
@@ -37,6 +38,7 @@ namespace DocSystWebApi.Models.UserModel
             Password = user.Password;
             Mail = user.Mail;
             IsAdmin = user.IsAdmin;
+            Token = user.Token;
             return this;
         }
 

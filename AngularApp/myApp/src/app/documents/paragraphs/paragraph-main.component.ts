@@ -21,7 +21,7 @@ export class ParagraphMainComponent implements OnInit {
     this._documentService.getDocument(this.documentId).subscribe(
       ((obtainedDocument: UserDocument) => this.userDocument = obtainedDocument),
       ((error: any) => console.log(error)),
-      
+
     )
   }
 
@@ -29,12 +29,17 @@ export class ParagraphMainComponent implements OnInit {
     this._documentService.getDocument(this.documentId).subscribe(
       ((obtainedDocument: UserDocument) => this.userDocument = obtainedDocument),
       ((error: any) => console.log(error)),
-      
+
     )
+    window.location.reload();
   }
 
-  deleteParagraph(paragraphId : string) {
-    this._documentService.deleteParagraph(paragraphId).subscribe();
+  deleteParagraph(paragraphId: string) {
+    if (window.confirm('¿Esta seguro que desea eliminar el parrafo?')) {
+      this._documentService.deleteParagraph(paragraphId).subscribe();
+      alert("Parrafo eliminado");
+      window.location.reload();
+    }
   }
 
 }

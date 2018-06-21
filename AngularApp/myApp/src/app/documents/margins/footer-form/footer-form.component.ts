@@ -19,6 +19,8 @@ export class FooterFormComponent {
     addFooter(): void {
         var footerTemp = new MarginTemp(this.styleClass, 1, this.documentId);
         this._documentService.addMargin(this.documentId,"FOOTER",footerTemp).subscribe();
+        alert("Pie de pagina añadido");
+        window.location.reload();
     }
 
 }

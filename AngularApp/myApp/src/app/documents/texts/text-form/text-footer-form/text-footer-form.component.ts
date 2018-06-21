@@ -22,6 +22,8 @@ export class TextFooterFormComponent {
     addText(): void {
         var textTemp = new TextTempClass(this.StyleClass, this.TextContent, this.marginId);
         this._documentService.addTextToMargin(this.marginId,textTemp).subscribe();
+        alert("Texto añadido");
+        window.location.reload();
     }
 
 }

@@ -22,6 +22,8 @@ export class TextParagraphFormComponent {
     addText(): void {
         var textTemp = new TextTempClass(this.StyleClass, this.TextContent, this.paragraphId);
         this._documentService.addTextToParagraph(this.paragraphId,textTemp).subscribe();
+        alert("Texto añadido");
+        window.location.reload();
     }
 
 }

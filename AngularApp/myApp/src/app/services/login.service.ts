@@ -3,6 +3,7 @@ import { User } from '../models/user';
 import { Http, Response, RequestOptions, Headers } from '@angular/http';
 import { Observable, throwError } from 'rxjs';
 import { map, tap, catchError } from 'rxjs/operators';
+import { LoginUser } from '../models/loginUser';
 
 
 
@@ -10,24 +11,20 @@ import { map, tap, catchError } from 'rxjs/operators';
 export class LoginService {
 
     private WEB_API_URL: string = 'http://localhost:4162/api/Login';
-    private static token: string;
-    private static username: string;
 
     constructor(private _httpService: Http) {
-        LoginService.token = localStorage.getItem('userToken');
-        LoginService.username = localStorage.getItem('username');
     }
 
-    login(myUser: User): Observable<string> {
+    login(myUser: User): Observable<LoginUser> {
         const myHeaders = new Headers();
         myHeaders.append('Content-Type', 'application/json');
-        myHeaders.append('Token', LoginService.token);
-        myHeaders.append('Username', LoginService.username);
+        myHeaders.append('Token', localStorage.getItem('userToken'));
+        myHeaders.append('Username', localStorage.getItem('username'));
 
         const requestOptions = new RequestOptions({ headers: myHeaders });
 
         return this._httpService.put(this.WEB_API_URL, JSON.stringify(myUser), requestOptions).pipe(
-            map((response: Response) => <string>response.json()),
+            map((response: Response) => <LoginUser>response.json()),
             tap(data => console.log('Los datos que obtuvimos fueron: ' + JSON.stringify(data))),
             catchError(this.handleError));
     }

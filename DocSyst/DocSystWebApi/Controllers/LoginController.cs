@@ -1,4 +1,6 @@
 ﻿using DocSystBusinessLogicInterface.AuthorizationBusinessLogicInterface;
+using DocSystBusinessLogicInterface.UserBusinessLogicInterface;
+using DocSystEntities.User;
 using DocSystWebApi.Models.UserModel;
 using System;
 using System.Collections.Generic;
@@ -11,10 +13,12 @@ namespace DocSystWebApi.Controllers
     public class LoginController : ApiController
     {
         private ILoginBusinessLogic LoginBusinessLogic { get; set; }
+        private IUserBusinessLogic UserBusinessLogic { get; set; }
 
-        public LoginController(ILoginBusinessLogic LoginBusinessLogic)
+        public LoginController(ILoginBusinessLogic LoginBusinessLogic, IUserBusinessLogic userBusinessLogic)
         {
             this.LoginBusinessLogic = LoginBusinessLogic;
+            this.UserBusinessLogic = userBusinessLogic;
         }
 
         [Route("api/Login", Name = "Login")]
@@ -24,7 +28,9 @@ namespace DocSystWebApi.Controllers
             try
             {
                 Guid token = LoginBusinessLogic.Login(user.Username, user.Password);
-                return Ok(token);
+                User obtainedUser = UserBusinessLogic.GetUser(user.Username);
+                UserModel responseUser = UserModel.ToModel(obtainedUser);
+                return Ok(responseUser);
             }
             catch (Exception e)
             {

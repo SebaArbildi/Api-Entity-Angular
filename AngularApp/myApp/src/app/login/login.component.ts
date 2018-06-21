@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { User } from '../models/user';
+import { LoginUser } from '../models/loginUser';
 import { LoginService } from '../services/login.service';
-import { MockNgModuleResolver } from '@angular/compiler/testing';
 
 @Component({
     selector: 'login',
@@ -9,27 +8,39 @@ import { MockNgModuleResolver } from '@angular/compiler/testing';
 })
 export class LoginComponent {
     pageTitle: string = "Login";
-    user: User;
+    user: LoginUser;
+    userPostLogin: LoginUser;
     resp: string;
     auth: boolean;
 
     constructor(private _loginService: LoginService) {
-        this.user = new User("", "", "", "", "", false);
-    }
-
-    log(){
-        console.log(localStorage.getItem('userToken'));
-        console.log(localStorage.getItem('username'));
+        this.user = new LoginUser("", "", "", "", "", false, "");
     }
 
     login(): void {
         this._loginService.login(this.user).subscribe(
-            ((response: string) => localStorage.setItem('userToken',response)),
-            ((error: any) => console.log(error))
+            ((response: LoginUser) => this.loadCredentials(response)),
+            ((error: any) => this.viewError(error))
         );
-
-        localStorage.setItem('username',this.user.Username);
     }
 
+    viewError(error: any){
+        alert("Datos incorrectos");
+        console.log(error);
+    }
 
+    loadCredentials(user:LoginUser): void {
+        window.location.assign("/welcome");
+        localStorage.setItem('username', user.Username);
+        localStorage.setItem('userToken', user.Token)
+
+        if (user.IsAdmin) {
+            localStorage.setItem('isAdmin', 'true');
+        }
+        else {
+            localStorage.setItem('isAdmin', 'false');
+        }
+
+        alert("Login exitoso");
+    }
 }

@@ -19,6 +19,8 @@ export class HeaderFormComponent {
     addHeader(): void {
         var headerTemp = new MarginTemp(this.styleClass, 0, this.documentId);
         this._documentService.addMargin(this.documentId,"HEADER",headerTemp).subscribe();
+        alert("Encabezado añadido");
+        window.location.reload();
     }
 
 }

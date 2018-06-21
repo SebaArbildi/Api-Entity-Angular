@@ -17,19 +17,15 @@ import { TextClass } from '../documents/texts/text';
 export class DocumentService {
     
     private WEB_API_URL : string = 'http://localhost:4162/api/';
-    private static token: string;
-    private static username: string;
 
     constructor(private _httpService: Http) { 
-        DocumentService.token = localStorage.getItem('userToken');
-        DocumentService.username = localStorage.getItem('username');
      }
 
     getDocuments(): Observable<Array<UserDocument>> {
         const myHeaders = new Headers();
         myHeaders.append('Accept','application/json');
-        myHeaders.append('Token', DocumentService.token);
-        myHeaders.append('Username', DocumentService.username);
+        myHeaders.append('Token', localStorage.getItem('userToken'));
+        myHeaders.append('Username', localStorage.getItem('username'));
 
         const requestOptions = new RequestOptions({headers : myHeaders});
 
@@ -44,8 +40,8 @@ export class DocumentService {
     getFormats(): Observable<Array<Format>> {
         const myHeaders = new Headers();
         myHeaders.append('Accept','application/json');
-        myHeaders.append('Token',DocumentService.token);
-        myHeaders.append('Username',DocumentService.username);
+        myHeaders.append('Token', localStorage.getItem('userToken'));
+        myHeaders.append('Username', localStorage.getItem('username'));
 
         const requestOptions = new RequestOptions({headers : myHeaders});
 
@@ -61,8 +57,8 @@ export class DocumentService {
     getDocument(id : string): Observable<UserDocument>{
         const myHeaders = new Headers();
         myHeaders.append('Accept','application/json');
-        myHeaders.append('Token',DocumentService.token);
-        myHeaders.append('Username',DocumentService.username);
+        myHeaders.append('Token', localStorage.getItem('userToken'));
+        myHeaders.append('Username', localStorage.getItem('username'));
 
         const requestOptions = new RequestOptions({headers : myHeaders});
 
@@ -76,8 +72,8 @@ export class DocumentService {
     getMargin(id : string): Observable<Margin>{
         const myHeaders = new Headers();
         myHeaders.append('Accept','application/json');
-        myHeaders.append('Token',DocumentService.token);
-        myHeaders.append('Username',DocumentService.username);
+        myHeaders.append('Token', localStorage.getItem('userToken'));
+        myHeaders.append('Username', localStorage.getItem('username'));
 
         const requestOptions = new RequestOptions({headers : myHeaders});
 
@@ -91,8 +87,8 @@ export class DocumentService {
     getParagraph(id : string): Observable<Paragraph>{
         const myHeaders = new Headers();
         myHeaders.append('Accept','application/json');
-        myHeaders.append('Token',DocumentService.token);
-        myHeaders.append('Username',DocumentService.username);
+        myHeaders.append('Token', localStorage.getItem('userToken'));
+        myHeaders.append('Username', localStorage.getItem('username'));
 
         const requestOptions = new RequestOptions({headers : myHeaders});
 
@@ -105,8 +101,8 @@ export class DocumentService {
     getText(id : string): Observable<TextClass>{
         const myHeaders = new Headers();
         myHeaders.append('Accept','application/json');
-        myHeaders.append('Token',DocumentService.token);
-        myHeaders.append('Username',DocumentService.username);
+        myHeaders.append('Token', localStorage.getItem('userToken'));
+        myHeaders.append('Username', localStorage.getItem('username'));
 
         const requestOptions = new RequestOptions({headers : myHeaders});
 
@@ -120,8 +116,8 @@ export class DocumentService {
     deleteDocument(id : string): Observable<any>{
         const myHeaders = new Headers();
         myHeaders.append('Content-Type', 'application/json');
-        myHeaders.append('Token', DocumentService.token);
-        myHeaders.append('Username',DocumentService.username);
+        myHeaders.append('Token', localStorage.getItem('userToken'));
+        myHeaders.append('Username', localStorage.getItem('username'));
 
         const requestOptions = new RequestOptions({ headers: myHeaders});
         return this._httpService.delete(this.WEB_API_URL+"Document/"+id, requestOptions);
@@ -130,8 +126,8 @@ export class DocumentService {
     deleteMargin(id : string): Observable<any>{
         const myHeaders = new Headers();
         myHeaders.append('Content-Type', 'application/json');
-        myHeaders.append('Token', DocumentService.token);
-        myHeaders.append('Username',DocumentService.username);
+        myHeaders.append('Token', localStorage.getItem('userToken'));
+        myHeaders.append('Username', localStorage.getItem('username'));
 
         const requestOptions = new RequestOptions({ headers: myHeaders});
         return this._httpService.delete(this.WEB_API_URL+"Margin/"+id, requestOptions);
@@ -140,8 +136,8 @@ export class DocumentService {
     deleteParagraph(id : string): Observable<any>{
         const myHeaders = new Headers();
         myHeaders.append('Content-Type', 'application/json');
-        myHeaders.append('Token', DocumentService.token);
-        myHeaders.append('Username',DocumentService.username);
+        myHeaders.append('Token', localStorage.getItem('userToken'));
+        myHeaders.append('Username', localStorage.getItem('username'));
 
         const requestOptions = new RequestOptions({ headers: myHeaders});
         return this._httpService.delete(this.WEB_API_URL+"Paragraph/"+id, requestOptions);
@@ -150,8 +146,8 @@ export class DocumentService {
     deleteText(id : string): Observable<any>{
         const myHeaders = new Headers();
         myHeaders.append('Content-Type', 'application/json');
-        myHeaders.append('Token', DocumentService.token);
-        myHeaders.append('Username',DocumentService.username);
+        myHeaders.append('Token', localStorage.getItem('userToken'));
+        myHeaders.append('Username', localStorage.getItem('username'));
 
         const requestOptions = new RequestOptions({ headers: myHeaders});
         return this._httpService.delete(this.WEB_API_URL+"Text/"+id, requestOptions);
@@ -160,8 +156,8 @@ export class DocumentService {
     printDocument(printer : Printer) : Observable<string>{ 
         const myHeaders = new Headers();
         myHeaders.append('Content-Type','application/json');
-        myHeaders.append('Token',DocumentService.token);
-        myHeaders.append('Username','admin');
+        myHeaders.append('Token', localStorage.getItem('userToken'));
+        myHeaders.append('Username', localStorage.getItem('username'));
 
         const requestOptions = new RequestOptions({headers : myHeaders});
 
@@ -174,8 +170,8 @@ export class DocumentService {
     addDocument(documentTemp : DocumentTemp): Observable<any> {
         const myHeaders = new Headers();
         myHeaders.append('Content-Type', 'application/json');
-        myHeaders.append('Token', DocumentService.token);
-        myHeaders.append('Username', DocumentService.username);
+        myHeaders.append('Token', localStorage.getItem('userToken'));
+        myHeaders.append('Username', localStorage.getItem('username'));
 
         const requestOptions = new RequestOptions({ headers: myHeaders });
         return this._httpService.post(this.WEB_API_URL+"Document", JSON.stringify(documentTemp), requestOptions);
@@ -184,8 +180,8 @@ export class DocumentService {
     modDocument(id : string, documentTemp : DocumentTemp): Observable<UserDocument>{
         const myHeaders = new Headers();
         myHeaders.append('Content-Type', 'application/json');
-        myHeaders.append('Token', DocumentService.token);
-        myHeaders.append('Username', DocumentService.username);
+        myHeaders.append('Token', localStorage.getItem('userToken'));
+        myHeaders.append('Username', localStorage.getItem('username'));
 
         const requestOptions = new RequestOptions({ headers: myHeaders });
 
@@ -198,8 +194,8 @@ export class DocumentService {
     addMargin(documentId: string, align: string, marginTemp : MarginTemp): Observable<any> {
         const myHeaders = new Headers();
         myHeaders.append('Content-Type', 'application/json');
-        myHeaders.append('Token', DocumentService.token);
-        myHeaders.append('Username', DocumentService.username);
+        myHeaders.append('Token', localStorage.getItem('userToken'));
+        myHeaders.append('Username', localStorage.getItem('username'));
 
         const requestOptions = new RequestOptions({ headers: myHeaders });
         return this._httpService.post(this.WEB_API_URL+"Document/"+documentId+"/Margin/"+align, JSON.stringify(marginTemp), requestOptions);
@@ -208,8 +204,8 @@ export class DocumentService {
     modMargin(id : string, marginTemp : MarginTemp): Observable<Margin>{
         const myHeaders = new Headers();
         myHeaders.append('Content-Type', 'application/json');
-        myHeaders.append('Token', DocumentService.token);
-        myHeaders.append('Username', DocumentService.username);
+        myHeaders.append('Token', localStorage.getItem('userToken'));
+        myHeaders.append('Username', localStorage.getItem('username'));
 
         const requestOptions = new RequestOptions({ headers: myHeaders });
 
@@ -222,8 +218,8 @@ export class DocumentService {
     addParagraph(documentId: string, paragraphTemp : ParagraphTemp): Observable<any> {
         const myHeaders = new Headers();
         myHeaders.append('Content-Type', 'application/json');
-        myHeaders.append('Token', DocumentService.token);
-        myHeaders.append('Username', DocumentService.username);
+        myHeaders.append('Token', localStorage.getItem('userToken'));
+        myHeaders.append('Username', localStorage.getItem('username'));
 
         const requestOptions = new RequestOptions({ headers: myHeaders });
         return this._httpService.post(this.WEB_API_URL+"Document/"+documentId+"/Paragraph", JSON.stringify(paragraphTemp), requestOptions);
@@ -232,8 +228,8 @@ export class DocumentService {
     modParagraph(id : string, paragraphTemp : ParagraphTemp): Observable<Margin>{
         const myHeaders = new Headers();
         myHeaders.append('Content-Type', 'application/json');
-        myHeaders.append('Token', DocumentService.token);
-        myHeaders.append('Username', DocumentService.username);
+        myHeaders.append('Token', localStorage.getItem('userToken'));
+        myHeaders.append('Username', localStorage.getItem('username'));
 
         const requestOptions = new RequestOptions({ headers: myHeaders });
 
@@ -246,8 +242,8 @@ export class DocumentService {
     modText(id : string, textTemp : TextTempClass): Observable<TextTempClass>{
         const myHeaders = new Headers();
         myHeaders.append('Content-Type', 'application/json');
-        myHeaders.append('Token', DocumentService.token);
-        myHeaders.append('Username', DocumentService.username);
+        myHeaders.append('Token', localStorage.getItem('userToken'));
+        myHeaders.append('Username', localStorage.getItem('username'));
 
         const requestOptions = new RequestOptions({ headers: myHeaders });
 
@@ -260,8 +256,8 @@ export class DocumentService {
     addTextToMargin(marginId: string, textTemp : TextTempClass): Observable<any> {
         const myHeaders = new Headers();
         myHeaders.append('Content-Type', 'application/json');
-        myHeaders.append('Token', DocumentService.token);
-        myHeaders.append('Username', DocumentService.username);
+        myHeaders.append('Token', localStorage.getItem('userToken'));
+        myHeaders.append('Username', localStorage.getItem('username'));
 
         const requestOptions = new RequestOptions({ headers: myHeaders });
         return this._httpService.put(this.WEB_API_URL+"Margin/"+marginId+"/SetText", JSON.stringify(textTemp), requestOptions);
@@ -270,8 +266,8 @@ export class DocumentService {
     addTextToParagraph(paragraphId: string, textTemp : TextTempClass): Observable<any> {
         const myHeaders = new Headers();
         myHeaders.append('Content-Type', 'application/json');
-        myHeaders.append('Token', DocumentService.token);
-        myHeaders.append('Username', DocumentService.username);
+        myHeaders.append('Token', localStorage.getItem('userToken'));
+        myHeaders.append('Username', localStorage.getItem('username'));
 
         const requestOptions = new RequestOptions({ headers: myHeaders });
         return this._httpService.post(this.WEB_API_URL+"Paragraph/"+paragraphId+"/Text", JSON.stringify(textTemp), requestOptions);

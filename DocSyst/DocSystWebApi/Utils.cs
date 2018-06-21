@@ -2,6 +2,7 @@
 using DocSystBusinessLogicInterface.UserBusinessLogicInterface;
 using DocSystEntities.StyleStructure;
 using DocSystWebApi.Models.StyleStructureModels;
+using DocSystWebApi.Models.UserModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace DocSystWebApi
             if (headers.Contains("Token"))
             {
                 return Guid.Parse(headers.GetValues("Token").First());
-            }
+            }   
             else
             {
                 throw new ArgumentNullException("request.Headers", "Doen't contains the token");
@@ -66,8 +67,20 @@ namespace DocSystWebApi
                 throw new ArgumentNullException("request.Headers", "Doen't contains the username");
             }
         }
-		
-		internal static IList<StyleModel> ConvertEntitiesToModels(IList<Style> styles)
+
+        internal static UserModel GetCreatorUser(HttpRequestMessage request, IUserBusinessLogic userBusinessLogic)
+        {
+            if (request.Headers.Contains("Username"))
+            {
+                return UserModel.ToModel(userBusinessLogic.GetUser(request.Headers.GetValues("Username").First()));
+            }
+            else
+            {
+                throw new ArgumentNullException("request.Headers", "Doen't contains the username");
+            }
+        }
+
+        internal static IList<StyleModel> ConvertEntitiesToModels(IList<Style> styles)
         {
             IList<StyleModel> stylesModels = new List<StyleModel>();
             foreach (Style style in styles)

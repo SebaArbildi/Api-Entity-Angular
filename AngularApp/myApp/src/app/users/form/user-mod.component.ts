@@ -31,12 +31,15 @@ export class UserModComponent {
             ((obtainedUser: User) => this.user = obtainedUser),
             ((error: any) => console.log(error))
         )
+        window.location.reload();
     }
 
     modUser(): void{
         this._userService.modUser(this.username, this.user).subscribe(
             ((error: any) => console.log(error))
         )
+        alert("Usuario modificado");
+        window.location.reload();
     }
 
 }

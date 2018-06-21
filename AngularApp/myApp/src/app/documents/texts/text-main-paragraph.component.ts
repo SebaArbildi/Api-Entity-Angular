@@ -25,16 +25,21 @@ export class TextParagraphMainComponent implements OnInit {
       ((error: any) => console.log(error))
     )
   }
-  
+
   ngOnChanges(): void {
     this._documentService.getParagraph(this.paragraphId).subscribe(
       ((obtainedParagraph: Paragraph) => this.userParagraph = obtainedParagraph),
       ((error: any) => console.log(error))
     )
+    window.location.reload();
   }
 
-  deleteText(textId : string) {
-    this._documentService.deleteText(textId).subscribe();
+  deleteText(textId: string) {
+    if (window.confirm('¿Esta seguro que desea eliminar el texto?')) {
+      this._documentService.deleteText(textId).subscribe();
+      alert("Texto eliminado");
+      window.location.reload();
+    }
   }
 
 }

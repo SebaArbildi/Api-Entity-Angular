@@ -40,11 +40,13 @@ export class StyleClassAddComponent {
 
     addStyle(style: Style): void {
         this.stylesToAdd.push(style);
+        alert("Estilo añadido a la clase de estilo");
     }
 
     addInheritedStyleClass(inheritedStyleClass: StyleClass): void {
         this.styleClassToAdd = inheritedStyleClass;
         this.styleClass.InheritedStyleClass = this.styleClassToAdd;
+        alert("Clase de estilo heredada añadida a la clase de estilo");
     }
 
     addStyleClass(): void {
@@ -56,6 +58,9 @@ export class StyleClassAddComponent {
         console.log("segundo");
         this.styles.forEach(style => this._styleClassService.addStylesToStyleClass(this.styleClass.Id, style).subscribe());
         
+        alert("Clase de estilo añadida");
+
+        window.location.reload();
     }
 
 }

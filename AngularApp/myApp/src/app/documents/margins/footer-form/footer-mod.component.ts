@@ -35,6 +35,8 @@ export class FooterModComponent {
 
     modFooter(): void {
         this._documentService.modMargin(this.id, this.margin).subscribe();
+        alert("Pie de pagina modificado");
+        window.location.reload();
     }
 
 }

@@ -40,6 +40,13 @@ import { StyleClassMainComponent } from './StyleClass/styleClass-main.component'
 import { UserFormComponent } from './users/form/user-form.component';
 import { UserModComponent } from './users/form/user-mod.component';
 import { UserMainComponent } from './users/user-main.component';
+import { UserService } from './services/user.service';
+import { LoginService } from './services/login.service';
+import { StyleService } from './services/style.service';
+import { StyleClassService } from './services/styleClass.service';
+import { DocumentService } from './services/document.service';
+import { LockGuard } from './guards/lock.guard';
+import { NotAvailableGuard } from './guards/notAvailable.guard';
 
 
 
@@ -95,13 +102,13 @@ import { UserMainComponent } from './users/user-main.component';
       { path: 'styleClass-mod', component: StyleClassModComponent},
       { path: 'styleClass-mod/:id', component: StyleClassModComponent},
       { path: 'styleClass-add', component: StyleClassAddComponent},
-      { path: 'styleClass-main', component: StyleClassMainComponent},
+      { path: 'styleClass-main', component: StyleClassMainComponent, canActivate: [NotAvailableGuard]},
       { path: 'style-add', component: StyleAddComponent},
       { path: 'style-mod', component: StyleModComponent},
       { path: 'style-mod/:name', component: StyleModComponent},
-      { path: 'style-main', component: StyleMainComponent},
+      { path: 'style-main', component: StyleMainComponent, canActivate: [NotAvailableGuard]},
       { path: 'login', component: LoginComponent},
-      { path: 'user-main', component: UserMainComponent},
+      { path: 'user-main', component: UserMainComponent, canActivate: [NotAvailableGuard]},
       { path: 'header-main/:id', component: HeaderMainComponent },
       { path: 'header-form/:id', component: HeaderFormComponent },
       { path: 'header-mod/:id/:marginId', component: HeaderModComponent },
@@ -132,7 +139,7 @@ import { UserMainComponent } from './users/user-main.component';
       { path: '**', redirectTo: 'welcome', pathMatch: 'full' }
     ])
   ],
-  providers: [],
+  providers: [UserService, LoginService, StyleService, StyleClassService, DocumentService, LockGuard, NotAvailableGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

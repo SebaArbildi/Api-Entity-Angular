@@ -12,8 +12,6 @@ body {
     width: 200px;
     position: fixed;
     z-index: 1;
-    top: 60px;
-    left: 200px;
     background: #337ab7;
     overflow-x: hidden;
     padding: 8px 0;

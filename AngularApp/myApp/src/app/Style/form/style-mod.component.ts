@@ -41,6 +41,8 @@ export class StyleModComponent {
         this._styleService.modStyle(this.name, this.style).subscribe(
             ((error: any) => console.log(error))
         )
+        alert("Estilo modificado");
+        window.location.reload();
     }
 
 }

@@ -35,6 +35,8 @@ export class ParagraphModComponent implements OnInit, OnChanges {
 
     modParagraph(): void {
         this._documentService.modParagraph(this.id, this.paragraph).subscribe();
+        alert("Parrafo modificado");
+        window.location.reload();
     }
 
 }

@@ -11,10 +11,10 @@
                     <tr>
                         <th>Nombre</th>
                         <th>Apellido</th>
-                        <th>Username</th>
+                        <th>Usuario</th>
                         <th>Mail</th>
-                        <th>EsAdmin</th>
-                        <th>Accion</th>
+                        <th>Es administrador</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <!--Cuerpo de la tabla-->
@@ -25,8 +25,10 @@
                         <td>{{aUser.Username}}</td>
                         <td>{{aUser.Mail}}</td>
                         <td>{{aUser.IsAdmin}}</td>
-                        <td><button type="button" class="btn btn-danger" (click)="deleteUser([(aUser.Username)])"> Eliminar </button>
-                        <button type="button" class="btn btn-warning" [routerLink]="['/user-mod', (aUser.Username)]"> Modificar </button></td>
+                        <td>
+                            <button type="button" class="btn btn-warning" [routerLink]="['/user-mod', (aUser.Username)]"> Modificar </button>
+                            <button type="button" class="btn btn-danger" (click)="deleteUser([(aUser.Username)])"> Eliminar </button>
+                        </td>
                     </tr>
                 </tbody>
             </table>

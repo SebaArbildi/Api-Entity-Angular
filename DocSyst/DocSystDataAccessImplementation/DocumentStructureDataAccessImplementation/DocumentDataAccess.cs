@@ -114,6 +114,8 @@ namespace DocSystDataAccessImplementation.DocumentStructureDataAccessImplementat
 
         public void Modify(Document aDocument)
         {
+            aDocument.LastModifyDate = DateTime.Today;
+
             IBodyDataAccess bodyDataAccess = new BodyDataAccess();
             foreach (Body body in aDocument.DocumentMargins)
             {

@@ -8,7 +8,7 @@ import { StyleService } from '../services/style.service';
 })
 
 export class StyleMainComponent implements OnInit {
-  title = 'Styles';
+  title = 'Estilos';
   styles: Array<Style>;
 
   constructor(private _styleService: StyleService) {
@@ -26,9 +26,14 @@ export class StyleMainComponent implements OnInit {
       ((obtainedStyles: Array<Style>) => this.styles = obtainedStyles),
       ((error: any) => console.log(error))
     )
+    window.location.reload();
   }
 
   deleteStyle(name: string): void {
-    this._styleService.deleteStyle(name).subscribe();
+    if (window.confirm('¿Esta seguro que desea eliminar el estilo?')) {
+      this._styleService.deleteStyle(name).subscribe();
+      alert("Estilo eliminado");
+      window.location.reload();
+    }
   }
 }
