@@ -30,7 +30,7 @@ namespace DocSystWebApi
             config.MapHttpAttributeRoutes();
 
             //Enable CORS
-            var cors = new EnableCorsAttribute(origins: "*", headers: "*", methods: "*");
+            var cors = new EnableCorsAttribute(origins: "*", headers: "*", methods: "GET, POST, PUT, DELETE, OPTIONS, HEAD");
             config.EnableCors(cors);
 
             config.Routes.MapHttpRoute(
