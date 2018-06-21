@@ -8,7 +8,7 @@ namespace DocSystDataAccessImplementation
 {
     public class DocSystDbContext : DbContext
     {
-        public DocSystDbContext() { }
+        public DocSystDbContext() : base("name=VehicleManagerDbContext") { }
         public DbSet<Body> Bodys { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Document> Documents { get; set; }

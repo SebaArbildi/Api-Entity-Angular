@@ -10,7 +10,7 @@ namespace DocSystEntities.StyleStructure
         public Guid Id { get; set; }
         public string Name { get; set; }
         public IList<Style> ProperStyles { get; set;}
-        public StyleClass InheritedStyleClass { get; private set; }
+        public StyleClass InheritedStyleClass { get; set; }
         public IList<Style> InheritedPlusProperStyles { get; set; }
         public IList<StyleClass> Observers { get; set; }
 

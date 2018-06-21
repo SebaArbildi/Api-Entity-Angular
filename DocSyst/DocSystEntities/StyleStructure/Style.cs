@@ -11,7 +11,7 @@ namespace DocSystEntities.StyleStructure
     {
         public enum StyleType
         {
-            ALIGN, FONT, COLOR, DECORATION, BOLD, ITALIC
+            ALIGN, FONT, COLOR, DECORATION, BOLD, ITALIC, BORDER
         }
 
         public Guid Id { get; set; }

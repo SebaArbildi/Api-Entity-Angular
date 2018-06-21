@@ -40,6 +40,10 @@ namespace DocSystEntities.StyleStructure
             {
                 implementation = "font-family: " + Value;
             }
+            else if (this.Type.Equals(StyleType.BORDER))
+            {
+                implementation = "border: " + Value;
+            }
 
             return implementation;
         }
