@@ -115,7 +115,7 @@ export class DocumentService {
 
     deleteDocument(id : string): Observable<any>{
         const myHeaders = new Headers();
-        myHeaders.append('Content-Type', 'application/json');
+        myHeaders.append('Accept', 'application/json');
         myHeaders.append('Token', localStorage.getItem('userToken'));
         myHeaders.append('Username', localStorage.getItem('username'));
 
@@ -125,7 +125,7 @@ export class DocumentService {
 
     deleteMargin(id : string): Observable<any>{
         const myHeaders = new Headers();
-        myHeaders.append('Content-Type', 'application/json');
+        myHeaders.append('Accept', 'application/json');
         myHeaders.append('Token', localStorage.getItem('userToken'));
         myHeaders.append('Username', localStorage.getItem('username'));
 
@@ -135,7 +135,7 @@ export class DocumentService {
 
     deleteParagraph(id : string): Observable<any>{
         const myHeaders = new Headers();
-        myHeaders.append('Content-Type', 'application/json');
+        myHeaders.append('Accept', 'application/json');
         myHeaders.append('Token', localStorage.getItem('userToken'));
         myHeaders.append('Username', localStorage.getItem('username'));
 
@@ -145,7 +145,7 @@ export class DocumentService {
 
     deleteText(id : string): Observable<any>{
         const myHeaders = new Headers();
-        myHeaders.append('Content-Type', 'application/json');
+        myHeaders.append('Accept', 'application/json');
         myHeaders.append('Token', localStorage.getItem('userToken'));
         myHeaders.append('Username', localStorage.getItem('username'));
 
@@ -155,7 +155,7 @@ export class DocumentService {
 
     printDocument(printer : Printer) : Observable<string>{ 
         const myHeaders = new Headers();
-        myHeaders.append('Content-Type','application/json');
+        myHeaders.append('Accept','application/json');
         myHeaders.append('Token', localStorage.getItem('userToken'));
         myHeaders.append('Username', localStorage.getItem('username'));
 
@@ -169,7 +169,7 @@ export class DocumentService {
 
     addDocument(documentTemp : DocumentTemp): Observable<any> {
         const myHeaders = new Headers();
-        myHeaders.append('Content-Type', 'application/json');
+        myHeaders.append('Accept', 'application/json');
         myHeaders.append('Token', localStorage.getItem('userToken'));
         myHeaders.append('Username', localStorage.getItem('username'));
 
@@ -179,7 +179,7 @@ export class DocumentService {
 
     modDocument(id : string, documentTemp : DocumentTemp): Observable<UserDocument>{
         const myHeaders = new Headers();
-        myHeaders.append('Content-Type', 'application/json');
+        myHeaders.append('Accept', 'application/json');
         myHeaders.append('Token', localStorage.getItem('userToken'));
         myHeaders.append('Username', localStorage.getItem('username'));
 
@@ -193,7 +193,7 @@ export class DocumentService {
 
     addMargin(documentId: string, align: string, marginTemp : MarginTemp): Observable<any> {
         const myHeaders = new Headers();
-        myHeaders.append('Content-Type', 'application/json');
+        myHeaders.append('Accept', 'application/json');
         myHeaders.append('Token', localStorage.getItem('userToken'));
         myHeaders.append('Username', localStorage.getItem('username'));
 
@@ -203,7 +203,7 @@ export class DocumentService {
 
     modMargin(id : string, marginTemp : MarginTemp): Observable<Margin>{
         const myHeaders = new Headers();
-        myHeaders.append('Content-Type', 'application/json');
+        myHeaders.append('Accept', 'application/json');
         myHeaders.append('Token', localStorage.getItem('userToken'));
         myHeaders.append('Username', localStorage.getItem('username'));
 
@@ -217,7 +217,7 @@ export class DocumentService {
 
     addParagraph(documentId: string, paragraphTemp : ParagraphTemp): Observable<any> {
         const myHeaders = new Headers();
-        myHeaders.append('Content-Type', 'application/json');
+        myHeaders.append('Accept', 'application/json');
         myHeaders.append('Token', localStorage.getItem('userToken'));
         myHeaders.append('Username', localStorage.getItem('username'));
 
@@ -227,7 +227,7 @@ export class DocumentService {
 
     modParagraph(id : string, paragraphTemp : ParagraphTemp): Observable<Margin>{
         const myHeaders = new Headers();
-        myHeaders.append('Content-Type', 'application/json');
+        myHeaders.append('Accept', 'application/json');
         myHeaders.append('Token', localStorage.getItem('userToken'));
         myHeaders.append('Username', localStorage.getItem('username'));
 
@@ -241,7 +241,7 @@ export class DocumentService {
 
     modText(id : string, textTemp : TextTempClass): Observable<TextTempClass>{
         const myHeaders = new Headers();
-        myHeaders.append('Content-Type', 'application/json');
+        myHeaders.append('Accept', 'application/json');
         myHeaders.append('Token', localStorage.getItem('userToken'));
         myHeaders.append('Username', localStorage.getItem('username'));
 
@@ -255,7 +255,7 @@ export class DocumentService {
 
     addTextToMargin(marginId: string, textTemp : TextTempClass): Observable<any> {
         const myHeaders = new Headers();
-        myHeaders.append('Content-Type', 'application/json');
+        myHeaders.append('Accept', 'application/json');
         myHeaders.append('Token', localStorage.getItem('userToken'));
         myHeaders.append('Username', localStorage.getItem('username'));
 
@@ -265,7 +265,7 @@ export class DocumentService {
 
     addTextToParagraph(paragraphId: string, textTemp : TextTempClass): Observable<any> {
         const myHeaders = new Headers();
-        myHeaders.append('Content-Type', 'application/json');
+        myHeaders.append('Accept', 'application/json');
         myHeaders.append('Token', localStorage.getItem('userToken'));
         myHeaders.append('Username', localStorage.getItem('username'));
 

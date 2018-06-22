@@ -36,7 +36,7 @@ import { StyleMainComponent } from './style/style-main.component';
 import { StyleClassAddComponent } from './styleClass/form/styleClass-add.component';
 import { StyleClassModComponent } from './styleClass/form/styleClass-mod.component';
 import { StyleClassViewComponent } from './styleClass/form/styleClass-view.component';
-import { StyleClassMainComponent } from './StyleClass/styleClass-main.component';
+import { StyleClassMainComponent } from './styleClass/styleClass-main.component';
 import { UserFormComponent } from './users/form/user-form.component';
 import { UserModComponent } from './users/form/user-mod.component';
 import { UserMainComponent } from './users/user-main.component';

@@ -17,7 +17,7 @@ export class LoginService {
 
     login(myUser: User): Observable<LoginUser> {
         const myHeaders = new Headers();
-        myHeaders.append('Content-Type', 'application/json');
+        myHeaders.append('Accept', 'application/json');
         myHeaders.append('Token', localStorage.getItem('userToken'));
         myHeaders.append('Username', localStorage.getItem('username'));
 

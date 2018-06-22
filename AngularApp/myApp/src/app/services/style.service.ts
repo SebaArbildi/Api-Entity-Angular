@@ -21,7 +21,7 @@ export class StyleService {
 
     getStyles(): Observable<Array<Style>> {
         const myHeaders = new Headers();
-        myHeaders.append('Content-Type', 'application/json');
+        myHeaders.append('Accept', 'application/json');
         myHeaders.append('Token', localStorage.getItem('userToken'));
         myHeaders.append('Username', localStorage.getItem('username'));
 
@@ -35,7 +35,7 @@ export class StyleService {
 
     getStyle(name: string): Observable<Style> {
         const myHeaders = new Headers();
-        myHeaders.append('Content-Type', 'application/json');
+        myHeaders.append('Accept', 'application/json');
         myHeaders.append('Token', localStorage.getItem('userToken'));
         myHeaders.append('Username', localStorage.getItem('username'));
 
@@ -49,7 +49,7 @@ export class StyleService {
 
     deleteStyle(name:string):Observable<any>{
         const myHeaders = new Headers();
-        myHeaders.append('Content-Type', 'application/json');
+        myHeaders.append('Accept', 'application/json');
         myHeaders.append('Token', localStorage.getItem('userToken'));
         myHeaders.append('Username', localStorage.getItem('username'));
 
@@ -59,7 +59,7 @@ export class StyleService {
 
     modStyle(name:string, myStyle: Style): Observable<Style>{
         const myHeaders = new Headers();
-        myHeaders.append('Content-Type', 'application/json');
+        myHeaders.append('Accept', 'application/json');
         myHeaders.append('Token', localStorage.getItem('userToken'));
         myHeaders.append('Username', localStorage.getItem('username'));
 
@@ -73,7 +73,7 @@ export class StyleService {
 
     addStyle(myStyle: Style): Observable<any>{
         const myHeaders = new Headers();
-        myHeaders.append('Content-Type', 'application/json');
+        myHeaders.append('Accept', 'application/json');
         myHeaders.append('Token', localStorage.getItem('userToken'));
         myHeaders.append('Username', localStorage.getItem('username'));
 
