@@ -30,7 +30,6 @@ export class LoginComponent {
     }
 
     loadCredentials(user:LoginUser): void {
-        window.location.assign("/welcome");
         localStorage.setItem('username', user.Username);
         localStorage.setItem('userToken', user.Token)
 
