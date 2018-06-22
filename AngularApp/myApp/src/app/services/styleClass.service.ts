@@ -23,6 +23,7 @@ export class StyleClassService {
     getStyleClasses(): Observable<Array<StyleClass>> {
         const myHeaders = new Headers();
         myHeaders.append('Accept', 'application/json');
+        myHeaders.append('Content-Type', 'application/json');
         myHeaders.append('Token', localStorage.getItem('userToken'));
         myHeaders.append('Username', localStorage.getItem('username'));
 
@@ -37,6 +38,7 @@ export class StyleClassService {
     deleteStyleClass(id:string):Observable<any>{
         const myHeaders = new Headers();
         myHeaders.append('Accept', 'application/json');
+        myHeaders.append('Content-Type', 'application/json');
         myHeaders.append('Token', localStorage.getItem('userToken'));
         myHeaders.append('Username', localStorage.getItem('username'));
 
@@ -60,6 +62,7 @@ export class StyleClassService {
     addStylesToStyleClass(myStyleClassId: String, style: Style): Observable<any>{
         const myHeaders = new Headers();
         myHeaders.append('Accept', 'application/json');
+        myHeaders.append('Content-Type', 'application/json');
         myHeaders.append('Token', localStorage.getItem('userToken'));
         myHeaders.append('Username', localStorage.getItem('username'));
 
@@ -73,6 +76,7 @@ export class StyleClassService {
     deleteStyleFromStyleClass(myStyleClassId: String, styleName: String): Observable<any>{
         const myHeaders = new Headers();
         myHeaders.append('Accept', 'application/json');
+        myHeaders.append('Content-Type', 'application/json');
         myHeaders.append('Token', localStorage.getItem('userToken'));
         myHeaders.append('Username', localStorage.getItem('username'));
 
@@ -86,6 +90,7 @@ export class StyleClassService {
     getStyleClass(id: string): Observable<StyleClass> {
         const myHeaders = new Headers();
         myHeaders.append('Accept', 'application/json');
+        myHeaders.append('Content-Type', 'application/json');
         myHeaders.append('Token', localStorage.getItem('userToken'));
         myHeaders.append('Username', localStorage.getItem('username'));
 

@@ -17,6 +17,7 @@ export class UserService {
     getUsers(): Observable<Array<User>> {
         const myHeaders = new Headers();
         myHeaders.append('Accept', 'application/json');
+        myHeaders.append('Content-Type', 'application/json');
         myHeaders.append('Token', localStorage.getItem('userToken'));
         myHeaders.append('Username', localStorage.getItem('username'));
 
@@ -31,6 +32,7 @@ export class UserService {
     getUser(username: string): Observable<User> {
         const myHeaders = new Headers();
         myHeaders.append('Accept', 'application/json');
+        myHeaders.append('Content-Type', 'application/json');
         myHeaders.append('Token', localStorage.getItem('userToken'));
         myHeaders.append('Username', localStorage.getItem('username'));
 
@@ -45,6 +47,7 @@ export class UserService {
     addUser(myUser: User): Observable<any> {
         const myHeaders = new Headers();
         myHeaders.append('Accept', 'application/json');
+        myHeaders.append('Content-Type', 'application/json');
         myHeaders.append('Token', localStorage.getItem('userToken'));
         myHeaders.append('Username', localStorage.getItem('username'));
 
@@ -55,6 +58,7 @@ export class UserService {
     deleteUser(username:string):Observable<any>{
         const myHeaders = new Headers();
         myHeaders.append('Accept', 'application/json');
+        myHeaders.append('Content-Type', 'application/json');
         myHeaders.append('Token', localStorage.getItem('userToken'));
         myHeaders.append('Username', localStorage.getItem('username'));
 
@@ -65,6 +69,7 @@ export class UserService {
     modUser(username:string, myUser: User): Observable<User>{
         const myHeaders = new Headers();
         myHeaders.append('Accept', 'application/json');
+        myHeaders.append('Content-Type', 'application/json');
         myHeaders.append('Token', localStorage.getItem('userToken'));
         myHeaders.append('Username', localStorage.getItem('username'));
 
