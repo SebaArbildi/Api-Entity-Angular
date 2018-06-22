@@ -11,7 +11,6 @@ using System.Web.Http;
 using System.Web.Http.Results;
 using System.Collections.Generic;
 using DocSystDataAccessInterface.StyleStructureDataAccessInterface;
-using DocSystDataAccessImplementation.StyleStructureDataAccess;
 using DocSystBusinessLogicImplementation.StyleStructureBusinessLogic;
 using DocSystDataAccessImplementation.StyleStructureDataAccessImplementation;
 
@@ -67,7 +66,7 @@ namespace DocSystTest.ApiTest.StyleStructureApiTest
         {
             mockStyleBusinessLogic.Setup(b1 => b1.Get(style.Name)).Throws(new Exception());
             IHttpActionResult statusObtained = styleController.Get(style.Name);
-            Assert.IsNull(statusObtained as OkNegotiatedContentResult<SpecificStyleModel>);
+            Assert.IsNull(statusObtained as OkNegotiatedContentResult<string>);
         }
 
         [TestMethod]

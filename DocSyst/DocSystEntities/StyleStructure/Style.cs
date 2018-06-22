@@ -7,68 +7,25 @@ using System.Threading.Tasks;
 
 namespace DocSystEntities.StyleStructure
 {
-    public class Style
+    public abstract class Style
     {
-        private Guid id;
-        private string name;
-        private SpecificStyle implementation;
-
-        public Style()
+        public enum StyleType
         {
-            this.Id = Guid.NewGuid();
+            ALIGN, FONT, COLOR, DECORATION, BOLD, ITALIC, BORDER
         }
 
-        public Style(string name, SpecificStyle implementation)
-        {
-            this.Id = Guid.NewGuid();
-            this.Name = name;
-            this.Implementation = implementation;
-        }
+        public Guid Id { get; set; }
+        public string Name { get; set; }
+        public StyleType Type { get; set; }
+        public string Value { get; set; }
 
-        public string Name
-        {
-            get
-            {
-                return name;
-            }
-
-            set
-            {
-                name = value;
-            }
-        }
-
-        public SpecificStyle Implementation
-        {
-            get
-            {
-                return implementation;
-            }
-
-            set
-            {
-                implementation = value;
-            }
-        }
-
-        public Guid Id
-        {
-            get
-            {
-                return id;
-            }
-
-            set
-            {
-                id = value;
-            }
-        }
+        public abstract string GetImplementation();
 
         public override bool Equals(object obj)
         {
             bool equals = false;
             Style style = (Style)obj;
-            if (this.Name.Equals(style.Name))
+            if (this.Type.Equals(style.Type))
             {
                 equals = true;
             }

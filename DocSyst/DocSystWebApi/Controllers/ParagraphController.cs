@@ -41,12 +41,14 @@ namespace DocSystWebApi.Controllers
         }
 
         // GET: api/Paragraph/5
-        public IHttpActionResult Get([FromUri] Guid id)
+        [Route("api/Paragraph/{paragraphId:guid}", Name = "GetParagraph")]
+        [HttpGet]
+        public IHttpActionResult Get([FromUri] Guid paragraphId)
         {
             try
             {
                 Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
-                var paragraph = ParagraphBusinessLogic.GetParagraph(id);
+                var paragraph = ParagraphBusinessLogic.GetParagraph(paragraphId);
                 return Ok(ParagraphModel.ToModel(paragraph));
             }
             catch (Exception e)
@@ -62,7 +64,7 @@ namespace DocSystWebApi.Controllers
             {
                 Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
                 ParagraphBusinessLogic.AddParagraph(paragraphModel.ToEntity());
-                return CreatedAtRoute("DefaultApi", new { paragraphModel.Id }, paragraphModel);
+                return Ok(paragraphModel);
             }
             catch (Exception e)
             {
@@ -70,12 +72,16 @@ namespace DocSystWebApi.Controllers
             }
         }
 
-        // PUT: api/Paragraph
-        public IHttpActionResult Put([FromBody]ParagraphModel paragraphModel)
+        [Route("api/Paragraph/{paragraphId:guid}", Name = "PutParagraph")]
+        [HttpPut]
+        public IHttpActionResult Put([FromUri] Guid paragraphId, [FromBody]ParagraphModel paragraphModel)
         {
             try
             {
                 Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
+
+                paragraphModel.Id = paragraphId;
+
                 ParagraphBusinessLogic.ModifyParagraph(paragraphModel.ToEntity());
 
                 AuditLogBussinesLogic.CreateLog("Document", paragraphModel.DocumentId, Utils.GetUsername(Request), ActionPerformed.MODIFY);
@@ -151,7 +157,7 @@ namespace DocSystWebApi.Controllers
                 ParagraphBusinessLogic.PutTextAtLast(paragraphId, text);
                 AuditLogBussinesLogic.CreateLog("Document", documentId, Utils.GetUsername(Request), ActionPerformed.MODIFY);
 
-                return CreatedAtRoute("DefaultApi", new { textModel.Id }, textModel);
+                return Ok(textModel);
             }
             catch (Exception e)
             {
@@ -171,7 +177,7 @@ namespace DocSystWebApi.Controllers
                 ParagraphBusinessLogic.PutTextAt(paragraphId, text, position);
                 AuditLogBussinesLogic.CreateLog("Document", documentId, Utils.GetUsername(Request), ActionPerformed.MODIFY);
 
-                return CreatedAtRoute("DefaultApi", new { textModel.Id }, textModel);
+                return Ok("Text deleted");
             }
             catch (Exception e)
             {

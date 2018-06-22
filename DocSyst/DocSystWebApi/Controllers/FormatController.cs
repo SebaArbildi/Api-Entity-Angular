@@ -23,6 +23,7 @@ namespace DocSystWebApi.Controllers
         }
         // GET: api/Format
         [Route("api/Format", Name = "GetFormats")]
+        [HttpGet]
         public IHttpActionResult Get()
         {
             try
@@ -40,6 +41,8 @@ namespace DocSystWebApi.Controllers
         }
 
         // GET: api/Format/5
+        [Route("api/Format/{id:guid}", Name = "GetFormat")]
+        [HttpGet]
         public IHttpActionResult Get([FromUri] Guid id)
         {
             try
@@ -56,6 +59,8 @@ namespace DocSystWebApi.Controllers
         }
 
         // POST: api/Format
+        [Route("api/Format", Name = "PostFormat")]
+        [HttpPost]
         public IHttpActionResult Post([FromBody]FormatModel formatModel)
         {
             try
@@ -63,7 +68,7 @@ namespace DocSystWebApi.Controllers
                 Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
                 Utils.HasAdminPermissions(Request, AuthorizationBusinessLogic);
                 FormatBusinessLogic.Add(formatModel.ToEntity());
-                return Ok("Format added");
+                return Ok(formatModel);
             }
             catch (Exception e)
             {
@@ -72,6 +77,8 @@ namespace DocSystWebApi.Controllers
         }
 
         // PUT: api/Format/5
+        [Route("api/Format/{id:guid}", Name = "PutFormat")]
+        [HttpPut]
         public IHttpActionResult Put([FromUri] Guid id, [FromBody]FormatModel formatModel)
         {
             try
@@ -89,6 +96,8 @@ namespace DocSystWebApi.Controllers
         }
 
         // DELETE: api/Format/5
+        [Route("api/Format/{id:guid}", Name = "DeleteFormat")]
+        [HttpDelete]
         public IHttpActionResult Delete([FromUri] Guid id)
         {
             try
@@ -104,8 +113,8 @@ namespace DocSystWebApi.Controllers
             }
         }
 
-        [Route("api/Format", Name = "AddStyleClassToFormat")]
-        [HttpPut]
+        [Route("api/Format/{formatId:guid}/AddStyleClass", Name = "AddStyleClassToFormat")]
+        [HttpPost]
         public IHttpActionResult AddStyleClassToFormat([FromUri] Guid formatId, [FromBody]StyleClassModel styleClassModel)
         {
             try
@@ -121,8 +130,8 @@ namespace DocSystWebApi.Controllers
             }
         }
 
-        [Route("api/Format", Name = "RemoveStyleClassFromFormat")]
-        [HttpPut]
+        [Route("api/Format/{formatId:guid}/RemoveStyleClass", Name = "RemoveStyleClassFromFormat")]
+        [HttpPost]
         public IHttpActionResult RemoveStyleClassFromFormat([FromUri] Guid formatId, [FromBody] Guid styleClassId
             )
         {

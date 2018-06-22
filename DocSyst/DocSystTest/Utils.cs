@@ -1,5 +1,4 @@
 ﻿using DocSystDataAccessImplementation;
-using DocSystDataAccessImplementation.StyleStructureDataAccess;
 using DocSystDataAccessImplementation.StyleStructureDataAccessImplementation;
 using DocSystDataAccessInterface.StyleStructureDataAccessInterface;
 using DocSystEntities.Audit;
@@ -57,7 +56,7 @@ namespace DocSystTest
             Style style = CreateStyleInDataBaseForTest();
             IList<Style> styleList = new List<Style>();
             styleList.Add(style);
-            return new StyleClass("name", styleList, null);
+            return new StyleClass("Normal", styleList, null);
         }
 
         internal static StyleClass CreateStyleClassInDataBaseForTest()
@@ -70,8 +69,12 @@ namespace DocSystTest
 
         internal static Style CreateStyleForTest()
         {
-            SpecificStyle specificStyle = CreateSpecificStyleInDataBaseForTest("Name");
-            return new Style("name", specificStyle);
+            return new StyleHtml("color-red", Style.StyleType.COLOR, "red");
+        }
+
+        internal static Style CreateStyleForTest(string name, Style.StyleType type, string value)
+        {
+            return new StyleHtml(name, type, value);
         }
 
         internal static Style CreateStyleInDataBaseForTest()
@@ -80,19 +83,6 @@ namespace DocSystTest
             Style style = CreateStyleForTest();
             styleDataAccess.Add(style);
             return style;
-        }
-
-        internal static SpecificStyle CreateSpecificStyleForTest(String name)
-        {
-            return new SpecificStyle(name, "<html><body>{0}</body></html>");
-        }
-
-        internal static SpecificStyle CreateSpecificStyleInDataBaseForTest(String name)
-        {
-            ISpecificStyleDataAccess specificStyleDataAccess = new SpecificStyleDataAccess();
-            SpecificStyle specificStyle = CreateSpecificStyleForTest(name);
-            specificStyleDataAccess.Add(specificStyle);
-            return specificStyle;
         }
 
         internal static Format CreateFormatForTest()

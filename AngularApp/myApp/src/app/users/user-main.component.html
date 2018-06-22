@@ -1,0 +1,38 @@
+<div class='panel panel-primary'>
+    <div class='panel-heading'>
+        <h1>{{title}} </h1>
+    </div>
+
+    <div class='panel-body'>
+        <div class='table-responsive'>
+            <table class='table' *ngIf='users && users.length'>
+                <!--Cabezal de la tabla -->
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Usuario</th>
+                        <th>Mail</th>
+                        <th>Es administrador</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <!--Cuerpo de la tabla-->
+                <tbody>
+                    <tr *ngFor='let aUser of users'>
+                        <td>{{aUser.Name}}</td>
+                        <td>{{aUser.LastName}}</td>
+                        <td>{{aUser.Username}}</td>
+                        <td>{{aUser.Mail}}</td>
+                        <td>{{aUser.IsAdmin}}</td>
+                        <td>
+                            <button type="button" class="btn btn-warning" [routerLink]="['/user-mod', (aUser.Username)]"> Modificar </button>
+                            <button type="button" class="btn btn-danger" (click)="deleteUser([(aUser.Username)])"> Eliminar </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <button class='btn btn-success' [routerLink]="['/user-form']"> Agregar </button>
+        </div>
+    </div>
+</div>

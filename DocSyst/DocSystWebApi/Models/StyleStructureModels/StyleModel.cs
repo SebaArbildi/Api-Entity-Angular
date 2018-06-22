@@ -1,8 +1,6 @@
 ﻿using DocSystEntities.StyleStructure;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using static DocSystEntities.StyleStructure.Style;
 
 namespace DocSystWebApi.Models.StyleStructureModels
 {
@@ -10,7 +8,8 @@ namespace DocSystWebApi.Models.StyleStructureModels
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public SpecificStyleModel Implementation { get; set; }
+        public StyleType Type { get; set; }
+        public string Value { get; set; }
 
         public StyleModel() { }
 
@@ -19,18 +18,34 @@ namespace DocSystWebApi.Models.StyleStructureModels
             SetModel(style);
         }
 
-        public override Style ToEntity() => new Style()
+        public override Style ToEntity()
         {
-            Id = this.Id,
-            Name = this.Name,
-            Implementation = this.Implementation.ToEntity(),
-        };
+            Style style = new StyleHtml()
+            {
+                Name = this.Name,
+                Type = this.Type,
+                Value = this.Value
+            };
+
+            if (!this.Id.Equals(Guid.Empty))
+            {
+                style.Id = this.Id;
+            }
+            else
+            {
+                this.Id = style.Id;
+            }
+
+            return style;
+        }
 
         protected override StyleModel SetModel(Style style)
         {
             Id = style.Id;
             Name = style.Name;
-            Implementation = SpecificStyleModel.ToModel(style.Implementation);
+            Type = style.Type;
+            Value = style.Value;
+
             return this;
         }
 

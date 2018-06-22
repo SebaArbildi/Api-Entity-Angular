@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DocSystEntities.StyleStructure;
+using System.Data.Entity;
 
 namespace DocSystDataAccessImplementation.StyleStructureDataAccessImplementation
 {
@@ -50,7 +51,12 @@ namespace DocSystDataAccessImplementation.StyleStructureDataAccessImplementation
             IList<Format> formats = null;
             using (DocSystDbContext context = new DocSystDbContext())
             {
-                formats = context.Formats.Include(STYLE_CLASSES).ToList<Format>();
+                formats = context.Formats.Include("StyleClasses")
+                                        .Include(formatDb => formatDb.StyleClasses.Select(styleDb => styleDb.ProperStyles))
+                                        .Include(formatDb => formatDb.StyleClasses.Select(styleDb => styleDb.Observers))
+                                        .Include(formatDb => formatDb.StyleClasses.Select(styleDb => styleDb.InheritedStyleClass))
+                                        .Include(formatDb => formatDb.StyleClasses.Select(styleDb => styleDb.InheritedPlusProperStyles))
+                                        .ToList<Format>();
             }
             return formats;
         }
@@ -60,7 +66,13 @@ namespace DocSystDataAccessImplementation.StyleStructureDataAccessImplementation
             Format format = null;
             using (DocSystDbContext context = new DocSystDbContext())
             {
-                format = context.Formats.Include(STYLE_CLASSES).Where(formatDb => formatDb.Id == id).FirstOrDefault();
+                format = context.Formats.Include("StyleClasses")
+                                        .Where(formatDb => formatDb.Id == id)
+                                        .Include(formatDb => formatDb.StyleClasses.Select(styleDb => styleDb.ProperStyles))
+                                        .Include(formatDb => formatDb.StyleClasses.Select(styleDb => styleDb.Observers))
+                                        .Include(formatDb => formatDb.StyleClasses.Select(styleDb => styleDb.InheritedStyleClass))
+                                        .Include(formatDb => formatDb.StyleClasses.Select(styleDb => styleDb.InheritedPlusProperStyles))
+                                        .FirstOrDefault();
             }
             return format;
         }
@@ -73,7 +85,7 @@ namespace DocSystDataAccessImplementation.StyleStructureDataAccessImplementation
                 format.StyleClasses = stClass;
                 Format actualFormat = context.Formats.Include(STYLE_CLASSES).Where(formatDb => formatDb.Id == format.Id).FirstOrDefault();
                 context.Entry(actualFormat).Entity.StyleClasses = format.StyleClasses;
-                context.Entry(actualFormat).CurrentValues.SetValues(actualFormat);
+                context.Entry(actualFormat).CurrentValues.SetValues(format);
                 context.SaveChanges();
             }
         }

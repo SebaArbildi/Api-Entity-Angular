@@ -1,0 +1,54 @@
+<div class="container-fluid">
+    <body>
+        <div class="col-md-3">
+            <div class="sidenav">
+                <h2>{{userDocument.Title}}</h2>
+                <hr>
+                <a [routerLink]="['/header-main', (userDocument.Id) ]">Encabezados</a>
+
+                <a [routerLink]="['/paragraph-main', (userDocument.Id) ]">Parrafos</a>
+
+                <a [routerLink]="['/footer-main', (userDocument.Id) ]">Pie de pagina</a>
+
+            </div>
+        </div>
+
+        <div *ngIf="formats && formats.length">
+            <div class="col-md-1">
+                <label>Formato: </label>
+            </div>
+            <div class="col-md-3">
+                <select [(ngModel)]="selectedOption" class="form-control" (change)="capture()" *ngFor='let aFormat of formats'>
+                    <option value="0">Selecciona un formato</option>
+                    <option value="{{aFormat.Id}}">{{aFormat.Name}}</option>
+                </select>
+            </div>
+            <div class="col-md-2" *ngIf="selectedOption != 0">
+                <button (click)="printDocument(documentId,formatId)" class='btn btn-primary'>
+                    Imprimir documento
+                </button>
+            </div>
+        </div>
+
+        <div class="col-md-9 col-md-offset-3">
+            <div  *ngIf="documentPrinted">
+                <div class="col-md-12">
+                    <h1>{{userDocument.Title}}</h1>
+                    <hr>
+                    <hr>
+
+                    <div class="panel panel-primary">
+                        <div *ngIf="documentPrinted" [innerHtml]="documentPrinted | safe: 'html'">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="!documentPrinted">
+                <div class="col-md-9">
+                    <h1>Esperando que se elija formato...</h1>
+                </div>
+            </div>
+        </div>
+    </body>
+</div>

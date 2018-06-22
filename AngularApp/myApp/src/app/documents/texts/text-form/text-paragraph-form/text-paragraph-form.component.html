@@ -1,0 +1,20 @@
+<div class='panel panel-primary'>
+    <div class='panel-heading'>
+        <h1>{{pageTitle}}</h1>
+    </div>
+    <form name="addText">
+        <div class="form-group">
+            <label name="title">Clase de estilo</label>
+            <input class="form-control" type="text" name="styleClass" requried [(ngModel)]="StyleClass">
+        </div>
+        <div class="form-group">
+            <label name="title">Texto</label>
+            <input class="form-control" type="text" name="textContent" requried [(ngModel)]="TextContent">
+        </div>
+        <div>
+            <button class="btn btn-success" type="button" (click)="addText()" [routerLink]="['/text-main-paragraph', (documentId), (paragraphId) ]">
+            Aceptar </button>
+            <button class="btn" type="button" [routerLink]="['/text-main-paragraph', (documentId), (paragraphId) ]"> Cancelar </button>
+        </div>
+    </form>
+</div>

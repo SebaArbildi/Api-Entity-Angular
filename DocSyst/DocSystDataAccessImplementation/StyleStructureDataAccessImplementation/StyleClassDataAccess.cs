@@ -73,7 +73,8 @@ namespace DocSystDataAccessImplementation.StyleStructureDataAccessImplementation
         {
             using (DocSystDbContext context = new DocSystDbContext())
             {
-                AttachInheritedStyleClass(context, styleClass.InheritedStyleClass);
+                StyleClass styleC = AttachInheritedStyleClass(context, styleClass.InheritedStyleClass);
+                styleClass.InheritedStyleClass = styleC;
                 IList<Style> st = AttachStyleList(context, styleClass.InheritedPlusProperStyles);
                 styleClass.InheritedPlusProperStyles = st;
                 styleClass.ProperStyles = st;
@@ -82,7 +83,7 @@ namespace DocSystDataAccessImplementation.StyleStructureDataAccessImplementation
                     .Include("InheritedPlusProperStyles").Include("Observers").Where(styleClassDb => styleClassDb.Id == styleClass.Id).FirstOrDefault();
 
                 context.Entry(actualStyleClass).Entity.InheritedPlusProperStyles = styleClass.InheritedPlusProperStyles;
-                context.Entry(actualStyleClass).Entity.InheritedStyleClass = styleClass.InheritedStyleClass;
+                context.Entry(actualStyleClass).Entity.SetInheritedStyleClass(styleClass.InheritedStyleClass);
                 context.Entry(actualStyleClass).Entity.Observers = styleClass.Observers;
                 context.Entry(actualStyleClass).Entity.ProperStyles = styleClass.ProperStyles;
                 context.Entry(actualStyleClass).CurrentValues.SetValues(styleClass);
@@ -105,7 +106,7 @@ namespace DocSystDataAccessImplementation.StyleStructureDataAccessImplementation
             IList<Style> styles = new List<Style>();
             foreach (Style style in styleList)
             {
-                Style st = context.Styles.Include("Implementation").Where(styleDb => styleDb.Name == style.Name).FirstOrDefault();
+                Style st = context.Styles.Where(styleDb => styleDb.Name == style.Name).FirstOrDefault();
                 context.Styles.Attach(st);
                 styles.Add(st);
             }
@@ -120,12 +121,15 @@ namespace DocSystDataAccessImplementation.StyleStructureDataAccessImplementation
             }
         }
 
-        private void AttachInheritedStyleClass(DocSystDbContext context, StyleClass inehritedStyleClass)
+        private StyleClass AttachInheritedStyleClass(DocSystDbContext context, StyleClass inehritedStyleClass)
         {
-            if(inehritedStyleClass != null)
+            StyleClass st = null;
+            if (inehritedStyleClass != null)
             {
-                context.StyleClasses.Attach(inehritedStyleClass);
+                st = context.StyleClasses.Include("ProperStyles").Include("InheritedStyleClass")
+                    .Include("InheritedPlusProperStyles").Include("Observers").Where(styleClassDb => styleClassDb.Id == inehritedStyleClass.Id).FirstOrDefault();
             }
+            return st;
         }
     }
 }

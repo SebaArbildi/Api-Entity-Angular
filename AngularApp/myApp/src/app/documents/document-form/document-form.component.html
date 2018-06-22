@@ -1,0 +1,19 @@
+<div class='panel panel-primary'>
+    <div class='panel-heading'>
+        <h1>{{pageTitle}}</h1>
+    </div>
+    <form name="addDocument">
+        <div class="form-group">
+            <label name="title">Titulo</label>
+            <input class="form-control" type="text" name="title" requried [(ngModel)]="Title">
+        </div>
+        <div class="form-group">
+            <label name="title">Clase de estilo</label>
+            <input class="form-control" type="text" name="styleClass" requried [(ngModel)]="StyleClass">
+        </div>
+        <div>
+            <button class="btn btn-success" type="button" (click)="addDocument()" [routerLink]="['/document-main']"> Aceptar </button>
+            <button class="btn" type="button" [routerLink]="['/document-main']"> Cancelar </button>
+        </div>
+    </form>
+</div>

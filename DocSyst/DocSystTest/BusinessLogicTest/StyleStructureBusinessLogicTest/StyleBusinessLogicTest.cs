@@ -103,7 +103,7 @@ namespace DocSystTest.BusinessLogicTest.StyleStructureBusinessLogicTest
         [ExpectedException(typeof(ArgumentNullException))]
         public void ModifyStyle_StyleHasNullFields_ArgumentNullException()
         {
-            style.Implementation = null;
+            style.Value = null;
             styleBusinessLogic.Modify(style);
         }
 

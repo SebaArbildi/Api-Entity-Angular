@@ -11,10 +11,20 @@ namespace DocSystDataAccessImplementation.DocumentStructureDataAccessImplementat
     {
         public void Add(Margin aMargin)
         {
-            using (DocSystDbContext context = new DocSystDbContext())
+            if (!Exists(aMargin.Id))
             {
-                context.Margins.Add(aMargin);
-                context.SaveChanges();
+                ITextDataAccess textDataAccess = new TextDataAccess();
+                foreach (Text text in aMargin.Texts)
+                {
+                    textDataAccess.Add(text);
+                }
+
+                using (DocSystDbContext context = new DocSystDbContext())
+                {
+                    aMargin.Texts = AttachTextList(context, aMargin.Texts).ToList();
+                    context.Margins.Add(aMargin);
+                    context.SaveChanges();
+                }
             }
         }
 
@@ -34,7 +44,6 @@ namespace DocSystDataAccessImplementation.DocumentStructureDataAccessImplementat
                 List<Text> textList = AttachTextList(context, margin.Texts);
                 margin.Texts = textList;
                 context.Margins.Attach(margin);
-                context.Texts.RemoveRange(textList);
                 context.Margins.Remove(margin);
                 context.SaveChanges();
             }
@@ -85,13 +94,22 @@ namespace DocSystDataAccessImplementation.DocumentStructureDataAccessImplementat
 
         public void Modify(Margin aMargin)
         {
+            ITextDataAccess textDataAccess = new TextDataAccess();
+            foreach (Text text in aMargin.Texts)
+            {
+                textDataAccess.Add(text);
+            }
+
             using (DocSystDbContext context = new DocSystDbContext())
             {
+                List<Text> textList = AttachTextList(context, aMargin.Texts);
+                aMargin.Texts = textList;
+
                 Margin actualMargin = context.Margins.Include(marginhDb => marginhDb.Texts)
                                               .FirstOrDefault(marginhDb => marginhDb.Id == aMargin.Id);
 
+                context.Entry(actualMargin).Entity.Texts = aMargin.Texts;
                 context.Entry(actualMargin).CurrentValues.SetValues(aMargin);
-                actualMargin.Texts = aMargin.Texts;
 
                 context.SaveChanges();
             }

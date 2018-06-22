@@ -24,6 +24,7 @@ namespace DocSystWebApi.Controllers
 
         // GET: api/StyleClass
         [Route("api/StyleClass", Name = "GetStyleClasses")]
+        [HttpGet]
         public IHttpActionResult Get()
         {
             try
@@ -41,6 +42,8 @@ namespace DocSystWebApi.Controllers
         }
 
         // GET: api/StyleClass/5
+        [Route("api/StyleClass/{id:guid}", Name = "GetStyleClass")]
+        [HttpGet]
         public IHttpActionResult Get([FromUri] Guid id)
         {
             try
@@ -57,6 +60,8 @@ namespace DocSystWebApi.Controllers
         }
 
         // POST: api/StyleClass
+        [Route("api/StyleClass", Name = "PostStyleClasses")]
+        [HttpPost]
         public IHttpActionResult Post([FromBody]StyleClassModel styleClassModel)
         {
             try
@@ -73,6 +78,8 @@ namespace DocSystWebApi.Controllers
         }
 
         // PUT: api/StyleClass/5
+        [Route("api/StyleClass/{id:guid}", Name = "PutStyleClasses")]
+        [HttpPut]
         public IHttpActionResult Put([FromUri] Guid id, [FromBody]StyleClassModel styleClassModel)
         {
             try
@@ -90,6 +97,8 @@ namespace DocSystWebApi.Controllers
         }
 
         // DELETE: api/StyleClass/5
+        [Route("api/StyleClass/{id:guid}", Name = "DeleteStyleClasses")]
+        [HttpDelete]
         public IHttpActionResult Delete([FromUri] Guid id)
         {
             try
@@ -105,7 +114,7 @@ namespace DocSystWebApi.Controllers
             }
         }
 
-        [Route("api/StyleClass", Name = "AddStyleToStyleClass")]
+        [Route("api/StyleClass/{styleClassId:guid}/AddStyle", Name = "AddStyleToStyleClass")]
         [HttpPut]
         public IHttpActionResult AddStyleToStyleClass([FromUri] Guid styleClassId, [FromBody]StyleModel styleModel)
         {
@@ -122,7 +131,7 @@ namespace DocSystWebApi.Controllers
             }
         }
 
-        [Route("api/StyleClass", Name = "RemoveStyleFromStyleClass")]
+        [Route("api/StyleClass/{styleClassId:guid}/RemoveStyle", Name = "RemoveStyleFromStyleClass")]
         [HttpPut]
         public IHttpActionResult RemoveStyleFromStyleClass([FromUri] Guid styleClassId, [FromBody]string styleName)
         {

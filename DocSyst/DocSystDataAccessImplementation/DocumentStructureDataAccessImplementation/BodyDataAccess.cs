@@ -13,8 +13,11 @@ namespace DocSystDataAccessImplementation.DocumentStructureDataAccessImplementat
         {
             using (DocSystDbContext context = new DocSystDbContext())
             {
-                context.Bodys.Add(aBody);
-                context.SaveChanges();
+                if(!Exists(aBody.Id))
+                {
+                    context.Bodys.Add(aBody);
+                    context.SaveChanges();
+                }
             }
         }
 

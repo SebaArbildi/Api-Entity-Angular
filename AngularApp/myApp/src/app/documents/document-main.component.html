@@ -1,0 +1,37 @@
+<div class='panel panel-primary'>
+    <div class='panel-heading'>
+        <h1>{{title}} </h1>
+    </div>
+
+    <div class='panel-body'>
+        <div class='table-responsive'>
+            <table class='table' *ngIf='documents && documents.length'>
+                <!--Cabezal de la tabla -->
+                <thead>
+                    <tr>
+                        <th>Titulo</th>
+                        <th>Fecha de creacion</th>
+                        <th>Fecha ultima modificacion</th>
+                        <th>Usuario creador</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <!--Cuerpo de la tabla-->
+                <tbody>
+                    <tr *ngFor='let aDocument of documents'>
+                        <td>{{aDocument.Title}}</td>
+                        <td>{{aDocument.CreationDate}}</td>
+                        <td>{{aDocument.LastModifyDate}}</td>
+                        <td>{{aDocument.CreatorUser.Username}}</td>
+                        <td>
+                            <button class='btn btn-primary' [routerLink]="['/document-detail', (aDocument.Id) ]">Ver</button>
+                            <button class='btn btn-warning' [routerLink]="['/document-mod', (aDocument.Id) ]">Modificar</button>
+                            <button class='btn btn-danger' (click)="deleteDocument([(aDocument.Id)])">Eliminar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <button class='btn btn-success' [routerLink]="['/document-form']"> Agregar </button>
+        </div>
+    </div>
+</div>

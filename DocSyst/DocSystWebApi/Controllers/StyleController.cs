@@ -22,6 +22,8 @@ namespace DocSystWebApi.Controllers
             AuthorizationBusinessLogic = authorizationBusinessLogic;
         }
         // GET: api/Style
+        [Route("api/Style", Name = "GetStyles")]
+        [HttpGet]
         public IHttpActionResult Get()
         {
             try
@@ -39,6 +41,8 @@ namespace DocSystWebApi.Controllers
         }
 
         // GET: api/Style/5
+        [Route("api/Style/{name}", Name = "GetStyle")]
+        [HttpGet]
         public IHttpActionResult Get([FromUri]string name)
         {
             try
@@ -55,6 +59,8 @@ namespace DocSystWebApi.Controllers
         }
 
         // POST: api/Style
+        [Route("api/Style", Name = "PostStyle")]
+        [HttpPost]
         public IHttpActionResult Post([FromBody]StyleModel styleModel)
         {
             try
@@ -62,7 +68,7 @@ namespace DocSystWebApi.Controllers
                 Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
                 Utils.HasAdminPermissions(Request, AuthorizationBusinessLogic);
                 StyleBusinessLogic.Add(styleModel.ToEntity());
-                return Ok("Style added");
+                return Ok(styleModel);
             }
             catch (Exception e)
             {
@@ -72,6 +78,8 @@ namespace DocSystWebApi.Controllers
         }
 
         // PUT: api/Style/5
+        [Route("api/Style/{name}", Name = "PutStyle")]
+        [HttpPut]
         public IHttpActionResult Put([FromUri] string name, [FromBody]StyleModel styleModel)
         {
             try
@@ -80,7 +88,7 @@ namespace DocSystWebApi.Controllers
                 Utils.IsAValidToken(Request, AuthorizationBusinessLogic);
                 Utils.HasAdminPermissions(Request, AuthorizationBusinessLogic);
                 StyleBusinessLogic.Modify(styleModel.ToEntity());
-                return Ok("Style Modified");
+                return Ok(styleModel);
             }
             catch (Exception e)
             {
@@ -90,6 +98,8 @@ namespace DocSystWebApi.Controllers
         }
 
         // DELETE: api/Style/5
+        [Route("api/Style/{name}", Name = "DeleteStyle")]
+        [HttpDelete]
         public IHttpActionResult Delete([FromUri] String name)
         {
             try
